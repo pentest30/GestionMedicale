@@ -1,0 +1,11 @@
+﻿@model GM.Presentation.Models.SimpleUserVm
+@{
+    ViewBag.Title = "Inscription";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Inscription</h3>
+<hr />
+@{
+    Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
