@@ -49,6 +49,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IServiceAdministrateur.cs" />
     <Compile Include="IServiceUtilisateur.cs" />
+    <Compile Include="Models\Addresse.cs" />
     <Compile Include="Models\Banne.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UtilisateurRole.cs" />

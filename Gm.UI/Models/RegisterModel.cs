@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using GM.Core.Models;
 
 namespace Gm.UI.Models
 {
@@ -20,17 +21,16 @@ namespace Gm.UI.Models
         public DateTime? DateNaissance { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Addresse { get; set; }
 
         [Required]
         public string Email { get; set; }
 
-        [Display(Name = "N de Tél")]
+        [Display(Name = "Tél")]
         public string Tel { get; set; }
 
-        [Display(Name = "N de FAX")]
-        public string Fax { get; set; }
-
+       
         [Display(Name = "Mot de pass")]
         [Required]
         [DataType(DataType.Password)]
@@ -41,15 +41,28 @@ namespace Gm.UI.Models
         [Display(Name = "Confirmer le mot de pass")]
         public string ConfirmerPassword { get; set; }
         [Required]
-        [Display(Name = "Nom d'utilisateur")]
+        [Display(Name = "Identifiant")]
         public string Pseudo { get; set; }
         // public DateTime? DateInscription { get; set; }
-        [Display(Name = "Role")]
+        [Display(Name = "Type de compte")]
+        [Required]
         public int RoleId { get; set; }
         [Display(Name = "Photo personnel")]
         public string Photo { get; set; }
         [Display(Name = "Piece d'identité")]
-        public string Piece { get; set; }   
-        //public int? LocalId { get; set; }
+        public string Piece { get; set; }
+        [Required]
+        public string Sexe { get; set; }
+        [Required]
+        [Display(Name = "Jour")]
+        public int? DateOfBirthDay { get; set; }
+        [Required]
+        [Display(Name = "Mois")]
+        public int? DateOfBirthMonth { get; set; }
+        [Required]
+        [Display(Name = "Année")]
+        public int? DateOfBirthYear { get; set; }
+      
+        public int? LocalId { get; set; }
     }
 }

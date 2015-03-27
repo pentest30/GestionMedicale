@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using GM.Core.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,21 +8,22 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-	<!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
-	@Scripts.Render("~/bundles/jquery")
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.default.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jszip.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="navbar navbar-inverse navbar-fixed-top ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,12 +36,41 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Docteurs", "About", "Home")</li>
+                    <li>@Html.ActionLink("Pharmacies", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Médicament", "Contact", "Home")</li>
+
                 </ul>
+
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!Request.IsAuthenticated)
+                    {
+
+                        <li><a href="@Url.Action("login", "account")"><span class="glyphicon glyphicon-log-in"></span> Se connecte</a></li>
+                                
+                        <li><a href="@Url.Action("Inscription", "Account")">Inscription</a></li>
+                               
+                          
+
+                    }
+                    else
+                    {
+                        if (User.IsInRole("admin"))
+                        {
+                            <li><a href="@Url.Action("Index","Admin")"><span class="glyphicon glyphicon-user"></span> Administrateur</a></li>
+                        }
+                        <li><a href="@Url.Action("logout","Account")"><span class="glyphicon  glyphicon-log-out"></span> Sortie</a></li>
+
+                    }
+                </ul>
+
             </div>
+
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -47,7 +79,8 @@
         </footer>
     </div>
 
-    
+
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

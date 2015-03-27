@@ -23,9 +23,14 @@ namespace Gm.UI.Controllers
         [AllowAnonymous]
         public ActionResult Inscription()
         {
-            var model = new RegisterModel();
+            ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom");
+            return View(new RegisterModel());
+        }
+
+        public ActionResult RetrunInscription()
+        {
             ViewBag.RoleId = new SelectList(_service.SelectRoles(), "Id", "Nom");
-            return View(model);
+            return View(new  RegisterModel ());
         }
         [HttpPost]
         [AllowAnonymous]
@@ -37,8 +42,8 @@ namespace Gm.UI.Controllers
                 int?[] roleIds = new int?[0];
                 roleIds[0] = model.RoleId;
                 var user = Mapper.Map<Utilisateur>(model);
-                var lienPhotoPersonel = user.Id + Path.GetFileName(photoPersonnel.FileName); ;
-                var lienPhotoPiece = user.Id + Path.GetFileName(photoPiece.FileName); ;
+                var lienPhotoPersonel = user.Id + Path.GetFileName(photoPersonnel.FileName);
+                var lienPhotoPiece = user.Id + Path.GetFileName(photoPiece.FileName);
                 user.Id= Guid.NewGuid();
                 user.LienPhotoPersonnelle = "~/App_Data/photos/"  +lienPhotoPersonel;
                 user.LienPhotoDocument = "~/App_Data/photos/" + lienPhotoPiece;

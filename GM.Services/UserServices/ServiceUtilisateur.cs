@@ -11,7 +11,9 @@ using Microsoft.Owin.Security;
 
 namespace GM.Services.UserServices
 {
-    public class ServiceUtilisateur : IServiceUtilisateur
+    
+
+    public class ServiceUtilisateur :  IServiceUtilisateur
     {
         private readonly IRepository<Utilisateur> _repository;
         private readonly IRepository<UtilisateurRole> _roleUserRepository;
@@ -35,7 +37,12 @@ namespace GM.Services.UserServices
 
         public IEnumerable<Role> SelectRoles()
         {
-           return _roleRepository.SelectAll().Where(x=>x.Public);
+           return _roleRepository.Find(x=>x.Public);
+        }
+
+        public Role GetSingleRole(string id)
+        {
+            return _roleRepository.FindSingle(x=>x.Nom==id);
         }
 
         public bool Authentification(Utilisateur utilisateur , string password , bool remember)

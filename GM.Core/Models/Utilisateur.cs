@@ -16,13 +16,14 @@ namespace GM.Core.Models
         public string Addresse { get; set; } 
         public string Email { get; set; }
         public string Tel { get; set; }
-        public string Fax { get; set; }
+        //public string Fax { get; set; }
         public string PasswordHash { get; set; }
         public string Pseudo   { get; set; }
         public string LienPhotoPersonnelle  { get; set; }
         public string LienPhotoDocument { get; set; }
         public bool Validation { get; set; }
         public DateTime? DateInscription { get; set; }
+        public string Sexe { get; set; }
 
         public int? LocalId { get; set; }
 

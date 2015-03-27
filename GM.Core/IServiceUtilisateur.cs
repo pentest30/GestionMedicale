@@ -7,6 +7,7 @@ namespace GM.Core
     public interface IServiceUtilisateur
     {
         IEnumerable<Role> SelectRoles();
+        Role GetSingleRole(string id);
         bool Authentification(Utilisateur utilisateur , string password , bool remember);
         Utilisateur VoirProfile(Guid? id);
         bool ModifierProfile(Utilisateur utilisateur);

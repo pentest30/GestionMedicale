@@ -1,12 +1,17 @@
-﻿@model Gm.UI.Models.RegisterModel
+﻿
+@model Gm.UI.Models.RegisterModel
 @{
     ViewBag.Title = "Inscription";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Inscription</h2>
+ <h2>Page <small>d'inscription</small>   </h2>
 <hr />
+<p class="alert alert-info">
+    Bien venue creé un compte gratuitement et utiliser notre services librement . 
+</p>
 @{
-    Html.RenderPartial("_CreateOrUpdateUser", Model);
+    Html.RenderPartial("_CreateOrUpdateUser",Model);
 }
-
+<script type="text/javascript">
+    $('select').select2();
+</script>

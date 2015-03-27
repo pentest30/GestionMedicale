@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -48,12 +49,12 @@ namespace GM.Services
 
        public IEnumerable<Role> Find(Func<Role, bool> predicate)
        {
-           throw new NotImplementedException();
+           return _db.Roles.Where(predicate);
        }
 
        public Role FindSingle(Func<Role, bool> predicate)
        {
-           throw new NotImplementedException();
+           return _db.Roles.FirstOrDefault(predicate);
        }
 
        public IEnumerable<Role> GetAllLazyLoad(params Expression<Func<Role, object>>[] children)
