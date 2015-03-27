@@ -54,6 +54,11 @@ namespace GM.Services.UserServices
             return true;
         }
 
+        public bool ExisteDeja(string identifiant)
+        {
+            return _repository.Exist(x => x.Email.Equals(identifiant) || x.Pseudo.Equals(identifiant));
+        }
+
         public Utilisateur VoirProfile(Guid? id)
         {
             var item = _repository.SelectById(id);

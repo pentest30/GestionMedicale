@@ -21,6 +21,7 @@
 
 select {
      max-width: 280px;
+    margin-bottom: 5px;
    
     height: 30px
 }
@@ -32,6 +33,7 @@ select {
     -webkit-min-width: 280px;
     min-width: 280px;
     margin-bottom: 5px;
+   
     
 }
 

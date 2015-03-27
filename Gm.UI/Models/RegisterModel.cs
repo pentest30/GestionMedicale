@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using GM.Core.Models;
 
 namespace Gm.UI.Models
 {
@@ -9,42 +8,47 @@ namespace Gm.UI.Models
         public Guid Id { get; set; }
 
         [Required]
+        [Display(Name = "Nom *")]
+        
         public string Nom { get; set; }
 
         [Required]
-        [Display(Name = "Prénom")]
+        [Display(Name = "Prénom *")]
         public string Prenom { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Date de naissance")]
         [DataType(DataType.Date)]
         public DateTime? DateNaissance { get; set; }
 
-        [Required]
+       // [Required]
         [DataType(DataType.MultilineText)]
         public string Addresse { get; set; }
 
         [Required]
+        [Display(Name = "Email *")]
+        
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Display(Name = "Tél")]
         public string Tel { get; set; }
-
-       
-        [Display(Name = "Mot de pass")]
+     
+        [Display(Name = "Mot de pass *")]
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Compare("Password")]
-        [Display(Name = "Confirmer le mot de pass")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmer le mot de pass *")]
         public string ConfirmerPassword { get; set; }
         [Required]
-        [Display(Name = "Identifiant")]
+        [Display(Name = "Identifiant *")]
         public string Pseudo { get; set; }
         // public DateTime? DateInscription { get; set; }
-        [Display(Name = "Type de compte")]
+        [Display(Name = "Type de compte *")]
         [Required]
         public int RoleId { get; set; }
         [Display(Name = "Photo personnel")]
@@ -52,6 +56,7 @@ namespace Gm.UI.Models
         [Display(Name = "Piece d'identité")]
         public string Piece { get; set; }
         [Required]
+        [Display(Name = "Genre *")]
         public string Sexe { get; set; }
         [Required]
         [Display(Name = "Jour")]
@@ -62,6 +67,10 @@ namespace Gm.UI.Models
         [Required]
         [Display(Name = "Année")]
         public int? DateOfBirthYear { get; set; }
+         [Required]
+         [Display(Name = "Wilaya *")]
+        
+        public string   Wilaya { get; set; }
       
         public int? LocalId { get; set; }
     }

@@ -24,6 +24,9 @@ namespace Gm.UI.HtmlExtenssions
             daysList.Attributes.Add("name", dayName);
             monthsList.Attributes.Add("name", monthName);
             yearsList.Attributes.Add("name", yearName);
+            daysList.Attributes.Add("id", dayName);
+            monthsList.Attributes.Add("id", monthName);
+            yearsList.Attributes.Add("id", yearName);
 
             daysList.Attributes.Add("class", "date-part");
             monthsList.Attributes.Add("class", "date-part");

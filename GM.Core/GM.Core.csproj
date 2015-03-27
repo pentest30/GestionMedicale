@@ -55,6 +55,7 @@
     <Compile Include="Models\UtilisateurRole.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wilaya.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

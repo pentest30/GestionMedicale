@@ -4,11 +4,13 @@
     ViewBag.Title = "Inscription";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- <h2>Page <small>d'inscription</small>   </h2>
+<h2>Page <small>d'inscription</small>   </h2>
+
 <hr />
 <p class="alert alert-info">
-    Bien venue creé un compte gratuitement et utiliser notre services librement . 
+    Bien venue creé un compte gratuitement et utiliser notre services librement .
 </p>
+<hr />
 @{
     Html.RenderPartial("_CreateOrUpdateUser",Model);
 }

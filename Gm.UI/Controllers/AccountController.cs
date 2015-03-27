@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Web;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AutoMapper;
 using Gm.UI.Models;
@@ -23,39 +23,65 @@ namespace Gm.UI.Controllers
         [AllowAnonymous]
         public ActionResult Inscription()
         {
+            if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
+            var genres = GetGenre();
+            ViewData["Sexe"] = new SelectList(genres, "Key","Value");
             ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom");
+            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom");
             return View(new RegisterModel());
         }
 
-        public ActionResult RetrunInscription()
+        private static IEnumerable<KeyValuePair<int, string>> GetGenre()
         {
-            ViewBag.RoleId = new SelectList(_service.SelectRoles(), "Id", "Nom");
-            return View(new  RegisterModel ());
+            IDictionary<int, string> genres = new Dictionary<int, string>();
+            genres.Add(1, "Homme");
+            genres.Add(2, "Femme");
+            return genres;
         }
-        [HttpPost]
+
+
         [AllowAnonymous]
-        public ActionResult Inscription(RegisterModel model, HttpPostedFileBase photoPersonnel, HttpPostedFileBase photoPiece)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inscription(RegisterModel model)
         {
+           
+            if (IsNumeric(model.DateOfBirthDay.ToString()) && IsNumeric(model.DateOfBirthYear.ToString()) &&
+                IsNumeric(model.DateOfBirthMonth.ToString()))
+            {
+                model.DateNaissance = Convert.ToDateTime(string.Format("{0}/{1}/{2}", model.DateOfBirthDay, model.DateOfBirthMonth,
+                model.DateOfBirthYear));
+            }
             if (ModelState.IsValid)
             {
-               
-                int?[] roleIds = new int?[0];
+                if (_service.ExisteDeja(model.Email))
+                {
+                    ModelState.AddModelError("EmailAddresse", "Email En utilisation, choiser un autre Email");
+                    return View(model);
+                }
+                if (_service.ExisteDeja(model.Pseudo))
+                {
+                    ModelState.AddModelError("Identiffiant", "Identifiant En utilisation, choiser un autre Identifiant");
+                    return View(model);
+                }
+                var roleIds = new int?[0];
                 roleIds[0] = model.RoleId;
                 var user = Mapper.Map<Utilisateur>(model);
-                var lienPhotoPersonel = user.Id + Path.GetFileName(photoPersonnel.FileName);
-                var lienPhotoPiece = user.Id + Path.GetFileName(photoPiece.FileName);
-                user.Id= Guid.NewGuid();
-                user.LienPhotoPersonnelle = "~/App_Data/photos/"  +lienPhotoPersonel;
-                user.LienPhotoDocument = "~/App_Data/photos/" + lienPhotoPiece;
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), lienPhotoPersonel);
-                photoPersonnel.SaveAs(path);
-                path = Path.Combine(Server.MapPath("~/App_Data/uploads"), lienPhotoPiece);
-                photoPersonnel.SaveAs(path);
-                _service.Inscription(user, model.Password,roleIds);
-
+                user.Id = Guid.NewGuid();
+                if (_service.Inscription(user, model.Password, roleIds))
+                {
+                    
+                }
             }
-            ViewBag.RoleId = new SelectList(_service.SelectRoles(), "Id", "Nom" , model.RoleId);
+            ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom", model.RoleId);
+            ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value", model.Sexe);
+            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
             return View(model);
+        }
+
+        private bool IsNumeric(string input)
+        {
+            return Regex.IsMatch(input, @"^\d+$");
         }
     }
 }
