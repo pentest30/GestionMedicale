@@ -45,38 +45,46 @@ namespace Gm.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inscription(RegisterModel model)
         {
+            InitDropDownlIst(model);
            
-            if (IsNumeric(model.DateOfBirthDay.ToString()) && IsNumeric(model.DateOfBirthYear.ToString()) &&
-                IsNumeric(model.DateOfBirthMonth.ToString()))
-            {
-                model.DateNaissance = Convert.ToDateTime(string.Format("{0}/{1}/{2}", model.DateOfBirthDay, model.DateOfBirthMonth,
-                model.DateOfBirthYear));
-            }
             if (ModelState.IsValid)
             {
+                if (IsNumeric(model.DateOfBirthDay.ToString()) && IsNumeric(model.DateOfBirthYear.ToString()) &&
+                    IsNumeric(model.DateOfBirthMonth.ToString()))
+                {
+                    model.DateNaissance =
+                        Convert.ToDateTime(string.Format("{0}/{1}/{2}", model.DateOfBirthDay, model.DateOfBirthMonth,
+                            model.DateOfBirthYear));
+                }
                 if (_service.ExisteDeja(model.Email))
                 {
                     ModelState.AddModelError("EmailAddresse", "Email En utilisation, choiser un autre Email");
+                    if (_service.ExisteDeja(model.Pseudo))
+                    {
+                        ModelState.AddModelError("Identifiant",
+                            "Identifiant En utilisation, choiser un autre Identifiant");
+                        
+                    }
                     return View(model);
                 }
-                if (_service.ExisteDeja(model.Pseudo))
-                {
-                    ModelState.AddModelError("Identiffiant", "Identifiant En utilisation, choiser un autre Identifiant");
-                    return View(model);
-                }
-                var roleIds = new int?[0];
+                var roleIds = new int?[1];
                 roleIds[0] = model.RoleId;
                 var user = Mapper.Map<Utilisateur>(model);
                 user.Id = Guid.NewGuid();
                 if (_service.Inscription(user, model.Password, roleIds))
                 {
-                    
+                    return RedirectToAction("Index", "Home");
                 }
             }
+            //InitDropDownlIst(model);
+            return View(model);
+        }
+
+        private void InitDropDownlIst(RegisterModel model)
+        {
             ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom", model.RoleId);
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value", model.Sexe);
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
-            return View(model);
         }
 
         private bool IsNumeric(string input)

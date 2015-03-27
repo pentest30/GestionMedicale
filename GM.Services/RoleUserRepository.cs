@@ -29,7 +29,8 @@ namespace GM.Services
 
         public void Insert(UtilisateurRole item)
         {
-            throw new NotImplementedException();
+            _db.UtilisateurRoles.Add(item);
+            Save();
         }
 
         public void Update(UtilisateurRole item)
@@ -44,7 +45,7 @@ namespace GM.Services
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public IEnumerable<UtilisateurRole> Find(Func<UtilisateurRole, bool> predicate)
