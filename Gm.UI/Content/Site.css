@@ -23,10 +23,10 @@ select {
      max-width: 280px;
     margin-bottom: 5px;
    
-    height: 30px
+    height: 32px
 }
 select.form-control {
-    max-height: 35px
+    max-height: 37px
 }
 
 .k-textbox {
@@ -47,6 +47,10 @@ select.form-control {
 		float:left;
 		position:relative;
 		left:-17px;
+}
+.k-widget.k-numerictextbox,  .k-datepicker.k-header {
+    width: 280px;
+    max-width: 280px;
 }
 
 #nav-search-label {

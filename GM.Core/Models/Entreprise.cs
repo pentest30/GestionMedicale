@@ -18,6 +18,7 @@ namespace GM.Core.Models
         public Guid PropreitaireId { get; set; }
         public string CompteBancaire { get; set; }
         public Utilisateur Propreitaire{ get; set; }
+        public string Logo { get; set; }
 
 
     }

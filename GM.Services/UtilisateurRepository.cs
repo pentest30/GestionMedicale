@@ -20,7 +20,7 @@ namespace GM.Services
 
         public IEnumerable<Utilisateur> SelectAll()
         {
-            return _db.Utilisateurs.Include("UtilisateurRoles").ToList();
+            return _db.Utilisateurs.Include(x => x.UtilisateurRoles.Select(y =>y.Roles)).ToList();
         }
 
        public bool Exist(Func<Utilisateur, bool> predicate)
@@ -66,7 +66,8 @@ namespace GM.Services
 
         public IEnumerable<Utilisateur> Find(Func<Utilisateur, bool> predicate)
         {
-            return _db.Utilisateurs.Where(predicate);
+            
+            return _db.Utilisateurs.Include(x => x.UtilisateurRoles).Where(predicate);
         }
 
         public Utilisateur FindSingle(Func<Utilisateur, bool> predicate)

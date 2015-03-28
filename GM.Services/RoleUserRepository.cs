@@ -50,7 +50,7 @@ namespace GM.Services
 
         public IEnumerable<UtilisateurRole> Find(Func<UtilisateurRole, bool> predicate)
         {
-            return _db.UtilisateurRoles.Where(predicate);
+            return _db.UtilisateurRoles.Include("Roles").Where(predicate);
         }
 
         public UtilisateurRole FindSingle(Func<UtilisateurRole, bool> predicate)

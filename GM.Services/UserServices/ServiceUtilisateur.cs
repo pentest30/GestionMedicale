@@ -87,9 +87,10 @@ namespace GM.Services.UserServices
             },
                 DefaultAuthenticationTypes.ApplicationCookie,
                 ClaimTypes.Name, ClaimTypes.Role);
+            var list = _roleUserRepository.Find(x => x.UtilisateurId == result.Id);
 
             // if you want roles, just add as many as you want here (for loop maybe?)
-            foreach (var userRole in _roleUserRepository.Find(x=>x.UtilisateurId== result.Id).Select(x=>x.Roles))
+            foreach (var userRole in list.Select(x=>x.Roles))
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, userRole.Nom));
             }
@@ -113,7 +114,7 @@ namespace GM.Services.UserServices
                     };
                     _roleUserRepository.Insert(role);
                 }
-               
+                Authentification(utilisateur, password, false);
                 return true;
             }
             catch (Exception)

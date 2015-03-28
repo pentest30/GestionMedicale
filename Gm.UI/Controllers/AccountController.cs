@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AutoMapper;
@@ -12,10 +13,12 @@ namespace Gm.UI.Controllers
     public class AccountController : Controller
     {
         private readonly IServiceUtilisateur _service;
+        private readonly IEnumerable<Role> _roles;
         // GET: Account
         public AccountController(IServiceUtilisateur service)
         {
             _service = service;
+            _roles = _service.SelectRoles();
         }
         
      
@@ -31,6 +34,7 @@ namespace Gm.UI.Controllers
             return View(new RegisterModel());
         }
 
+        
         private static IEnumerable<KeyValuePair<string, string>> GetGenre()
         {
             IDictionary<string, string> genres = new Dictionary<string, string>();
@@ -46,7 +50,6 @@ namespace Gm.UI.Controllers
         public ActionResult Inscription(RegisterModel model)
         {
             InitDropDownList(model);
-           
             if (ModelState.IsValid)
             {
                 if (IsNumeric(model.DateOfBirthDay.ToString()) && IsNumeric(model.DateOfBirthYear.ToString()) &&
@@ -68,7 +71,22 @@ namespace Gm.UI.Controllers
                 user.Id = Guid.NewGuid();
                 if (_service.Inscription(user, model.Password, roleIds))
                 {
-                    return RedirectToRoute("Index", "Home");
+                    var role = _roles.SingleOrDefault(x => x.Id == model.RoleId);
+                    if (role != null)
+                    {
+                        var r = role.Nom;
+                        switch (r)
+                        {
+                            case "patient":
+                                break;
+                            case "medecin":
+                                break;
+                            case "pharmacien":
+                            {
+                                return RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = user.Id});
+                            }
+                        }
+                    }
                 }
             }
           return View(model);

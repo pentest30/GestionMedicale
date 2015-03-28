@@ -34,10 +34,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Docteurs", "About", "Home")</li>
-                    <li>@Html.ActionLink("Pharmacies", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Médicament", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" })</li>
+                    <li>@Html.ActionLink("Docteurs", "About", new { area = "", controller = "Home" })</li>
+                    <li>@Html.ActionLink("Pharmacies", "Contact",  new { area = "" ,controller = "Home" })</li>
+                    <li>@Html.ActionLink("Médicament", "Contact", "Home", new { area = "" })</li>
 
                 </ul>
 
@@ -47,9 +47,9 @@
                     @if (!Request.IsAuthenticated)
                     {
 
-                        <li><a href="@Url.Action("login", "account")"><span class="glyphicon glyphicon-log-in"></span> Se connecte</a></li>
+                        <li><a href="@Url.Action("login", "account",new { area = "" })"><span class="glyphicon glyphicon-log-in"></span> Se connecte</a></li>
                                 
-                        <li><a href="@Url.Action("Inscription", "Account")">Inscription</a></li>
+                        <li><a href="@Url.Action("Inscription", "Account", new { area = "" })">Inscription</a></li>
                     }
                     else
                     {

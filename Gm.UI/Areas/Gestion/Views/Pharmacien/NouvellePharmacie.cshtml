@@ -1,0 +1,15 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+@{
+    ViewBag.Title = "NouvellePharmacie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nouvelle <small>Pharmacie</small></h2>
+
+<hr/>
+@{
+    Html.RenderPartial("_CreatePharmacie", Model);
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
