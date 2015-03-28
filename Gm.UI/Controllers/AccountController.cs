@@ -31,11 +31,11 @@ namespace Gm.UI.Controllers
             return View(new RegisterModel());
         }
 
-        private static IEnumerable<KeyValuePair<int, string>> GetGenre()
+        private static IEnumerable<KeyValuePair<string, string>> GetGenre()
         {
-            IDictionary<int, string> genres = new Dictionary<int, string>();
-            genres.Add(1, "Homme");
-            genres.Add(2, "Femme");
+            IDictionary<string, string> genres = new Dictionary<string, string>();
+            genres.Add("Homme", "Homme");
+            genres.Add("Femme", "Femme");
             return genres;
         }
 
@@ -45,7 +45,7 @@ namespace Gm.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inscription(RegisterModel model)
         {
-            InitDropDownlIst(model);
+            InitDropDownList(model);
            
             if (ModelState.IsValid)
             {
@@ -59,13 +59,8 @@ namespace Gm.UI.Controllers
                 if (_service.ExisteDeja(model.Email))
                 {
                     ModelState.AddModelError("EmailAddresse", "Email En utilisation, choiser un autre Email");
-                    if (_service.ExisteDeja(model.Pseudo))
-                    {
-                        ModelState.AddModelError("Identifiant",
-                            "Identifiant En utilisation, choiser un autre Identifiant");
-                        
-                    }
-                    return View(model);
+                    if (_service.ExisteDeja(model.Pseudo)) ModelState.AddModelError("Identifiant", "Identifiant En utilisation, choiser un autre Identifiant");
+                   return View(model);
                 }
                 var roleIds = new int?[1];
                 roleIds[0] = model.RoleId;
@@ -73,14 +68,13 @@ namespace Gm.UI.Controllers
                 user.Id = Guid.NewGuid();
                 if (_service.Inscription(user, model.Password, roleIds))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToRoute("Index", "Home");
                 }
             }
-            //InitDropDownlIst(model);
-            return View(model);
+          return View(model);
         }
 
-        private void InitDropDownlIst(RegisterModel model)
+        private void InitDropDownList(RegisterModel model)
         {
             ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom", model.RoleId);
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value", model.Sexe);

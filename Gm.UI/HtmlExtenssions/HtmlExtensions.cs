@@ -15,11 +15,11 @@ namespace Gm.UI.HtmlExtenssions
             int? selectedDay = null, int? selectedMonth = null, int? selectedYear = null, bool localizeLabels = true, bool disabled = false)
         {
             var daysList = new TagBuilder("select");
-            daysList.MergeAttribute("style", "width: 70px;height: 30px");
+            daysList.MergeAttribute("style", "width: 70px;height: 35px");
             var monthsList = new TagBuilder("select");
-            monthsList.MergeAttribute("style", "width: 120px;height: 30px");
+            monthsList.MergeAttribute("style", "width: 120px;height: 35px");
             var yearsList = new TagBuilder("select");
-            yearsList.MergeAttribute("style", "width: 90px;height: 30px");
+            yearsList.MergeAttribute("style", "width: 90px;height: 35px");
 
             daysList.Attributes.Add("name", dayName);
             monthsList.Attributes.Add("name", monthName);
@@ -44,7 +44,7 @@ namespace Gm.UI.HtmlExtenssions
             var years = new StringBuilder();
 
             string dayLocale = "Jour";
-            string monthLocale = "Moi";
+            string monthLocale = "Mois";
             string yearLocale = "Année";
 
             days.AppendFormat("<option>{0}</option>", dayLocale);

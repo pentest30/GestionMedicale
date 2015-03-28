@@ -25,6 +25,9 @@ select {
    
     height: 30px
 }
+select.form-control {
+    max-height: 35px
+}
 
 .k-textbox {
     -moz-min-width: 280px;

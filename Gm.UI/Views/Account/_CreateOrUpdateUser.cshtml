@@ -104,8 +104,10 @@
                                     Model.DateOfBirthDay,
                                     Model.DateOfBirthMonth,
                                     Model.DateOfBirthYear)
-               
-                @Html.ValidationMessageFor(model => model.DateNaissance, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.DateOfBirthDay, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.DateOfBirthMonth, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.DateOfBirthYear, "", new { @class = "text-danger" })
+                
             </div>
         </div>
     
@@ -126,7 +128,7 @@
     <div>
         @Html.LabelFor(model => model.Addresse, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 10px">
-            @Html.TextAreaFor(model => model.Addresse, 5, 50, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextAreaFor(model => model.Addresse, 3, 55, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Addresse, "", new { @class = "text-danger" })
         </div>
     </div>

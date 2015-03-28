@@ -58,13 +58,13 @@ namespace Gm.UI.Models
         [Required]
         [Display(Name = "Genre *")]
         public string Sexe { get; set; }
-        [Required]
-        [Display(Name = "Jour")]
+        [Required(ErrorMessage = "Valeur non Valide por le champ Jours")]
+        [Display(Name = "Jours")]
         public int? DateOfBirthDay { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Valeur non Valide por le champ Mois")]
         [Display(Name = "Mois")]
         public int? DateOfBirthMonth { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Valeur non Valide por le champ Année")]
         [Display(Name = "Année")]
         public int? DateOfBirthYear { get; set; }
          [Required]

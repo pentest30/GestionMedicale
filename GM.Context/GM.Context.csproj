@@ -63,6 +63,7 @@
       <DependentUpon>201503270928389_up6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
