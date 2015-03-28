@@ -22,7 +22,7 @@ namespace Gm.UI.Areas.Gestion.Models
         [DataType(DataType.Date)]
         public DateTime? DateFondation { get; set; }
         [Required]
-        [Display(Name = "Tél")]
+        [Display(Name = "Tél *")]
         public string Tel { get; set; }
         public string Fax { get; set; }
         [DataType(DataType.EmailAddress, ErrorMessage = "Forme d'addresse email non valide")]
@@ -32,8 +32,10 @@ namespace Gm.UI.Areas.Gestion.Models
          [Required]
         public Guid? PropreitaireId { get; set; }
         [Required]
+        [Display(Name = "Wilaya *")]
         public string Wilaya { get; set; }
         [Required]
+        [Display(Name = "Commune *")]
         public string Commune { get; set; }
         [Display(Name = "Compte bancaire")]
         public string CompteBancaire { get; set; }
