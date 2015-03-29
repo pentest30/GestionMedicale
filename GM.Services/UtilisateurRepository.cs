@@ -20,7 +20,7 @@ namespace GM.Services
 
         public IEnumerable<Utilisateur> SelectAll()
         {
-            return _db.Utilisateurs.Include(x => x.UtilisateurRoles.Select(y =>y.Roles)).ToList();
+            return _db.Utilisateurs.ToList();
         }
 
        public bool Exist(Func<Utilisateur, bool> predicate)

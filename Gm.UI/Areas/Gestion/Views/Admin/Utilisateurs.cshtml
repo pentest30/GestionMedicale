@@ -1,8 +1,55 @@
-﻿
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<GM.Core.Models.Utilisateur>
+
 @{
     ViewBag.Title = "Utilisateurs";
-    Layout = "~/Areas/Gestion/Views/Shared/_Root.cshtml";
+    Layout = "~/Areas/Gestion/Views/Shared/_AdminMainPage.cshtml";
 }
 
-<h2>Utilisateurs</h2>
 
+<div>
+    @(Html.Kendo().Grid(Model)
+          .Name("grid-users")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Hidden(true).Width(15).Sortable(false);
+              columns.Bound(c => c.Pseudo).Width(60);
+              columns.Bound(c => c.Email).Width(80);
+              columns.Bound(c => c.Nom).Width(80);
+              columns.Bound(c => c.Prenom).Width(80);
+
+          })
+          .HtmlAttributes(new {style = "height: auto;"})
+          .Scrollable()
+          .Groupable()
+          .Sortable().Selectable(selectable => selectable
+              .Mode(GridSelectionMode.Multiple)
+              .Type(GridSelectionType.Row))
+          .Events(events => events.Change("OnChange"))
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("AllUsers", "Admin")
+                  .Data("additionalData"))
+          )
+          )
+</div>
+<script>
+    function additionalData() {
+        return {
+            UserName: $('#UserName').val(),
+            Email: $('#Email').val()
+        };
+
+    }
+    var selectedIds = [];
+    function OnChange(e) {
+        var grid = e.sender;
+        selectedIds = [];
+        selectedIds.push(grid.dataItem(e.sender.select()));
+        console.log(selectedIds);
+    }
+</script>

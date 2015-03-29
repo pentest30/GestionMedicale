@@ -30,7 +30,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
+            return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
         }
     }
 }
