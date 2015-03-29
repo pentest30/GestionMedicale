@@ -25,6 +25,7 @@ namespace Gm.UI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                    "~/Scripts/gestion/bootstrap.min.js",
                    "~/Scripts/respond.js",
+                   "~/Scripts/jquery.confirm.min.js",
                      "~/Scripts/select2.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

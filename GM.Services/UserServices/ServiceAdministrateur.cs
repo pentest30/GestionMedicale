@@ -23,7 +23,7 @@ namespace GM.Services.UserServices
             return true;
         }
 
-        public bool SupprimeInscription(Guid? id)
+        public bool SupprimeCompte(Guid? id)
         {
             var item = _repository.SelectById(id);
             if (item == null) return false;

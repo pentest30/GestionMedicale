@@ -14,5 +14,8 @@ namespace GM.Core
         bool ModifierProfile(Utilisateur utilisateur);
         bool Inscription(Utilisateur utilisateur , string password , int ?[] roles);
         IEnumerable<Utilisateur> AllUsers();
+        IEnumerable<Utilisateur> ActiveUsers();
+        IEnumerable<Utilisateur> NonActiveUsers();
+        void Logout();
     }
 }

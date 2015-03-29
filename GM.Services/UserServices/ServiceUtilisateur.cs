@@ -126,5 +126,20 @@ namespace GM.Services.UserServices
         {
             return _repository.SelectAll();
         }
+
+        public IEnumerable<Utilisateur> ActiveUsers()
+        {
+            return _repository.Find(x => x.Validation);
+        }
+
+        public IEnumerable<Utilisateur> NonActiveUsers()
+        {
+            return _repository.Find(x => !x.Validation);
+        }
+
+        public void Logout()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
     }
 }

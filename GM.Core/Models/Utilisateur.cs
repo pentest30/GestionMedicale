@@ -13,7 +13,9 @@ namespace GM.Core.Models
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public DateTime DateNaissance { get; set; }
-        public string Addresse { get; set; } 
+        public string Addresse { get; set; }
+        public string Wilaya { get; set; }
+
         public string Email { get; set; }
         public string Tel { get; set; }
         //public string Fax { get; set; }
@@ -28,6 +30,14 @@ namespace GM.Core.Models
         public int? LocalId { get; set; }
 
         public ICollection<UtilisateurRole> UtilisateurRoles { get; set; }
+
+        public string Etat
+        {
+            get
+            {
+                return Validation ? "Active" : "Non active";
+            }
+        }
 
 
 

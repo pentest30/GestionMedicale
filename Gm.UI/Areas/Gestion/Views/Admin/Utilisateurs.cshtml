@@ -11,50 +11,52 @@
     Html.RenderPartial("_ToolBarUser");
 }
 
-<div style="margin-top: 90px" >
-    <div class="alert alert-warning"></div>
-   
-    <div class="row">
-        <div class="span10">
-            <form class="form-horizontal">
-                <label class="control-label">Filtre</label>
-                <div class="controls">
-                    <select id="filter-gird">
-                        <option></option>
-                        <option>Touts les utilisateurs </option>
-                        <option>Utilisateurs non activés</option>
-                        <option>Utilisateurs en banne</option>
-                    </select>
-                </div>
-            </form>
+<div style="margin-top: 110px">
+    <div id="alert"></div>
+
+    <div class="row-fluid">
+        <div class="span7">
+
             @{
                 Html.RenderPartial("_SearchForm", new UtilisateurModel());
             }
         </div>
-        <div class="span2  ">
-           
+        <div class="span1" style="left: 5px">
+            <form class="form-horizontal">
+                <label class="control-label">Filtre</label>
+                <div class="controls">
+                    @Html.DropDownList("filterUsers")
+                </div>
+            </form>
 
         </div>
 
     </div>
-
-
     @(Html.Kendo().Grid(Model)
-          .Name("grid-users")
+          .Name("users")
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).Width(15).Sortable(false).ClientTemplate("<input type='checkbox' class='checkbox' />");
+              columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
+                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                        .Title("<input id='mastercheckbox' type='checkbox'/>")
+                        .Width(50)
+                        .HtmlAttributes(new { style = "text-align:center" })
+                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+              columns.Bound(x => x.Id)
+                          .Width(50).Visible(false);
               columns.Bound(c => c.Pseudo).Width(60);
               columns.Bound(c => c.Email).Width(80);
               columns.Bound(c => c.Nom).Width(80);
-              columns.Bound(c => c.Prenom).Width(80);
+              columns.Bound(c => c.Prenom).Width(80).Title("Prénom");
+              columns.Bound(c => c.Wilaya).Width(80);
+              columns.Bound(c => c.Etat).Width(80).Title("Etat");
 
           })
-          .HtmlAttributes(new {style = "height: auto;"})
+          .HtmlAttributes(new { style = "height: auto;" })
           .Scrollable()
-          
+
           .Sortable()
-          .Events(events => events.Change("OnChange"))
+            //.Events(events => events.Change("OnChange"))
           .Pageable(pageable => pageable
               .Refresh(true)
               .PageSizes(true)
@@ -64,12 +66,104 @@
               .Read(read => read.Action("AllUsers", "Admin")
                   .Data("additionalData"))
           )
-          )
+    )
 </div>
 <script>
-    $(document).ready(function() {
-        $("#filter-gird").select2();
+    var selectedIds = [];
+
+    $(document).ready(function () {
+        $("#filterUsers").select2();
+        $('#mastercheckbox').click(function () {
+            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+        });
+
+        $("#delete-btn").confirm({
+            text: "Est vous sur(e)?",
+            title: "Confirmation",
+            confirm: function () {
+                if ($.isEmptyObject(selectedIds) === true) {
+                    alert("Séléctionner un utilisateur!");
+                    return;
+                }
+
+                for (var i = 0; i < selectedIds.length; i++) {
+                    fireAction(selectedIds[0], '@Url.Action("Delete")' + '/?id=');
+                }
+
+            },
+            cancel: function () {
+                // nothing to do
+            },
+            confirmButton: "Oui",
+            cancelButton: "Non",
+            post: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-default"
+        });
+        $("#active-btn").confirm({
+            text: "Est vous sur(e)?",
+            title: "Confirmation",
+            confirm: function () {
+                if ($.isEmptyObject(selectedIds) === true) {
+                    alert("Séléctionner un utilisateur!");
+                    return;
+                }
+
+                for (var i = 0; i < selectedIds.length; i++) {
+                    fireAction(selectedIds[0], '@Url.Action("Activate")' + '/?id=');
+                }
+
+            },
+            cancel: function () {
+                // nothing to do
+            },
+            confirmButton: "Oui",
+            cancelButton: "Non",
+            post: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-default"
+        });
+       
+        $(document).on('change', '#users input[type=checkbox][id!=mastercheckbox]', function () {
+            var $check = $(this);
+            var checked;
+            if ($check.is(":checked") == true) {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked == -1) {
+                    //add id to selectedIds.
+                    selectedIds.push($check.val());
+                }
+            }
+            else {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked > -1) {
+                    //remove id from selectedIds.
+                    selectedIds = $.grep(selectedIds, function (item) {
+                        return item != $check.val();
+                    });
+                }
+            }
+            updateMasterCheckbox();
+        });
+
     });
+    function fireAction(id, url) {
+        $.ajax({
+            url: url + id.replace("<", "").replace(">", ""),
+            type: 'POST',
+            success: function (data) {
+                $("#alert").html(data);
+                $('#users').data('kendoGrid').dataSource.read();
+            },
+            error: function () {
+            }
+        });
+    }
+    function updateMasterCheckbox() {
+        var numChkBoxes = $('#users input[type=checkbox]:not([id=mastercheckbox])').length;
+        var numChkBoxesChecked = $('#customers-grid input[type=checkbox][checked]:not([id=mastercheckbox])').length;
+        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+    }
     function additionalData() {
         return {
             UserName: $('#Identifiant').val(),
@@ -77,11 +171,5 @@
         };
 
     }
-    var selectedIds = [];
-    function OnChange(e) {
-        var grid = e.sender;
-        selectedIds = [];
-        selectedIds.push(grid.dataItem(e.sender.select()));
-        console.log(selectedIds);
-    }
+
 </script>

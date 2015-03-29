@@ -24,6 +24,7 @@ namespace Gm.UI.Controllers
      
         [HttpGet]
         [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult Inscription()
         {
             if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
@@ -46,9 +47,10 @@ namespace Gm.UI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public ActionResult Inscription(RegisterModel model)
         {
+            if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
             InitDropDownList(model);
             if (ModelState.IsValid)
             {
@@ -81,7 +83,7 @@ namespace Gm.UI.Controllers
                                 break;
                             case "medecin":
                                 break;
-                            case "pharmacien":
+                            case "Pharmacien":
                             {
                                 return RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = user.Id});
                             }
@@ -92,6 +94,11 @@ namespace Gm.UI.Controllers
           return View(model);
         }
 
+        public ActionResult Logout()
+        {
+            _service.Logout();
+            return RedirectToAction("Index", "Home");
+        }
         private void InitDropDownList(RegisterModel model)
         {
             ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom", model.RoleId);
