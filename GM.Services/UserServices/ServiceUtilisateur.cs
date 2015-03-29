@@ -48,8 +48,7 @@ namespace GM.Services.UserServices
         public bool Authentification(Utilisateur utilisateur , string password , bool remember)
         {
             var b =_repository.Exist(x => x.Email.Equals(utilisateur.Email) || x.Pseudo.Equals(utilisateur.Pseudo));
-            if (!b) return false;
-            if (!Crypto.VerifyHashedPassword(utilisateur.PasswordHash, password)) return false;
+            if (!b || !Crypto.VerifyHashedPassword(utilisateur.PasswordHash, password)) return false;
             Authenticate(utilisateur, remember);
             return true;
         }
@@ -119,9 +118,13 @@ namespace GM.Services.UserServices
             }
             catch (Exception)
             {
-
                 return false;
             }
+        }
+
+        public IEnumerable<Utilisateur> AllUsers()
+        {
+            return _repository.SelectAll();
         }
     }
 }

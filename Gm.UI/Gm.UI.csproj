@@ -527,6 +527,7 @@
     <Content Include="Areas\Gestion\Views\Shared\_Root.cshtml" />
     <Content Include="Areas\Gestion\Views\Pharmacien\NouvellePharmacie.cshtml" />
     <Content Include="Areas\Gestion\Views\Pharmacien\_CreatePharmacie.cshtml" />
+    <Content Include="Areas\Gestion\Views\Admin\Utilisateurs.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -842,7 +843,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\" />
-    <Folder Include="Areas\Gestion\Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

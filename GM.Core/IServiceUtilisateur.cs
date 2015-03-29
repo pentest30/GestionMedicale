@@ -13,5 +13,6 @@ namespace GM.Core
         Utilisateur VoirProfile(Guid? id);
         bool ModifierProfile(Utilisateur utilisateur);
         bool Inscription(Utilisateur utilisateur , string password , int ?[] roles);
+        IEnumerable<Utilisateur> AllUsers();
     }
 }
