@@ -1,18 +1,49 @@
-﻿@using Kendo.Mvc.UI
-@model IEnumerable<GM.Core.Models.Utilisateur>
+﻿@using Gm.UI.Areas.Gestion.Models
+@using GM.Core.Models
+@using Kendo.Mvc.UI
+@model IEnumerable<Utilisateur>
 
 @{
     ViewBag.Title = "Utilisateurs";
     Layout = "~/Areas/Gestion/Views/Shared/_AdminMainPage.cshtml";
 }
+@{
+    Html.RenderPartial("_ToolBarUser");
+}
+
+<div style="margin-top: 90px" >
+    <div class="alert alert-warning"></div>
+   
+    <div class="row">
+        <div class="span10">
+            <form class="form-horizontal">
+                <label class="control-label">Filtre</label>
+                <div class="controls">
+                    <select id="filter-gird">
+                        <option></option>
+                        <option>Touts les utilisateurs </option>
+                        <option>Utilisateurs non activés</option>
+                        <option>Utilisateurs en banne</option>
+                    </select>
+                </div>
+            </form>
+            @{
+                Html.RenderPartial("_SearchForm", new UtilisateurModel());
+            }
+        </div>
+        <div class="span2  ">
+           
+
+        </div>
+
+    </div>
 
 
-<div>
     @(Html.Kendo().Grid(Model)
           .Name("grid-users")
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).Hidden(true).Width(15).Sortable(false);
+              columns.Bound(c => c.Id).Width(15).Sortable(false).ClientTemplate("<input type='checkbox' class='checkbox' />");
               columns.Bound(c => c.Pseudo).Width(60);
               columns.Bound(c => c.Email).Width(80);
               columns.Bound(c => c.Nom).Width(80);
@@ -21,10 +52,8 @@
           })
           .HtmlAttributes(new {style = "height: auto;"})
           .Scrollable()
-          .Groupable()
-          .Sortable().Selectable(selectable => selectable
-              .Mode(GridSelectionMode.Multiple)
-              .Type(GridSelectionType.Row))
+          
+          .Sortable()
           .Events(events => events.Change("OnChange"))
           .Pageable(pageable => pageable
               .Refresh(true)
@@ -38,9 +67,12 @@
           )
 </div>
 <script>
+    $(document).ready(function() {
+        $("#filter-gird").select2();
+    });
     function additionalData() {
         return {
-            UserName: $('#UserName').val(),
+            UserName: $('#Identifiant').val(),
             Email: $('#Email').val()
         };
 

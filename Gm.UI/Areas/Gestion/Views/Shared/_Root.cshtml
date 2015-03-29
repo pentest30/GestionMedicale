@@ -19,8 +19,10 @@
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+<div>
+    @RenderBody()
+</div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

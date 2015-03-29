@@ -46,6 +46,16 @@ h1 {padding-bottom:0.2em;}
 /* files */
 .files li {list-style-type:none;}
 .files .meta {padding-left:18px;}
+.k-textbox {
+    -moz-min-width: 280px;
+    -ms-min-width: 280px;
+    -o-min-width: 280px;
+    -webkit-min-width: 280px;
+    min-width: 280px;
+    margin-bottom: 5px;
+   
+    
+}
 
 .zebra-list {margin:0 0 18px 0; padding:0;}
 .zebra-list li {border:1px solid #DDD; padding:8px; border-bottom:none;}

@@ -1,9 +1,11 @@
-﻿<div class="navbar-inner">
-    <div class="container">
+﻿
+
+<div class="navbar-inner navbar-fixed-top navbar-default ">
+    <div >
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">Akira</a>
         <div class="nav-collapse">
             <ul class="nav">
-                <li>@Html.ActionLink("Tableau de bord", "Index", new { area = "Gestion", controller = "Admin" })</li>
+                <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class=" icon-home"></i> Home</a></li>
                 <li>@Html.ActionLink("Utilisateurs", "Utilisateurs", new { area = "Gestion", controller = "Admin" })</li>
 
                 <li>
@@ -38,9 +40,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-search pull-left" action="">
-                <input type="text" class="search-query span2" placeholder="Search" />
-            </form>
+           
             <ul class="nav pull-right">
                 <li>
                     <a href="profile.htm"></a>
