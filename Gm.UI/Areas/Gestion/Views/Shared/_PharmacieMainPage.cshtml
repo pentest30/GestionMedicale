@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Gestion de la pharmacie";
+    Layout = "~/Areas/Gestion/Views/Shared/_Root.cshtml";
+}
+
+<div style="margin: 10px">
+    <div class="navbar navbar-inverses" style="padding: 0">
+        @{
+            Html.RenderPartial("_PharmacieMenu");
+        }
+    </div>
+    <div>
+        @if (IsSectionDefined("sidebar"))
+        {
+            <div class="row" style="margin-top: 50px">
+                <div class="span3">
+                    <div class="well" style="padding: 8px 0;">
+                        @RenderSection("sidebar")
+                    </div>
+                </div>
+            </div>
+        }
+        @RenderBody()
+    </div>
+</div>
+
+

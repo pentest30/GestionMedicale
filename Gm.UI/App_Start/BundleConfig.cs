@@ -8,7 +8,7 @@ namespace Gm.UI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-2.1.3.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -22,9 +22,9 @@ namespace Gm.UI
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                         "~/Scripts/select2.min.js"));
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/gestion/bootstrap").Include(
                    "~/Scripts/gestion/bootstrap.min.js",
-                   "~/Scripts/respond.js",
+                   "~/Scripts/gestion/site.js",
                    "~/Scripts/jquery.confirm.min.js",
                      "~/Scripts/select2.min.js"));
 

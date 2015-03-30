@@ -91,7 +91,7 @@ namespace GM.Services.UserServices
             // if you want roles, just add as many as you want here (for loop maybe?)
             foreach (var userRole in list.Select(x=>x.Roles))
             {
-                identity.AddClaim(new Claim(ClaimTypes.Role, userRole.Nom));
+                identity.AddClaim(new Claim(ClaimTypes.Role, userRole.Nom.ToLower()));
             }
 
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = remember }, identity);

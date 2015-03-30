@@ -9,5 +9,6 @@ namespace GM.Core
         bool AccepteInscription(Guid? id);
         bool SupprimeCompte(Guid? id);
         IEnumerable<Utilisateur> UtilisateursNonActive();
+        bool DesactiveCompte(Guid? id);
     }
 }

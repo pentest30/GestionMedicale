@@ -540,6 +540,9 @@
     <Content Include="Areas\Gestion\Views\Shared\_AdminMenu.cshtml" />
     <Content Include="Areas\Gestion\Views\Admin\_ToolBarUser.cshtml" />
     <Content Include="Areas\Gestion\Views\Admin\_SearchForm.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_PharmacieMainPage.cshtml" />
+    <Content Include="Areas\Gestion\Views\Pharmacien\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_PharmacieMenu.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />

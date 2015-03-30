@@ -5,12 +5,13 @@ using GM.Core;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
-    [Authorize(Roles = "Pharmacien")]
+    [Authorize(Roles = "pharmacien")]
     public class PharmacienController : Controller
     {
         // GET: Gestion/Pharmacien
         public ActionResult Index()
         {
+
             return View();
         }
         [HttpGet]

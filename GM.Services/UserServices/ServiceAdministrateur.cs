@@ -36,5 +36,13 @@ namespace GM.Services.UserServices
             return _repository.Find(x => !x.Validation);
         }
 
+        public bool DesactiveCompte(Guid? id)
+        {
+            var item = _repository.SelectById(id);
+            if (item == null) return false;
+            item.Validation = false;
+            _repository.Update(item);
+            return true;
+        }
     }
 }

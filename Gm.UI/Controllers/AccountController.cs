@@ -71,6 +71,7 @@ namespace Gm.UI.Controllers
                 roleIds[0] = model.RoleId;
                 var user = Mapper.Map<Utilisateur>(model);
                 user.Id = Guid.NewGuid();
+                user.DateInscription = DateTime.Now;
                 if (_service.Inscription(user, model.Password, roleIds))
                 {
                     var role = _roles.SingleOrDefault(x => x.Id == model.RoleId);
@@ -83,7 +84,7 @@ namespace Gm.UI.Controllers
                                 break;
                             case "medecin":
                                 break;
-                            case "Pharmacien":
+                            case "pharmacien":
                             {
                                 return RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = user.Id});
                             }

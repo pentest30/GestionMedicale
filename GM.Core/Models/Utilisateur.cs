@@ -28,6 +28,7 @@ namespace GM.Core.Models
         public string Sexe { get; set; }
 
         public int? LocalId { get; set; }
+       
 
         public ICollection<UtilisateurRole> UtilisateurRoles { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using GM.Core;
+using GM.Core.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
@@ -12,29 +13,41 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceAdministrateur _service;
         private readonly IServiceUtilisateur _serviceUtilisateur;
         private readonly IDictionary<int, string> _filtreUsers;
+        private readonly IList<Role> _roles;
+        private int _filter;
 
 
-        public AdminController(IServiceAdministrateur service, IServiceUtilisateur serviceUtilisateur )
+        public AdminController(IServiceAdministrateur service, IServiceUtilisateur serviceUtilisateur)
         {
             _service = service;
             _serviceUtilisateur = serviceUtilisateur;
-            _filtreUsers = new Dictionary<int, string>();
-            _filtreUsers.Add(1,"Touts les utilisateurs");
-            _filtreUsers.Add(2, "Utilisateurs activés");
-            _filtreUsers.Add(3, "Utilisateurs non activés");
+            _roles = new List<Role>();
+            _roles.Add(new Role
+            {
+                Id = 0,
+                Nom = ""
+            });
+            _roles.AddRange(_serviceUtilisateur.SelectRoles());
+            _filtreUsers = new Dictionary<int, string>
+            {
+                {1, "Tous les utilisateurs"},
+                {2, "Comptes actifs"},
+                {3, "comptes non actifs"}
+            };
         }
 
         // GET: Gestion/Admin
         public ActionResult Index()
         {
-            
             return View();
 
         }
 
         public ActionResult Utilisateurs()
         {
+            Session["filter"] = 0;
             ViewData["filterUsers"] = new SelectList(_filtreUsers, "Key", "Value");
+            ViewData["roles"] = new SelectList(_roles, "Id", "Nom");
             return View();
         }
 
@@ -42,46 +55,75 @@ namespace Gm.UI.Areas.Gestion.Controllers
         //[filte(false)]
         public ActionResult Delete(string id)
         {
-            if (string.IsNullOrEmpty(id))
-                return Content("<div class='alert alert-danger'><p>Suppression est terminer avec succés!</p><div/>");
-
             Guid? identity = new Guid(id.Trim());
-            _service.SupprimeCompte(identity);
-            return Content("<div class='alert alert-success'><p>Suppression est terminer avec succés!</p><div/>");
+            if (string.IsNullOrEmpty(id) || !_service.SupprimeCompte(identity))
+                return Content(ErrorMessage());
+            return Content(SuccessMessage());
         }
-         [HttpPost]
+
+        [HttpPost]
         public ActionResult Activate(string id)
         {
-            if (string.IsNullOrEmpty(id))
-                return Content("<div class='alert alert-danger'><p>Suppression est terminer avec succés!</p><div/>");
-
             Guid? identity = new Guid(id.Trim());
-            _service.AccepteInscription(identity);
-            return Content("<div class='alert alert-info'><p>Activation est terminer avec succés!</p><div/>");
+            if (string.IsNullOrEmpty(id) || !_service.AccepteInscription(identity))
+                return Content(ErrorMessage());
+            return Content(SuccessMessage());
         }
 
-        public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request, int ? filter)
+        [HttpPost]
+        public ActionResult Desactive(string id)
         {
-            if (filter != null)
+            Guid? identity = new Guid(id.Trim());
+            if (string.IsNullOrEmpty(id) || !_service.DesactiveCompte(identity))
+                return Content(ErrorMessage());
+            return Content(SuccessMessage());
+
+        }
+
+        [HttpPost]
+        public ActionResult UpdateFilter(int? f)
+        {
+            Session["filter"] = Convert.ToInt32(f);
+            return null;
+        }
+
+        public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request)
+        {
+
+            _filter = Convert.ToInt32(Session["filter"].ToString());
+
+            if (_filter == 0)
             {
-                switch (filter)
+                return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
+            }
+            switch (_filter)
+            {
+                case 1:
                 {
-                    case 1:
-                        {
-                            return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
-                        }
-                    case 2:
-                        {
-                            return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
-                        }
-                    case 3:
-                        {
-                            return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
-                        }
-                        
+                    return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
                 }
+                case 2:
+                {
+                    return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
+                }
+                case 3:
+                {
+                    return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
+                }
+
             }
             return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
         }
+
+        private string ErrorMessage()
+        {
+            return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
+        }
+
+        private string SuccessMessage()
+        {
+            return "<div class='alert alert-success'><p>Suppression est terminer avec succés!</p><div/>";
+        }
+
     }
 }

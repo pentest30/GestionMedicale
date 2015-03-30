@@ -1,11 +1,11 @@
 ﻿
 
-<div class="navbar-inner navbar-inverse navbar-fixed-top  " style="background-color: #17568c">
+<div class="navbar-inner  navbar-fixed-top">
     <div >
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="@Url.Action("Index","Home", new{area =""})">Akira</a>
         <div class="nav-collapse">
             <ul class="nav">
-                <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class=" icon-home"></i> Home</a></li>
+                <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class="icon-white icon-home"></i> Home</a></li>
                 <li>@Html.ActionLink("Utilisateurs", "Utilisateurs", new { area = "Gestion", controller = "Admin" })</li>
 
                 <li>

@@ -23,9 +23,17 @@
         </div>
         <div class="span1" style="left: 5px">
             <form class="form-horizontal">
-                <label class="control-label">Filtre</label>
-                <div class="controls">
-                    @Html.DropDownList("filterUsers")
+                <div class="control-group">
+                    <label class="control-label">Filtre</label>
+                    <div class="controls">
+                        @Html.DropDownList("filterUsers")
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Type de compte</label>
+                    <div class="controls">
+                        @Html.DropDownList("roles")
+                    </div>
                 </div>
             </form>
 
@@ -34,6 +42,7 @@
     </div>
     @(Html.Kendo().Grid(Model)
           .Name("users")
+                 
           .Columns(columns =>
           {
               columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
@@ -48,13 +57,12 @@
               columns.Bound(c => c.Email).Width(80);
               columns.Bound(c => c.Nom).Width(80);
               columns.Bound(c => c.Prenom).Width(80).Title("Prénom");
-              columns.Bound(c => c.Wilaya).Width(80);
+              columns.Bound(c => c.DateInscription).Width(80).Title("Date d'inscription");
               columns.Bound(c => c.Etat).Width(80).Title("Etat");
 
           })
-          .HtmlAttributes(new { style = "height: auto;" })
-          .Scrollable()
-
+          .HtmlAttributes(new { style = "height: 300px;" })
+          .Scrollable().Selectable()
           .Sortable()
             //.Events(events => events.Change("OnChange"))
           .Pageable(pageable => pageable
@@ -66,13 +74,33 @@
               .Read(read => read.Action("AllUsers", "Admin")
                   .Data("additionalData"))
           )
-    )
+          )
+    <input id="filter" type="hidden" name="filter"  />
 </div>
 <script>
     var selectedIds = [];
 
     $(document).ready(function () {
+        $("#search").on("click", function (e) {
+            e.preventDefault();
+            $('#users').data('kendoGrid').dataSource.fetch();
+        });
         $("#filterUsers").select2();
+        $("#filterUsers").on("change", function () {
+            $('#filter').val($("#filterUsers").val());
+            $.ajax({
+                url: '@Url.Action("UpdateFilter")' + '/?f=' + $("#filterUsers").val(),
+                type: 'POST',
+                success: function () {
+
+                    $('#users').data('kendoGrid').dataSource.read();
+                },
+                error: function () {
+                }
+            });
+
+            $('#users').data('kendoGrid').dataSource.read();
+        });
         $('#mastercheckbox').click(function () {
             $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
         });
@@ -123,13 +151,36 @@
             confirmButtonClass: "btn-success",
             cancelButtonClass: "btn-default"
         });
-       
+        $("#desactive-btn").confirm({
+            text: "Est vous sur(e)?",
+            title: "Confirmation",
+            confirm: function () {
+                if ($.isEmptyObject(selectedIds) === true) {
+                    alert("Séléctionner un utilisateur!");
+                    return;
+                }
+
+                for (var i = 0; i < selectedIds.length; i++) {
+                    fireAction(selectedIds[0], '@Url.Action("Desactive")' + '/?id=');
+                }
+
+            },
+            cancel: function () {
+                // nothing to do
+            },
+            confirmButton: "Oui",
+            cancelButton: "Non",
+            post: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-default"
+        });
+
         $(document).on('change', '#users input[type=checkbox][id!=mastercheckbox]', function () {
             var $check = $(this);
             var checked;
-            if ($check.is(":checked") == true) {
+            if ($check.is(":checked") === true) {
                 checked = jQuery.inArray($check.val(), selectedIds);
-                if (checked == -1) {
+                if (checked === -1) {
                     //add id to selectedIds.
                     selectedIds.push($check.val());
                 }
@@ -139,7 +190,7 @@
                 if (checked > -1) {
                     //remove id from selectedIds.
                     selectedIds = $.grep(selectedIds, function (item) {
-                        return item != $check.val();
+                        return item !== $check.val();
                     });
                 }
             }
@@ -147,6 +198,7 @@
         });
 
     });
+
     function fireAction(id, url) {
         $.ajax({
             url: url + id.replace("<", "").replace(">", ""),
@@ -162,7 +214,7 @@
     function updateMasterCheckbox() {
         var numChkBoxes = $('#users input[type=checkbox]:not([id=mastercheckbox])').length;
         var numChkBoxesChecked = $('#customers-grid input[type=checkbox][checked]:not([id=mastercheckbox])').length;
-        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+        $('#mastercheckbox').attr('checked', numChkBoxes === numChkBoxesChecked && numChkBoxes > 0);
     }
     function additionalData() {
         return {
