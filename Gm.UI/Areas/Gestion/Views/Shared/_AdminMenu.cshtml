@@ -6,7 +6,7 @@
         <div class="nav-collapse">
             <ul class="nav">
                 <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class="icon-white icon-home"></i> Home</a></li>
-                <li>@Html.ActionLink("Utilisateurs", "Utilisateurs", new { area = "Gestion", controller = "Admin" })</li>
+                <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-user"></i> Utilisateurs</a>   </li>
 
                 <li>
                     <a href="help.htm">Help</a>

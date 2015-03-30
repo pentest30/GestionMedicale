@@ -5,7 +5,7 @@ using GM.Core;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
-    [Authorize(Roles = "pharmacien")]
+    //[Authorize(Roles = "pharmacien")]
     public class PharmacienController : Controller
     {
         // GET: Gestion/Pharmacien
