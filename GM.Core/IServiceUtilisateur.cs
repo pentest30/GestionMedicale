@@ -8,7 +8,7 @@ namespace GM.Core
     {
         IEnumerable<Role> SelectRoles();
         bool ExisteDeja(string identifiant);
-        Role GetSingleRole(string id);
+        Role GetSingleRole(Guid? id);
         bool Authentification(Utilisateur utilisateur , string password , bool remember);
         Utilisateur VoirProfile(Guid? id);
         bool ModifierProfile(Utilisateur utilisateur);

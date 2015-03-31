@@ -71,7 +71,8 @@ namespace Gm.UI.Models
          [Display(Name = "Wilaya *")]
         
         public string   Wilaya { get; set; }
-      
+
+        public string Filter { get; set; }
         public int? LocalId { get; set; }
     }
 }

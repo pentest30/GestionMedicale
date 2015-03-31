@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
@@ -16,6 +17,7 @@ namespace Gm.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Mapper.CreateMap<RegisterModel, Utilisateur>();
+                //.ForMember(x => x.UtilisateurRoles.FirstOrDefault().RoleId, o => o.MapFrom(x => x.RoleId));
             Mapper.CreateMap<Utilisateur, RegisterModel>();
         }
     }

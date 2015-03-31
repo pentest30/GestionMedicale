@@ -13,5 +13,7 @@ namespace Gm.UI.Areas.Gestion.Models
         public string Prenom { get; set; }
         [Display(Name = "Identifiant: ")]
         public string Pseudo { get; set; }
+
+        public string RoleId { get; set; }
     }
 }

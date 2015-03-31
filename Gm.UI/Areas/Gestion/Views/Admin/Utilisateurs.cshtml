@@ -71,34 +71,34 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
               .Ajax()
-              .Read(read => read.Action("AllUsers", "Admin")
+                      .Read(read => read.Action("AllUsers", "Admin")
                   .Data("additionalData"))
           ))
-    <input id="filter" type="hidden" name="filter"  />
+    
 </div>
 <script>
     var selectedIds = [];
 
     $(document).ready(function () {
+       
         $("#search").on("click", function (e) {
             e.preventDefault();
             $('#users').data('kendoGrid').dataSource.fetch();
         });
         $("#filterUsers").select2();
         $("#filterUsers").on("change", function () {
-            $('#filter').val($("#filterUsers").val());
+            $('#RoleId').val($("#filterUsers").val());
+            $('#Pseudo').val("");
+            $('#Email').val("");
             $.ajax({
                 url: '@Url.Action("UpdateFilter")' + '/?f=' + $("#filterUsers").val(),
                 type: 'POST',
                 success: function () {
-
-                    $('#users').data('kendoGrid').dataSource.read();
+                  $('#users').data('kendoGrid').dataSource.read();
                 },
                 error: function () {
                 }
             });
-
-            $('#users').data('kendoGrid').dataSource.read();
         });
         $('#mastercheckbox').click(function () {
             $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
@@ -195,6 +195,15 @@
             }
             updateMasterCheckbox();
         });
+        $("#details-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un utilisateur!");
+                return;
+            }
+            var form = $('<form method="post" action="/Gestion/Admin/UserDetails">' +
+             '<input type="hidden" name="id" value="' + selectedIds[0].replace("<", "").replace(">", "") + '"></form>');
+            $(form).submit();
+        });
 
     });
 
@@ -217,8 +226,9 @@
     }
     function additionalData() {
         return {
-            UserName: $('#Identifiant').val(),
-            Email: $('#Email').val()
+            
+            pseudo: $('#Pseudo').val(),
+            email: $('#Email').val()
         };
 
     }

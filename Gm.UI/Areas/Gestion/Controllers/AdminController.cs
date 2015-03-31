@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using GM.Core;
 using GM.Core.Models;
+using Gm.UI.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
@@ -14,8 +16,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceUtilisateur _serviceUtilisateur;
         private readonly IDictionary<int, string> _filtreUsers;
         private readonly IList<Role> _roles;
-        private int _filter;
-
 
         public AdminController(IServiceAdministrateur service, IServiceUtilisateur serviceUtilisateur)
         {
@@ -39,8 +39,18 @@ namespace Gm.UI.Areas.Gestion.Controllers
         // GET: Gestion/Admin
         public ActionResult Index()
         {
+            Session["NewUsers"] = _serviceUtilisateur.NonActiveUsers().Count();
             return View();
 
+        }
+        [HttpPost]
+        //[ChildActionOnly]
+        public ActionResult UserDetails(string id)
+        {
+            var identity = new Guid(id.Trim());
+            var user =_serviceUtilisateur.VoirProfile(identity);
+            var model = AutoMapper.Mapper.Map<RegisterModel>(user);
+            return View(model);
         }
 
         public ActionResult Utilisateurs()
@@ -87,29 +97,30 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return null;
         }
 
-        public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request)
+        public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request, string pseudo, string email)
         {
-
-            _filter = Convert.ToInt32(Session["filter"].ToString());
-
-            if (_filter == 0)
+           
+            if (!string.IsNullOrEmpty(pseudo)|| !string.IsNullOrEmpty(email))
             {
-                return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
+                var model = new RegisterModel();
+                 model.Pseudo =pseudo;
+                model.Email = email;
+                var result = Utilisateurs(model) as IList<Utilisateur>;
+                return Json(result.ToDataSourceResult(request));
             }
-            switch (_filter)
+            var filter = Session["filter"].ToString();
+
+            switch (filter)
             {
-                case 1:
-                {
-                    return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
-                }
-                case 2:
-                {
-                    return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
-                }
-                case 3:
-                {
-                    return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
-                }
+
+                case "2":
+                    {
+                        return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
+                    }
+                case "3":
+                    {
+                        return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
+                    }
 
             }
             return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
@@ -123,6 +134,16 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private string SuccessMessage()
         {
             return "<div class='alert alert-success'><p>Suppression est terminer avec succés!</p><div/>";
+        }
+        private IEnumerable<Utilisateur> Utilisateurs(RegisterModel model)
+        {
+            var result = new List<Utilisateur>();
+            if (!string.IsNullOrEmpty(model.Email) && string.IsNullOrEmpty(model.Pseudo))
+                result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Email.Equals(model.Email)));
+            else if (string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Pseudo))
+                result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Pseudo == model.Pseudo));
+            else if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Pseudo)) result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Pseudo == model.Pseudo && x.Email == model.Email));
+            return result;
         }
 
     }

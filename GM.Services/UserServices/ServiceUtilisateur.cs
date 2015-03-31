@@ -45,6 +45,12 @@ namespace GM.Services.UserServices
             return _roleRepository.FindSingle(x=>x.Nom==id);
         }
 
+
+        public Role GetSingleRole(Guid? id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Authentification(Utilisateur utilisateur , string password , bool remember)
         {
             var b =_repository.Exist(x => x.Email.Equals(utilisateur.Email) || x.Pseudo.Equals(utilisateur.Pseudo));

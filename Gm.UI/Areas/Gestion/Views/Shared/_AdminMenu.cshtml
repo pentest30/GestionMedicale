@@ -6,39 +6,9 @@
         <div class="nav-collapse">
             <ul class="nav">
                 <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class="icon-white icon-home"></i> Home</a></li>
-                <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-user"></i> Utilisateurs</a>   </li>
+                <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-envelope"></i> Messages</a>   </li>
+                  <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-user"></i> Utilisateurs @Session["NewUsers"]</a>  </li>
 
-                <li>
-                    <a href="help.htm">Help</a>
-                </li>
-                <li class="dropdown">
-                    <a href="help.htm" class="dropdown-toggle" data-toggle="dropdown">Tours <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="help.htm">Introduction Tour</a>
-                        </li>
-                        <li>
-                            <a href="help.htm">Project Organisation</a>
-                        </li>
-                        <li>
-                            <a href="help.htm">Task Assignment</a>
-                        </li>
-                        <li>
-                            <a href="help.htm">Access Permissions</a>
-                        </li>
-                        <li class="divider">
-                        </li>
-                        <li class="nav-header">
-                            Files
-                        </li>
-                        <li>
-                            <a href="help.htm">How to upload multiple files</a>
-                        </li>
-                        <li>
-                            <a href="help.htm">Using file version</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
            
             <ul class="nav pull-right">
