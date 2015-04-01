@@ -1,24 +1,26 @@
 ﻿
 
 <div class="navbar-inner  navbar-fixed-top">
-    <div >
+    <div class="container-fluid">
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="@Url.Action("Index","Home", new{area =""})">Akira</a>
         <div class="nav-collapse">
             <ul class="nav">
                 <li><a href="@Url.Action("Index", "Admin",new { area = "Gestion" })"><i class="icon-white icon-home"></i> Home</a></li>
                 <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-envelope"></i> Messages</a>   </li>
-                  <li> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-user"></i> Utilisateurs @Session["NewUsers"]</a>  </li>
+               
+                    <li id="count"> <a href="@Url.Action("Utilisateurs", "Admin",new { area = "Gestion" })"><i class="icon-white icon-user"></i> Utilisateurs <span class="notification_count">@Session["NewUsers"]</span></a>  </li>
 
+               
+               
             </ul>
-           
+
             <ul class="nav pull-right">
                 <li>
-                    <a href="profile.htm"></a>
+                    <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Spécialité</a>
                 </li>
-                <li>
-                    <a href="login.htm">Logout</a>
-                </li>
+
             </ul>
+
         </div>
     </div>
 </div>

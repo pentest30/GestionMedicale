@@ -47,17 +47,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         //[ChildActionOnly]
         public ActionResult UserDetails(string id)
         {
+            if (id == "") return HttpNotFound();
             var identity = new Guid(id.Trim());
             var user =_serviceUtilisateur.VoirProfile(identity);
-            var model = AutoMapper.Mapper.Map<RegisterModel>(user);
+            var model = AutoMapper.Mapper.Map<RegisterModel>(user); 
+            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
             return View(model);
         }
-
+        [HttpGet]
         public ActionResult Utilisateurs()
         {
             Session["filter"] = 0;
             ViewData["filterUsers"] = new SelectList(_filtreUsers, "Key", "Value");
             ViewData["roles"] = new SelectList(_roles, "Id", "Nom");
+            Session["NewUsers"] = _serviceUtilisateur.NonActiveUsers().Count();
             return View();
         }
 
@@ -67,8 +70,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             if (string.IsNullOrEmpty(id) || !_service.SupprimeCompte(identity))
-                return Content(ErrorMessage());
-            return Content(SuccessMessage());
+            {
+                var data1 = new
+                {
+                    message = ErrorMessage(),
+                    data =  _serviceUtilisateur.NonActiveUsers().Count()
+                };
+                Json(data1, JsonRequestBehavior.AllowGet);
+            }
+            var data2 = new
+            {
+                message = SuccessMessage(),
+                data = _serviceUtilisateur.NonActiveUsers().Count()
+            };
+            return Json(data2, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -76,8 +91,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             if (string.IsNullOrEmpty(id) || !_service.AccepteInscription(identity))
-                return Content(ErrorMessage());
-            return Content(SuccessMessage());
+            {
+                var data1 = new
+                {
+                    message = ErrorMessage(),
+                    data =  _serviceUtilisateur.NonActiveUsers().Count()
+                };
+                return Json(data1, JsonRequestBehavior.AllowGet);
+            }
+            var data2 = new
+            {
+                message=SuccessMessage(),
+                data= _serviceUtilisateur.NonActiveUsers().Count()
+            };
+            return Json(data2,JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -85,8 +112,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             if (string.IsNullOrEmpty(id) || !_service.DesactiveCompte(identity))
-                return Content(ErrorMessage());
-            return Content(SuccessMessage());
+            {
+                var data1 = new
+                {
+                    message = ErrorMessage(),
+                    data = _serviceUtilisateur.NonActiveUsers().Count()
+                };
+                return Json(data1, JsonRequestBehavior.AllowGet);
+            }
+            var data2 = new
+            {
+                message = SuccessMessage(),
+                data = _serviceUtilisateur.NonActiveUsers().Count()
+            };
+            return Json(data2, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -99,11 +138,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request, string pseudo, string email)
         {
-           
-            if (!string.IsNullOrEmpty(pseudo)|| !string.IsNullOrEmpty(email))
+
+            if (!string.IsNullOrEmpty(pseudo) || !string.IsNullOrEmpty(email))
             {
                 var model = new RegisterModel();
-                 model.Pseudo =pseudo;
+                model.Pseudo = pseudo;
                 model.Email = email;
                 var result = Utilisateurs(model) as IList<Utilisateur>;
                 return Json(result.ToDataSourceResult(request));
@@ -114,13 +153,13 @@ namespace Gm.UI.Areas.Gestion.Controllers
             {
 
                 case "2":
-                    {
-                        return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
-                    }
+                {
+                    return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
+                }
                 case "3":
-                    {
-                        return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
-                    }
+                {
+                    return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
+                }
 
             }
             return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
@@ -133,7 +172,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         private string SuccessMessage()
         {
-            return "<div class='alert alert-success'><p>Suppression est terminer avec succés!</p><div/>";
+            return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
         }
         private IEnumerable<Utilisateur> Utilisateurs(RegisterModel model)
         {

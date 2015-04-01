@@ -30,14 +30,17 @@ namespace Gm.UI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                       "~/Content/select2.min.css",
+                       "~/Content/select2-bootstrap.css",
+                       "~/Content/select2.css",
                       "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/Gestion/css").Include(
                    "~/Content/Gestion/css/bootstrap-responsive.min.css",
                        "~/Content/Gestion/css/bootstrap.min.css",
-                      "~/Content/select2.min.css",
+                       "~/Content/select2-bootstrap.css",
+                       "~/Content/select2.css",
                       "~/Content/Gestion/css/site.css"
                      ));
+            
            
         }
     }

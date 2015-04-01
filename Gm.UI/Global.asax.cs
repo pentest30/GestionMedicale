@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Security.Claims;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,8 +17,9 @@ namespace Gm.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Mapper.CreateMap<RegisterModel, Utilisateur>();
-                //.ForMember(x => x.UtilisateurRoles.FirstOrDefault().RoleId, o => o.MapFrom(x => x.RoleId));
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+            Mapper.CreateMap<RegisterModel, Utilisateur>()
+                .ForMember(x => x.UtilisateurRoles, o => o.MapFrom(x => x.UtilisateurRoles));
             Mapper.CreateMap<Utilisateur, RegisterModel>();
         }
     }

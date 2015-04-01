@@ -26,7 +26,8 @@ select {
     height: 32px
 }
 select.form-control {
-    max-height: 37px
+    max-height: 37px;
+     max-width: 280px;
 }
 
 .k-textbox {

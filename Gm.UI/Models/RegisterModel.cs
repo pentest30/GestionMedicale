@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using GM.Core.Models;
 
 namespace Gm.UI.Models
 {
     public class RegisterModel
     {
+        public RegisterModel()
+        {
+            UtilisateurRoles  = new Collection<UtilisateurRole>();
+        }
         public Guid Id { get; set; }
 
         [Required]
@@ -69,10 +76,11 @@ namespace Gm.UI.Models
         public int? DateOfBirthYear { get; set; }
          [Required]
          [Display(Name = "Wilaya *")]
-        
+        [UIHint("Wilaya")]
         public string   Wilaya { get; set; }
 
         public string Filter { get; set; }
         public int? LocalId { get; set; }
+        public ICollection<UtilisateurRole> UtilisateurRoles { get; set; }
     }
 }

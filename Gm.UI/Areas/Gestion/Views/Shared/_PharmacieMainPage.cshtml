@@ -4,7 +4,7 @@
     Layout = "~/Areas/Gestion/Views/Shared/_Root.cshtml";
 }
 
-<div style="margin: 10px;background-color: #e9eaed">
+<div style="margin: 10px;">
     <div class="navbar navbar-inverses" style="padding: 0">
         @{
             Html.RenderPartial("_PharmacieMenu");
@@ -21,7 +21,8 @@
                 </div>
             </div>
         }
-        @RenderBody()
+        
+        <div style="border-left: 1px solid #ccc; background-color: white">@RenderBody()</div>
     </div>
 </div>
 

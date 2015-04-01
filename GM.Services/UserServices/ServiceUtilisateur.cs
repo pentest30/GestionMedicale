@@ -67,6 +67,7 @@ namespace GM.Services.UserServices
         public Utilisateur VoirProfile(Guid? id)
         {
             var item = _repository.SelectById(id);
+            item.UtilisateurRoles = _roleUserRepository.Find(x => x.UtilisateurId == id).ToList();
             return item;
         }
 
@@ -119,7 +120,7 @@ namespace GM.Services.UserServices
                     };
                     _roleUserRepository.Insert(role);
                 }
-                Authentification(utilisateur, password, false);
+               // Authentification(utilisateur, password, false);
                 return true;
             }
             catch (Exception)

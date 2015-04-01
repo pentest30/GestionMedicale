@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GM.Core.Models
 {
-    public class Utilisateur
+    public  class Utilisateur
     {
         public Utilisateur()
         {
@@ -24,6 +25,7 @@ namespace GM.Core.Models
         public string LienPhotoPersonnelle  { get; set; }
         public string LienPhotoDocument { get; set; }
         public bool Validation { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DateInscription { get; set; }
         public string Sexe { get; set; }
 

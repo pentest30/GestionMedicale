@@ -20,7 +20,7 @@ namespace GM.Services
 
         public IEnumerable<Utilisateur> SelectAll()
         {
-            return _db.Utilisateurs.ToList();
+            return _db.Utilisateurs.Include(x=>x.UtilisateurRoles).ToList();
         }
 
        public bool Exist(Func<Utilisateur, bool> predicate)
@@ -30,11 +30,7 @@ namespace GM.Services
         public Utilisateur SelectById(object id)
         {
             var item = _db.Utilisateurs.Find(id);
-            if (item != null) return item;
-            else
-            {
-                return  new Utilisateur();
-            }
+            return item ?? new Utilisateur();
         }
 
         public void Insert(Utilisateur item)
@@ -52,11 +48,9 @@ namespace GM.Services
         public void Delete(object id)
         {
             var item = _db.Utilisateurs.Find(id);
-            if (item != null)
-            {
-                _db.Entry(item).State = EntityState.Deleted;
-                Save();
-            }
+            if (item == null) return;
+            _db.Entry(item).State = EntityState.Deleted;
+            Save();
         }
 
         public void Save()
@@ -66,8 +60,7 @@ namespace GM.Services
 
         public IEnumerable<Utilisateur> Find(Func<Utilisateur, bool> predicate)
         {
-            
-            return _db.Utilisateurs.Where(predicate);
+            return _db.Utilisateurs.Include(x=>x.UtilisateurRoles).Where(predicate);
         }
 
         public Utilisateur FindSingle(Func<Utilisateur, bool> predicate)

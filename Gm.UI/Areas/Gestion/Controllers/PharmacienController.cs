@@ -5,16 +5,18 @@ using GM.Core;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
-    //[Authorize(Roles = "pharmacien")]
+  
     public class PharmacienController : Controller
     {
         // GET: Gestion/Pharmacien
+        [Authorize(Roles = "pharmacien")]
         public ActionResult Index()
         {
 
             return View();
         }
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult NouvellePharmacie(Guid? id)
         {
             if (id == Guid.Empty) return HttpNotFound();
