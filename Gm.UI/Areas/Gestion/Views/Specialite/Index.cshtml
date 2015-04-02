@@ -52,6 +52,7 @@
 <script type="text/javascript">
     var selectedIds = [];
     $(document).ready(function () {
+        $(".menu *").prop('disabled', true);
         $('#mastercheckbox').click(function () {
             $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
         });

@@ -1,22 +1,25 @@
 ﻿
-<div  class="navbar-inner  navbar-fixed-top">
+<div class="menu navbar-inner  navbar-fixed-top">
     <div>
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="@Url.Action("Index","Home", new{area =""})">Akira</a>
         <div class="nav-collapse">
             <ul class="nav">
+
                 <li><a href="@Url.Action("Index", "Pharmacien", new {area = "Gestion"})"><i class="icon-white icon-home"></i> Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-cog"></i> Paramètres<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Entreprise</a>
+                            <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Entreprise</a>
                         </li>
                         <li>
-                        <a href="@Url.Action("Index", "Specialite", new { area = "Gestion" })">Profile</a>
+                            <a href="@Url.Action("Index", "Specialite", new { area = "Gestion" })">Profile</a>
                         </li>
-                        
+
                     </ul>
-                </li>
+
+
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-list"></i> Structure <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -24,7 +27,7 @@
                             <a href="@Url.Action("Index", "Specialite", new { area = "Gestion" })">Spécialité</a>
                         </li>
                         <li>
-                        <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Dénomination Commune</a>
+                            <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Dénomination Commune</a>
                         <li>
                             <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Forme</a>
                         </li>
@@ -37,51 +40,41 @@
                         <li>
                             <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Magasins</a>
                         </li>
-                        <li class="divider">
-                        </li>
+
                         <li>
                             <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Fournisseurs</a>
                         </li>
-                       
-
-                       
                         <li>
                             <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Clients</a>
                         </li>
-                      
+
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-shopping-cart"></i> Achat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Commandes</a>
+                            <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Commandes</a>
                         </li>
                         <li>
-                        <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Entrées</a>
+                            <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Entrées</a>
+                        </li>
 
                     </ul>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Ventes</a>
+                    <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Ventes</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Stocks</a>
+                    <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Stocks</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Pharmacie", new { area = "Gestion" })"><i class="icon-white icon-user"></i>Utilisateurs</a>
+                    <a href="@Url.Action("Specialite", "Pharmacien", new { area = "Gestion" })"><i class="icon-white icon-user"></i>Utilisateurs</a>
                 </li>
             </ul>
-           
 
-            <ul class="nav pull-right">
-                <li>
-                    <a href="profile.htm"></a>
-                </li>
-                <li>
-                    <a href="login.htm">Logout</a>
-                </li>
-            </ul>
+
+
         </div>
     </div>
 </div>

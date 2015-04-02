@@ -37,8 +37,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
             var item = _service.FindSingle((int)id);
             if (item == null) return HttpNotFound();
             return View(item);
-
-            
         }
         [HttpPost]
         public ActionResult Update(Specialite specialite)
