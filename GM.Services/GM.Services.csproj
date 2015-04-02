@@ -108,8 +108,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PharmacieServices\ServiceSpecialite.cs" />
     <Compile Include="RoleRepository.cs" />
     <Compile Include="RoleUserRepository.cs" />
+    <Compile Include="SpecialiteRepository.cs" />
     <Compile Include="UserServices\ServiceAdministrateur.cs" />
     <Compile Include="UserServices\ServiceUtilisateur.cs" />
     <Compile Include="UtilisateurRepository.cs" />

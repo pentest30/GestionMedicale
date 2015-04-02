@@ -177,6 +177,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Gestion\Controllers\AdminController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PharmacienController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\SpecialiteController.cs" />
     <Compile Include="Areas\Gestion\GestionAreaRegistration.cs" />
     <Compile Include="Areas\Gestion\Models\PharmacieModel.cs" />
     <Compile Include="Areas\Gestion\Models\UtilisateurModel.cs" />
@@ -545,6 +546,12 @@
     <Content Include="Areas\Gestion\Views\Shared\_PharmacieMenu.cshtml" />
     <Content Include="Areas\Gestion\Views\Admin\UserDetails.cshtml" />
     <Content Include="Areas\Gestion\Views\Admin\_RolesPartialView.cshtml" />
+    <Content Include="Areas\Gestion\Views\Specialite\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_ListToolBar.cshtml" />
+    <Content Include="Areas\Gestion\Views\Specialite\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Specialite\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Specialite\_Search.cshtml" />
+    <Content Include="Areas\Gestion\Views\Specialite\Update.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />

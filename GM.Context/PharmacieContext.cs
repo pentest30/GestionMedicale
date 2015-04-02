@@ -14,5 +14,6 @@ namespace GM.Context
        
         public DbSet<Pharmacie> Pharmacies { get; set; }
         public DbSet<Magasin> Magasins { get; set; }
+        public DbSet<Specialite> Specialites { get; set; }
     }
 }

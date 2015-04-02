@@ -1,0 +1,79 @@
+﻿@model GM.Core.Models.Specialite
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+}
+
+<div style="margin-top: 80px;padding: 15px;height: auto" class="container-fluid">
+    <h2>Modifier <small>specialité</small></h2>
+    <hr />
+    <div id="alert">
+
+    </div>
+
+   @using (Html.BeginForm())
+   {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="navbar">
+            <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
+                <div>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li><button id="update-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregistrer </button></li>
+                            <li><button id="return-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Fermer</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+   }
+
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#return-btn").click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("Index","Specialite", new {area="Gestion"})';
+        });
+        $("#update-btn").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '@Url.Action("Update", "Specialite" , new {area ="Gestion"})',
+                data: $("form").serialize(),
+                type: 'POST',
+                success: function(data) {
+                    $('#alert').html(data.message);
+                },
+                error: function() {
+                }
+            });
+        });
+    });
+</script>

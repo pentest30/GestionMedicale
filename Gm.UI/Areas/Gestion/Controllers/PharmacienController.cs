@@ -9,12 +9,13 @@ namespace Gm.UI.Areas.Gestion.Controllers
     public class PharmacienController : Controller
     {
         // GET: Gestion/Pharmacien
-        [Authorize(Roles = "pharmacien")]
+        //[Authorize(Roles = "pharmacien")]
         public ActionResult Index()
         {
-
             return View();
         }
+
+      
         [HttpGet]
         [AllowAnonymous]
         public ActionResult NouvellePharmacie(Guid? id)

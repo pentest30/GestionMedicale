@@ -4,6 +4,7 @@ using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 using GM.Services;
+using GM.Services.PharmacieServices;
 using GM.Services.UserServices;
 using Microsoft.Practices.Unity;
 
@@ -43,11 +44,14 @@ namespace Gm.UI
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<DbContext, UserContext>(new PerRequestLifetimeManager());
+            container.RegisterType<DbContext, PharmacieContext>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<UtilisateurRole>, RoleUserRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Utilisateur>, UtilisateurRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Role>, RoleRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Specialite>, SpecialiteRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());
         }
     }
 }

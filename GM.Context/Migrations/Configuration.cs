@@ -5,14 +5,14 @@ namespace GM.Context.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GM.Context.UserContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GM.Context.PharmacieContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(GM.Context.UserContext context)
+        protected override void Seed(GM.Context.PharmacieContext context)
         {
             //  This method will be called after migrating to the latest version.
 

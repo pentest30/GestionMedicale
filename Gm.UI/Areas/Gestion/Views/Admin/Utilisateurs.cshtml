@@ -229,7 +229,7 @@
     }
     function updateMasterCheckbox() {
         var numChkBoxes = $('#users input[type=checkbox]:not([id=mastercheckbox])').length;
-        var numChkBoxesChecked = $('#customers-grid input[type=checkbox][checked]:not([id=mastercheckbox])').length;
+        var numChkBoxesChecked = $('#users input[type=checkbox][checked]:not([id=mastercheckbox])').length;
         $('#mastercheckbox').attr('checked', numChkBoxes === numChkBoxesChecked && numChkBoxes > 0);
     }
     function additionalData() {
