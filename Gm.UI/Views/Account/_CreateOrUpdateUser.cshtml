@@ -30,8 +30,21 @@
     }
     <div>
         @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
+        <div class="col-md-9" style="margin-bottom: 5px;">
+            <select id="RoleId" name="RoleId" style="width: 280px;height: 35px">
+                
+                @{
+                    var roleList = ViewData["RoleId"] as SelectList;
+                }
+                @if (roleList != null)
+                {
+                    foreach (var item in roleList)
+                    {
+                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
+
+                    }
+                }
+            </select>
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -87,10 +100,24 @@
    
     <div>
         @Html.LabelFor(model => model.Sexe, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            @Html.DropDownList("Sexe", null, htmlAttributes: new { @class = "form-control" })
+        <div class="col-md-9" style="margin-bottom: 5px;">
+            <select id="Sexe" name="Sexe" style="width: 280px;height: 35px">
+
+                @{
+                    var genreList = ViewData["Sexe"] as SelectList;
+                }
+                @if (genreList != null)
+                {
+                    foreach (var item in genreList)
+                    {
+                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
+
+                    }
+                }
+            </select>
             @Html.ValidationMessageFor(model => model.Sexe, "", new { @class = "text-danger" })
         </div>
+
     </div>
   <br />
         <div >
@@ -120,10 +147,25 @@
     </div>
     <div>
         @Html.LabelFor(model => model.Wilaya, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9" style="margin-bottom: 5px">
-            @Html.DropDownList("Wilaya", null, htmlAttributes: new { @class = "form-control", @style = "max-width: 280px; height: 33px" })
-            @Html.ValidationMessageFor(model => model.Wilaya, "", new { @class = "text-danger" })
+        <div class="col-md-9" style="margin-bottom: 5px;">
+            <select id="Wilaya" name="Wilaya" style="width: 280px;height: 35px">
+
+                @{
+                    var wilayaList = ViewData["Wilaya"] as SelectList;
+                }
+                @if (wilayaList != null)
+                {
+                    foreach (var item in wilayaList)
+                    {
+                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
+
+                    }
+                }
+            </select>
+
+            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
+
     </div>
     <div>
         @Html.LabelFor(model => model.Addresse, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -145,6 +187,8 @@
 
 <script>
     $(document).ready(function () {
+        $('#RoleId').select2();
+        $('#Sexe').select2();
         $('#DateOfBirthMonth').select2();
         $('#DateOfBirthDay').select2();
         $('#DateOfBirthYear').select2();

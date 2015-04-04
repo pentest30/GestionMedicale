@@ -20,22 +20,21 @@ namespace Gm.UI.Controllers
             _service = service;
             _roles = _service.SelectRoles();
         }
-        
-     
+
+
         [HttpGet]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public ActionResult Inscription()
         {
             if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
-            var genres = GetGenre();
-            ViewData["Sexe"] = new SelectList(genres, "Key","Value");
+            ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value");
             ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom");
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom");
             return View(new RegisterModel());
         }
 
-        
+
         private static IEnumerable<KeyValuePair<string, string>> GetGenre()
         {
             IDictionary<string, string> genres = new Dictionary<string, string>();
@@ -77,7 +76,7 @@ namespace Gm.UI.Controllers
                     var role = _roles.SingleOrDefault(x => x.Id == model.RoleId);
                     if (role != null)
                     {
-                        var r = role.Nom;
+                        var r = role.Nom.ToLower();
                         switch (r)
                         {
                             case "patient":

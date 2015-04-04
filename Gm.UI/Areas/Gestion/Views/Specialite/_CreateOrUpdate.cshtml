@@ -46,12 +46,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        //
+        $(".menu *").prop('disabled', true);
         $("#delete-btn").click(function(e) {
             e.preventDefault();
             window.location.href = '@Url.Action("Index","Specialite", new {area="Gestion"})';
 
         });
         $("#save-btn").click(function (e) {
+            $('form').validate();
             e.preventDefault();
             $.ajax({
                 url: '@Url.Action("Create", "Specialite" , new {area ="Gestion"})',

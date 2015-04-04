@@ -69,40 +69,24 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public ActionResult Delete(string id)
         {
             Guid? identity = new Guid(id.Trim());
-            if (string.IsNullOrEmpty(id) || !_service.SupprimeCompte(identity))
-            {
-                var data1 = new
-                {
-                    message = ErrorMessage(),
-                    data =  _serviceUtilisateur.NonActiveUsers().Count()
-                };
-                Json(data1, JsonRequestBehavior.AllowGet);
-            }
+            var b = string.IsNullOrEmpty(id) || !_service.SupprimeCompte(identity);
             var data2 = new
             {
-                message = SuccessMessage(),
+                message =(!b)? SuccessMessage():ErrorMessage(),
                 data = _serviceUtilisateur.NonActiveUsers().Count()
             };
-            return Json(data2, JsonRequestBehavior.AllowGet);
+           return Json(data2, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult Activate(string id)
         {
             Guid? identity = new Guid(id.Trim());
-            if (string.IsNullOrEmpty(id) || !_service.AccepteInscription(identity))
-            {
-                var data1 = new
-                {
-                    message = ErrorMessage(),
-                    data =  _serviceUtilisateur.NonActiveUsers().Count()
-                };
-                return Json(data1, JsonRequestBehavior.AllowGet);
-            }
+            var b = string.IsNullOrEmpty(id) || !_service.AccepteInscription(identity);
             var data2 = new
             {
-                message=SuccessMessage(),
-                data= _serviceUtilisateur.NonActiveUsers().Count()
+                message = (!b) ? SuccessMessage() : ErrorMessage(),
+                data = _serviceUtilisateur.NonActiveUsers().Count()
             };
             return Json(data2,JsonRequestBehavior.AllowGet);
         }
@@ -111,18 +95,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public ActionResult Desactive(string id)
         {
             Guid? identity = new Guid(id.Trim());
-            if (string.IsNullOrEmpty(id) || !_service.DesactiveCompte(identity))
-            {
-                var data1 = new
-                {
-                    message = ErrorMessage(),
-                    data = _serviceUtilisateur.NonActiveUsers().Count()
-                };
-                return Json(data1, JsonRequestBehavior.AllowGet);
-            }
+            var b = string.IsNullOrEmpty(id) || !_service.DesactiveCompte(identity);
             var data2 = new
             {
-                message = SuccessMessage(),
+                message = (!b) ? SuccessMessage() : ErrorMessage(),
                 data = _serviceUtilisateur.NonActiveUsers().Count()
             };
             return Json(data2, JsonRequestBehavior.AllowGet);

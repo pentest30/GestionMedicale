@@ -52,6 +52,7 @@
     <Compile Include="IServiceUtilisateur.cs" />
     <Compile Include="Models\Addresse.cs" />
     <Compile Include="Models\Banne.cs" />
+    <Compile Include="Models\Dci.cs" />
     <Compile Include="Models\Entreprise.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Pharmacie.cs" />

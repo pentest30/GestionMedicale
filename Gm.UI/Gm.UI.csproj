@@ -89,11 +89,17 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="MvcExtensions">
       <HintPath>..\packages\MvcExtensions.2.5.1\lib\net40\MvcExtensions.dll</HintPath>
     </Reference>
     <Reference Include="MvcExtensions.AutoMapper">
       <HintPath>..\packages\MvcExtensions.AutoMapper.1.0.0\lib\net45\MvcExtensions.AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="NCrunch.Framework">
+      <HintPath>..\packages\NCrunch.Framework.2.14.0.8\lib\portable-windows8+net45\NCrunch.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -176,12 +182,16 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Gestion\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\DCIController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PharmacienController.cs" />
     <Compile Include="Areas\Gestion\Controllers\SpecialiteController.cs" />
     <Compile Include="Areas\Gestion\GestionAreaRegistration.cs" />
     <Compile Include="Areas\Gestion\Models\PharmacieModel.cs" />
     <Compile Include="Areas\Gestion\Models\UtilisateurModel.cs" />
+    <Compile Include="HtmlExtenssions\ControlGroupExtensions.cs" />
+    <Compile Include="HtmlExtenssions\ViewHelperExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,9 +202,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Content\Gestion\css\bootstrap-responsive.css" />
     <Content Include="Content\Gestion\css\bootstrap-responsive.min.css" />
     <Content Include="Content\Gestion\css\bootstrap.css" />
@@ -552,18 +566,26 @@
     <Content Include="Areas\Gestion\Views\Specialite\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Gestion\Views\Specialite\_Search.cshtml" />
     <Content Include="Areas\Gestion\Views\Specialite\Update.cshtml" />
+    <Content Include="Areas\Gestion\Views\DCI\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\DCI\_Search.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
     <Content Include="Scripts\gestion\jquery.min.js" />
     <Content Include="Scripts\gestion\site.js" />
+    <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
     <Content Include="Scripts\jquery.confirm.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive-custom-for-bootstrap.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
@@ -777,7 +799,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -916,6 +937,11 @@
     <Content Include="Views\Account\_CreateOrUpdateUser.cshtml" />
     <Content Include="Views\Account\RetrunInscription.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Wilaya.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\Details.cshtml" />
+    <Content Include="Views\Shared\Create.cshtml" />
+    <Content Include="Views\Shared\_alerts.cshtml" />
+    <Content Include="_ViewState.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\" />

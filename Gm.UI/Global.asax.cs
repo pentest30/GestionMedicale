@@ -21,6 +21,8 @@ namespace Gm.UI
             Mapper.CreateMap<RegisterModel, Utilisateur>()
                 .ForMember(x => x.UtilisateurRoles, o => o.MapFrom(x => x.UtilisateurRoles));
             Mapper.CreateMap<Utilisateur, RegisterModel>();
+            //BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
+           // BootstrapMvcSample.ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }
