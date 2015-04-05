@@ -31,7 +31,7 @@
     <div>
         @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 5px;">
-            <select id="RoleId" name="RoleId" style="width: 280px;height: 35px">
+            @*<select id="RoleId" name="RoleId" style="width: 280px;height: 35px">
                 
                 @{
                     var roleList = ViewData["RoleId"] as SelectList;
@@ -44,7 +44,8 @@
 
                     }
                 }
-            </select>
+            </select>*@
+            @Html.Custom_DropdownList("RoleId",ViewData["RoleId"]as SelectList)
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
     </div>

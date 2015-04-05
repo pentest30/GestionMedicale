@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
-using AutoMapper;
 using GM.Core;
-using GM.Core.Models;
 using Gm.UI.Controllers;
 using Gm.UI.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,12 +13,12 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            //var repo = Mock.Create<IServiceUtilisateur>();
-            //var controller = new AccountController(repo);
-            //var model = new RegisterModel();
-            //var result = (ViewResult) controller.Inscription(model );
-            ////Mapper.CreateMap<Utilisateur, RegisterModel>();
-            ////var user = AutoMapper.Mapper.Map<Utilisateur>(model);
+            var repo = Mock.Create<IServiceUtilisateur>();
+            var controller = new AccountController(repo);
+            var model = new RegisterModel();
+            var result = (ViewResult)controller.Inscription(model);
+            //Mapper.CreateMap<Utilisateur, RegisterModel>();
+            //var user = AutoMapper.Mapper.Map<Utilisateur>(model);
 
 
 

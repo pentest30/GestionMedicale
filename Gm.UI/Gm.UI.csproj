@@ -559,7 +559,6 @@
     <Content Include="Areas\Gestion\Views\Pharmacien\Index.cshtml" />
     <Content Include="Areas\Gestion\Views\Shared\_PharmacieMenu.cshtml" />
     <Content Include="Areas\Gestion\Views\Admin\UserDetails.cshtml" />
-    <Content Include="Areas\Gestion\Views\Admin\_RolesPartialView.cshtml" />
     <Content Include="Areas\Gestion\Views\Specialite\Index.cshtml" />
     <Content Include="Areas\Gestion\Views\Shared\_ListToolBar.cshtml" />
     <Content Include="Areas\Gestion\Views\Specialite\Create.cshtml" />

@@ -21,12 +21,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             _service = service;
             _serviceUtilisateur = serviceUtilisateur;
-            _roles = new List<Role>();
-            _roles.Add(new Role
+            _roles = new List<Role>
             {
-                Id = 0,
-                Nom = ""
-            });
+                new Role
+                {
+                    Id = 0,
+                    Nom = ""
+                }
+            };
             _roles.AddRange(_serviceUtilisateur.SelectRoles());
             _filtreUsers = new Dictionary<int, string>
             {
@@ -141,12 +143,12 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
         }
 
-        private string ErrorMessage()
+        private static string ErrorMessage()
         {
             return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
         }
 
-        private string SuccessMessage()
+        public string SuccessMessage()
         {
             return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
         }
