@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GM.Core;
 using GM.Core.Models;
 
-namespace GM.Services.PharmacieServices
+namespace GM.Services.Categorie
 {
     public class ServiceSpecialite : IServiceSpecialite
     {

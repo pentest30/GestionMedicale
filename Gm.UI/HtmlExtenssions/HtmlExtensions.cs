@@ -107,7 +107,11 @@ namespace Gm.UI.HtmlExtenssions
             foreach (var item in list)
             {
                 //Each option represents a value in dropdown. For each element in the list, option element is created and appended to the stringBuilder object.
-                options = options.AppendFormat("<option value='{0}' selected={2}>{1}</option>", item.Value, item.Text ,item.Selected);
+                if (!item.Selected) options = options.AppendFormat("<option value='{0}' >{1}</option>", item.Value, item.Text);
+                else
+                {
+                    options = options.AppendFormat("<option value='{0}' selected='{0}' >{1}</option>", item.Value, item.Text);
+                }
             }
             //assigned all the options to the dropdown using innerHTML property.
             dropdown.InnerHtml = options.ToString();

@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201504020954361_m1.Designer.cs">
       <DependentUpon>201504020954361_m1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504061010588_up8.cs" />
+    <Compile Include="Migrations\201504061010588_up8.Designer.cs">
+      <DependentUpon>201504061010588_up8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504020954361_m1.resx">
       <DependentUpon>201504020954361_m1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504061010588_up8.resx">
+      <DependentUpon>201504061010588_up8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
-using GM.Core.Models;
 using System.Web.Helpers;
 using GM.Core;
+using GM.Core.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace GM.Services.UserServices
+namespace GM.Services.Utilisateurs
 {
     
 
@@ -110,14 +110,12 @@ namespace GM.Services.UserServices
                 //utilisateur.Id = Guid.NewGuid();
                 utilisateur.PasswordHash = Crypto.HashPassword(password);
                 _repository.Insert(utilisateur);
-                for (int i = 0; i < roles.Length; i++)
+                foreach (var role in roles.Select(r => new UtilisateurRole
                 {
-                    int? r = roles[i];
-                    var role = new UtilisateurRole
-                    {
-                        UtilisateurId = utilisateur.Id,
-                        RoleId = Convert.ToInt32(r)
-                    };
+                    UtilisateurId = utilisateur.Id,
+                    RoleId = Convert.ToInt32(r)
+                }))
+                {
                     _roleUserRepository.Insert(role);
                 }
                // Authentification(utilisateur, password, false);

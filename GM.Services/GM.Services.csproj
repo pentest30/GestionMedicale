@@ -108,13 +108,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PharmacieServices\ServiceSpecialite.cs" />
-    <Compile Include="RoleRepository.cs" />
-    <Compile Include="RoleUserRepository.cs" />
-    <Compile Include="SpecialiteRepository.cs" />
-    <Compile Include="UserServices\ServiceAdministrateur.cs" />
-    <Compile Include="UserServices\ServiceUtilisateur.cs" />
-    <Compile Include="UtilisateurRepository.cs" />
+    <Compile Include="Nomenclature\DciRepository.cs" />
+    <Compile Include="Nomenclature\DciService.cs" />
+    <Compile Include="Nomenclature\IServiceDci.cs" />
+    <Compile Include="Categorie\IServiceSpecialite.cs" />
+    <Compile Include="Categorie\ServiceSpecialite.cs" />
+    <Compile Include="Utilisateurs\RoleRepository.cs" />
+    <Compile Include="Utilisateurs\RoleUserRepository.cs" />
+    <Compile Include="Categorie\SpecialiteRepository.cs" />
+    <Compile Include="Utilisateurs\IServiceAdministrateur.cs" />
+    <Compile Include="Utilisateurs\IServiceUtilisateur.cs" />
+    <Compile Include="Utilisateurs\ServiceAdministrateur.cs" />
+    <Compile Include="Utilisateurs\ServiceUtilisateur.cs" />
+    <Compile Include="Utilisateurs\UtilisateurRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +137,9 @@
       <Name>GM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pharmacies\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

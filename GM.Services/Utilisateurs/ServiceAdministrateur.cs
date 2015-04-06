@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GM.Core;
 using GM.Core.Models;
 
-namespace GM.Services.UserServices
+namespace GM.Services.Utilisateurs
 {
     public class ServiceAdministrateur : IServiceAdministrateur
     {

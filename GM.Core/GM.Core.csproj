@@ -47,9 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
-    <Compile Include="IServiceAdministrateur.cs" />
-    <Compile Include="IServiceSpecialite.cs" />
-    <Compile Include="IServiceUtilisateur.cs" />
     <Compile Include="Models\Addresse.cs" />
     <Compile Include="Models\Banne.cs" />
     <Compile Include="Models\Dci.cs" />

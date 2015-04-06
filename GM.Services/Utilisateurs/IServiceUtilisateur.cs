@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using GM.Core.Models;
 
-namespace GM.Core
+namespace GM.Services.Utilisateurs
 {
     public interface IServiceUtilisateur
     {

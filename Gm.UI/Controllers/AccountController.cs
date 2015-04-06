@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AutoMapper;
+using GM.Services.Utilisateurs;
 using Gm.UI.Models;
 using GM.Core;
 using GM.Core.Models;
 
 namespace Gm.UI.Controllers
 {
+    //[Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IServiceUtilisateur _service;
@@ -97,7 +99,7 @@ namespace Gm.UI.Controllers
         public ActionResult Logout()
         {
             _service.Logout();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home" , new {area=""});
         }
         private void InitDropDownList(RegisterModel model)
         {

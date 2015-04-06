@@ -28,24 +28,14 @@
             </p>
         </div>
     }
+    <h2>Informations<small> d'authentification</small>
+    </h2>
+    <hr />
     <div>
         @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 5px;">
-            @*<select id="RoleId" name="RoleId" style="width: 280px;height: 35px">
-                
-                @{
-                    var roleList = ViewData["RoleId"] as SelectList;
-                }
-                @if (roleList != null)
-                {
-                    foreach (var item in roleList)
-                    {
-                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
-
-                    }
-                }
-            </select>*@
-            @Html.Custom_DropdownList("RoleId",ViewData["RoleId"]as SelectList)
+           
+            @Html.Custom_DropdownList("RoleId",ViewData["RoleId"]as SelectList, htmlAttributes:new{@style="width: 280px;height: 35px"})
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -81,8 +71,11 @@
                 @Html.ValidationMessageFor(model => model.ConfirmerPassword, "", new { @class = "text-danger" })
             </div>
         </div>
-   
-      <hr />
+    <hr />
+    <h2>
+        Informations<small> personel</small>
+    </h2>
+    <hr />
          <div>
             @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
@@ -102,20 +95,7 @@
     <div>
         @Html.LabelFor(model => model.Sexe, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 5px;">
-            <select id="Sexe" name="Sexe" style="width: 280px;height: 35px">
-
-                @{
-                    var genreList = ViewData["Sexe"] as SelectList;
-                }
-                @if (genreList != null)
-                {
-                    foreach (var item in genreList)
-                    {
-                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
-
-                    }
-                }
-            </select>
+            @Html.Custom_DropdownList("Sexe", ViewData["Sexe"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.Sexe, "", new { @class = "text-danger" })
         </div>
 
@@ -149,20 +129,7 @@
     <div>
         @Html.LabelFor(model => model.Wilaya, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 5px;">
-            <select id="Wilaya" name="Wilaya" style="width: 280px;height: 35px">
-
-                @{
-                    var wilayaList = ViewData["Wilaya"] as SelectList;
-                }
-                @if (wilayaList != null)
-                {
-                    foreach (var item in wilayaList)
-                    {
-                        <option selected="@item.Selected" value="@item.Value">@item.Text</option>
-
-                    }
-                }
-            </select>
+            @Html.Custom_DropdownList("Wilaya", ViewData["Wilaya"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
 
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>

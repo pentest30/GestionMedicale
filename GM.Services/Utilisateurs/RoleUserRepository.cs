@@ -6,7 +6,7 @@ using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 
-namespace GM.Services
+namespace GM.Services.Utilisateurs
 {
     public class RoleUserRepository:IRepository<UtilisateurRole>
     {
