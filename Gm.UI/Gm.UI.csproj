@@ -213,6 +213,11 @@
     <Content Include="Content\Gestion\css\bootstrap-responsive.min.css" />
     <Content Include="Content\Gestion\css\bootstrap.css" />
     <Content Include="Content\Gestion\css\bootstrap.min.css" />
+    <Content Include="Content\Gestion\css\cmxform.css" />
+    <Content Include="Content\Gestion\css\cmxformTemplate.css" />
+    <Content Include="Content\Gestion\css\core.css" />
+    <Content Include="Content\Gestion\css\reset.css" />
+    <Content Include="Content\Gestion\css\screen.css" />
     <Content Include="Content\Gestion\css\site.css" />
     <Content Include="Content\Gestion\img\glyphicons-halflings-white.png" />
     <Content Include="Content\Gestion\img\glyphicons-halflings.png" />
@@ -571,6 +576,8 @@
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
     <Content Include="Scripts\gestion\jquery.min.js" />
+    <Content Include="Scripts\gestion\jquery.validate.min.js" />
+    <Content Include="Scripts\gestion\messages_fr.min.js" />
     <Content Include="Scripts\gestion\site.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

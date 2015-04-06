@@ -31,7 +31,7 @@ namespace Gm.UI.Controllers
         {
             if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value");
-            ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom");
+            ViewData["RoleId"] = new SelectList(_roles, "Id", "Nom");
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom");
             return View(new RegisterModel());
         }
@@ -103,7 +103,7 @@ namespace Gm.UI.Controllers
         }
         private void InitDropDownList(RegisterModel model)
         {
-            ViewData["RoleId"] = new SelectList(_service.SelectRoles(), "Id", "Nom", model.RoleId);
+            ViewData["RoleId"] = new SelectList(_roles, "Id", "Nom", model.RoleId);
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value", model.Sexe);
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
         }

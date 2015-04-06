@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -55,12 +56,12 @@ namespace GM.Services.Categorie
 
         public IEnumerable<Specialite> Find(Func<Specialite, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Specialites.Where(predicate);
         }
 
         public Specialite FindSingle(Func<Specialite, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Specialites.FirstOrDefault(predicate);
         }
 
         public IEnumerable<Specialite> GetAllLazyLoad(params Expression<Func<Specialite, object>>[] children)
@@ -70,7 +71,7 @@ namespace GM.Services.Categorie
 
         public bool Exist(Func<Specialite, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Specialites.Any(predicate);
         }
     }
 }

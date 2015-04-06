@@ -3,9 +3,7 @@ using System.Data.Entity;
 using GM.Context;
 using GM.Core;
 using GM.Core.Models;
-using GM.Services;
 using GM.Services.Categorie;
-using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
 using Microsoft.Practices.Unity;
 

@@ -46,6 +46,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        
         //
         $(".menu *").prop('disabled', true);
         $("#delete-btn").click(function(e) {
@@ -54,21 +55,28 @@
 
         });
         $("#save-btn").click(function (e) {
-            $('form').validate();
             e.preventDefault();
+           
             $.ajax({
                 url: '@Url.Action("Create", "Specialite" , new {area ="Gestion"})',
                 data: $("form").serialize(),
                 type: 'POST',
                 success: function (data) {
-                    $('#alert').html(data.message);
-                    $('#Libelle)').val("");
-                    $('#Code)').val("");
+                    console.log(data);
+                    try {
+                        $('#alert').html(data.message);
+                        $('#Libelle)').val("");
+                        $('#Code)').val("");
+                    } catch (e) {
+                        $('#alert').html(data);
+                    } 
                 },
                 error: function () {
                 }
             });
         });
+        
+        
     });
 </script>
 

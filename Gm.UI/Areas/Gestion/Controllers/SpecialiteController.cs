@@ -1,8 +1,7 @@
-﻿using System.Web.Mvc;
-using GM.Core;
+﻿using System.Linq;
+using System.Web.Mvc;
 using GM.Core.Models;
 using GM.Services.Categorie;
-using GM.Services.Pharmacies;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
@@ -75,7 +74,22 @@ namespace Gm.UI.Areas.Gestion.Controllers
                     return Json(data, JsonRequestBehavior.AllowGet);
                 }
             }
-            return View();
+            else if (Request.IsAjaxRequest())
+            {
+                var data = Validate();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+
+            return View(specialite);
+        }
+
+        private string Validate()
+        {
+            var data = ModelState.Values.SelectMany(val => val.Errors)
+                .Aggregate("<div class='alert alert-danger'>",
+                    (current, error) => current + "<p>" + error.ErrorMessage + "<p/><br/>");
+            data = data + "</div>";
+            return data;
         }
 
         public ActionResult Delete(int? id)

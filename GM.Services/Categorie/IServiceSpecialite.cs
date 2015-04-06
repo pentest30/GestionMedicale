@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using GM.Core.Models;
 
 namespace GM.Services.Categorie
 {
     public interface IServiceSpecialite
     {
-        IEnumerable<Core.Models.Specialite> ListeSpecialites();
-        bool Insert(Core.Models.Specialite specialite);
-        bool Update(Core.Models.Specialite specialite);
-        Core.Models.Specialite FindSingle(int id);
+        IEnumerable<Specialite> ListeSpecialites();
+        bool Insert(Specialite specialite);
+        bool Update(Specialite specialite);
+        Specialite FindSingle(int id);
         bool Delete(int id);
     }
 }

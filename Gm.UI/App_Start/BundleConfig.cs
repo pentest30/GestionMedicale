@@ -24,8 +24,11 @@ namespace Gm.UI
                         "~/Scripts/select2.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/gestion/bootstrap").Include(
                    "~/Scripts/gestion/bootstrap.min.js",
+                   "~/Scripts/gestion/jquery.validate.min.js",
+                    "~/Scripts/gestion/messages_fr.min.js",
                    "~/Scripts/gestion/site.js",
                    "~/Scripts/jquery.confirm.min.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.min.js",
                      "~/Scripts/select2.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -37,6 +40,7 @@ namespace Gm.UI
                    "~/Content/Gestion/css/bootstrap-responsive.min.css",
                        "~/Content/Gestion/css/bootstrap.min.css",
                        "~/Content/select2-bootstrap.css",
+                       "~/Content/Gestion/css/screen.css",
                        "~/Content/select2.css",
                       "~/Content/Gestion/css/site.css"
                      ));
