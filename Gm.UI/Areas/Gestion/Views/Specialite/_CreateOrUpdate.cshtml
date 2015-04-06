@@ -26,7 +26,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label"})
             <div class="controls">
-                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "validate[required] " } })
                 @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label"})
             <div class="controls">
-                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "validate[required]" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,8 +46,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#Libelle").addClass("validate[required]");
+        $("#Code").addClass("validate[required]");
+        $('form').validationEngine();
         
-        //
         $(".menu *").prop('disabled', true);
         $("#delete-btn").click(function(e) {
             e.preventDefault();
@@ -55,25 +57,24 @@
 
         });
         $("#save-btn").click(function (e) {
-            e.preventDefault();
+            if ($('form').validationEngine('validate')) {
+                e.preventDefault();
+               $.ajax({
+                   url: '@Url.Action("Create", "Specialite" , new {area ="Gestion"})',
+                   data: $("form").serialize(),
+                   type: 'POST',
+                   success: function (data) {
+                       $('#alert').html(data.message);
+                       $('#Libelle').val("");
+                       $('#Code').val("");
+                   },
+                   error: function () {
+                   }
+               });
+           } else {
+               e.preventDefault();
+           }
            
-            $.ajax({
-                url: '@Url.Action("Create", "Specialite" , new {area ="Gestion"})',
-                data: $("form").serialize(),
-                type: 'POST',
-                success: function (data) {
-                    console.log(data);
-                    try {
-                        $('#alert').html(data.message);
-                        $('#Libelle)').val("");
-                        $('#Code)').val("");
-                    } catch (e) {
-                        $('#alert').html(data);
-                    } 
-                },
-                error: function () {
-                }
-            });
         });
         
         

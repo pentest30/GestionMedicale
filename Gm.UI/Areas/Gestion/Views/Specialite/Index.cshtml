@@ -52,6 +52,7 @@
 <script type="text/javascript">
     var selectedIds = [];
     $(document).ready(function () {
+        $(".menu *").prop('disabled', true);
         $("#return-btn").click(function (e) {
             e.preventDefault();
             window.location.href = '@Url.Action("Index","Pharmacien", new {area="Gestion"})';

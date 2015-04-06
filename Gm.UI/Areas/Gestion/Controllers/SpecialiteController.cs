@@ -87,7 +87,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             var data = ModelState.Values.SelectMany(val => val.Errors)
                 .Aggregate("<div class='alert alert-danger'>",
-                    (current, error) => current + "<p>" + error.ErrorMessage + "<p/><br/>");
+                    (current, error) => current + "<p>" + error.ErrorMessage + "<p/>");
             data = data + "</div>";
             return data;
         }

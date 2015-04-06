@@ -213,7 +213,6 @@
     <Content Include="Content\Gestion\css\bootstrap-responsive.min.css" />
     <Content Include="Content\Gestion\css\bootstrap.css" />
     <Content Include="Content\Gestion\css\bootstrap.min.css" />
-    <Content Include="Content\Gestion\css\cmxform.css" />
     <Content Include="Content\Gestion\css\cmxformTemplate.css" />
     <Content Include="Content\Gestion\css\core.css" />
     <Content Include="Content\Gestion\css\reset.css" />
