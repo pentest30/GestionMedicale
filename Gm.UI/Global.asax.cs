@@ -6,6 +6,7 @@ using System.Web.Routing;
 using AutoMapper;
 using GM.Core.Models;
 using Gm.UI.Models;
+using Gm.UI.Models.Utilisateurs;
 
 namespace Gm.UI
 {

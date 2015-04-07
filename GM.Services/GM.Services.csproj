@@ -113,6 +113,9 @@
     <Compile Include="Nomenclature\IServiceDci.cs" />
     <Compile Include="Categorie\IServiceSpecialite.cs" />
     <Compile Include="Categorie\ServiceSpecialite.cs" />
+    <Compile Include="Pharmacies\IServicePharmacie.cs" />
+    <Compile Include="Pharmacies\PharmacieRepository.cs" />
+    <Compile Include="Pharmacies\ServicePharmacie.cs" />
     <Compile Include="Utilisateurs\RoleRepository.cs" />
     <Compile Include="Utilisateurs\RoleUserRepository.cs" />
     <Compile Include="Categorie\SpecialiteRepository.cs" />
@@ -137,9 +140,7 @@
       <Name>GM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pharmacies\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

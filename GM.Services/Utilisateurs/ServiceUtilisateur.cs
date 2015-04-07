@@ -142,6 +142,11 @@ namespace GM.Services.Utilisateurs
             return _repository.Find(x => !x.Validation);
         }
 
+        public Utilisateur SingleUser(string identifiant)
+        {
+            return _repository.FindSingle(x => x.Pseudo == identifiant || x.Email == identifiant);
+        }
+
         public void Logout()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

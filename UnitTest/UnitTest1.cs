@@ -3,6 +3,7 @@ using GM.Core;
 using GM.Services.Utilisateurs;
 using Gm.UI.Controllers;
 using Gm.UI.Models;
+using Gm.UI.Models.Utilisateurs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
 

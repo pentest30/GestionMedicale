@@ -16,6 +16,7 @@ namespace GM.Services.Utilisateurs
         IEnumerable<Utilisateur> AllUsers();
         IEnumerable<Utilisateur> ActiveUsers();
         IEnumerable<Utilisateur> NonActiveUsers();
+        Utilisateur SingleUser(string identifiant);
         void Logout();
     }
 }

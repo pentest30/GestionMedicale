@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AutoMapper;
+using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
-using Gm.UI.Models;
 using GM.Core;
 using GM.Core.Models;
+using Gm.UI.Models.Utilisateurs;
 
 namespace Gm.UI.Controllers
 {
@@ -15,11 +16,13 @@ namespace Gm.UI.Controllers
     public class AccountController : Controller
     {
         private readonly IServiceUtilisateur _service;
+        private readonly IServicePharmacie _servicePharmacie;
         private readonly IEnumerable<Role> _roles;
         // GET: Account
-        public AccountController(IServiceUtilisateur service)
+        public AccountController(IServiceUtilisateur service, IServicePharmacie servicePharmacie)
         {
             _service = service;
+            _servicePharmacie = servicePharmacie;
             _roles = _service.SelectRoles();
         }
 
@@ -94,6 +97,65 @@ namespace Gm.UI.Controllers
                 }
             }
           return View(model);
+        }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _service.SingleUser(model.Identifiant);
+                if (item != null)
+                {
+                    if (item.Validation)
+                    {
+                        if (_service.Authentification(item, model.Password, model.RememberMe))
+                        {
+                            if (User.IsInRole("pharmacien") || User.IsInRole("pharmacien-vendeur"))
+                            {
+                                //var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
+                                if (User.IsInRole("pharmacien"))
+                                {
+                                    var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
+                                    return (pharmacieId != null)
+                                        ? RedirectToAction("Index", "Gestion/Pharmacien", new { id = pharmacieId })
+                                        : RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = item.Id});
+                                }
+                                //return ((pharmacieId != null))
+                                //    ? RedirectToAction("Index", "Gestion/Pharmacien", new { id = pharmacieId })
+                                //    : null;
+
+                            }
+                            else if (User.IsInRole("distributeur") || User.IsInRole("distributeur-vendeur"))
+                            {
+
+                            }
+                            else if (User.IsInRole("medecin"))
+                            {
+
+                            }
+                            if (User.IsInRole("patient"))
+                            {
+
+                            }
+                        }
+                        
+                    }
+                    else
+                    {
+                        ViewData["info"] = "Utilisateur non trouvé";
+                    }
+                }
+                else
+                {
+                    ViewData["info"] = "Utilisateur non trouvé";
+                }
+            }
+            return View(model);
         }
 
         public ActionResult Logout()

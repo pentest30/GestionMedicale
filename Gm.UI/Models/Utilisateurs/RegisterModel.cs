@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using GM.Core.Models;
 
-namespace Gm.UI.Models
+namespace Gm.UI.Models.Utilisateurs
 {
     public class RegisterModel
     {

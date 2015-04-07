@@ -6,6 +6,7 @@ using GM.Core;
 using GM.Core.Models;
 using GM.Services.Utilisateurs;
 using Gm.UI.Models;
+using Gm.UI.Models.Utilisateurs;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 

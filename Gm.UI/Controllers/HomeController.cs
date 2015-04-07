@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using GM.Core;
 using GM.Services.Utilisateurs;
 
 namespace Gm.UI.Controllers

@@ -197,7 +197,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlExtenssions\HtmlExtensions.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Utilisateurs\LoginModel.cs" />
+    <Compile Include="Models\Utilisateurs\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -947,6 +948,7 @@
     <Content Include="Views\Shared\Create.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
     <Content Include="_ViewState.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\" />

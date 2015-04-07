@@ -1,5 +1,5 @@
 ﻿@using Gm.UI.HtmlExtenssions
-@model Gm.UI.Models.RegisterModel
+@model Gm.UI.Models.Utilisateurs.RegisterModel
  @{
      var emailExiste = Html.ViewData.ModelState.FirstOrDefault(x => x.Key == "EmailAddresse");
      var identifiantExiste = Html.ViewData.ModelState.FirstOrDefault(x => x.Key == "Identifiant");
@@ -73,7 +73,7 @@
         </div>
     <hr />
     <h2>
-        Informations<small> personel</small>
+        Informations<small> personnel</small>
     </h2>
     <hr />
          <div>
@@ -155,8 +155,8 @@
 
 <script>
     $(document).ready(function () {
-        $('#RoleId').select2();
-        $('#Sexe').select2();
+        //$('#RoleId').select2();
+        //$('#Sexe').select2();
         $('#DateOfBirthMonth').select2();
         $('#DateOfBirthDay').select2();
         $('#DateOfBirthYear').select2();
