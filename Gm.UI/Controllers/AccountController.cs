@@ -101,53 +101,58 @@ namespace Gm.UI.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home", new { area = "" });
             return View();
         }
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home", new { area = "" });
             if (ModelState.IsValid)
             {
                 var item = _service.SingleUser(model.Identifiant);
                 if (item != null)
                 {
-                    if (item.Validation)
+                    var b = _service.Authentification(item, model.Password, model.RememberMe);
+                    if (item.Validation && b)
                     {
-                        if (_service.Authentification(item, model.Password, model.RememberMe))
+                        var role = _service.Role(item);
+                        if (!string.IsNullOrEmpty(role) &&(role.Equals("pharmacien") || role.Equals("pharmacien-vendeur")))
                         {
-                            if (User.IsInRole("pharmacien") || User.IsInRole("pharmacien-vendeur"))
+                            //var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
+                            if (role.Equals("pharmacien"))
                             {
-                                //var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
-                                if (User.IsInRole("pharmacien"))
-                                {
-                                    var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
-                                    return (pharmacieId != null)
-                                        ? RedirectToAction("Index", "Gestion/Pharmacien", new { id = pharmacieId })
-                                        : RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = item.Id});
-                                }
-                                //return ((pharmacieId != null))
-                                //    ? RedirectToAction("Index", "Gestion/Pharmacien", new { id = pharmacieId })
-                                //    : null;
-
+                                var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
+                                return RedirectToAction("Index", "Gestion/Pharmacien", new {id = pharmacieId});
                             }
-                            else if (User.IsInRole("distributeur") || User.IsInRole("distributeur-vendeur"))
-                            {
-
-                            }
-                            else if (User.IsInRole("medecin"))
-                            {
-
-                            }
-                            if (User.IsInRole("patient"))
-                            {
-
-                            }
+                            return ((item.EnrepriseId != null))
+                                ? RedirectToAction("Index", "Gestion/Pharmacien", new {id = item.EnrepriseId})
+                                : RedirectToAction("Index", "Home", new { area = "" });
                         }
-                        
+                        if (User.IsInRole("distributeur") || User.IsInRole("distributeur-vendeur"))
+                        {
+
+                        }
+                        else if (User.IsInRole("medecin"))
+                        {
+
+                        }
+                        else if (User.IsInRole("patient"))
+                        {
+
+                        }
                     }
-                    else
+                    else if (b)
                     {
-                        ViewData["info"] = "Utilisateur non trouvé";
+                        if (item.UtilisateurRoles.Any(x => x.Roles.Nom.ToLower() == "pharmacien"))
+                        {
+                            var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
+                            return (pharmacieId == 0)
+                                ? RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = item.Id})
+                                : RedirectToAction("Info", "Home", new {area = ""});
+
+                        }
+
                     }
                 }
                 else

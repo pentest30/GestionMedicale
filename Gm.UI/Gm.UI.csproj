@@ -949,6 +949,7 @@
     <Content Include="Views\Shared\_alerts.cshtml" />
     <Content Include="_ViewState.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\" />

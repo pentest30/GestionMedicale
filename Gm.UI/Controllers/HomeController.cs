@@ -24,7 +24,13 @@ namespace Gm.UI.Controllers
             //ViewData["Roles"] = _service.SelectRoles();
             return View();
         }
-
+        [Authorize]
+        public ActionResult Info()
+        {
+            ViewBag.Message = "ce compte n'est pas encore actif";
+            //ViewData["Roles"] = _service.SelectRoles();
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

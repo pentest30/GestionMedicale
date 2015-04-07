@@ -29,7 +29,7 @@ namespace GM.Core.Models
         public DateTime? DateInscription { get; set; }
         public string Sexe { get; set; }
 
-        public int? LocalId { get; set; }
+        public int? EnrepriseId { get; set; }
        
 
         public ICollection<UtilisateurRole> UtilisateurRoles { get; set; }

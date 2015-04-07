@@ -151,5 +151,11 @@ namespace GM.Services.Utilisateurs
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        public string Role(Utilisateur item)
+        {
+            var firstOrDefault = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
+            return firstOrDefault != null ? firstOrDefault.Roles.Nom.ToLower() : "";
+        }
     }
 }

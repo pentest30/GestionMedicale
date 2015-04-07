@@ -5,7 +5,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using GM.Core.Models;
-using Gm.UI.Models;
 using Gm.UI.Models.Utilisateurs;
 
 namespace Gm.UI
@@ -18,7 +17,7 @@ namespace Gm.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
             Mapper.CreateMap<RegisterModel, Utilisateur>()
                 .ForMember(x => x.UtilisateurRoles, o => o.MapFrom(x => x.UtilisateurRoles));
             Mapper.CreateMap<Utilisateur, RegisterModel>();

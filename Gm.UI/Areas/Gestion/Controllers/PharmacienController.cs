@@ -9,7 +9,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
     public class PharmacienController : Controller
     {
         // GET: Gestion/Pharmacien
-        //[Authorize(Roles = "pharmacien")]
+        [Authorize(Roles = "pharmacien, pharmacien-vendeur")]
         public ActionResult Index()
         {
             return View();
@@ -17,7 +17,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
       
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "pharmacien")]
         public ActionResult NouvellePharmacie(Guid? id)
         {
             if (id == Guid.Empty) return HttpNotFound();

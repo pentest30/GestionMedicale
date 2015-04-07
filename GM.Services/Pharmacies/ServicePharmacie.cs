@@ -15,7 +15,8 @@ namespace GM.Services.Pharmacies
 
         public int? GetPharmacie(Guid id)
         {
-            return _repository.FindSingle(x => x.PropreitaireId == id).Id;
+            var item = _repository.FindSingle(x => x.PropreitaireId == id);
+            return (item!= null)? _repository.FindSingle(x => x.PropreitaireId == id).Id:0;
         }
     }
 }
