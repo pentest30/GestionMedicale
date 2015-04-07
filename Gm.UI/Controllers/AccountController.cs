@@ -114,10 +114,10 @@ namespace Gm.UI.Controllers
                 if (item != null)
                 {
                     var b = _service.Authentification(item, model.Password, model.RememberMe);
+                    var role = _service.Role(item);
                     if (item.Validation && b)
                     {
-                        var role = _service.Role(item);
-                        if (!string.IsNullOrEmpty(role) &&(role.Equals("pharmacien") || role.Equals("pharmacien-vendeur")))
+                       if (!string.IsNullOrEmpty(role) &&(role.Equals("pharmacien") || role.Equals("pharmacien-vendeur")))
                         {
                             //var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
                             if (role.Equals("pharmacien"))
@@ -144,7 +144,7 @@ namespace Gm.UI.Controllers
                     }
                     else if (b)
                     {
-                        if (item.UtilisateurRoles.Any(x => x.Roles.Nom.ToLower() == "pharmacien"))
+                        if (role == "pharmacien")
                         {
                             var pharmacieId = _servicePharmacie.GetPharmacie(item.Id);
                             return (pharmacieId == 0)
