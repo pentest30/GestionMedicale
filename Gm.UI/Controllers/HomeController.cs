@@ -27,7 +27,7 @@ namespace Gm.UI.Controllers
         [Authorize]
         public ActionResult Info()
         {
-            ViewBag.Message = "ce compte n'est pas encore actif";
+            ViewBag.Message = "Ce compte n'est pas encore activé , Merci!";
             //ViewData["Roles"] = _service.SelectRoles();
             return View();
         }

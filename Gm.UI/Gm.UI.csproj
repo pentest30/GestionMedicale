@@ -183,6 +183,8 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Gestion\Controllers\AdminController.cs" />
     <Compile Include="Areas\Gestion\Controllers\DCIController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\MedecinController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\PatientController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PharmacienController.cs" />
     <Compile Include="Areas\Gestion\Controllers\SpecialiteController.cs" />
     <Compile Include="Areas\Gestion\GestionAreaRegistration.cs" />
@@ -572,6 +574,10 @@
     <Content Include="Areas\Gestion\Views\Specialite\Update.cshtml" />
     <Content Include="Areas\Gestion\Views\DCI\Index.cshtml" />
     <Content Include="Areas\Gestion\Views\DCI\_Search.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_PatientMenu.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_MedecinMenu.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_MedecinMainPage.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medecin\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -953,6 +959,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\" />
+    <Folder Include="Areas\Gestion\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

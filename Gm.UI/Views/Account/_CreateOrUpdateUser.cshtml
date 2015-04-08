@@ -28,9 +28,9 @@
             </p>
         </div>
     }
-    <h2>Informations<small> d'authentification</small>
-    </h2>
-    <hr />
+    @*<h2>Informations<small> d'authentification</small>
+    </h2>*@
+   
     <div>
         @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9" style="margin-bottom: 5px;">
@@ -71,10 +71,12 @@
                 @Html.ValidationMessageFor(model => model.ConfirmerPassword, "", new { @class = "text-danger" })
             </div>
         </div>
-    <hr />
-    <h2>
-        Informations<small> personnel</small>
-    </h2>
+   <br />
+    <div style="margin-top: 10px">
+        @*<h2>
+            Informations<small> personnel</small>
+        </h2>*@
+    </div>
     <hr />
          <div>
             @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-3" })

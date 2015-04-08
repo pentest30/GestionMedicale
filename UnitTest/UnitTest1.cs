@@ -1,9 +1,4 @@
-﻿using System.Web.Mvc;
-using GM.Core;
-using GM.Services.Utilisateurs;
-using Gm.UI.Controllers;
-using Gm.UI.Models;
-using Gm.UI.Models.Utilisateurs;
+﻿using GM.Services.Utilisateurs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
 
@@ -16,9 +11,10 @@ namespace UnitTest
         public void TestMethod1()
         {
             var repo = Mock.Create<IServiceUtilisateur>();
-            var controller = new AccountController(repo);
-            var model = new RegisterModel();
-            var result = (ViewResult)controller.Inscription(model);
+            //var repo2 = Mock.Create<>();
+            //var controller = new AccountController(repo);
+            //var model = new RegisterModel();
+            //var result = (ViewResult)controller.Inscription(model);
             //Mapper.CreateMap<Utilisateur, RegisterModel>();
             //var user = AutoMapper.Mapper.Map<Utilisateur>(model);
 

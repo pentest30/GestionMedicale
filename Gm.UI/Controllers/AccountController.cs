@@ -26,6 +26,8 @@ namespace Gm.UI.Controllers
             _roles = _service.SelectRoles();
         }
 
+       
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -154,11 +156,16 @@ namespace Gm.UI.Controllers
                         }
 
                     }
+                    else 
+                    {
+                        ViewData["info"] = "Password est faux essayez vous une autre fois.";
+                    }
                 }
                 else
                 {
-                    ViewData["info"] = "Utilisateur non trouvé";
+                    ViewData["info"] = "Ce compte n'existe pas.";
                 }
+               
             }
             return View(model);
         }

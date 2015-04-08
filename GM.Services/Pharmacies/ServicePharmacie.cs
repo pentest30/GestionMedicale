@@ -18,5 +18,32 @@ namespace GM.Services.Pharmacies
             var item = _repository.FindSingle(x => x.PropreitaireId == id);
             return (item!= null)? _repository.FindSingle(x => x.PropreitaireId == id).Id:0;
         }
+
+        public bool Insert(Pharmacie pharmacie)
+        {
+            try
+            {
+                _repository.Insert(pharmacie);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool Update(Pharmacie pharmacie)
+        {
+            try
+            {
+                _repository.Update(pharmacie);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
