@@ -37,6 +37,7 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,14 +49,16 @@
   <ItemGroup>
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Banne.cs" />
+    <Compile Include="Models\BonEntree.cs" />
     <Compile Include="Models\Conditionnement.cs" />
     <Compile Include="Models\Dci.cs" />
-    <Compile Include="Models\EntreePharmacie.cs" />
     <Compile Include="Models\Entreprise.cs" />
     <Compile Include="Models\Forme.cs" />
     <Compile Include="Models\Fournisseur.cs" />
+    <Compile Include="Models\ILignePiece.cs" />
+    <Compile Include="Models\IPieceComptable.cs" />
     <Compile Include="Models\Laboratoire.cs" />
-    <Compile Include="Models\LignePiece.cs" />
+    <Compile Include="Models\LigneEntree.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Medicament.cs" />
     <Compile Include="Models\ParamStock.cs" />

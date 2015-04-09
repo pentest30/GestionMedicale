@@ -54,6 +54,26 @@
     <Compile Include="Migrations\201504090906580_m2.Designer.cs">
       <DependentUpon>201504090906580_m2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504090929048_m3.cs" />
+    <Compile Include="Migrations\201504090929048_m3.Designer.cs">
+      <DependentUpon>201504090929048_m3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091039107_m4.cs" />
+    <Compile Include="Migrations\201504091039107_m4.Designer.cs">
+      <DependentUpon>201504091039107_m4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091053579_m5.cs" />
+    <Compile Include="Migrations\201504091053579_m5.Designer.cs">
+      <DependentUpon>201504091053579_m5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091257174_m6.cs" />
+    <Compile Include="Migrations\201504091257174_m6.Designer.cs">
+      <DependentUpon>201504091257174_m6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091258488_m7.cs" />
+    <Compile Include="Migrations\201504091258488_m7.Designer.cs">
+      <DependentUpon>201504091258488_m7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +95,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504090906580_m2.resx">
       <DependentUpon>201504090906580_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504090929048_m3.resx">
+      <DependentUpon>201504090929048_m3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091039107_m4.resx">
+      <DependentUpon>201504091039107_m4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091053579_m5.resx">
+      <DependentUpon>201504091053579_m5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091257174_m6.resx">
+      <DependentUpon>201504091257174_m6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091258488_m7.resx">
+      <DependentUpon>201504091258488_m7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -25,10 +25,6 @@ namespace Gm.UI.Controllers
             _servicePharmacie = servicePharmacie;
             _roles = _service.SelectRoles();
         }
-
-       
-
-
         [HttpGet]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
