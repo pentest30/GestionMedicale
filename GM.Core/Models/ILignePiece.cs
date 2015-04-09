@@ -9,7 +9,7 @@
         //decimal? Montant { get; set; }
         decimal PrixUnitaire { get; set; }
         Medicament Medicament { get; set; }
-        long BonEntreeId { get; set; }
-        BonEntree    BonEntree { get; set; }
+        //long BonEntreeId { get; set; }
+        //BonEntree    BonEntree { get; set; }
     }
 }

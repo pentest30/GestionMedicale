@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
@@ -104,15 +105,7 @@ namespace Gm.UI.HtmlExtenssions
             //Created StringBuilder object to store option data fetched oen by one from list.
             StringBuilder options = new StringBuilder();
             //Iterated over the IEnumerable list.
-            foreach (var item in list)
-            {
-                //Each option represents a value in dropdown. For each element in the list, option element is created and appended to the stringBuilder object.
-                if (!item.Selected) options = options.AppendFormat("<option value='{0}' >{1}</option>", item.Value, item.Text);
-                else
-                {
-                    options = options.AppendFormat("<option value='{0}' selected='{0}' >{1}</option>", item.Value, item.Text);
-                }
-            }
+            options = list.Aggregate(options, (current, item) => current.AppendFormat(!item.Selected ? "<option value='{0}' >{1}</option>" : "<option value='{0}' selected='{0}' >{1}</option>", item.Value, item.Text));
             //assigned all the options to the dropdown using innerHTML property.
             dropdown.InnerHtml = options.ToString();
             //Assigning the attributes passed as a htmlAttributes object.

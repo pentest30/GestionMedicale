@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using GM.Core;
 using GM.Core.Models;
 
 namespace GM.Services.Utilisateurs
 {
     public interface IServiceUtilisateur
     {
+       
         IEnumerable<Role> SelectRoles();
         bool ExisteDeja(string identifiant);
         Role GetSingleRole(Guid? id);
