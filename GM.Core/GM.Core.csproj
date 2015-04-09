@@ -48,12 +48,23 @@
   <ItemGroup>
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Banne.cs" />
+    <Compile Include="Models\Conditionnement.cs" />
     <Compile Include="Models\Dci.cs" />
+    <Compile Include="Models\EntreePharmacie.cs" />
     <Compile Include="Models\Entreprise.cs" />
+    <Compile Include="Models\Forme.cs" />
+    <Compile Include="Models\Fournisseur.cs" />
+    <Compile Include="Models\Laboratoire.cs" />
+    <Compile Include="Models\LignePiece.cs" />
     <Compile Include="Models\Magasin.cs" />
+    <Compile Include="Models\Medicament.cs" />
+    <Compile Include="Models\ParamStock.cs" />
     <Compile Include="Models\Pharmacie.cs" />
+    <Compile Include="Models\PieceComptable.cs" />
+    <Compile Include="Models\Remboursement.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Specialite.cs" />
+    <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\UtilisateurRole.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

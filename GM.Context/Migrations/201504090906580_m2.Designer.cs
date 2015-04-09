@@ -7,13 +7,13 @@ namespace GM.Context.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class up8 : IMigrationMetadata
+    public sealed partial class m2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(up8));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(m2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504061010588_up8"; }
+            get { return "201504090906580_m2"; }
         }
         
         string IMigrationMetadata.Source

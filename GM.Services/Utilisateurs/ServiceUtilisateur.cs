@@ -154,8 +154,8 @@ namespace GM.Services.Utilisateurs
 
         public string Role(Utilisateur item)
         {
-            var firstOrDefault = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
-            return firstOrDefault != null ? firstOrDefault.Roles.Nom.ToLower() : "";
+            var role = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
+            return role != null ? role.Roles.Nom.ToLower() : "";
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GM.Core.Models
 {
-    public class Entreprise
+    public abstract class Entreprise
     {
         public int Id { get; set; }
         public string Nom { get; set; }

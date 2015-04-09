@@ -46,37 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201503221417191_up1.cs" />
-    <Compile Include="Migrations\201503221417191_up1.Designer.cs">
-      <DependentUpon>201503221417191_up1.cs</DependentUpon>
+    <Compile Include="Migrations\201504090905520_m1.cs" />
+    <Compile Include="Migrations\201504090905520_m1.Designer.cs">
+      <DependentUpon>201504090905520_m1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503230935391_up2.cs" />
-    <Compile Include="Migrations\201503230935391_up2.Designer.cs">
-      <DependentUpon>201503230935391_up2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503262103426_up5.cs" />
-    <Compile Include="Migrations\201503262103426_up5.Designer.cs">
-      <DependentUpon>201503262103426_up5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503270928389_up6.cs" />
-    <Compile Include="Migrations\201503270928389_up6.Designer.cs">
-      <DependentUpon>201503270928389_up6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503291639073_up7.cs" />
-    <Compile Include="Migrations\201503291639073_up7.Designer.cs">
-      <DependentUpon>201503291639073_up7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504020954361_m1.cs" />
-    <Compile Include="Migrations\201504020954361_m1.Designer.cs">
-      <DependentUpon>201504020954361_m1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504061010588_up8.cs" />
-    <Compile Include="Migrations\201504061010588_up8.Designer.cs">
-      <DependentUpon>201504061010588_up8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504071945461_up9.cs" />
-    <Compile Include="Migrations\201504071945461_up9.Designer.cs">
-      <DependentUpon>201504071945461_up9.cs</DependentUpon>
+    <Compile Include="Migrations\201504090906580_m2.cs" />
+    <Compile Include="Migrations\201504090906580_m2.Designer.cs">
+      <DependentUpon>201504090906580_m2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
@@ -94,29 +70,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503221417191_up1.resx">
-      <DependentUpon>201503221417191_up1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504090905520_m1.resx">
+      <DependentUpon>201504090905520_m1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503230935391_up2.resx">
-      <DependentUpon>201503230935391_up2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503262103426_up5.resx">
-      <DependentUpon>201503262103426_up5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503270928389_up6.resx">
-      <DependentUpon>201503270928389_up6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503291639073_up7.resx">
-      <DependentUpon>201503291639073_up7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504020954361_m1.resx">
-      <DependentUpon>201504020954361_m1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504061010588_up8.resx">
-      <DependentUpon>201504061010588_up8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504071945461_up9.resx">
-      <DependentUpon>201504071945461_up9.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504090906580_m2.resx">
+      <DependentUpon>201504090906580_m2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
