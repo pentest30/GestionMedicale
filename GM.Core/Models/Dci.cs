@@ -8,6 +8,9 @@ namespace GM.Core.Models
         [Required]
         public string Nom { get; set; }
         public string Code { get; set; }
+        [Display(Name = "Spécialité")]
+        public int SpecialiteId { get; set; }
+        public Specialite Specialite { get; set; }
 
     }
 }

@@ -61,6 +61,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpPost]
         public ActionResult Create(Specialite specialite)
         {
+            
             if (ModelState.IsValid)
             {
                 var b = _service.Insert(specialite);

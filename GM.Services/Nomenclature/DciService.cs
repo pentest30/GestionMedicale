@@ -56,10 +56,10 @@ namespace GM.Services.Nomenclature
 
         public bool Delete(int id)
         {
-            var dci = _repository.SelectById(id);
+            //var dci = _repository.SelectById(id);
             try
             {
-                _repository.Delete(dci);
+                _repository.Delete(id);
                 return true;
             }
             catch (Exception)

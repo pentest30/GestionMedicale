@@ -4,6 +4,7 @@ using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 using GM.Services.Categorie;
+using GM.Services.Nomenclature;
 using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
 using Microsoft.Practices.Unity;
@@ -50,10 +51,12 @@ namespace Gm.UI
             container.RegisterType<IRepository<Role>, RoleRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Specialite>, SpecialiteRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Pharmacie>, PharmacieRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Dci>, DciRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());
             container.RegisterType<IServicePharmacie, ServicePharmacie>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceDci, DciService>(new PerRequestLifetimeManager());
         }
     }
 }

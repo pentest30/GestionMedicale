@@ -1,0 +1,21 @@
+﻿@model GM.Core.Models.Dci
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+}
+
+<div style="margin-top: 80px;padding: 15px;height: auto" class="container-fluid">
+    <h2>Modifier <small>Dénomination</small></h2>
+    <hr />
+
+
+    <div id="alert">
+
+    </div>
+
+    @{
+        Html.RenderPartial("_CreateOrUpdate", Model);
+    }
+
+
+</div>

@@ -35,7 +35,7 @@
               columns.Bound(c => c.Code).Width(120);
 
           })
-          .HtmlAttributes(new { style = "height: 300px;" })
+          .HtmlAttributes(new { style = "height: 350px;" })
           .Scrollable().Selectable()
           .Sortable()
             //.Events(events => events.Change("OnChange"))
@@ -45,7 +45,7 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
               .Ajax()
-                              .Read(read => read.Action("ListSpecialite", "Specialite")
+                                      .Read(read => read.Action("ListDci", "Dci")
                   .Data("additionalData"))
           ))
 

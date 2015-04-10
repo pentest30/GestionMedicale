@@ -71,6 +71,7 @@
                 type: 'POST',
                 success: function(data) {
                     $('#alert').html(data.message);
+                    $("#alert").fadeIn('slow').delay(1500).hide(0);
                 },
                 error: function() {
                 }
