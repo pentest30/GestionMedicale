@@ -51,7 +51,7 @@ namespace Gm.UI
             container.RegisterType<IRepository<Role>, RoleRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Specialite>, SpecialiteRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Pharmacie>, PharmacieRepository>(new PerRequestLifetimeManager());
-            container.RegisterType<IRepository<Dci>, DciRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Dci>, FormeiRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());

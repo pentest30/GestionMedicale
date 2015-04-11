@@ -205,6 +205,28 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data1\images\8508dbed85.jpg" />
+    <Content Include="data1\images\bgslider2.jpg" />
+    <Content Include="data1\images\bgslider3.jpg" />
+    <Content Include="data1\images\digital-health-art1-300x203.jpg" />
+    <Content Include="data1\images\slide1.png" />
+    <Content Include="data1\tooltips\8508dbed85.jpg" />
+    <Content Include="data1\tooltips\bgslider2.jpg" />
+    <Content Include="data1\tooltips\bgslider3.jpg" />
+    <Content Include="data1\tooltips\slide1.png" />
+    <Content Include="engine1\arrows.png" />
+    <Content Include="engine1\bullet.png" />
+    <Content Include="engine1\jquery.js" />
+    <Content Include="engine1\pause.png" />
+    <Content Include="engine1\play.png" />
+    <Content Include="engine1\script.js" />
+    <Content Include="engine1\shadow.png" />
+    <Content Include="engine1\style.css" />
+    <Content Include="engine1\style.mod.css" />
+    <Content Include="engine1\triangle.png" />
+    <Content Include="engine1\wowslider.js" />
+    <Content Include="engine1\wowslider.mod.js" />
+    <Content Include="engine1\ws-ctrl-material.svg" />
     <Content Include="Content\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -581,6 +603,10 @@
     <Content Include="Areas\Gestion\Views\DCI\Create.cshtml" />
     <Content Include="Areas\Gestion\Views\DCI\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Gestion\Views\DCI\Update.cshtml" />
+    <Content Include="Areas\Gestion\Views\Pharmacien\Compte.cshtml" />
+    <Content Include="engine1\ws-ctrl-material.eot" />
+    <Content Include="engine1\ws-ctrl-material.ttf" />
+    <Content Include="engine1\ws-ctrl-material.woff" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />

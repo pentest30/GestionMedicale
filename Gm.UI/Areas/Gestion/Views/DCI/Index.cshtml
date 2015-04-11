@@ -33,6 +33,7 @@
                  .Width(20).Visible(false);
               columns.Bound(c => c.Nom).Width(160);
               columns.Bound(c => c.Code).Width(120);
+              columns.Bound(c => c.Specialite.Libelle).Width(120).Title("Spécialité");
 
           })
           .HtmlAttributes(new { style = "height: 350px;" })

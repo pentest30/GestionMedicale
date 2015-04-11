@@ -108,6 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formes\FormeRepository.cs" />
+    <Compile Include="Formes\ISrviceForme.cs" />
+    <Compile Include="Formes\ServiceForme.cs" />
     <Compile Include="Nomenclature\DciRepository.cs" />
     <Compile Include="Nomenclature\DciService.cs" />
     <Compile Include="Nomenclature\IServiceDci.cs" />
@@ -140,7 +143,10 @@
       <Name>GM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Conditionnelts\" />
+    <Folder Include="Medicaments\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

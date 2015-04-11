@@ -21,6 +21,7 @@ namespace Gm.UI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js",
+              
                 "~/Scripts/select2.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/gestion/bootstrap").Include(
                 "~/Scripts/gestion/bootstrap.min.js",
@@ -34,6 +35,7 @@ namespace Gm.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/select2-bootstrap.css",
+              
                 "~/Content/select2.css",
                 "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/Gestion/css").Include(

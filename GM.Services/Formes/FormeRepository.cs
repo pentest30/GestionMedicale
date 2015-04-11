@@ -6,9 +6,9 @@ using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 
-namespace GM.Services.Nomenclature
+namespace GM.Services.Formes
 {
-    public class FormeiRepository:IRepository<Dci>
+    public class FormeiRepository : IRepository<Forme>
     {
         private readonly PharmacieContext _db;
 
@@ -17,25 +17,25 @@ namespace GM.Services.Nomenclature
             _db = db;
         }
 
-        public IEnumerable<Dci> SelectAll()
+        public IEnumerable<Forme> SelectAll()
         {
-            return _db.Dcis.Include("Specialite");
+            return _db.Formes;
         }
 
-        public Dci SelectById(object id)
+        public Forme SelectById(object id)
         {
-            return (id == null) ? new Dci() : _db.Dcis.Find(id);
+            return (id == null) ? new Forme() : _db.Formes.Find(id);
         }
 
-        public void Insert(Dci item)
+        public void Insert(Forme item)
         {
-            _db.Dcis.Add(item);
+            _db.Formes.Add(item);
             Save();
         }
 
-        public void Update(Dci item)
+        public void Update(Forme item)
         {
-            _db.Entry(item).State =EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
             Save();
         }
 
@@ -55,22 +55,22 @@ namespace GM.Services.Nomenclature
             _db.SaveChanges();
         }
 
-        public IEnumerable<Dci> Find(Func<Dci, bool> predicate)
+        public IEnumerable<Forme> Find(Func<Forme, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Dci FindSingle(Func<Dci, bool> predicate)
+        public Forme FindSingle(Func<Forme, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Dci> GetAllLazyLoad(params Expression<Func<Dci, object>>[] children)
+        public IEnumerable<Forme> GetAllLazyLoad(params Expression<Func<Forme, object>>[] children)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exist(Func<Dci, bool> predicate)
+        public bool Exist(Func<Forme, bool> predicate)
         {
             throw new NotImplementedException();
         }

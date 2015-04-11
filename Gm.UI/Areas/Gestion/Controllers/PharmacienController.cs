@@ -15,6 +15,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
+        public ActionResult Compte()
+        {
+            return View();
+        }
+
       
         [HttpGet]
         [Authorize(Roles = "pharmacien")]
