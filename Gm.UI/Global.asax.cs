@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
+using Gm.UI.Areas.Gestion.Models;
 using GM.Core.Models;
 using Gm.UI.Models.Utilisateurs;
 
@@ -21,6 +22,12 @@ namespace Gm.UI
             Mapper.CreateMap<RegisterModel, Utilisateur>()
                 .ForMember(x => x.UtilisateurRoles, o => o.MapFrom(x => x.UtilisateurRoles));
             Mapper.CreateMap<Utilisateur, RegisterModel>();
+            Mapper.CreateMap<MedicamentModel, Medicament>();
+            Mapper.CreateMap<Medicament, MedicamentModel>()
+               .ForMember(x => x.Dci, o => o.MapFrom(x => x.Dci.Nom))
+               .ForMember(x => x.Specialite, o => o.MapFrom(x => x.Specialite.Libelle))
+               .ForMember(x => x.Forme, o => o.MapFrom(x => x.Forme.Libelle))
+               .ForMember(x => x.Conditionnement, o => o.MapFrom(x => x.Conditionnement.Libelle));
             //BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
            // BootstrapMvcSample.ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
         }

@@ -6,8 +6,10 @@ using GM.Core.Models;
 using GM.Services.Categorie;
 using GM.Services.Conditionnelts;
 using GM.Services.Formes;
+using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
 using GM.Services.Pharmacies;
+using GM.Services.Stocks;
 using GM.Services.Utilisateurs;
 using Microsoft.Practices.Unity;
 
@@ -56,6 +58,9 @@ namespace Gm.UI
             container.RegisterType<IRepository<Dci>, DciRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Forme>, FormeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Conditionnement>, ConditionnementRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<ParamStock> , StockPramsRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Remboursement>, RembouressementRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Medicament>, MedicamentRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());
@@ -63,6 +68,7 @@ namespace Gm.UI
             container.RegisterType<IServiceDci, DciService>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceForme, ServiceForme>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceConditionnement, ServiceConditionnement>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceMedicmaent, ServiceMedicament>(new PerRequestLifetimeManager());
         }
     }
 }

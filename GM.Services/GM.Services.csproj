@@ -114,6 +114,11 @@
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />
+    <Compile Include="Medicaments\IServiceMedicmaent.cs" />
+    <Compile Include="Medicaments\MedicamentRepository.cs" />
+    <Compile Include="Medicaments\RembouressementRepository.cs" />
+    <Compile Include="Medicaments\ServiceMedicament.cs" />
+    <Compile Include="Medicaments\StockPramsRepository.cs" />
     <Compile Include="Nomenclature\DciRepository.cs" />
     <Compile Include="Nomenclature\DciService.cs" />
     <Compile Include="Nomenclature\IServiceDci.cs" />
@@ -122,6 +127,7 @@
     <Compile Include="Pharmacies\IServicePharmacie.cs" />
     <Compile Include="Pharmacies\PharmacieRepository.cs" />
     <Compile Include="Pharmacies\ServicePharmacie.cs" />
+    <Compile Include="Stocks\StockRepository.cs" />
     <Compile Include="Utilisateurs\RoleRepository.cs" />
     <Compile Include="Utilisateurs\RoleUserRepository.cs" />
     <Compile Include="Categorie\SpecialiteRepository.cs" />
@@ -146,9 +152,7 @@
       <Name>GM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Medicaments\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

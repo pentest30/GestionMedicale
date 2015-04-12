@@ -1,8 +1,11 @@
-﻿namespace GM.Core.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GM.Core.Models
 {
     public class ParamStock
     {
         public int Id { get; set; }
+        [ForeignKey("Medicament")]
         public int MedicamentId { get; set; }
         public int EntrepriseId { get; set; }
         public Medicament Medicament { get; set; }
