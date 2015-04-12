@@ -13,7 +13,7 @@ namespace Gm.UI.Models.Utilisateurs
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Souvien de moi")]
+        [Display(Name = "Se souvenir de moi")]
         public bool RememberMe { get; set; }
     }
 }

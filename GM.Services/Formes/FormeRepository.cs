@@ -8,11 +8,11 @@ using GM.Core.Models;
 
 namespace GM.Services.Formes
 {
-    public class FormeiRepository : IRepository<Forme>
+    public class FormeRepository : IRepository<Forme>
     {
         private readonly PharmacieContext _db;
 
-        public FormeiRepository(PharmacieContext db)
+        public FormeRepository(PharmacieContext db)
         {
             _db = db;
         }

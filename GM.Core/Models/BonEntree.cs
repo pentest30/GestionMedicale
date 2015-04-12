@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GM.Core.Models
 {
-    public class BonEntree : IPieceComptable
+    public class BonEntree : ICommandes
     {
         public BonEntree()
         {
@@ -29,6 +29,6 @@ namespace GM.Core.Models
         public int MagasinId { get; set; }
         public Magasin Magasin { get; set; }
 
-        public IEnumerable<ILignePiece> LignePieces { get; set; }
+        public IEnumerable<ILigneCommande> LignePieces { get; set; }
     }
 }

@@ -6,36 +6,36 @@ using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 
-namespace GM.Services.Nomenclature
+namespace GM.Services.Conditionnelts
 {
-    public class DciRepository:IRepository<Dci>
+    public class ConditionnementRepository:IRepository<Conditionnement>
     {
         private readonly PharmacieContext _db;
 
-        public DciRepository(PharmacieContext db)
+        public ConditionnementRepository(PharmacieContext db)
         {
             _db = db;
         }
 
-        public IEnumerable<Dci> SelectAll()
+        public IEnumerable<Conditionnement> SelectAll()
         {
-            return _db.Dcis.Include("Specialite");
+            return _db.Conditionnements;
         }
 
-        public Dci SelectById(object id)
+        public Conditionnement SelectById(object id)
         {
-            return (id == null) ? new Dci() : _db.Dcis.Find(id);
+            return (id == null) ? new Conditionnement() : _db.Conditionnements.Find(id);
         }
 
-        public void Insert(Dci item)
+        public void Insert(Conditionnement item)
         {
-            _db.Dcis.Add(item);
+            _db.Conditionnements.Add(item);
             Save();
         }
 
-        public void Update(Dci item)
+        public void Update(Conditionnement item)
         {
-            _db.Entry(item).State =EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
             Save();
         }
 
@@ -55,22 +55,22 @@ namespace GM.Services.Nomenclature
             _db.SaveChanges();
         }
 
-        public IEnumerable<Dci> Find(Func<Dci, bool> predicate)
+        public IEnumerable<Conditionnement> Find(Func<Conditionnement, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Dci FindSingle(Func<Dci, bool> predicate)
+        public Conditionnement FindSingle(Func<Conditionnement, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Dci> GetAllLazyLoad(params Expression<Func<Dci, object>>[] children)
+        public IEnumerable<Conditionnement> GetAllLazyLoad(params Expression<Func<Conditionnement, object>>[] children)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exist(Func<Dci, bool> predicate)
+        public bool Exist(Func<Conditionnement, bool> predicate)
         {
             throw new NotImplementedException();
         }

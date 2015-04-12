@@ -1,6 +1,6 @@
 ﻿namespace GM.Core.Models
 {
-    public interface ILignePiece
+    public interface ILigneCommande
     {
         int Id { get; set; }
         int MedicamentId { get; set; }

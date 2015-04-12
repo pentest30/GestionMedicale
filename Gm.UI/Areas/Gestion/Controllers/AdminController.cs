@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using Gm.UI.Models.Utilisateurs;
 using GM.Core;
 using GM.Core.Models;
 using GM.Services.Utilisateurs;
-using Gm.UI.Models;
-using Gm.UI.Models.Utilisateurs;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
@@ -54,7 +54,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             if (id == "") return HttpNotFound();
             var identity = new Guid(id.Trim());
             var user =_serviceUtilisateur.VoirProfile(identity);
-            var model = AutoMapper.Mapper.Map<RegisterModel>(user); 
+            var model = Mapper.Map<RegisterModel>(user); 
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
             return View(model);
         }

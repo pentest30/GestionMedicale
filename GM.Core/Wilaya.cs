@@ -14,7 +14,7 @@ namespace GM.Core
             wilayas.Add(new Wilaya { NumWilaya = 1, Nom = "Adrar" });
             wilayas.Add(new Wilaya { NumWilaya = 2, Nom = "Chlef" });
             wilayas.Add(new Wilaya { NumWilaya = 3, Nom = "Laghouat" });
-            wilayas.Add(new Wilaya { NumWilaya = 4, Nom = "d'Oum El Bouaghi" });
+            wilayas.Add(new Wilaya { NumWilaya = 4, Nom = "Oum El Bouaghi" });
             wilayas.Add(new Wilaya { NumWilaya = 5, Nom = "Batna" });
             wilayas.Add(new Wilaya { NumWilaya = 6, Nom = "Béjaïa" });
             wilayas.Add(new Wilaya { NumWilaya = 7, Nom = "Biskra" });

@@ -55,8 +55,8 @@
     <Compile Include="Models\Entreprise.cs" />
     <Compile Include="Models\Forme.cs" />
     <Compile Include="Models\Fournisseur.cs" />
-    <Compile Include="Models\ILignePiece.cs" />
-    <Compile Include="Models\IPieceComptable.cs" />
+    <Compile Include="Models\ILigneCommande.cs" />
+    <Compile Include="Models\ICommandes.cs" />
     <Compile Include="Models\Laboratoire.cs" />
     <Compile Include="Models\LigneEntree.cs" />
     <Compile Include="Models\Magasin.cs" />

@@ -1,33 +1,70 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GM.Core;
 using GM.Core.Models;
 
 namespace GM.Services.Formes
 {
     public class ServiceForme:IServiceForme
     {
+        private readonly IRepository<Forme> _repository;
+
+        public ServiceForme(IRepository<Forme> repository )
+        {
+            _repository = repository;
+        }
+
         public IEnumerable<Forme> ListeFormes()
         {
-            throw new System.NotImplementedException();
+            return _repository.SelectAll();
         }
 
         public bool Insert(Forme forme)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Insert(forme );
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public bool Update(Forme forme)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Update(forme);
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public Forme FindSingle(int id)
         {
-            throw new System.NotImplementedException();
+            return _repository.SelectById(id);
         }
 
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Delete(id);
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

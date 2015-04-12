@@ -108,6 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditionnelts\ConditionnemeRepository.cs" />
+    <Compile Include="Conditionnelts\IServiceConditionnement.cs" />
+    <Compile Include="Conditionnelts\ServiceConditionnement.cs" />
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />
@@ -144,7 +147,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Conditionnelts\" />
     <Folder Include="Medicaments\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

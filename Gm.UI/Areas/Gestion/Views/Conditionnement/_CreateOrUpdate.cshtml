@@ -1,0 +1,89 @@
+﻿@model GM.Core.Models.Conditionnement
+
+@{
+    var url = (Request.RawUrl.Contains("Update")) ?
+        Url.Action("Update", "Conditionnement", new { area = "Gestion" }) :
+        Url.Action("Create", "Conditionnement", new { area = "Gestion" });
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="navbar">
+            <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
+                <div>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
+                            <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
+                            <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (Request.RawUrl.Contains("Update"))
+        {
+            @Html.HiddenFor(model => model.Id)
+        }
+
+
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "validate[required] " } })
+                @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+    </div>
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Libelle").addClass("validate[required]");
+
+        $('form').validationEngine();
+        $("#SpecialiteId").select2();
+
+        $(".menu *").prop('disabled', true);
+        $("#delete-btn").click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("Index", "Conditionnement", new { area = "Gestion" })';
+
+        });
+        $("#save-btn").click(function (e) {
+            if ($('form').validationEngine('validate')) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@url',
+                    data: $("form").serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        $('#alert').html(data.message);
+                        $("#alert").fadeIn('slow').delay(1500).hide(0);
+                        $('#Libelle').val("");
+
+                    },
+                    error: function () {
+                    }
+                });
+            } else {
+                e.preventDefault();
+            }
+
+        });
+
+
+    });
+</script>
+
+

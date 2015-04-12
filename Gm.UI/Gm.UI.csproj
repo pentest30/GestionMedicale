@@ -182,7 +182,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Gestion\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\ConditionnementController.cs" />
     <Compile Include="Areas\Gestion\Controllers\DCIController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\FormeController.cs" />
     <Compile Include="Areas\Gestion\Controllers\MedecinController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PatientController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PharmacienController.cs" />
@@ -608,6 +610,14 @@
     <Content Include="engine1\ws-ctrl-material.eot" />
     <Content Include="engine1\ws-ctrl-material.ttf" />
     <Content Include="engine1\ws-ctrl-material.woff" />
+    <Content Include="Areas\Gestion\Views\Forme\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Forme\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Forme\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Forme\Update.cshtml" />
+    <Content Include="Areas\Gestion\Views\Conditionnement\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Conditionnement\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Conditionnement\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Conditionnement\Update.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -977,9 +987,7 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Account\Inscription.cshtml" />
     <Content Include="Views\Account\_CreateOrUpdateUser.cshtml" />
-    <Content Include="Views\Account\RetrunInscription.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Wilaya.cshtml" />
-    <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\Details.cshtml" />
     <Content Include="Views\Shared\Create.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
