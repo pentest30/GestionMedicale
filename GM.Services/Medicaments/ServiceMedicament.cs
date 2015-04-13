@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using EntyTea.EntityQueries;
 using GM.Core;
 using GM.Core.Models;
 
@@ -105,6 +107,18 @@ namespace GM.Services.Medicaments
         public bool UpdateParamsStock(Remboursement remboursement)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Medicament> FilterListe(Medicament medicament)
+        {
+            var filter = from m in EntityFilter<Medicament>.AsQueryable()
+                         where m.NomCommerciale.Equals(medicament.NomCommerciale) || string.IsNullOrEmpty(medicament.NomCommerciale)
+                         where m.Code.Equals(medicament.Code) || string.IsNullOrEmpty(medicament.Code)
+                         where m.SpecialiteId.Equals(medicament.SpecialiteId) || medicament.SpecialiteId ==0
+                         where m.DciId.Equals(medicament.DciId) || medicament.DciId ==0
+                         where m.NumEnregistrement.Equals(medicament.NumEnregistrement) || string.IsNullOrEmpty(medicament.NumEnregistrement)
+                         select m;
+            return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }
 }

@@ -22,9 +22,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult ListSpecialite([DataSourceRequest] DataSourceRequest request)
+        public ActionResult ListSpecialite([DataSourceRequest] DataSourceRequest request , string libelle , string code)
         {
-            return Json(_service.ListeSpecialites().ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
+            var filter = new Specialite()
+            {
+                Libelle = libelle,
+                Code = code
+            };
+            return Json(_service.FilterListe(filter).ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

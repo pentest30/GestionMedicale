@@ -118,14 +118,12 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request, string pseudo, string email)
         {
-
-            if (!string.IsNullOrEmpty(pseudo) || !string.IsNullOrEmpty(email))
+            var user = new Utilisateur
             {
-                var result = !string.IsNullOrEmpty(pseudo)?
-                    _serviceUtilisateur.FlietrByPseudo(pseudo):
-                    _serviceUtilisateur.FlietrByEmail(email);
-                return Json(result.ToDataSourceResult(request));
-            }
+                Pseudo = pseudo,
+                Email = email
+            };
+            var result = _serviceUtilisateur.FilterListe(user);
             var filter = Session["filter"].ToString();
 
             switch (filter)
@@ -133,15 +131,16 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
                 case "2":
                 {
-                    return Json(_serviceUtilisateur.ActiveUsers().ToDataSourceResult(request));
+                    return Json(_serviceUtilisateur.FilterByActivation(result, true).ToDataSourceResult(request));
                 }
                 case "3":
                 {
-                    return Json(_serviceUtilisateur.NonActiveUsers().ToDataSourceResult(request));
+                    return Json(_serviceUtilisateur.FilterByActivation(result, false).ToDataSourceResult(request));
                 }
 
             }
-            return Json(_serviceUtilisateur.AllUsers().ToDataSourceResult(request));
+            return Json(result.ToDataSourceResult(request));
+
         }
 
         private static string ErrorMessage()
@@ -153,16 +152,5 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
         }
-        private IEnumerable<Utilisateur> Utilisateurs(RegisterModel model)
-        {
-            var result = new List<Utilisateur>();
-            if (!string.IsNullOrEmpty(model.Email) && string.IsNullOrEmpty(model.Pseudo))
-                result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Email.Equals(model.Email)));
-            else if (string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Pseudo))
-                result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Pseudo == model.Pseudo));
-            else if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Pseudo)) result.AddRange(_serviceUtilisateur.AllUsers().Where(x => x.Pseudo == model.Pseudo && x.Email == model.Email));
-            return result;
-        }
-
     }
 }

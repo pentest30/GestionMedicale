@@ -18,7 +18,7 @@ namespace Gm.UI.Areas.Gestion.Models
         public string Dose { get; set; }
         public bool Remboursable { get; set; }
         [Required]
-        [Display(Name = "Dénomination commune intrenationale")]
+        [Display(Name = "DCI")]
         public int DciId { get; set; }
         [Display(Name = "Spécialité")]
         [Required]
@@ -32,8 +32,10 @@ namespace Gm.UI.Areas.Gestion.Models
         [Display(Name = "Fabriquant")]
         [Required]
         public int LaboratoireId { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Discription { get; set; }
-        public decimal? Tva { get; set; }
+        [UIHint("Number")]
+        public decimal Tva { get; set; }
         public string Dci { get; set; }
         public string Specialite { get; set; }
         public string Forme { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using EntyTea.EntityQueries;
 using GM.Core;
 using GM.Core.Models;
 
@@ -61,6 +63,17 @@ namespace GM.Services.Categorie
             {
                 return false;
             }
+        }
+
+        public IEnumerable<Specialite> FilterListe(Specialite specialite)
+        {
+            var filter = from m in EntityFilter<Specialite>.AsQueryable()
+                where m.Libelle.Equals(specialite.Libelle, StringComparison.InvariantCultureIgnoreCase) ||
+                    string.IsNullOrEmpty(specialite.Libelle)
+                where m.Code.Equals(specialite.Code) || string.IsNullOrEmpty(specialite.Code)
+                select m;
+
+            return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }
 }

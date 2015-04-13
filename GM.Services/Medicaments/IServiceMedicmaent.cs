@@ -15,5 +15,6 @@ namespace GM.Services.Medicaments
         bool InsertParamsStock(ParamStock stock,int id);
         bool UpdateRemboussement(Remboursement remboursement);
         bool UpdateParamsStock(Remboursement remboursement);
+        IEnumerable<Medicament> FilterListe(Medicament medicament);
     }
 }

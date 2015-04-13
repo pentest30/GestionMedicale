@@ -1,0 +1,50 @@
+﻿@model Gm.UI.Areas.Gestion.Models.MedicamentModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+}
+
+<div style="margin-top: 90px; margin-right: 25px">
+    <div class="navbar">
+        <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
+            <div>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
+                        <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
+                        <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="content">
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li class="active"><a href="#red" data-toggle="tab">Médicament</a></li>
+            <li><a href="#orange" data-toggle="tab">Paramètres de remboursement</a></li>
+            <li><a href="#yellow" data-toggle="tab">Paramètres de stockage</a></li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="red">
+                @{
+                    Html.RenderPartial("_CreateOrUpdate", Model);
+                }
+            </div>
+            <div class="tab-pane" id="orange">
+                <h1>Orange</h1>
+                <p>orange orange orange orange orange</p>
+            </div>
+            <div class="tab-pane" id="yellow">
+                <h1>Yellow</h1>
+                <p>yellow yellow yellow yellow yellow</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+</script>

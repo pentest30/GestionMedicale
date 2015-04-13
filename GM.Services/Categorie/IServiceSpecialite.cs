@@ -10,5 +10,6 @@ namespace GM.Services.Categorie
         bool Update(Specialite specialite);
         Specialite FindSingle(int id);
         bool Delete(int id);
+        IEnumerable<Specialite> FilterListe(Specialite utilisateur);
     }
 }

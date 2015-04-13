@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GM.Core;
 using GM.Core.Models;
 
 namespace GM.Services.Utilisateurs
@@ -21,7 +20,7 @@ namespace GM.Services.Utilisateurs
         Utilisateur SingleUser(string identifiant);
         string Role( Utilisateur item);
         void Logout();
-        IEnumerable<Utilisateur> FlietrByPseudo(string identifiant);
-        IEnumerable<Utilisateur> FlietrByEmail(string identifiant);
+        IEnumerable<Utilisateur> FilterListe(Utilisateur utilisateur);
+        IEnumerable<Utilisateur> FilterByActivation(IEnumerable<Utilisateur> utilisateurs, bool predicate);
     }
 }

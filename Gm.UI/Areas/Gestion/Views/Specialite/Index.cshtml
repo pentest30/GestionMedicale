@@ -123,7 +123,10 @@
             }
             updateMasterCheckbox();
         });
-       
+        $("#search").on("click", function (e) {
+            e.preventDefault();
+            $('#specialites').data('kendoGrid').dataSource.fetch();
+        });
 
     });
     function updateMasterCheckbox() {
@@ -134,8 +137,8 @@
     function additionalData() {
         return {
 
-            pseudo: $('#Pseudo').val(),
-            email: $('#Email').val()
+            libelle: $('#Libelle').val(),
+            code: $('#Code').val()
         };
 
     }

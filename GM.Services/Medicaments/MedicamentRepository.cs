@@ -77,20 +77,7 @@ namespace GM.Services.Medicaments
             return _db.Medicaments.Any(predicate);
         }
 
-        public IEnumerable<Medicament> FileterByDci(string dci)
-        {
-            var filter = from m in EntityFilter<Medicament>.AsQueryable()
-                where m.Dci.Nom.Equals(dci)
-                select m;
-            return filter.Filter((IQueryable<Medicament>) SelectAll());
-        }
-        public IEnumerable<Medicament> FileterByNom(string nom)
-        {
-            var filter = from m in EntityFilter<Medicament>.AsQueryable()
-                         where m.NomCommerciale.Equals(nom)
-                         select m;
-            return filter.Filter((IQueryable<Medicament>) SelectAll());
-        }
+        
 
     }
 }

@@ -12,15 +12,11 @@ using Microsoft.Owin.Security;
 
 namespace GM.Services.Utilisateurs
 {
-    
-
     public class ServiceUtilisateur :  IServiceUtilisateur
     {
         private readonly IRepository<Utilisateur> _repository;
         private readonly IRepository<UtilisateurRole> _roleUserRepository;
         private readonly IRepository<Role> _roleRepository;
-
-
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -101,7 +97,6 @@ namespace GM.Services.Utilisateurs
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, userRole.Nom.ToLower()));
             }
-
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = remember }, identity);
         }
         public bool Inscription(Utilisateur utilisateur , string password , int ?[] roles)
@@ -158,19 +153,20 @@ namespace GM.Services.Utilisateurs
             var role = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
             return role != null ? role.Roles.Nom.ToLower() : "";
         }
-        public IEnumerable<Utilisateur> FlietrByPseudo(string identifiant)
+        public IEnumerable<Utilisateur> FilterListe(Utilisateur utilisateur)
         {
             var filter = from m in EntityFilter<Utilisateur>.AsQueryable()
-                         where m.Pseudo.Equals(identifiant)
+                         where m.Pseudo.Equals(utilisateur.Pseudo) ||string.IsNullOrEmpty(utilisateur.Pseudo)
+                         where m.Email.Equals(utilisateur.Email) || string.IsNullOrEmpty(utilisateur.Email)
                          select m;
-            
             return filter.Filter(_repository.SelectAll().AsQueryable());
         }
-        public IEnumerable<Utilisateur> FlietrByEmail(string identifiant)
+
+        public IEnumerable<Utilisateur> FilterByActivation(IEnumerable<Utilisateur> utilisateurs,bool predicate)
         {
             var filter = from m in EntityFilter<Utilisateur>.AsQueryable()
-                         where m.Email.Equals(identifiant)
-                         select m;
+                where m.Validation == predicate
+                select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }
