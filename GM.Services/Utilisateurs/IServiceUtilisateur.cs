@@ -21,5 +21,7 @@ namespace GM.Services.Utilisateurs
         Utilisateur SingleUser(string identifiant);
         string Role( Utilisateur item);
         void Logout();
+        IEnumerable<Utilisateur> FlietrByPseudo(string identifiant);
+        IEnumerable<Utilisateur> FlietrByEmail(string identifiant);
     }
 }

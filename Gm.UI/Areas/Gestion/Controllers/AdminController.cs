@@ -121,10 +121,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
             if (!string.IsNullOrEmpty(pseudo) || !string.IsNullOrEmpty(email))
             {
-                var model = new RegisterModel();
-                model.Pseudo = pseudo;
-                model.Email = email;
-                var result = Utilisateurs(model) as IList<Utilisateur>;
+                var result = !string.IsNullOrEmpty(pseudo)?
+                    _serviceUtilisateur.FlietrByPseudo(pseudo):
+                    _serviceUtilisateur.FlietrByEmail(email);
                 return Json(result.ToDataSourceResult(request));
             }
             var filter = Session["filter"].ToString();

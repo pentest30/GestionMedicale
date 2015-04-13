@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Helpers;
+using EntyTea.EntityQueries;
 using GM.Core;
 using GM.Core.Models;
 using Microsoft.AspNet.Identity;
@@ -156,6 +157,21 @@ namespace GM.Services.Utilisateurs
         {
             var role = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
             return role != null ? role.Roles.Nom.ToLower() : "";
+        }
+        public IEnumerable<Utilisateur> FlietrByPseudo(string identifiant)
+        {
+            var filter = from m in EntityFilter<Utilisateur>.AsQueryable()
+                         where m.Pseudo.Equals(identifiant)
+                         select m;
+            
+            return filter.Filter(_repository.SelectAll().AsQueryable());
+        }
+        public IEnumerable<Utilisateur> FlietrByEmail(string identifiant)
+        {
+            var filter = from m in EntityFilter<Utilisateur>.AsQueryable()
+                         where m.Email.Equals(identifiant)
+                         select m;
+            return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }
 }

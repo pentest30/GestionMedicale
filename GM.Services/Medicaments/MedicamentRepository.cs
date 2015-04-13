@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using EntyTea.EntityQueries;
 using GM.Context;
 using GM.Core;
 using GM.Core.Models;
@@ -20,7 +21,7 @@ namespace GM.Services.Medicaments
 
         public IEnumerable<Medicament> SelectAll()
         {
-            return _db.Medicaments.Include("Remboursements").Include("ParamStocks");
+            return _db.Medicaments.Include("Remboursements").Include("ParamStocks").Include("Dci");
         }
 
         public Medicament SelectById(object id)
@@ -75,5 +76,21 @@ namespace GM.Services.Medicaments
         {
             return _db.Medicaments.Any(predicate);
         }
+
+        public IEnumerable<Medicament> FileterByDci(string dci)
+        {
+            var filter = from m in EntityFilter<Medicament>.AsQueryable()
+                where m.Dci.Nom.Equals(dci)
+                select m;
+            return filter.Filter((IQueryable<Medicament>) SelectAll());
+        }
+        public IEnumerable<Medicament> FileterByNom(string nom)
+        {
+            var filter = from m in EntityFilter<Medicament>.AsQueryable()
+                         where m.NomCommerciale.Equals(nom)
+                         select m;
+            return filter.Filter((IQueryable<Medicament>) SelectAll());
+        }
+
     }
 }
