@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using GM.Core.Models;
 using GM.Services.Categorie;
+using GM.Services.Fabriquant;
 using GM.Services.Conditionnelts;
 using GM.Services.Formes;
 using GM.Services.Medicaments;
@@ -18,14 +19,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceDci _serviceDci;
         private readonly IServiceForme _serviceForme;
         private readonly IServiceConditionnement _serviceConditionnement;
+        private readonly IServiceFabriquant _serviceFabriquant;
         // GET: Gestion/Medicament
-        public MedicamentController(IServiceMedicmaent service,IServiceSpecialite serviceSpecialite , IServiceDci serviceDci ,IServiceForme serviceForme , IServiceConditionnement serviceConditionnement)
+        public MedicamentController(IServiceMedicmaent service,
+            IServiceSpecialite serviceSpecialite , 
+            IServiceDci serviceDci ,IServiceForme serviceForme , 
+            IServiceConditionnement serviceConditionnement ,
+            IServiceFabriquant serviceFabriquant)
         {
             _service = service;
             _serviceSpecialite = serviceSpecialite;
             _serviceDci = serviceDci;
             _serviceForme = serviceForme;
             _serviceConditionnement = serviceConditionnement;
+            _serviceFabriquant = serviceFabriquant;
         }
         [HttpGet]
         public ActionResult Create()
@@ -34,6 +41,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
             ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Nom");
             ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Nom");
+            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Nom");
             return View();
         }
 
@@ -46,7 +54,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult ListeMedicaments([DataSourceRequest] DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int labId)
         {
-            var filter = new Medicament()
+            var filter = new Medicament
             {
                 SpecialiteId =Convert.ToInt32( specialiteId),
                 DciId = Convert.ToInt32(dciId),

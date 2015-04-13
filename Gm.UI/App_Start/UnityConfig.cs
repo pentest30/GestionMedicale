@@ -5,6 +5,7 @@ using GM.Core;
 using GM.Core.Models;
 using GM.Services.Categorie;
 using GM.Services.Conditionnelts;
+using GM.Services.Fabriquant;
 using GM.Services.Formes;
 using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
@@ -61,12 +62,14 @@ namespace Gm.UI
             container.RegisterType<IRepository<ParamStock> , StockPramsRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Remboursement>, RembouressementRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Medicament>, MedicamentRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Laboratoire>, FabriquantRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());
             container.RegisterType<IServicePharmacie, ServicePharmacie>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceDci, DciService>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceForme, ServiceForme>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceFabriquant, ServiceFabriquant>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceConditionnement, ServiceConditionnement>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceMedicmaent, ServiceMedicament>(new PerRequestLifetimeManager());
         }

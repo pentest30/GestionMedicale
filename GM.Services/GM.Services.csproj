@@ -114,6 +114,9 @@
     <Compile Include="Conditionnelts\ConditionnemeRepository.cs" />
     <Compile Include="Conditionnelts\IServiceConditionnement.cs" />
     <Compile Include="Conditionnelts\ServiceConditionnement.cs" />
+    <Compile Include="Fabriquant\FabriquantRepository.cs" />
+    <Compile Include="Fabriquant\IServiceFabriquant.cs" />
+    <Compile Include="Fabriquant\ServiceFabriquant.cs" />
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />

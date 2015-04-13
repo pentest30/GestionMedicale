@@ -84,7 +84,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.LaboratoireId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="controls">
-                    @Html.EditorFor(model => model.LaboratoireId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.Custom_DropdownList("LaboratoireId", ViewData["fabriquants"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
                     @Html.ValidationMessageFor(model => model.LaboratoireId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -116,6 +116,7 @@
         $("#DciId").select2();
         $("#FormeId").select2();
         $("#ConditionnementId").select2();
+        $("#LaboratoireId").select2();
         
     });
 </script>
