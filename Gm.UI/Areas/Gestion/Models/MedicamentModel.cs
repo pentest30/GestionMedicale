@@ -12,7 +12,7 @@ namespace Gm.UI.Areas.Gestion.Models
         [Display(Name = "Code")]
         public string Code { get; set; }
         //Required]
-        [Display(Name = "N d'enregistrement")]
+        [Display(Name = "N° d'enregistrement")]
         public string NumEnregistrement { get; set; }
         [Display(Name = "Dose")]
         public string Dose { get; set; }
