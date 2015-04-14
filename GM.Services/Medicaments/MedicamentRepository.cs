@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using EntyTea.EntityQueries;
 using GM.Context;
 using GM.Core;
 using GM.Core.Models;
@@ -21,7 +20,7 @@ namespace GM.Services.Medicaments
 
         public IEnumerable<Medicament> SelectAll()
         {
-            return _db.Medicaments.Include("Remboursements").Include("ParamStocks").Include("Dci");
+            return _db.Medicaments.Include("Remboursements").Include("ParamStocks").Include("Dci").Include("Specialite").Include("Forme").Include("Conditionnement");
         }
 
         public Medicament SelectById(object id)

@@ -120,6 +120,7 @@
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />
+    <Compile Include="Helpers\Existe.cs" />
     <Compile Include="Medicaments\IServiceMedicmaent.cs" />
     <Compile Include="Medicaments\MedicamentRepository.cs" />
     <Compile Include="Medicaments\RembouressementRepository.cs" />

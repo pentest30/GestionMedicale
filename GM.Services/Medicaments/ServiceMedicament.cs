@@ -26,16 +26,21 @@ namespace GM.Services.Medicaments
             return _repository.SelectAll();
         }
 
-        public bool Insert(Medicament medicament)
+        public bool Insert(Medicament medicament , out  int identity)
         {
             try
             {
                 _repository.Insert(medicament);
+
                 return true;
             }
             catch (Exception)
             {
                 return false;
+            }
+            finally
+            {
+                identity = medicament.Id;
             }
         }
 
@@ -57,6 +62,10 @@ namespace GM.Services.Medicaments
             return _repository.SelectById(id);
         }
 
+        public bool Existe(string nom)
+        {
+            return _repository.Exist(x => x.NomCommerciale == nom ||x.Code ==nom);
+        }
         public bool Delete(int id)
         {
             try

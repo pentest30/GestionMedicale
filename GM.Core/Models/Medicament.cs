@@ -19,7 +19,7 @@ namespace GM.Core.Models
         public int SpecialiteId { get; set; }
         public int FormeId { get; set; }
         public int ConditionnementId { get; set; }
-        public int LaboratoireId { get; set; }
+        public int? LaboratoireId { get; set; }
         public string Discription { get; set; }
         public decimal? Tva { get; set; }
         public Dci Dci { get; set; }

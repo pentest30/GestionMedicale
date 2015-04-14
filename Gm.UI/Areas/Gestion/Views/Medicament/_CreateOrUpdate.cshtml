@@ -8,19 +8,23 @@
         
            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (Request.RawUrl.Contains("Update"))
+        {
             @Html.HiddenFor(model => model.Id)
+        }
+        <input type="hidden" id="continuer" name="continuer" />
         <div class="control-group">
             @Html.LabelFor(model => model.SpecialiteId, htmlAttributes: new { @class = "control-label" })
             <div class="controls">
                 @Html.Custom_DropdownList("SpecialiteId", ViewData["specialites"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
-                @Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger", })
             </div>
         </div>
         <div class="control-group">
             @Html.LabelFor(model => model.DciId, htmlAttributes: new { @class = "control-label" })
             <div class="controls">
                 @Html.Custom_DropdownList("DciId", ViewData["dcis"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
-                @Html.ValidationMessageFor(model => model.DciId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.DciId, "", new { @class = "text-danger", @style = "text-transform: uppercase;" })
             </div>
         </div>
         <div class="control-group">
@@ -43,15 +47,16 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.NomCommerciale, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="controls">
-                    @Html.EditorFor(model => model.NomCommerciale, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.NomCommerciale, new { htmlAttributes = new { @class = "form-control" ,@style = "text-transform: uppercase;" } })
                     @Html.ValidationMessageFor(model => model.NomCommerciale, "", new { @class = "text-danger" })
+                    
                 </div>
             </div>
 
             <div class="control-group">
                 @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="controls">
-                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @style = "text-transform: uppercase;" } })
                     @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -59,7 +64,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.NumEnregistrement, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="controls">
-                    @Html.EditorFor(model => model.NumEnregistrement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.NumEnregistrement, new { htmlAttributes = new { @class = "form-control", @style = "text-transform: uppercase;" } })
                     @Html.ValidationMessageFor(model => model.NumEnregistrement, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -67,7 +72,7 @@
             <div class="control-group">
                 @Html.LabelFor(model => model.Dose, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="controls">
-                    @Html.EditorFor(model => model.Dose, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Dose, new { htmlAttributes = new { @class = "form-control", @style = "text-transform: uppercase;" } })
                     @Html.ValidationMessageFor(model => model.Dose, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -77,7 +82,7 @@
                 <div class="controls">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.Remboursable)
-                        @Html.ValidationMessageFor(model => model.Remboursable, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Remboursable, "", new { @class = "text-danger", @style = "text-transform: uppercase;" })
                     </div>
                 </div>
             </div>
@@ -117,6 +122,11 @@
         $("#FormeId").select2();
         $("#ConditionnementId").select2();
         $("#LaboratoireId").select2();
-        
+        $("#save-btn").click(function () {
+           
+            $("#continuer").val(true);
+            $('form').submit();
+        });
+
     });
 </script>

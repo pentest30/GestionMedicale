@@ -6,12 +6,13 @@
 }
 
 <div style="margin-top: 90px; margin-right: 25px">
+   
     <div class="navbar">
         <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
             <div>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
+                        <li><button id="save-btn"  style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
                         <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
                         <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
                     </ul>
@@ -27,17 +28,45 @@
         </ul>
         <div id="my-tab-content" class="tab-content">
             <div class="tab-pane active" id="red">
+                @if (ViewData["info"] != null)
+                {
+                    <div class="alert alert-info">@ViewData["info"]</div>
+                }
                 @{
                     Html.RenderPartial("_CreateOrUpdate", Model);
                 }
             </div>
             <div class="tab-pane" id="orange">
-                <h1>Orange</h1>
-                <p>orange orange orange orange orange</p>
+                @if (Model!=null)
+                {
+                    if (Model.Id > 0)
+                    {
+                        
+                    }
+                }
+                else if(Model== null|| Model.Id<0)
+                {
+                    <div class="alert alert-warning" style="margin-left: 15px">
+                        <p>Ajouter un nouveau médicament Stp.</p>
+                    </div>
+  
+                }
             </div>
             <div class="tab-pane" id="yellow">
-                <h1>Yellow</h1>
-                <p>yellow yellow yellow yellow yellow</p>
+                @if (Model != null)
+                {
+                    if (Model.Id > 0)
+                    {
+
+                    }
+                }
+                else if (Model == null || Model.Id < 0)
+                {
+                    <div class="alert alert-warning" style="margin-left: 15px">
+                        <p>Ajouter un nouveau médicament Stp.</p>
+                    </div>
+
+                }
             </div>
         </div>
     </div>

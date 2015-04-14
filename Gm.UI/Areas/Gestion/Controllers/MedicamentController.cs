@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Gm.UI.Areas.Gestion.Models;
 using GM.Core.Models;
 using GM.Services.Categorie;
 using GM.Services.Fabriquant;
@@ -39,12 +41,30 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
-            ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Nom");
-            ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Nom");
-            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Nom");
+            ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle");
+            ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Libelle");
+            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle");
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MedicamentModel model , bool continuer)
+        {
+            if (ModelState.IsValid)
+            {
+                int identity = 0;
+                var medicament = AutoMapper.Mapper.Map<Medicament>(model);
+                _service.Insert(medicament,out identity);
+                ViewData["info"] = "Opération est terminé avec succéss !";
+                model.Id = identity;
+            }
+            ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle" ,model.SpecialiteId);
+            ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom", model.DciId);
+            ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle", model.FormeId);
+            ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Libelle", model.ConditionnementId);
+            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle", model.LaboratoireId);
+            return (continuer)? View(model):View("Index");
+        }
         public ActionResult Index()
         {
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
@@ -52,7 +72,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult ListeMedicaments([DataSourceRequest] DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int labId)
+        [HttpPost]
+        public JsonResult ExisteResult(string nom)
+        {
+            if (_service.Existe(nom)) return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(nom, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ListeMedicaments([DataSourceRequest] DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int? labId)
         {
             var filter = new Medicament
             {
@@ -62,7 +89,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Code = code,
                 NumEnregistrement = nEnregistrement
             };
-            return Json(_service.FilterListe(filter).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var list = AutoMapper.Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
+            return Json(list.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+        
+ 
     }
 }

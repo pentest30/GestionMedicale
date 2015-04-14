@@ -7,7 +7,7 @@ namespace GM.Services.Medicaments
     public interface IServiceMedicmaent
     {
         IEnumerable<Medicament> ListeMedicaments();
-        bool Insert(Medicament medicament);
+        bool Insert(Medicament medicament , out int identity);
         bool Update(Medicament medicament);
         Medicament FindSingle(int id);
         bool Delete(int id);
@@ -16,5 +16,6 @@ namespace GM.Services.Medicaments
         bool UpdateRemboussement(Remboursement remboursement);
         bool UpdateParamsStock(Remboursement remboursement);
         IEnumerable<Medicament> FilterListe(Medicament medicament);
+        bool Existe(string nom);
     }
 }

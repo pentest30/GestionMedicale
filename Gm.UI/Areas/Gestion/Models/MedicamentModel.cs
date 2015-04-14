@@ -1,4 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
+using Gm.UI.HtmlExtenssions;
+using GM.Services.Helpers;
 
 namespace Gm.UI.Areas.Gestion.Models
 {
@@ -7,6 +11,7 @@ namespace Gm.UI.Areas.Gestion.Models
         public int Id { get; set; }
         [Required]
         [Display(Name = "Nom commerciale")]
+        [Remote("ExisteResult", "Medicament", HttpMethod = "POST", ErrorMessage = "Ce nom déja exister choiser un autre nom commerciale.")]
         public string NomCommerciale { get; set; }
         [Required]
         [Display(Name = "Code")]
@@ -31,11 +36,11 @@ namespace Gm.UI.Areas.Gestion.Models
         public int ConditionnementId { get; set; }
         [Display(Name = "Fabriquant")]
         [Required]
-        public int LaboratoireId { get; set; }
+        public int? LaboratoireId { get; set; }
         [DataType(DataType.MultilineText)]
         public string Discription { get; set; }
-        [UIHint("Number")]
-        public decimal Tva { get; set; }
+        //[UIHint("Number")]
+        public decimal? Tva { get; set; }
         public string Dci { get; set; }
         public string Specialite { get; set; }
         public string Forme { get; set; }

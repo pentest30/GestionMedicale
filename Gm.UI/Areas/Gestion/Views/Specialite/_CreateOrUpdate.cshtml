@@ -29,7 +29,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label"})
             <div class="controls">
-                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "validate[required] " } })
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "validate[required] ", @style = "text-transform: uppercase;" } })
                 @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
             </div>
         </div>
