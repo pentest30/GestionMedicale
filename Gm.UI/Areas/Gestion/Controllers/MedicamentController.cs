@@ -52,7 +52,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             if (ModelState.IsValid)
             {
-                int identity = 0;
+                int identity;
                 var medicament = AutoMapper.Mapper.Map<Medicament>(model);
                 _service.Insert(medicament,out identity);
                 ViewData["info"] = "Opération est terminé avec succéss !";
@@ -73,10 +73,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
         }
 
         [HttpPost]
-        public JsonResult ExisteResult(string nom)
+        public JsonResult ExisteResult(string nomCommerciale)
         {
-            if (_service.Existe(nom)) return Json(true, JsonRequestBehavior.AllowGet);
-            return Json(nom, JsonRequestBehavior.AllowGet);
+            return Json(_service.Existe(nomCommerciale), JsonRequestBehavior.AllowGet);
+            
         }
         [HttpPost]
         public ActionResult ListeMedicaments([DataSourceRequest] DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int? labId)

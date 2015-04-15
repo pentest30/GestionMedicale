@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web.Mvc;
-using Gm.UI.HtmlExtenssions;
-using GM.Services.Helpers;
 
 namespace Gm.UI.Areas.Gestion.Models
 {
     public class MedicamentModel
     {
-        public int Id { get; set; }
-        [Required]
-        [Display(Name = "Nom commerciale")]
+        public int Id { get;set;}
+
+        
+        [Display(Name = "Nom commerciale *")]
         [Remote("ExisteResult", "Medicament", HttpMethod = "POST", ErrorMessage = "Ce nom déja exister choiser un autre nom commerciale.")]
+        [Required(ErrorMessage = "ce champ est requis")]
         public string NomCommerciale { get; set; }
         [Required]
         [Display(Name = "Code")]
