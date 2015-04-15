@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoMapper;
 using Gm.UI.Areas.Gestion.Models;
 using GM.Core.Models;
 using GM.Services.Categorie;
-using GM.Services.Fabriquant;
 using GM.Services.Conditionnelts;
+using GM.Services.Fabriquant;
 using GM.Services.Formes;
 using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
@@ -53,10 +54,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
             if (ModelState.IsValid)
             {
                 int identity;
-                var medicament = AutoMapper.Mapper.Map<Medicament>(model);
-                _service.Insert(medicament,out identity);
+                var medicament = Mapper.Map<Medicament>(model);
+                _service.Insert(medicament, out identity);
                 ViewData["info"] = "Opération est terminé avec succéss !";
-                model.Id = identity;
+                ViewData["id"] = model.Id = identity;
             }
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle" ,model.SpecialiteId);
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom", model.DciId);
@@ -64,6 +65,24 @@ namespace Gm.UI.Areas.Gestion.Controllers
             ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Libelle", model.ConditionnementId);
             ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle", model.LaboratoireId);
             return (continuer)? View(model):View("Index");
+        }
+        //[ChildActionOnly]
+        [HttpPost]
+        public ActionResult CreateRemboussement(Remboursement model)
+        {
+            model.Date = DateTime.Now.Date;
+            var b = _service.InsertRemboussement(model);
+            if (Request.IsAjaxRequest())
+            {
+                dynamic data = new
+                {
+                    message = b ? SuccessMessage() : ErrorMessage()
+                };
+                return Json(data, JsonRequestBehavior.AllowGet);
+               
+            }
+            return null;
+
         }
         public ActionResult Index()
         {
@@ -89,8 +108,16 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Code = code,
                 NumEnregistrement = nEnregistrement
             };
-            var list = AutoMapper.Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
+            var list = Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
             return Json(list.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        private string SuccessMessage()
+        {
+            return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
+        }
+        private string ErrorMessage()
+        {
+            return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
         }
         
  

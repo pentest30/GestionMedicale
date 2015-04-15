@@ -625,6 +625,7 @@
     <Content Include="Areas\Gestion\Views\Medicament\_Search.cshtml" />
     <Content Include="Areas\Gestion\Views\Medicament\Create.cshtml" />
     <Content Include="Areas\Gestion\Views\Medicament\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medicament\_CreateOrUpdateRemboursement.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />

@@ -79,9 +79,9 @@ namespace GM.Services.Medicaments
             }
         }
 
-        public bool InsertRemboussement(Remboursement remboursement,int id)
+        public bool InsertRemboussement(Remboursement remboursement)
         {
-            remboursement.MedicamentId = id;
+            
             try
             {
                 _rembousementRepository.Insert(remboursement);
