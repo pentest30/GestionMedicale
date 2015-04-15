@@ -30,8 +30,7 @@ namespace Gm.UI
                 .ForMember(x => x.Forme, o => o.MapFrom(x => x.Forme.Libelle))
                 .ForMember(x => x.Conditionnement, o => o.MapFrom(x => x.Conditionnement.Libelle))
             .ForMember(x => x.TarifReference, o => o.MapFrom(x => x.Remboursements.OrderBy(r => r.Date).FirstOrDefault().TarifReference)); 
-            //BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
-            // BootstrapMvcSample.ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
+            
         }
     }
 }

@@ -20,12 +20,16 @@ namespace Gm.UI
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
+                 "~/Scripts/bootstrap-datepicker.js",
+                  "~/Scripts/bootstrap-datepicker.fr.js",
                 "~/Scripts/respond.js",
               
                 "~/Scripts/select2.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/gestion/bootstrap").Include(
                 "~/Scripts/gestion/bootstrap.min.js",
                 "~/Scripts/gestion/jquery.validate.min.js",
+                 "~/Scripts/bootstrap-datepicker.js",
+                  "~/Scripts/bootstrap-datepicker.fr.js",
                 "~/Scripts/gestion/messages_fr.min.js",
                 "~/Scripts/gestion/site.js",
                 "~/Scripts/jquery.confirm.min.js",
@@ -35,12 +39,14 @@ namespace Gm.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/select2-bootstrap.css",
+                 "~/Content/bootstrap-datepicker.min.css",
               
                 "~/Content/select2.css",
                 "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/Gestion/css").Include(
                 "~/Content/Gestion/css/bootstrap-responsive.min.css",
                 "~/Content/Gestion/css/bootstrap.min.css",
+                 "~/Content/bootstrap-datepicker.min.css",
                 "~/Content/select2-bootstrap.css",
                 "~/Content/Gestion/css/screen.css",
                 "~/Content/select2.css",

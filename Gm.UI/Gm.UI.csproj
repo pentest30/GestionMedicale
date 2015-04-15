@@ -210,6 +210,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="data1\images\8508dbed85.jpg" />
     <Content Include="data1\images\bgslider2.jpg" />
     <Content Include="data1\images\bgslider3.jpg" />
@@ -560,6 +561,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datepicker.fr.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2015.1.318\fonts\DejaVu\DejaVuSans-Bold.ttf" />

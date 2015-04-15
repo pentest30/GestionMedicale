@@ -36,6 +36,7 @@
     $(document).ready(function() {
         $("#Date").addClass("validate[required]");
         $("#TarifReference").addClass("validate[required]");
+        $('#Date').datepicker();
         $('#rembourse-form').validationEngine();
         $("#add-med-remb-btn").click(function(e) {
             if ($('#rembourse-form').validationEngine('validate')) {

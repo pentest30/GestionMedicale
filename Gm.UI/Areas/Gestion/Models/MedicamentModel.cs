@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using GM.Core.Models;
 using GM.Services.Helpers;
 
@@ -8,7 +6,10 @@ namespace Gm.UI.Areas.Gestion.Models
 {
     public class MedicamentModel
     {
-       
+        public MedicamentModel()
+        {
+            Remboursement = new Remboursement();
+        }
 
         public int Id { get;set;}
 
