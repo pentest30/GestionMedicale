@@ -4,8 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.WebPages;
+using Microsoft.Ajax.Utilities;
+using Microsoft.Practices.Unity.Utility;
 
 namespace Gm.UI.HtmlExtenssions
 {
@@ -112,6 +116,46 @@ namespace Gm.UI.HtmlExtenssions
             dropdown.MergeAttributes(new RouteValueDictionary(htmlAttributes));
             //Returning the entire select or dropdown control in HTMLString format.
             return MvcHtmlString.Create(dropdown.ToString(TagRenderMode.Normal));
+        }
+        public static IHtmlString DataList<T>(this HtmlHelper helper, IEnumerable<T> items, int columns,
+            Func<T, HelperResult> template, int gridColumns = 24)
+            where T : class
+        {
+            if (items == null)
+                return new HtmlString("");
+
+            var sb = new StringBuilder();
+            sb.Append("<div class='data-list data-list-grid'>");
+
+            int cellIndex = 0;
+            string spanClass = String.Format("span{0}", gridColumns / columns);
+
+            foreach (T item in items)
+            {
+                if (cellIndex == 0)
+                    sb.Append("<div class='data-list-row row-fluid'>");
+
+                sb.Append("<div class='{0} data-list-item equalized-column' data-equalized-deep='true'>".FormatInvariant(spanClass));
+                sb.Append(template(item).ToHtmlString());
+                sb.Append("</div>");
+
+                cellIndex++;
+
+                if (cellIndex == columns)
+                {
+                    cellIndex = 0;
+                    sb.Append("</div>");
+                }
+            }
+
+            if (cellIndex != 0)
+            {
+                sb.Append("</div>"); // close .row-fluid
+            }
+
+            sb.Append("</div>"); // close .data-list
+
+            return new HtmlString(sb.ToString());
         }
 
     }
