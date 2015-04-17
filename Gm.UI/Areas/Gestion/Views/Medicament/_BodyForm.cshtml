@@ -12,21 +12,21 @@
     <div class="control-group">
         @Html.LabelFor(model => model.SpecialiteId, htmlAttributes: new { @class = "control-label" })
         <div class="controls">
-            @Html.Custom_DropdownList("SpecialiteId",null, ViewData["specialites"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+            @Html.Custom_DropdownList("SpecialiteId", ViewData["specialites"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger", })
         </div>
     </div>
     <div class="control-group">
         @Html.LabelFor(model => model.DciId, htmlAttributes: new { @class = "control-label" })
         <div class="controls">
-            @Html.Custom_DropdownList("DciId",null, ViewData["dcis"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+            @Html.Custom_DropdownList("DciId", ViewData["dcis"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.DciId, "", new { @class = "text-danger", @style = "text-transform: uppercase;" })
         </div>
     </div>
     <div class="control-group">
         @Html.LabelFor(model => model.FormeId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="controls">
-            @Html.Custom_DropdownList("FormeId",null, ViewData["formes"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+            @Html.Custom_DropdownList("FormeId", ViewData["formes"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.FormeId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -34,7 +34,7 @@
     <div class="control-group">
         @Html.LabelFor(model => model.ConditionnementId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="controls">
-            @Html.Custom_DropdownList("ConditionnementId",null, ViewData["conditionnements"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+            @Html.Custom_DropdownList("ConditionnementId", ViewData["conditionnements"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.ConditionnementId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -85,7 +85,7 @@
     <div class="control-group">
         @Html.LabelFor(model => model.LaboratoireId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="controls">
-            @Html.Custom_DropdownList("LaboratoireId",null, ViewData["fabriquants"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+            @Html.Custom_DropdownList("LaboratoireId", ViewData["fabriquants"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
             @Html.ValidationMessageFor(model => model.LaboratoireId, "", new { @class = "text-danger" })
         </div>
     </div>

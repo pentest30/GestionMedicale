@@ -66,6 +66,7 @@ namespace GM.Services.Medicaments
             return _db.Medicaments.FirstOrDefault(predicate);
         }
 
+       
         public IEnumerable<Medicament> GetAllLazyLoad(params Expression<Func<Medicament, object>>[] children)
         {
             throw new NotImplementedException();

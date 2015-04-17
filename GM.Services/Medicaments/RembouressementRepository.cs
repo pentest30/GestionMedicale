@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -34,12 +36,15 @@ namespace GM.Services.Medicaments
 
         public void Update(Remboursement item)
         {
-            throw new NotImplementedException();
+            _db.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var item = _db.Remboursements.Find(id);
+            _db.Entry(item).State = EntityState.Deleted;
+            Save();
         }
 
         public void Save()
@@ -49,7 +54,7 @@ namespace GM.Services.Medicaments
 
         public IEnumerable<Remboursement> Find(Func<Remboursement, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Remboursements.Where(predicate);
         }
 
         public Remboursement FindSingle(Func<Remboursement, bool> predicate)

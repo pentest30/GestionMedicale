@@ -110,19 +110,32 @@ namespace GM.Services.Medicaments
 
         public bool UpdateRemboussement(Remboursement remboursement)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _rembousementRepository.Update(remboursement);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool UpdateParamsStock(Remboursement remboursement)
         {
             throw new NotImplementedException();
         }
+         public IEnumerable<Remboursement> GetListRemboursements(int? id)
+         {
+             var ide = Convert.ToInt32(id);
+             return _rembousementRepository.Find(x => x.MedicamentId ==ide);
+         }
 
         public IEnumerable<Medicament> FilterListe(Medicament medicament)
         {
             var filter = from m in EntityFilter<Medicament>.AsQueryable()
                 where
-                    m.NomCommerciale.Equals(medicament.NomCommerciale) ||
+                    m.NomCommerciale.Contains(medicament.NomCommerciale) ||
                     string.IsNullOrEmpty(medicament.NomCommerciale)
                 where m.Code.Equals(medicament.Code) || string.IsNullOrEmpty(medicament.Code)
                 where m.SpecialiteId.Equals(medicament.SpecialiteId) || medicament.SpecialiteId == 0
