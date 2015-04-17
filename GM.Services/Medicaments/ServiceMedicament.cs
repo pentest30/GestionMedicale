@@ -64,7 +64,7 @@ namespace GM.Services.Medicaments
 
         public bool Existe(string nom)
         {
-            return _repository.Exist(x => x.NomCommerciale == nom ||x.Code ==nom);
+            return _repository.Exist(x => x.NomCommerciale .ToUpper().Equals( nom.ToUpper()) ||x.Code .Equals(nom));
         }
         public bool Delete(int id)
         {
@@ -79,9 +79,9 @@ namespace GM.Services.Medicaments
             }
         }
 
-        public bool InsertRemboussement(Remboursement remboursement,int id)
+        public bool InsertRemboussement(Remboursement remboursement)
         {
-            remboursement.MedicamentId = id;
+            
             try
             {
                 _rembousementRepository.Insert(remboursement);

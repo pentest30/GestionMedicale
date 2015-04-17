@@ -11,7 +11,7 @@ namespace GM.Services.Medicaments
         bool Update(Medicament medicament);
         Medicament FindSingle(int id);
         bool Delete(int id);
-        bool InsertRemboussement(Remboursement remboursement, int id);
+        bool InsertRemboussement(Remboursement remboursement);
         bool InsertParamsStock(ParamStock stock,int id);
         bool UpdateRemboussement(Remboursement remboursement);
         bool UpdateParamsStock(Remboursement remboursement);

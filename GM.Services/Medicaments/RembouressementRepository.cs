@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 
@@ -8,6 +9,13 @@ namespace GM.Services.Medicaments
 {
     public class RembouressementRepository:IRepository<Remboursement>
     {
+        private readonly PharmacieContext _db;
+
+        public RembouressementRepository(PharmacieContext db)
+        {
+            _db = db;
+        }
+
         public IEnumerable<Remboursement> SelectAll()
         {
             throw new NotImplementedException();
@@ -20,7 +28,8 @@ namespace GM.Services.Medicaments
 
         public void Insert(Remboursement item)
         {
-            throw new NotImplementedException();
+            _db.Remboursements.Add(item);
+            Save();
         }
 
         public void Update(Remboursement item)
@@ -35,7 +44,7 @@ namespace GM.Services.Medicaments
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public IEnumerable<Remboursement> Find(Func<Remboursement, bool> predicate)

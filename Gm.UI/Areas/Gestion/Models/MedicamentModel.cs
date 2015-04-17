@@ -1,17 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web.Mvc;
-using Gm.UI.HtmlExtenssions;
+using GM.Core.Models;
 using GM.Services.Helpers;
 
 namespace Gm.UI.Areas.Gestion.Models
 {
     public class MedicamentModel
     {
-        public int Id { get; set; }
-        [Required]
-        [Display(Name = "Nom commerciale")]
-        [Remote("ExisteResult", "Medicament", HttpMethod = "POST", ErrorMessage = "Ce nom déja exister choiser un autre nom commerciale.")]
+        public MedicamentModel()
+        {
+            Remboursement = new Remboursement();
+        }
+
+        public int Id { get;set;}
+
+        
+        [Display(Name = "Nom commerciale *")]
+        [Existe(ErrorMessage = "Ce nom existe déja dans la base de donnée")]  
+        [Required(ErrorMessage = "ce champ est requis")]
         public string NomCommerciale { get; set; }
         [Required]
         [Display(Name = "Code")]
@@ -45,6 +50,12 @@ namespace Gm.UI.Areas.Gestion.Models
         public string Specialite { get; set; }
         public string Forme { get; set; }
         public string Conditionnement { get; set; }
+
+        public decimal? TarifReference { get; set; }
+
+
+        public Remboursement Remboursement { get; set; }
+       
 
     }
 }

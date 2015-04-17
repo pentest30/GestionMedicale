@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -24,12 +25,12 @@ namespace Gm.UI
             Mapper.CreateMap<Utilisateur, RegisterModel>();
             Mapper.CreateMap<MedicamentModel, Medicament>();
             Mapper.CreateMap<Medicament, MedicamentModel>()
-               .ForMember(x => x.Dci, o => o.MapFrom(x => x.Dci.Nom))
-               .ForMember(x => x.Specialite, o => o.MapFrom(x => x.Specialite.Libelle))
-               .ForMember(x => x.Forme, o => o.MapFrom(x => x.Forme.Libelle))
-               .ForMember(x => x.Conditionnement, o => o.MapFrom(x => x.Conditionnement.Libelle));
-            //BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
-           // BootstrapMvcSample.ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
+                .ForMember(x => x.Dci, o => o.MapFrom(x => x.Dci.Nom))
+                .ForMember(x => x.Specialite, o => o.MapFrom(x => x.Specialite.Libelle))
+                .ForMember(x => x.Forme, o => o.MapFrom(x => x.Forme.Libelle))
+                .ForMember(x => x.Conditionnement, o => o.MapFrom(x => x.Conditionnement.Libelle))
+            .ForMember(x => x.TarifReference, o => o.MapFrom(x => x.Remboursements.OrderBy(r => r.Date).FirstOrDefault().TarifReference)); 
+            
         }
     }
 }
