@@ -14,9 +14,9 @@
                     <ul class="nav">
                         <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
                         <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
-                        @if (Model!=null && Model.Id!=0)
+                        @if (Model != null && Model.Id != 0)
                         {
-                            <li><button id="add-med-remb-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-ok"></i> Enregistrer les paramètres de remboursements</button></li>
+                            <li><button data-toggle="modal" data-target="#myModal" id="add-med-remb-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-ok"></i> Paramètres de remboursements</button></li>
                         }
                         <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
                     </ul>
@@ -40,12 +40,12 @@
                     Html.RenderPartial("_CreateOrUpdate", Model);
                 }
             </div>
-            <div class="tab-pane" id="orange">
+            <div class="tab-pane" id="orange" style="margin:20px">
                 @if (Model != null)
                 {
                     if (Model.Id > 0)
                     {
-                        Html.RenderPartial("_CreateOrUpdateRemboursement", Model.Remboursement);
+                        Html.RenderPartial("_ListMedicRemb", Model.Remboursements);
                     }
                     else
                     {
@@ -55,7 +55,7 @@
 
                     }
                 }
-                else if (Model == null )
+                else if (Model == null)
                 {
                     <div class="alert alert-warning" style="margin-left: 15px">
                         <p>Ajouter un nouveau médicament Stp.</p>
@@ -83,8 +83,51 @@
     </div>
 
 </div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Ajouter</h3>
+    </div>
+    <div class="modal-body" id="dony">
+        @{
+            if (Model != null)
+            {
+                var item = Model.Remboursement;
+                item.MedicamentId = Model.Id;
+                Html.RenderPartial("_CreateOrUpdateRemboursement", item);
+            }
+        }
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="save-modal-btn" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
+
         $('#tabs').tab();
+
+        $("#save-modal-btn").click(function (e) {
+            if ($('#rembourse-form').validationEngine('validate')) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("CreateRemboussement", "Medicament", new {area = "Gestion"})',
+                    data: $("form").serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        //$('#alert').html(data.message);
+                        $("#alert").fadeIn('slow').delay(1500).hide(0);
+                        $('#remboursement').data('kendoGrid').dataSource.read();
+                        $('#Date').val("");
+                        $('#TarifReference').val("");
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+        });
     });
 </script>

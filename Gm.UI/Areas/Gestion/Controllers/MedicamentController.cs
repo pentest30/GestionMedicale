@@ -107,7 +107,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpPost]
         public ActionResult CreateRemboussement(Remboursement model)
         {
-            model.Date = DateTime.Now.Date;
+           // if (!ModelState.IsValid) return null;
             var b = _service.InsertRemboussement(model);
             if (Request.IsAjaxRequest())
             {
@@ -122,7 +122,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         }
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateRemboursement([DataSourceRequest] DataSourceRequest request, Remboursement product)
+        public ActionResult UpdateRembousement([DataSourceRequest] DataSourceRequest request, Remboursement product)
         {
             if (product != null && ModelState.IsValid)
             {
