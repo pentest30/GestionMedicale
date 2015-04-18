@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using EntyTea.EntityQueries;
+using Excel;
 using GM.Core;
 using GM.Core.Models;
+using GM.Services.Nomenclature;
 
 namespace GM.Services.Medicaments
 {
@@ -12,13 +17,15 @@ namespace GM.Services.Medicaments
         private readonly IRepository<Medicament> _repository;
         private readonly IRepository<Remboursement> _rembousementRepository;
         private readonly IRepository<ParamStock> _repositoryParamsStock;
+        private readonly IServiceDci _serviceDci;
 
         public ServiceMedicament(IRepository<Medicament> repository, IRepository<Remboursement> rembousementRepository,
-            IRepository<ParamStock> repositoryParamsStock)
+            IRepository<ParamStock> repositoryParamsStock , IServiceDci serviceDci)
         {
             _repository = repository;
             _rembousementRepository = rembousementRepository;
             _repositoryParamsStock = repositoryParamsStock;
+            _serviceDci = serviceDci;
         }
 
         public IEnumerable<Medicament> ListeMedicaments()
@@ -66,6 +73,69 @@ namespace GM.Services.Medicaments
         {
             return _repository.Exist(x => x.NomCommerciale .ToUpper().Equals( nom.ToUpper()) ||x.Code .Equals(nom));
         }
+
+        public bool ImporteListe( string fileName)
+        {
+            var file = new FileInfo(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open))
+            {
+                IExcelDataReader reader = null;
+                if (file.Extension == ".xls")
+                {
+                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
+
+                }
+                else if (file.Extension == ".xlsx")
+                {
+                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
+
+                if (reader == null)
+                    return false;
+                var dt = reader.AsDataSet().Tables[0];
+                var dcis = (from row in dt.AsEnumerable()
+                    select new 
+                    {
+                        Nom = row.Field<string>(2),
+                        
+                    }).Distinct().AsEnumerable();
+                bool b = false;
+                int k = 1;
+                foreach (var row in dcis)
+                {
+                    if (row.Nom != null && row.Nom.Contains("DENOMINATION"))
+                    {
+                        b = true;
+                        continue;
+                    }
+                    if (!b) continue;
+                    var dci = new Dci
+                    {
+                        SpecialiteId = 1,
+                        Nom = row.Nom,
+                        Code = k++.ToString(CultureInfo.InvariantCulture)
+                    };
+                    _serviceDci.Insert(dci);
+                }
+                //foreach (DataRow row in dt.Rows)
+                //{
+                //    Medicament medicament = new Medicament();
+                //    medicament.NumEnregistrement = row["N°ENREGISTREMENT"].ToString();
+                //    //medicament.DciId = row["DINOMINATION COMMUNE INTERNAIONNALE"].ToString();
+                //    medicament.NumEnregistrement = row["N°ENREGISTREMENT"].ToString();
+                //    medicament.NumEnregistrement = row["N°ENREGISTREMENT"].ToString();
+                //    medicament.NumEnregistrement = row["N°ENREGISTREMENT"].ToString();
+                //    medicament.NumEnregistrement = row["N°ENREGISTREMENT"].ToString();
+
+                //}
+
+
+                //dataGridView1.DataSource = ds;
+                //dataGridView1.DataMember
+            }
+            return true;
+        }
+
         public bool Delete(int id)
         {
             try
@@ -140,6 +210,7 @@ namespace GM.Services.Medicaments
                 where m.Code.Equals(medicament.Code) || string.IsNullOrEmpty(medicament.Code)
                 where m.SpecialiteId.Equals(medicament.SpecialiteId) || medicament.SpecialiteId == 0
                 where m.DciId.Equals(medicament.DciId) || medicament.DciId == 0
+                where m.LaboratoireId ==(medicament.LaboratoireId) || medicament.LaboratoireId == 0
                 where
                     m.NumEnregistrement.Equals(medicament.NumEnregistrement) ||
                     string.IsNullOrEmpty(medicament.NumEnregistrement)

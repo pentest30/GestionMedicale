@@ -108,6 +108,7 @@ namespace Gm.UI.HtmlExtenssions
 
             //Created StringBuilder object to store option data fetched oen by one from list.
             StringBuilder options = new StringBuilder();
+            options = options.Append("<option value='" + "" + "'>" + "" + "</option>");
             //Iterated over the IEnumerable list.
             options = list.Aggregate(options, (current, item) => current.AppendFormat(!item.Selected ? "<option value='{0}' >{1}</option>" : "<option value='{0}' selected='{0}' >{1}</option>", item.Value, item.Text));
             //assigned all the options to the dropdown using innerHTML property.

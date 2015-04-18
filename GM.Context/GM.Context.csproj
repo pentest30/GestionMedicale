@@ -58,6 +58,18 @@
     <Compile Include="Migrations\201504141254102_mg2.Designer.cs">
       <DependentUpon>201504141254102_mg2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504181141411_lj25.cs" />
+    <Compile Include="Migrations\201504181141411_lj25.Designer.cs">
+      <DependentUpon>201504181141411_lj25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504181146324_lj2.cs" />
+    <Compile Include="Migrations\201504181146324_lj2.Designer.cs">
+      <DependentUpon>201504181146324_lj2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504181147423_lj21.cs" />
+    <Compile Include="Migrations\201504181147423_lj21.Designer.cs">
+      <DependentUpon>201504181147423_lj21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +94,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504141254102_mg2.resx">
       <DependentUpon>201504141254102_mg2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181141411_lj25.resx">
+      <DependentUpon>201504181141411_lj25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181146324_lj2.resx">
+      <DependentUpon>201504181146324_lj2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181147423_lj21.resx">
+      <DependentUpon>201504181147423_lj21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

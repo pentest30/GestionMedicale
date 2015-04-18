@@ -61,6 +61,7 @@
     <Compile Include="Models\LigneEntree.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Medicament.cs" />
+    <Compile Include="Models\MedicamentPicture.cs" />
     <Compile Include="Models\ParamStock.cs" />
     <Compile Include="Models\Pharmacie.cs" />
     <Compile Include="Models\PieceComptable.cs" />

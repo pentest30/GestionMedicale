@@ -20,7 +20,7 @@ namespace GM.Services.Medicaments
 
         public IEnumerable<Medicament> SelectAll()
         {
-            return _db.Medicaments.Include("Remboursements").Include("ParamStocks").Include("Dci").Include("Specialite").Include("Forme").Include("Conditionnement");
+            return _db.Medicaments.Include("Remboursements").Include("ParamStocks").Include("Dci").Include("Specialite").Include("Forme").Include("Conditionnement").Include("Laboratoire");
         }
 
         public Medicament SelectById(object id)

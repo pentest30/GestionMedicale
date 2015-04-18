@@ -635,6 +635,8 @@
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
+    <Content Include="Scripts\gestion\form-jq.js" />
+    <Content Include="Scripts\gestion\jquery.ajax-progress.js" />
     <Content Include="Scripts\gestion\jquery.min.js" />
     <Content Include="Scripts\gestion\jquery.validate.min.js" />
     <Content Include="Scripts\gestion\messages_fr.min.js" />
@@ -1007,9 +1009,14 @@
     <Content Include="_ViewState.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\photos\" />
+    <Folder Include="App_Data\photos\logos\" />
+    <Folder Include="App_Data\photos\poduits\" />
+    <Folder Include="App_Data\photos\profils\" />
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Areas\Gestion\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>

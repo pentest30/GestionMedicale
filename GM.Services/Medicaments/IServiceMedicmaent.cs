@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using GM.Core.Models;
 
 namespace GM.Services.Medicaments
@@ -18,5 +19,6 @@ namespace GM.Services.Medicaments
         IEnumerable<Medicament> FilterListe(Medicament medicament);
         IEnumerable<Remboursement> GetListRemboursements(int? id);
         bool Existe(string nom);
+        bool ImporteListe(string fileName);
     }
 }

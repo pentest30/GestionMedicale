@@ -67,5 +67,10 @@ namespace GM.Services.Nomenclature
                 return false;
             }
         }
+
+        public bool Existe(string code)
+        {
+            return _repository.Exist(x => x.Code .StartsWith( code.Trim(), StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

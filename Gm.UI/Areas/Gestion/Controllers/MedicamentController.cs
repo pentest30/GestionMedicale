@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Gm.UI.Areas.Gestion.Models;
@@ -55,6 +57,18 @@ namespace Gm.UI.Areas.Gestion.Controllers
             InitDrops(model);
             return View(model);
         }
+         [HttpPost]
+        public ActionResult Delete(int? id)
+        {
+            var b = id != null && _service.Delete((int)id);
+            var data = new
+            {
+                message = (b) ? SuccessMessage() : ErrorMessage(),
+                //data = _serviceUtilisateur.NonActiveUsers().Count()
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+            
+        } 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MedicamentModel model , bool continuer)
@@ -135,6 +149,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
+            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle");
             return View();
         }
 
@@ -151,10 +166,30 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 DciId = Convert.ToInt32(dciId),
                 NomCommerciale = nom,
                 Code = code,
-                NumEnregistrement = nEnregistrement
+                NumEnregistrement = nEnregistrement,
+                LaboratoireId =Convert.ToInt32( labId)
             };
+            
             var list = Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
             return Json(list.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ImportXls()
+        {
+            HttpPostedFileBase file = Request.Files[0]; 
+            if (file != null && file.ContentLength <= 0) return null;
+            if (file != null)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                if (fileName != null)
+                {
+                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                    file.SaveAs(path);
+                    _service.ImporteListe(path);
+               
+                }
+            }
+            return RedirectToAction("Index");
         }
         private string SuccessMessage()
         {
