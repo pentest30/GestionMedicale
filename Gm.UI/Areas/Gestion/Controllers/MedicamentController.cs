@@ -19,7 +19,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 {
     public class MedicamentController : Controller
     {
-        private readonly ServiceMedicament _service;
+        private readonly IServiceMedicmaent _service;
         private readonly IServiceSpecialite _serviceSpecialite;
         private readonly IServiceDci _serviceDci;
         private readonly IServiceForme _serviceForme;
@@ -27,7 +27,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceFabriquant _serviceFabriquant;
        
         // GET: Gestion/Medicament
-        public MedicamentController(ServiceMedicament service,
+        public MedicamentController(IServiceMedicmaent service,
             IServiceSpecialite serviceSpecialite , 
             IServiceDci serviceDci ,IServiceForme serviceForme , 
             IServiceConditionnement serviceConditionnement ,
@@ -189,10 +189,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 {
                     var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                     file.SaveAs(path);
-                   
                     _service.ImporteListe(path);
-                   
-                    return Json(true, JsonRequestBehavior.AllowGet);
+                   return Json(true, JsonRequestBehavior.AllowGet);
                 }
             }
             return RedirectToAction("Index");

@@ -105,8 +105,8 @@ namespace GM.Services.Medicaments
                         Nom = row.Field<string>(2),
                         
                     }).Distinct().AsEnumerable();
-                bool b = false;
-                int k = 1;
+                var b = false;
+                var k = 1;
                 foreach (var row in dcis)
                 {
                     if (row.Nom != null && row.Nom.Contains("DENOMINATION"))
