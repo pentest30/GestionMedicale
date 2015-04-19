@@ -35,6 +35,8 @@ namespace Gm.UI
                 "~/Scripts/gestion/form-jq.js",
                  "~/Scripts/gestion/jquery.ajax-progress.js",
                 "~/Scripts/jquery.confirm.min.js",
+                 "~/Scripts/waitMe.min.js",
+               
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Scripts/select2.min.js"));
 
@@ -52,6 +54,7 @@ namespace Gm.UI
                 "~/Content/select2-bootstrap.css",
                 "~/Content/Gestion/css/screen.css",
                 "~/Content/select2.css",
+                "~/Content/Gestion/css/waitMe.min.css",
                 "~/Content/Gestion/css/site.css"
                 ));
 

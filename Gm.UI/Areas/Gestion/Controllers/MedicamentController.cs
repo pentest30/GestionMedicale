@@ -19,14 +19,15 @@ namespace Gm.UI.Areas.Gestion.Controllers
 {
     public class MedicamentController : Controller
     {
-        private readonly IServiceMedicmaent _service;
+        private readonly ServiceMedicament _service;
         private readonly IServiceSpecialite _serviceSpecialite;
         private readonly IServiceDci _serviceDci;
         private readonly IServiceForme _serviceForme;
         private readonly IServiceConditionnement _serviceConditionnement;
         private readonly IServiceFabriquant _serviceFabriquant;
+       
         // GET: Gestion/Medicament
-        public MedicamentController(IServiceMedicmaent service,
+        public MedicamentController(ServiceMedicament service,
             IServiceSpecialite serviceSpecialite , 
             IServiceDci serviceDci ,IServiceForme serviceForme , 
             IServiceConditionnement serviceConditionnement ,
@@ -38,6 +39,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceForme = serviceForme;
             _serviceConditionnement = serviceConditionnement;
             _serviceFabriquant = serviceFabriquant;
+            
         }
         [HttpGet]
         public ActionResult Create()
@@ -150,6 +152,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
             ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle");
+            ViewData["max"] = 0;
             return View();
         }
 
@@ -176,6 +179,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpPost]
         public ActionResult ImportXls()
         {
+            
             HttpPostedFileBase file = Request.Files[0]; 
             if (file != null && file.ContentLength <= 0) return null;
             if (file != null)
@@ -185,12 +189,16 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 {
                     var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                     file.SaveAs(path);
+                   
                     _service.ImporteListe(path);
-               
+                   
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
             }
             return RedirectToAction("Index");
         }
+
+       
         private string SuccessMessage()
         {
             return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";

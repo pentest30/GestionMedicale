@@ -18,6 +18,7 @@ namespace GM.Services.Medicaments
         private readonly IRepository<Remboursement> _rembousementRepository;
         private readonly IRepository<ParamStock> _repositoryParamsStock;
         private readonly IServiceDci _serviceDci;
+      
 
         public ServiceMedicament(IRepository<Medicament> repository, IRepository<Remboursement> rembousementRepository,
             IRepository<ParamStock> repositoryParamsStock , IServiceDci serviceDci)
@@ -74,7 +75,7 @@ namespace GM.Services.Medicaments
             return _repository.Exist(x => x.NomCommerciale .ToUpper().Equals( nom.ToUpper()) ||x.Code .Equals(nom));
         }
 
-        public bool ImporteListe( string fileName)
+        public bool ImporteListe( string fileName )
         {
             var file = new FileInfo(fileName);
             using (var stream = new FileStream(fileName, FileMode.Open))
@@ -91,8 +92,13 @@ namespace GM.Services.Medicaments
                 }
 
                 if (reader == null)
-                    return false;
+                {
+                  
+                    return false; 
+                }
+                    
                 var dt = reader.AsDataSet().Tables[0];
+               
                 var dcis = (from row in dt.AsEnumerable()
                     select new 
                     {
@@ -116,6 +122,7 @@ namespace GM.Services.Medicaments
                         Code = k++.ToString(CultureInfo.InvariantCulture)
                     };
                     _serviceDci.Insert(dci);
+                   
                 }
                 //foreach (DataRow row in dt.Rows)
                 //{
