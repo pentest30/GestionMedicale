@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -72,7 +73,7 @@ namespace GM.Services.Nomenclature
 
         public bool Exist(Func<Dci, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Dcis.Any(predicate);
         }
     }
 }

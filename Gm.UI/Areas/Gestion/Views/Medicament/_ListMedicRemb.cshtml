@@ -1,0 +1,39 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<GM.Core.Models.Remboursement>
+
+@(Html.Kendo().Grid(Model)
+          .Name("remboursement")
+
+          .Columns(columns =>
+          {
+              columns.Bound(x => x.Id)
+                 .Width(20).Visible(false);
+              columns.Bound(c => c.Date).Width(160);
+              columns.Bound(c => c.TarifReference).Width(120);
+              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(172);
+
+          })
+          .HtmlAttributes(new { style = "height: auto;" })
+          .Scrollable()
+          .Sortable()
+        //.Events(events => events.Change("OnChange"))
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+                  .Model(model => model.Id(p => p.Id))
+                  .Read(read => read.Action("GetListeRemb", "Medicament", new { id = ViewData["id"] }) )
+                          .Update(update => update.Action("UpdateRembousement", "Medicament"))
+                .Destroy(update => update.Action("EditingInline_Destroy", "Grid"))
+          ))
+
+
+
+
+<script>
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+</script>

@@ -26,7 +26,7 @@ namespace GM.Context
         public DbSet<ParamStock> ParamStocks { get; set; }
         public DbSet<BonEntree> BonEntrees { get; set; }
         public DbSet<LigneEntree> LigneEntrees { get; set; }
-
+        public DbSet<MedicamentPicture> MedicamentPicture { get; set; }
 
 
     }

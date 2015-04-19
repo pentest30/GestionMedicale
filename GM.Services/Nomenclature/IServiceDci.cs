@@ -10,5 +10,6 @@ namespace GM.Services.Nomenclature
         bool Update(Dci dci);
         Dci FindSingle(int id);
         bool Delete(int id);
+        bool Existe(string code);
     }
 }

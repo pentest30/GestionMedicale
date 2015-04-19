@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace GM.Core.Models
 {
@@ -8,6 +9,7 @@ namespace GM.Core.Models
         {
             Remboursements = new List<Remboursement>();
             ParamStocks = new List<ParamStock>();
+            MedicamentPictures = new Collection<MedicamentPicture>();
         }
         public int Id { get; set; }
         public string NomCommerciale { get; set; }
@@ -29,6 +31,7 @@ namespace GM.Core.Models
         public Laboratoire Laboratoire { get; set; }
         public ICollection<Remboursement> Remboursements { get; set; }
         public ICollection<ParamStock> ParamStocks { get; set; }
+        public ICollection<MedicamentPicture> MedicamentPictures { get; set; } 
 
         //public TYPE Type { get; set; }
 

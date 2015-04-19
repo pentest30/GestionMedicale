@@ -11,6 +11,7 @@ namespace GM.Services.Helpers
         {
             using (var db = new PharmacieContext())
             {
+                if (value == null) return false;
                 return !db.Medicaments.Any(x => x.NomCommerciale.Equals(value.ToString()));
             }
         }

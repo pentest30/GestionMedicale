@@ -18,11 +18,11 @@ namespace GM.Core.Models
         public Guid PropreitaireId { get; set; }
         public string CompteBancaire { get; set; }
         public Utilisateur Propreitaire{ get; set; }
-        public string Logo { get; set; }
+        public string LogoUrl { get; set; }
         public string Wilaya { get; set; }
         public string Commune { get; set; }
         public string Rue { get; set; }
-
+        public string CodePostale { get; set; }
 
 
 

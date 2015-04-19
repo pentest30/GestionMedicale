@@ -9,6 +9,13 @@
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="control-group">
+            @Html.LabelFor(model => model.SpecialiteId, htmlAttributes: new { @class = "control-label" })
+            <div class="controls">
+                @Html.Custom_DropdownList("SpecialiteId", ViewData["specialites"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+                @*@Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="control-group">
             @Html.LabelFor(model => model.DciId, htmlAttributes: new { @class = "control-label" })
             <div class="controls">
                 @Html.Custom_DropdownList("DciId", ViewData["dcis"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
@@ -16,13 +23,7 @@
             </div>
         </div>
 
-        <div class="control-group">
-            @Html.LabelFor(model => model.SpecialiteId, htmlAttributes: new { @class = "control-label" })
-            <div class="controls">
-               @Html.Custom_DropdownList("SpecialiteId", ViewData["specialites"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
-                @*@Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+        
         <div class="control-group">
             @Html.LabelFor(model => model.NomCommerciale, htmlAttributes: new { @class = "control-label" })
             <div class="controls">
@@ -48,26 +49,16 @@
         </div>
 
         <div class="control-group">
-            @Html.LabelFor(model => model.Dose, htmlAttributes: new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.Dose, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Dose, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-
-        
-
-        <div class="control-group">
             @Html.LabelFor(model => model.LaboratoireId, htmlAttributes: new { @class = "control-label" })
             <div class="controls">
-                @Html.EditorFor(model => model.LaboratoireId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.Custom_DropdownList("LboratoireId", ViewData["fabriquants"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
                 @*@Html.ValidationMessageFor(model => model.SpecialiteId, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="control-group">
             <div class="col-md-offset-2 controls">
-                <input type="submit" value="Recherche" class="btn btn-primary" />
+                <input type="submit" value="Recherche" id="search" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -78,5 +69,6 @@
     $(document).ready(function() {
         $("#SpecialiteId").select2();
         $("#DciId").select2();
+        $("#LboratoireId").select2();
     });
 </script>
