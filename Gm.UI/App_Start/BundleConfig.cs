@@ -36,8 +36,8 @@ namespace Gm.UI
                  "~/Scripts/gestion/jquery.ajax-progress.js",
                 "~/Scripts/jquery.confirm.min.js",
                  "~/Scripts/waitMe.min.js",
-               
-                "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                   "~/Scripts/bootstrap-progressbar.js",
+               "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Scripts/select2.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

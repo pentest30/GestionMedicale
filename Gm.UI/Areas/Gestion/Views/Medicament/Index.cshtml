@@ -13,7 +13,7 @@
     <h2>Liste  <small>de médicaments</small></h2>
     <hr />
     <div id="alert"></div>
-    <div id="import-modal" class="modal hide fade" style="margin-bottom: 100px" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="import-modal" class="modal hide fade" style="margin-top: -250px" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Importer ... </h3>
@@ -24,10 +24,9 @@
 
                 <div>
                     @(Html.Kendo().Upload()
-            .Name("file")
+                        .Name("file")
                     )
                 </div>
-
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
@@ -86,7 +85,7 @@
             evt.preventDefault();
             var formData = new FormData($(this)[0]);
             var currentEffect = 'stretch';
-            $.when(run_waitMe(currentEffect),
+            $.when(run_waitMe(currentEffect), 
             $.ajax({
                 url: '@Url.Action("ImportXls", "Medicament")',
                 type: 'POST',
@@ -96,7 +95,6 @@
                 contentType: false,
                 enctype: 'multipart/form-data',
                 processData: false,
-
                 success: function () {
                     $('#import-modal').waitMe('hide');
                 }
@@ -190,12 +188,13 @@
     function run_waitMe(effect) {
         $('#import-modal').waitMe({
             effect: effect,
-            text: 'Please waiting...',
+            text: 'Veuillez vous patienter ...',
             bg: 'rgba(255,255,255,0.7)',
             color: '#000'
         });
     }
-
+    
+   
     function updateMasterCheckbox() {
         var numChkBoxes = $('#specialites input[type=checkbox]:not([id=mastercheckbox])').length;
         var numChkBoxesChecked = $('#specialites input[type=checkbox][checked]:not([id=mastercheckbox])').length;

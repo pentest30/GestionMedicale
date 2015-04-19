@@ -18,8 +18,6 @@ namespace GM.Services.Medicaments
         private readonly IRepository<Remboursement> _rembousementRepository;
         private readonly IRepository<ParamStock> _repositoryParamsStock;
         private readonly IServiceDci _serviceDci;
-      
-
         public ServiceMedicament(IRepository<Medicament> repository, IRepository<Remboursement> rembousementRepository,
             IRepository<ParamStock> repositoryParamsStock , IServiceDci serviceDci)
         {
