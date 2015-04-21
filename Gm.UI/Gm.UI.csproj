@@ -184,6 +184,7 @@
     <Compile Include="Areas\Gestion\Controllers\AdminController.cs" />
     <Compile Include="Areas\Gestion\Controllers\ConditionnementController.cs" />
     <Compile Include="Areas\Gestion\Controllers\DCIController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\FabriquantController.cs" />
     <Compile Include="Areas\Gestion\Controllers\FormeController.cs" />
     <Compile Include="Areas\Gestion\Controllers\MedecinController.cs" />
     <Compile Include="Areas\Gestion\Controllers\MedicamentController.cs" />
@@ -1019,6 +1020,7 @@
     <Folder Include="App_Data\photos\poduits\" />
     <Folder Include="App_Data\photos\profils\" />
     <Folder Include="App_Data\uploads\" />
+    <Folder Include="Areas\Gestion\Views\Fabriquant\" />
     <Folder Include="Areas\Gestion\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>
