@@ -86,20 +86,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
             InitDrops(model);
             return (continuer)? View(model):View("Index");
         }
-
-        private void InitDrops(MedicamentModel model)
-        {
-            ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle", model.SpecialiteId);
-            ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom", model.DciId);
-            ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle", model.FormeId);
-            ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Libelle",
-                model.ConditionnementId);
-            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle", model.LaboratoireId);
-        }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public ActionResult Update(MedicamentModel model, bool continuer)
         {
 
@@ -195,7 +184,15 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        private void InitDrops(MedicamentModel model)
+        {
+            ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle", model.SpecialiteId);
+            ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom", model.DciId);
+            ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle", model.FormeId);
+            ViewData["conditionnements"] = new SelectList(_serviceConditionnement.Liste(), "Id", "Libelle",
+                model.ConditionnementId);
+            ViewData["fabriquants"] = new SelectList(_serviceFabriquant.Liste(), "Id", "Libelle", model.LaboratoireId);
+        }
        
         private string SuccessMessage()
         {
