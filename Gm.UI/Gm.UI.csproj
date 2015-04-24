@@ -661,6 +661,10 @@
     <Content Include="Areas\Gestion\Views\Medicament\_ListMedicRemb.cshtml" />
     <Content Include="Areas\Gestion\Views\Pharmacien\EditPharmacie.cshtml" />
     <Content Include="Areas\Gestion\Views\Pharmacien\_EditPharmacie.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fabriquant\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fabriquant\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fabriquant\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fabriquant\Update.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -1046,7 +1050,6 @@
     <Folder Include="App_Data\photos\poduits\" />
     <Folder Include="App_Data\photos\profils\" />
     <Folder Include="App_Data\uploads\" />
-    <Folder Include="Areas\Gestion\Views\Fabriquant\" />
     <Folder Include="Areas\Gestion\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>

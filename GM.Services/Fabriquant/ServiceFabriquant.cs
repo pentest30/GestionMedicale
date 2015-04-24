@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using GM.Core;
 using GM.Core.Models;
 
 namespace GM.Services.Fabriquant
 {
     public class ServiceFabriquant:IServiceFabriquant
     {
-        private readonly IRepository<Laboratoire> _repository;
+        private readonly FabriquantRepository _repository;
 
-        public ServiceFabriquant(IRepository<Laboratoire>repository )
+        public ServiceFabriquant(FabriquantRepository repository )
         {
             _repository = repository;
         }
@@ -17,6 +16,11 @@ namespace GM.Services.Fabriquant
         public IEnumerable<Laboratoire> Liste()
         {
             return _repository.SelectAll();
+        }
+
+        public IEnumerable<Pays> ListePays()
+        {
+            return _repository.ListePays();
         }
 
         public bool Insert(Laboratoire laboratoire)

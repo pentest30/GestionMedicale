@@ -63,8 +63,10 @@
     <Compile Include="Models\Medicament.cs" />
     <Compile Include="Models\MedicamentPicture.cs" />
     <Compile Include="Models\ParamStock.cs" />
+    <Compile Include="Models\Pays.cs" />
     <Compile Include="Models\Pharmacie.cs" />
     <Compile Include="Models\PieceComptable.cs" />
+    <Compile Include="Models\PointVente.cs" />
     <Compile Include="Models\Remboursement.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Specialite.cs" />

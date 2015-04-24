@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using GM.Core.Models;
 using GM.Services.Fabriquant;
@@ -10,10 +11,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
     public class FabriquantController : Controller
     {
         private readonly IServiceFabriquant _service;
-
+        private readonly IEnumerable<Pays> _pays; 
         public FabriquantController(IServiceFabriquant service)
         {
             _service = service;
+            _pays = _service.ListePays();
         }
 
         // GET: Gestion/Fabriquant
@@ -27,6 +29,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         }
         public ActionResult Create()
         {
+            ViewData["pays"] = new SelectList(_pays, "Nom", "Nom");
             return View();
         }
 
@@ -35,11 +38,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
             if (id == null) return HttpNotFound();
             var item = _service.FindSingle((int)id);
             if (item == null) return HttpNotFound();
+            ViewData["pays"] = new SelectList(_pays, "Nom", "Nom", item.Pays);
+           
             return View(item);
         }
         [HttpPost]
         public ActionResult Update(Laboratoire laboratoire)
         {
+            ViewData["pays"] = new SelectList(_pays, "Nom", "Nom", laboratoire.Pays);
             if (ModelState.IsValid)
             {
                 var b = _service.Update(laboratoire);
@@ -59,7 +65,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpPost]
         public ActionResult Create(Laboratoire laboratoire)
         {
-
+            ViewData["pays"] = new SelectList(_pays, "Nom", "Nom", laboratoire.Pays);
             if (ModelState.IsValid)
             {
                 var b = _service.Insert(laboratoire);

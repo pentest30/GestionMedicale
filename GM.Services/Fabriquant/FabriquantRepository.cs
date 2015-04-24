@@ -23,6 +23,11 @@ namespace GM.Services.Fabriquant
             return _db.Laboratoires;
         }
 
+        public IEnumerable<Pays> ListePays()
+        {
+            return _db.Payses;
+        } 
+
         public Laboratoire SelectById(object id)
         {
             var item = _db.Laboratoires.Find(id);
@@ -43,7 +48,7 @@ namespace GM.Services.Fabriquant
 
         public void Delete(object id)
         {
-            var item = _db.Specialites.Find(id);
+            var item = _db.Laboratoires.Find(id);
             if (item == null) return;
             _db.Entry(item).State = EntityState.Deleted;
             Save();
