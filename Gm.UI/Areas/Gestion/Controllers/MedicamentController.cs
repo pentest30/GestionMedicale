@@ -176,14 +176,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 var fileName = Path.GetFileName(file.FileName);
                 if (fileName != null)
                 {
-                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-                    file.SaveAs(path);
-                    _service.ImporteListe(path);
-                   return Json(true, JsonRequestBehavior.AllowGet);
+                    _service.ImporteListe(SaveFile(fileName, file));
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
             }
             return RedirectToAction("Index");
         }
+
+        private string SaveFile(string fileName, HttpPostedFileBase file)
+        {
+            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+            file.SaveAs(path);
+            return path;
+        }
+
         private void InitDrops(MedicamentModel model)
         {
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle", model.SpecialiteId);

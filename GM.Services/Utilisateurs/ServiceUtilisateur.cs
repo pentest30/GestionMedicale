@@ -153,12 +153,13 @@ namespace GM.Services.Utilisateurs
             var role = item.UtilisateurRoles.FirstOrDefault(x => x.UtilisateurId==item.Id);
             return role != null ? role.Roles.Nom.ToLower() : "";
         }
+
         public IEnumerable<Utilisateur> FilterListe(Utilisateur utilisateur)
         {
             var filter = from m in EntityFilter<Utilisateur>.AsQueryable()
-                         where m.Pseudo.Equals(utilisateur.Pseudo) ||string.IsNullOrEmpty(utilisateur.Pseudo)
-                         where m.Email.Equals(utilisateur.Email) || string.IsNullOrEmpty(utilisateur.Email)
-                         select m;
+                where m.Pseudo.Equals(utilisateur.Pseudo) || string.IsNullOrEmpty(utilisateur.Pseudo)
+                where m.Email.Equals(utilisateur.Email) || string.IsNullOrEmpty(utilisateur.Email)
+                select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
         }
 

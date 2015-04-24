@@ -1,0 +1,14 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+@{
+    ViewBag.Title = "EditPharmacie";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+}
+
+<div style="margin-top: 50px">
+    
+    @{
+        Html.RenderPartial("_EditPharmacie", Model);
+    }
+
+</div>
+
