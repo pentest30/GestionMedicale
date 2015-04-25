@@ -59,6 +59,7 @@
                             ParamStock item1 = Model.ParamStock ?? new ParamStock();
                             item1.MedicamentId = Model.Id;
                             item1.EntrepriseId = Convert.ToInt32(ViewData["entrpriseId"]);
+                            
                             Html.RenderPartial("_CreateOrUpdateParms", item1);
                         }
                     }
