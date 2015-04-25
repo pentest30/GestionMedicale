@@ -1,0 +1,70 @@
+﻿@using Kendo.Mvc.UI
+@model GM.Core.Models.ParamStock
+
+@using (Html.BeginForm("CreateUpdateParams", "Medicament", FormMethod.Post, new { id = "params-form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       @if (Model.ParmsId != 0)
+       {
+        @Html.HiddenFor(model => model.ParmsId)
+       }
+        @Html.HiddenFor(model => model.MedicamentId)
+        @Html.HiddenFor(model => model.EntrepriseId)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.QntMinimale, htmlAttributes: new { @class = "control-label " })
+            <div class="controls">
+                @(Html.Kendo().IntegerTextBoxFor(m => m.QntMinimale)
+      .HtmlAttributes(new { style = "width:20%" })
+      .Min(1)
+                )
+                @Html.ValidationMessageFor(model => model.QntMinimale, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.QntCritique, htmlAttributes: new { @class = "control-label " })
+            <div class="controls">
+                @(Html.Kendo().IntegerTextBoxFor(m => m.QntCritique)
+      .HtmlAttributes(new { style = "width:20%" })
+      .Min(1)
+                )
+                @Html.ValidationMessageFor(model => model.QntCritique, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#QntMinimale").addClass("validate[required,min[1]]");
+        $("#QntCritique").addClass("validate[required,min[1]]");
+        $('form').validationEngine();
+        $("#stock-btn").click(function (e) {
+            if ($('form').validationEngine('validate')) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("CreateUpdateParams", "Medicament", new { area = "Gestion" })',
+                    data: $("#params-form").serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                       
+                        $.bootstrapGrowl(data.message);
+                        $("#QntMinimale").val();
+                        $("#QntCritique").val();
+                    },
+                    error: function () {
+                    }
+                });
+            } else {
+                e.preventDefault();
+            }
+
+        });
+    });
+</script>

@@ -1,4 +1,5 @@
-﻿@model Gm.UI.Areas.Gestion.Models.MedicamentModel
+﻿@using GM.Core.Models
+@model Gm.UI.Areas.Gestion.Models.MedicamentModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,24 +7,9 @@
 }
 
 <div style="margin-top: 90px; margin-right: 25px">
-
-    <div class="navbar">
-        <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
-            <div>
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
-                        <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
-                        @if (Model != null && Model.Id != 0)
-                        {
-                            <li><button data-toggle="modal" data-target="#myModal" id="add-med-remb-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-ok"></i> Paramètres de remboursements</button></li>
-                        }
-                        <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+    @{
+        Html.RenderPartial("_ToolbarMed", Model);
+    }
     <div id="content">
         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
             <li class="active"><a href="#red" data-toggle="tab">Médicament</a></li>
@@ -68,10 +54,26 @@
                 {
                     if (Model.Id > 0)
                     {
+                        if (User.IsInRole("pharmacien"))
+                        {
+                            ParamStock item1 = Model.ParamStock ?? new ParamStock
+                            {
+                                MedicamentId = Model.Id,
+                                EntrepriseId = Convert.ToInt32(ViewData["entrpriseId"]),
+                                
+                            };
+                            Html.RenderPartial("_CreateOrUpdateParms", item1);
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" style="margin-left: 15px">
+                            <p>Ajouter un nouveau médicament Stp.</p>
+                        </div>
 
                     }
                 }
-                else if (Model == null || Model.Id < 0)
+                else if (Model == null)
                 {
                     <div class="alert alert-warning" style="margin-left: 15px">
                         <p>Ajouter un nouveau médicament Stp.</p>

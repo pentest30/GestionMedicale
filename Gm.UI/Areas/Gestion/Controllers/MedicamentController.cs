@@ -4,6 +4,8 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using GM.Services.Pharmacies;
+using GM.Services.Utilisateurs;
 using Gm.UI.Areas.Gestion.Models;
 using GM.Core.Models;
 using GM.Services.Categorie;
@@ -25,13 +27,17 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceForme _serviceForme;
         private readonly IServiceConditionnement _serviceConditionnement;
         private readonly IServiceFabriquant _serviceFabriquant;
-       
+        private readonly IServicePharmacie _pharmacieService;
+        private readonly IServiceUtilisateur _utilisateurService;
+
         // GET: Gestion/Medicament
         public MedicamentController(IServiceMedicmaent service,
             IServiceSpecialite serviceSpecialite , 
             IServiceDci serviceDci ,IServiceForme serviceForme , 
             IServiceConditionnement serviceConditionnement ,
-            IServiceFabriquant serviceFabriquant)
+            IServiceFabriquant serviceFabriquant, 
+            IServicePharmacie pharmacieService,
+            IServiceUtilisateur utilisateurService)
         {
             _service = service;
             _serviceSpecialite = serviceSpecialite;
@@ -39,11 +45,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceForme = serviceForme;
             _serviceConditionnement = serviceConditionnement;
             _serviceFabriquant = serviceFabriquant;
-            
+            _pharmacieService = pharmacieService;
+            _utilisateurService = utilisateurService;
         }
         [HttpGet]
         public ActionResult Create()
         {
+            var user = _utilisateurService.SingleUser(User.Identity.Name);
+            ViewData["entrpriseId"] = _pharmacieService.GetPharmacie(user.Id);
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
             ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle");
@@ -54,12 +63,21 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpGet]
         public ActionResult Update(int ? id)
         {
-            var model = Mapper.Map<MedicamentModel>(_service.FindSingle(Convert.ToInt32(id)));
+            var user = _utilisateurService.SingleUser(User.Identity.Name);
+            var enId = _pharmacieService.GetPharmacie(user.Id);
+            ViewData["entrpriseId"] = enId;
+            var med = _service.FindSingle(Convert.ToInt32(id));
+            var model = Mapper.Map<MedicamentModel>(med);
+            if (med.ParamStocks.Count > 0)
+                model.ParamStock = _service.GetParamStock(med, Convert.ToInt32(enId));
             ViewData["id"] = model.Id;
             InitDrops(model);
             return View(model);
         }
-         [HttpPost]
+
+    
+
+        [HttpPost]
         public ActionResult Delete(int? id)
         {
             var b = id != null && _service.Delete((int)id);
@@ -94,11 +112,17 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
             ViewData["id"] = model.Id ;
             ModelState.Remove("NomCommerciale");
+            var user = _utilisateurService.SingleUser(User.Identity.Name);
+            var enId = _pharmacieService.GetPharmacie(user.Id);
+            ViewData["entrpriseId"] = enId;
             if (ModelState.IsValid)
             {
-                
+
                 var medicament = Mapper.Map<Medicament>(model);
                 _service.Update(medicament);
+                medicament = _service.FindSingle(Convert.ToInt32(model.Id));
+                if (medicament.ParamStocks.Count > 0)
+                    model.ParamStock = _service.GetParamStock(medicament, Convert.ToInt32(enId));
                 ViewData["info"] = "Opération est terminé avec succéss !";
             }
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle", model.SpecialiteId);
@@ -135,6 +159,26 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
 
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult CreateUpdateParams(ParamStock model)
+        {
+            bool b;
+            if (model.ParmsId == 0)
+            {
+                b= _service.InsertParamsStock(model);
+               dynamic data = new
+               {
+                   message = b ? SuccessMessage() : ErrorMessage()
+               };
+               return Json(data, JsonRequestBehavior.AllowGet);
+            }
+             b = _service.UpdateParamsStock(model);
+            dynamic data2 = new
+            {
+                message = b ? SuccessMessage() : ErrorMessage()
+            };
+            return Json(data2, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Index()
         {

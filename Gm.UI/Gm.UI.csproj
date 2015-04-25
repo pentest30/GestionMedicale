@@ -665,6 +665,8 @@
     <Content Include="Areas\Gestion\Views\Fabriquant\Create.cshtml" />
     <Content Include="Areas\Gestion\Views\Fabriquant\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Gestion\Views\Fabriquant\Update.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medicament\_CreateOrUpdateParms.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medicament\_ToolBarMed.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -680,6 +682,7 @@
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Scripts\jquery-migrate-1.2.1.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Scripts\jquery.bootstrap-growl.min.js" />
     <Content Include="Scripts\jquery.confirm.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />

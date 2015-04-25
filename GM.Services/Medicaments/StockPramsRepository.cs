@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq.Expressions;
+using GM.Context;
 using GM.Core;
 using GM.Core.Models;
 
@@ -8,6 +10,13 @@ namespace GM.Services.Medicaments
 {
     public class StockPramsRepository:IRepository<ParamStock>
     {
+        private readonly PharmacieContext _db;
+
+        public StockPramsRepository(PharmacieContext db)
+        {
+            _db = db;
+        }
+
         public IEnumerable<ParamStock> SelectAll()
         {
             throw new NotImplementedException();
@@ -20,22 +29,29 @@ namespace GM.Services.Medicaments
 
         public void Insert(ParamStock item)
         {
-            throw new NotImplementedException();
+            _db.ParamStocks.Add(item);
+            Save();
         }
 
         public void Update(ParamStock item)
         {
-            throw new NotImplementedException();
+            _db.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var item = _db.ParamStocks.Find(id);
+            if (item != null)
+            {
+                _db.Entry(item).State = EntityState.Deleted;
+                Save();
+            }
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public IEnumerable<ParamStock> Find(Func<ParamStock, bool> predicate)

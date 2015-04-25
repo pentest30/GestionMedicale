@@ -11,6 +11,13 @@ namespace GM.Context
         {
             
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Utilisateur>()
+            //    .HasOptional(a => a.UtilisateurRoles)
+            //    .WithOptionalDependent()
+            //    .WillCascadeOnDelete(true);
+        }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UtilisateurRole> UtilisateurRoles { get; set; }

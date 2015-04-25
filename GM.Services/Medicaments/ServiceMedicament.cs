@@ -18,8 +18,10 @@ namespace GM.Services.Medicaments
         private readonly IRepository<Remboursement> _rembousementRepository;
         private readonly IRepository<ParamStock> _repositoryParamsStock;
         private readonly IServiceDci _serviceDci;
-        public ServiceMedicament(IRepository<Medicament> repository, IRepository<Remboursement> rembousementRepository,
-            IRepository<ParamStock> repositoryParamsStock , IServiceDci serviceDci)
+        public ServiceMedicament(IRepository<Medicament> repository,
+            IRepository<Remboursement> rembousementRepository,
+            IRepository<ParamStock> repositoryParamsStock , 
+            IServiceDci serviceDci)
         {
             _repository = repository;
             _rembousementRepository = rembousementRepository;
@@ -65,7 +67,7 @@ namespace GM.Services.Medicaments
 
         public Medicament FindSingle(int id)
         {
-            return _repository.SelectById(id);
+            return _repository.FindSingle(x=>x.Id ==id);
         }
 
         public bool Existe(string nom)
@@ -141,6 +143,11 @@ namespace GM.Services.Medicaments
             return true;
         }
 
+        public ParamStock GetParamStock(Medicament medicament, int entrpriseId)
+        {
+            return medicament.ParamStocks.FirstOrDefault(x => x.EntrepriseId == entrpriseId);
+        }
+
         public bool Delete(int id)
         {
             try
@@ -168,9 +175,9 @@ namespace GM.Services.Medicaments
             }
         }
 
-        public bool InsertParamsStock(ParamStock stock,int id)
+        public bool InsertParamsStock(ParamStock stock)
         {
-            stock.MedicamentId = id;
+          
             try
             {
                 _repositoryParamsStock.Insert(stock);
@@ -182,6 +189,10 @@ namespace GM.Services.Medicaments
                 return false;
             }
         }
+
+     
+
+      
 
         public bool UpdateRemboussement(Remboursement remboursement)
         {
@@ -196,9 +207,17 @@ namespace GM.Services.Medicaments
             }
         }
 
-        public bool UpdateParamsStock(Remboursement remboursement)
+        public bool UpdateParamsStock(ParamStock remboursement)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _repositoryParamsStock.Update(remboursement);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
          public IEnumerable<Remboursement> GetListRemboursements(int? id)
          {

@@ -11,6 +11,7 @@ namespace Gm.UI.Areas.Gestion.Models
         {
             Remboursement = new Remboursement();
             Remboursements = new List<Remboursement>();
+            ParamStock = new ParamStock();
         }
 
         public int Id { get;set;}
@@ -55,7 +56,7 @@ namespace Gm.UI.Areas.Gestion.Models
 
         public decimal? TarifReference { get; set; }
 
-
+        public ParamStock ParamStock { get; set; }
         public Remboursement Remboursement { get; set; }
         public List<Remboursement> Remboursements { get; set; }
        
