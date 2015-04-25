@@ -8,10 +8,9 @@
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       @if (Model.ParmsId != 0)
-       {
+      
         @Html.HiddenFor(model => model.ParmsId)
-       }
+      
         @Html.HiddenFor(model => model.MedicamentId)
         @Html.HiddenFor(model => model.EntrepriseId)
 
@@ -55,6 +54,7 @@
                     success: function (data) {
                        
                         $.bootstrapGrowl(data.message);
+                        $('#ParmsId').val(data.id);
                         $("#QntMinimale").val();
                         $("#QntCritique").val();
                     },

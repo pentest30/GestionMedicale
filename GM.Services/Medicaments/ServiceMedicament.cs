@@ -175,18 +175,23 @@ namespace GM.Services.Medicaments
             }
         }
 
-        public bool InsertParamsStock(ParamStock stock)
+        public bool InsertParamsStock(ParamStock stock , out int id)
         {
-          
+
             try
             {
                 _repositoryParamsStock.Insert(stock);
+
                 return true;
             }
             catch (Exception)
             {
 
                 return false;
+            }
+            finally
+            {
+                id = stock.ParmsId;
             }
         }
 

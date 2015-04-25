@@ -31,7 +31,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceUtilisateur _utilisateurService;
 
         // GET: Gestion/Medicament
-        public MedicamentController(IServiceMedicmaent service,
+        public MedicamentController(
+            IServiceMedicmaent service,
             IServiceSpecialite serviceSpecialite , 
             IServiceDci serviceDci ,IServiceForme serviceForme , 
             IServiceConditionnement serviceConditionnement ,
@@ -52,6 +53,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public ActionResult Create()
         {
             var user = _utilisateurService.SingleUser(User.Identity.Name);
+            var enId = _pharmacieService.GetPharmacie(user.Id);
+            ViewData["entrpriseId"] = enId;
             ViewData["entrpriseId"] = _pharmacieService.GetPharmacie(user.Id);
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
@@ -93,6 +96,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MedicamentModel model , bool continuer)
         {
+            var user = _utilisateurService.SingleUser(User.Identity.Name);
+            var enId = _pharmacieService.GetPharmacie(user.Id);
+            ViewData["entrpriseId"] = enId;
             if (ModelState.IsValid)
             {
                 int identity;
@@ -166,17 +172,21 @@ namespace Gm.UI.Areas.Gestion.Controllers
             bool b;
             if (model.ParmsId == 0)
             {
-                b= _service.InsertParamsStock(model);
+                int id;
+                b= _service.InsertParamsStock(model , out id);
                dynamic data = new
                {
-                   message = b ? SuccessMessage() : ErrorMessage()
+                   message = b ? SuccessMessage() : ErrorMessage(), 
+                   id
+
                };
                return Json(data, JsonRequestBehavior.AllowGet);
             }
              b = _service.UpdateParamsStock(model);
             dynamic data2 = new
             {
-                message = b ? SuccessMessage() : ErrorMessage()
+                message = b ? SuccessMessage() : ErrorMessage(),
+                id = model.ParmsId
             };
             return Json(data2, JsonRequestBehavior.AllowGet);
         }
