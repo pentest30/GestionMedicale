@@ -160,7 +160,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Code = code,
                 NumEnregistrement = nEnregistrement,
                 LaboratoireId =Convert.ToInt32( labId)
-            };
+        s    };
             
             var list = Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
             return Json(list.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
