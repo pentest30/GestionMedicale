@@ -18,6 +18,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceUtilisateur _serviceUtilisateur;
         private readonly IDictionary<int, string> _filtreUsers;
         private readonly IList<Role> _roles;
+        private  int _count;
 
         public AdminController(IServiceAdministrateur service, IServiceUtilisateur serviceUtilisateur)
         {
@@ -38,14 +39,22 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 {2, "Comptes actifs"},
                 {3, "comptes non actifs"}
             };
+            _count = _serviceUtilisateur.NonActiveUsers().Count();
         }
 
         // GET: Gestion/Admin
         public ActionResult Index()
         {
-            Session["NewUsers"] = _serviceUtilisateur.NonActiveUsers().Count();
+            Session["NewUsers"] = _count;
             return View();
 
+        }
+        [HttpPost]
+
+        public ActionResult Notifications()
+        {
+            var count1 = _serviceUtilisateur.NonActiveUsers().Count();
+            return count1 >= _count ? Json(count1, JsonRequestBehavior.AllowGet) : Json(null);
         }
         [HttpPost]
         //[ChildActionOnly]
@@ -74,10 +83,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             var b = string.IsNullOrEmpty(id) || !_service.SupprimeCompte(identity);
+            //_count = _serviceUtilisateur.NonActiveUsers().Count();
             var data2 = new
             {
                 message =(!b)? SuccessMessage():ErrorMessage(),
-                data = _serviceUtilisateur.NonActiveUsers().Count()
+                data =_serviceUtilisateur.NonActiveUsers().Count()
             };
            return Json(data2, JsonRequestBehavior.AllowGet);
         }
@@ -87,10 +97,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             var b = string.IsNullOrEmpty(id) || !_service.AccepteInscription(identity);
+            _count = _serviceUtilisateur.NonActiveUsers().Count();
             var data2 = new
             {
                 message = (!b) ? SuccessMessage() : ErrorMessage(),
-                data = _serviceUtilisateur.NonActiveUsers().Count()
+                data = _count
             };
             return Json(data2,JsonRequestBehavior.AllowGet);
         }
@@ -100,10 +111,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             Guid? identity = new Guid(id.Trim());
             var b = string.IsNullOrEmpty(id) || !_service.DesactiveCompte(identity);
+            _count = _serviceUtilisateur.NonActiveUsers().Count();
             var data2 = new
             {
                 message = (!b) ? SuccessMessage() : ErrorMessage(),
-                data = _serviceUtilisateur.NonActiveUsers().Count()
+                data = _count
             };
             return Json(data2, JsonRequestBehavior.AllowGet);
 

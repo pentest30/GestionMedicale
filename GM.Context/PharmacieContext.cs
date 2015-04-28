@@ -11,6 +11,7 @@ namespace GM.Context
             
         }
 
+        public DbSet<Pays> Payses { get; set; }
        
         public DbSet<Pharmacie> Pharmacies { get; set; }
         public DbSet<Fournisseur> Fournisseurs { get; set; }
@@ -27,6 +28,7 @@ namespace GM.Context
         public DbSet<BonEntree> BonEntrees { get; set; }
         public DbSet<LigneEntree> LigneEntrees { get; set; }
         public DbSet<MedicamentPicture> MedicamentPicture { get; set; }
+        public DbSet<PointVente> PointVentes { get; set; }
 
 
     }

@@ -2,13 +2,14 @@
 @model Gm.UI.Areas.Gestion.Models.PharmacieModel
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-
+    @Html.AntiForgeryToken()
 
     <div >
 
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model=>model.PropreitaireId)
         <div class="form-group">
             @Html.LabelFor(model => model.Nom, htmlAttributes: new {@class = "control-label col-md-4"})
             <div class="col-md-8">
@@ -52,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateFondation, htmlAttributes: new {@class = "control-label col-md-4"})
             <div class="col-md-8" style="margin-bottom: 5px">
-                @Html.EditorFor(model => model.DateFondation, new {htmlAttributes = new {@class = "form-control"}})
+                <input type="text" name="DateFondation" id="DateFondation" style="width: 280px">
                 @Html.ValidationMessageFor(model => model.DateFondation, "", new {@class = "text-danger"})
             </div>
         </div>
@@ -118,7 +119,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Logo, htmlAttributes: new {@class = "control-label col-md-4"})
             <div class="col-md-8" style="margin-bottom: 10px; margin-top: 10px">
-                <div class="demo-section k-header">
+                <div class=" k-header">
                     <input name="image" id="files" type="file"/>
 
                 </div>
@@ -138,7 +139,9 @@
 <hr />
 <script>
     $(document).ready(function () {
-       
+        $('#DateFondation').datepicker({
+            format: 'dd/mm/yyyy'
+        });
         $('#Wilaya').select2();
         $("#files").kendoUpload();
 

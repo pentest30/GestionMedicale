@@ -10,7 +10,6 @@ using GM.Services.Formes;
 using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
 using GM.Services.Pharmacies;
-using GM.Services.Stocks;
 using GM.Services.Utilisateurs;
 using Microsoft.Practices.Unity;
 

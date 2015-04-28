@@ -1,0 +1,174 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid" style="padding: 25px">
+        <div class="row-fluid">
+            <div class="span3" id="image-div">
+                <div id="image-frame">
+                    <img id="logo-img" src="@Url.Action("SomeImage", "Pharmacien", new { imageName  = Model.Logo})" alt="" class="img img-polaroid" />
+                </div>
+                <hr />
+                <span class="btn btn-primary btn-file">
+                    Modifier LOGO
+                    <input class="k-filebrowser" id="fileupload" type="file" value="" name="file" />
+
+                </span>
+
+
+            </div>
+            <div class="span9">
+                <div class="form-inline">
+
+                    <div class="alert alert-info">
+                        <h2>User Bio : </h2>
+                        <h4>Bootstrap user profile template </h4>
+                        <p>
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                        </p>
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.PropreitaireId)
+                    @Html.HiddenFor(model => model.Logo)
+                    <div class="control-group">
+                     
+                            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label" })
+
+                        
+                         <div class="controls ">
+                            @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Nrc, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Nrc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nrc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Nif, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Nif, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nif, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Nis, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Nis, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nis, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.DateFondation, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            <input type="text" name="DateFondation" id="DateFondation" style="width: 265px">
+                            @Html.ValidationMessageFor(model => model.DateFondation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.SiteWeb, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.SiteWeb, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SiteWeb, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Wilaya, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Wilaya, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Wilaya, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Commune, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Commune, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Commune, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.CompteBancaire, htmlAttributes: new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CompteBancaire, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CompteBancaire, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <div class="control-group">
+                        <div class="col-md-offset-2 controls">
+                            <input type="submit" value="Enregistrer" class="btn btn-primary" />
+                            <button class="btn btn-default">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+<input type="hidden" id="file-hidden" />
+
+<script type="text/javascript">
+    var images = [];
+    $(function () {
+        $('#DateFondation').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            url: '@Url.Action("UpdateLogo")' + '/?id=@Model.Id',
+            done: function (e, data) {
+                $('#Logo').attr('value', data.result);
+                console.log($('#Logo').val());
+                $('#image-frame > img').remove();
+                $('#image-frame').append('<img src="' + '@Url.Action("SomeImage", "Pharmacien")' + '/?imageName=' + $("#Logo").val() + '" ' + ' alt="" class="img img-polaroid">');
+
+            }
+        });
+    });
+</script>

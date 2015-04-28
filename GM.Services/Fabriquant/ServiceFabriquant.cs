@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using GM.Core;
+﻿using System;
+using System.Collections.Generic;
 using GM.Core.Models;
 
 namespace GM.Services.Fabriquant
 {
     public class ServiceFabriquant:IServiceFabriquant
     {
-        private readonly IRepository<Laboratoire> _repository;
+        private readonly FabriquantRepository _repository;
 
-        public ServiceFabriquant(IRepository<Laboratoire>repository )
+        public ServiceFabriquant(FabriquantRepository repository )
         {
             _repository = repository;
         }
@@ -18,24 +18,53 @@ namespace GM.Services.Fabriquant
             return _repository.SelectAll();
         }
 
+        public IEnumerable<Pays> ListePays()
+        {
+            return _repository.ListePays();
+        }
+
         public bool Insert(Laboratoire laboratoire)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Insert(laboratoire);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Update(Laboratoire laboratoire)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Update(laboratoire);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public Laboratoire FindSingle(int id)
         {
-            throw new System.NotImplementedException();
+            return _repository.SelectById(id);
         }
 
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _repository.Delete(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

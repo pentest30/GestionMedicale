@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GM.Core;
 using GM.Core.Models;
 
@@ -8,10 +9,12 @@ namespace GM.Services.Utilisateurs
     public class ServiceAdministrateur : IServiceAdministrateur
     {
         private readonly IRepository<Utilisateur> _repository;
+        private readonly IRepository<UtilisateurRole> _userRoleRepository;
 
-        public ServiceAdministrateur(IRepository<Utilisateur> repository)
+        public ServiceAdministrateur(IRepository<Utilisateur> repository , IRepository<UtilisateurRole> userRoleRepository )
         {
             _repository = repository;
+            _userRoleRepository = userRoleRepository;
         }
 
         public bool AccepteInscription(Guid? id)
@@ -27,8 +30,22 @@ namespace GM.Services.Utilisateurs
         {
             var item = _repository.SelectById(id);
             if (item == null) return false;
-            _repository.Delete(id);
-            return true;
+            try
+            {
+                var arry = item.UtilisateurRoles.ToArray();
+                foreach (var utilisateurRole in arry)
+                {
+                    _userRoleRepository.Delete(utilisateurRole.Id);
+                    item.UtilisateurRoles.Remove(utilisateurRole);
+
+                }
+                _repository.Delete(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<Utilisateur> UtilisateursNonActive()

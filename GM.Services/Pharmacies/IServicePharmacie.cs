@@ -8,5 +8,7 @@ namespace GM.Services.Pharmacies
         int? GetPharmacie(Guid id);
         bool Insert(Pharmacie pharmacie);
         bool Update(Pharmacie pharmacie);
+        bool Existe(Guid id);
+        Pharmacie SinglePharmacie(int id);
     }
 }

@@ -66,8 +66,12 @@ namespace Gm.UI.Controllers
                 if (_service.ExisteDeja(model.Email))
                 {
                     ModelState.AddModelError("EmailAddresse", "Email En utilisation, choiser un autre Email");
-                    if (_service.ExisteDeja(model.Pseudo)) ModelState.AddModelError("Identifiant", "Identifiant En utilisation, choiser un autre Identifiant");
                    return View(model);
+                }
+                if (_service.ExisteDeja(model.Pseudo)) 
+                {
+                    ModelState.AddModelError("Identifiant", "Identifiant En utilisation, choiser un autre Identifiant");
+                    return View(model);
                 }
                 var roleIds = new int?[1];
                 roleIds[0] = model.RoleId;

@@ -32,7 +32,7 @@ namespace GM.Core.Models
         public int? EnrepriseId { get; set; }
        
 
-        public ICollection<UtilisateurRole> UtilisateurRoles { get; set; }
+        public IList<UtilisateurRole> UtilisateurRoles { get; set; }
 
         public string Etat
         {

@@ -37,3 +37,27 @@
                
            
 </div>
+<script type="text/javascript">
+    $(function() {
+        setInterval(runNotification, 10000);
+    });
+    function runNotification() {
+        $.ajax({
+            url: '@Url.Action("Notifications", "Admin")' ,
+            type: 'POST',
+            success: function (data) {
+                
+                var count = $("#count span").text();
+                $("#count span").text(data);
+                if (data!= null && data >count) {
+                    $.bootstrapGrowl("Un nouveau compte n'est pas activé ", { type: 'success' });
+                    $('#users').data('kendoGrid').dataSource.read();
+                }
+            },
+            error: function () {
+            }
+        });
+        setInterval(runNotification, 10000);
+        
+    };
+</script>

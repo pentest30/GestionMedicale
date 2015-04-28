@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -21,39 +23,50 @@ namespace GM.Services.Fabriquant
             return _db.Laboratoires;
         }
 
+        public IEnumerable<Pays> ListePays()
+        {
+            return _db.Payses;
+        } 
+
         public Laboratoire SelectById(object id)
         {
-            throw new NotImplementedException();
+            var item = _db.Laboratoires.Find(id);
+            return item;
         }
 
         public void Insert(Laboratoire item)
         {
-            throw new NotImplementedException();
+            _db.Laboratoires.Add(item);
+            Save();
         }
 
         public void Update(Laboratoire item)
         {
-            throw new NotImplementedException();
+            _db.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var item = _db.Laboratoires.Find(id);
+            if (item == null) return;
+            _db.Entry(item).State = EntityState.Deleted;
+            Save();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public IEnumerable<Laboratoire> Find(Func<Laboratoire, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Laboratoires.Where(predicate);
         }
 
         public Laboratoire FindSingle(Func<Laboratoire, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Laboratoires.FirstOrDefault(predicate);
         }
 
         public IEnumerable<Laboratoire> GetAllLazyLoad(params Expression<Func<Laboratoire, object>>[] children)
@@ -63,7 +76,7 @@ namespace GM.Services.Fabriquant
 
         public bool Exist(Func<Laboratoire, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _db.Laboratoires.Any(predicate);
         }
     }
 }

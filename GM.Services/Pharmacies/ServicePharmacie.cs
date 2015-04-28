@@ -45,5 +45,15 @@ namespace GM.Services.Pharmacies
                 return false;
             }
         }
+
+        public bool Existe(Guid id)
+        {
+            return _repository.Exist(x=>x.PropreitaireId==id);
+        }
+
+        public Pharmacie SinglePharmacie(int id)
+        {
+            return _repository.SelectById(id);
+        }
     }
 }

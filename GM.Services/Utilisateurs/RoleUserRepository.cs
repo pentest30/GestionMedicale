@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
@@ -40,7 +41,10 @@ namespace GM.Services.Utilisateurs
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var item = _db.UtilisateurRoles.Find(id);
+            if (item == null) return;
+            _db.Entry(item).State = EntityState.Deleted;
+            Save();
         }
 
         public void Save()

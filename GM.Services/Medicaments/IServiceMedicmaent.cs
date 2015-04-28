@@ -14,12 +14,13 @@ namespace GM.Services.Medicaments
         Medicament FindSingle(int id);
         bool Delete(int id);
         bool InsertRemboussement(Remboursement remboursement);
-        bool InsertParamsStock(ParamStock stock,int id);
+        bool InsertParamsStock(ParamStock stock , out int id);
         bool UpdateRemboussement(Remboursement remboursement);
-        bool UpdateParamsStock(Remboursement remboursement);
+        bool UpdateParamsStock(ParamStock remboursement);
         IEnumerable<Medicament> FilterListe(Medicament medicament);
         IEnumerable<Remboursement> GetListRemboursements(int? id);
         bool Existe(string nom);
         bool ImporteListe(string fileName );
+        ParamStock GetParamStock(Medicament medicament, int entrpriseId);
     }
 }

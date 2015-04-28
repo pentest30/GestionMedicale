@@ -11,9 +11,12 @@ namespace GM.Services.Utilisateurs
 {
    public class UtilisateurRepository:IRepository<Utilisateur>
     {
-        private readonly UserContext _db;
+       
+       private readonly UserContext _db;
 
-        public UtilisateurRepository(UserContext db)
+      
+
+       public UtilisateurRepository(UserContext db)
         {
             _db = db;
         }
@@ -47,7 +50,7 @@ namespace GM.Services.Utilisateurs
 
         public void Delete(object id)
         {
-            var item = _db.Utilisateurs.Find(id);
+            var item = _db.Utilisateurs.Find(id); 
             if (item == null) return;
             _db.Entry(item).State = EntityState.Deleted;
             Save();

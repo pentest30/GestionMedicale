@@ -10,7 +10,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-cog"></i> Paramètres<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Entreprise</a>
+                            <a href="@Url.Action("EditPharmacie", "Pharmacien", new {area = "Gestion"})">Entreprise</a>
                         </li>
                         <li>
                             <a href="@Url.Action("Index", "Specialite", new { area = "Gestion" })">Profile</a>
@@ -33,6 +33,9 @@
                         </li>
                         <li>
                             <a href="@Url.Action("Index", "Conditionnement", new { area = "Gestion" })">Conditionnement</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Fabriquant", new { area = "Gestion" })">Laboratoire</a>
                         </li>
                         <li>
                             <a href="@Url.Action("Index", "Medicament", new {area = "Gestion"})">Médicaments</a>

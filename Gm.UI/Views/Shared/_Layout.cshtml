@@ -55,7 +55,7 @@
                     {
                         if (User.IsInRole("pharmacien"))
                         {
-                            <li><a href="@Url.Action("Index","Admin")"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("Index","Gestion/Pharmacien")"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
                         }
                         <li><a href="@Url.Action("logout", "Account", new { area = "" })"><span class="glyphicon  glyphicon-log-out"></span> Sortie</a></li>
 
