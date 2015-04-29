@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using GM.Core.Models;
 
 namespace GM.Services.Medicaments
