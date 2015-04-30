@@ -129,6 +129,9 @@
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />
+    <Compile Include="Fournisseurs\FournisseurRepository.cs" />
+    <Compile Include="Fournisseurs\IServiceFournisseur.cs" />
+    <Compile Include="Fournisseurs\ServiceFournisseur.cs" />
     <Compile Include="Helpers\Existe.cs" />
     <Compile Include="Magasins\IServiceMagasin.cs" />
     <Compile Include="Magasins\MagasinRepository.cs" />
