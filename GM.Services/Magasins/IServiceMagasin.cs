@@ -5,7 +5,7 @@ namespace GM.Services.Magasins
 {
     public interface IServiceMagasin
     {
-        IEnumerable<Magasin> Liste();
+        IEnumerable<Magasin> Liste(int id);
         //IEnumerable<Pays> ListePays();
         bool Insert(Magasin laboratoire);
         bool Update(Magasin laboratoire);

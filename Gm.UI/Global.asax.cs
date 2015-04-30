@@ -31,7 +31,7 @@ namespace Gm.UI
                 .ForMember(x => x.Specialite, o => o.MapFrom(x => x.Specialite.Libelle))
                 .ForMember(x => x.Forme, o => o.MapFrom(x => x.Forme.Libelle))
                 .ForMember(x => x.Conditionnement, o => o.MapFrom(x => x.Conditionnement.Libelle))
-            .ForMember(x => x.TarifReference, o => o.MapFrom(x => x.Remboursements.OrderBy(r => r.Date).FirstOrDefault().TarifReference)); 
+            .ForMember(x => x.TarifReference, o => o.MapFrom(x => x.Remboursements.OrderBy(r => r.Date).ThenBy(y=>y.TarifReference).FirstOrDefault().TarifReference)); 
             
         }
     }

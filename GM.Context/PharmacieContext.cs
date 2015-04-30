@@ -29,6 +29,9 @@ namespace GM.Context
         public DbSet<LigneEntree> LigneEntrees { get; set; }
         public DbSet<MedicamentPicture> MedicamentPicture { get; set; }
         public DbSet<PointVente> PointVentes { get; set; }
+        public DbSet<Commande> Commandes { get; set; }
+        public DbSet<LigneCommande> LigneCommandes { get; set; }
+
 
 
     }

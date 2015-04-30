@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
@@ -49,7 +50,7 @@ namespace GM.Services.Magasins
         public void Delete(object id)
         {
             var item = _db.Magasins.Find(id);
-            if (item == null) return;
+            if (item == null) throw new ModelValidationException();
             _db.Entry(item).State = EntityState.Deleted;
             Save();
         }

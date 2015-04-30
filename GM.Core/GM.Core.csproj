@@ -50,6 +50,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Banne.cs" />
     <Compile Include="Models\BonEntree.cs" />
+    <Compile Include="Models\Commande.cs" />
     <Compile Include="Models\Conditionnement.cs" />
     <Compile Include="Models\Dci.cs" />
     <Compile Include="Models\Entreprise.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Models\ILigneCommande.cs" />
     <Compile Include="Models\ICommandes.cs" />
     <Compile Include="Models\Laboratoire.cs" />
+    <Compile Include="Models\LigneCommande.cs" />
     <Compile Include="Models\LigneEntree.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Medicament.cs" />
@@ -65,7 +67,6 @@
     <Compile Include="Models\ParamStock.cs" />
     <Compile Include="Models\Pays.cs" />
     <Compile Include="Models\Pharmacie.cs" />
-    <Compile Include="Models\PieceComptable.cs" />
     <Compile Include="Models\PointVente.cs" />
     <Compile Include="Models\Remboursement.cs" />
     <Compile Include="Models\Role.cs" />
