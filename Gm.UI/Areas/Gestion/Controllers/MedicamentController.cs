@@ -34,7 +34,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public MedicamentController(
             IServiceMedicmaent service,
             IServiceSpecialite serviceSpecialite , 
-            IServiceDci serviceDci ,IServiceForme serviceForme , 
+            IServiceDci serviceDci ,
+            IServiceForme serviceForme , 
             IServiceConditionnement serviceConditionnement ,
             IServiceFabriquant serviceFabriquant, 
             IServicePharmacie pharmacieService,
@@ -78,8 +79,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View(model);
         }
 
-    
-
         [HttpPost]
         public ActionResult Delete(int? id)
         {
@@ -115,7 +114,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Update(MedicamentModel model, bool continuer)
         {
-
             ViewData["id"] = model.Id ;
             ModelState.Remove("NomCommerciale");
             var user = _utilisateurService.SingleUser(User.Identity.Name);
@@ -214,7 +212,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Code = code,
                 NumEnregistrement = nEnregistrement,
                 LaboratoireId =Convert.ToInt32( labId)
-            };
+           };
             
             var list = Mapper.Map<IList<MedicamentModel>>(_service.FilterListe(filter));
             return Json(list.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);

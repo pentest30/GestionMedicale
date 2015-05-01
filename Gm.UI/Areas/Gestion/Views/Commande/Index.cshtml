@@ -1,6 +1,6 @@
-﻿@using Gm.UI.Areas.Gestion.Models
-@using Kendo.Mvc.UI
-@model IEnumerable<MedicamentModel>
+﻿@using Kendo.Mvc.UI
+@using GM.Core.Models
+@model IEnumerable<Commande>
 
 @{
     ViewBag.Title = "Index";
@@ -10,32 +10,11 @@
     Html.RenderPartial("_ListToolBar");
 }
 <div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
-    <h2>Liste  <small>des médicaments</small></h2>
+    <h2>Commandes  </h2>
     <hr />
     <div id="alert"></div>
-    <div id="import-modal" class="modal hide fade" style="margin-top: -250px" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Importer ... </h3>
-        </div>
-        @using (Html.BeginForm("ImportXls", "Medicament", FormMethod.Post, new { id = "import-fomr" }))
-        {
-            <div class="modal-body" id="dony">
-
-                <div>
-                    @(Html.Kendo().Upload()
-                        .Name("file")
-                    )
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
-                <button type="submit" class="btn btn-primary">Lancer</button>
-            </div>
-        }
-    </div>
     @{
-        Html.RenderPartial("_Search", new SearchMedicamentModel());
+        Html.RenderPartial("_Search", new Commande());
     }
     @(Html.Kendo().Grid(Model)
           .Name("specialites")
@@ -43,22 +22,17 @@
           .Columns(columns =>
           {
               columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
-                  .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
-                  .Title("<input id='mastercheckbox' type='checkbox'/>")
-                  .Width(50)
-                  .HtmlAttributes(new { style = "text-align:center" })
-                  .HeaderHtmlAttributes(new { style = "text-align:center" });
+                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                        .Title("<input id='mastercheckbox' type='checkbox'/>")
+                        .Width(50)
+                        .HtmlAttributes(new { style = "text-align:center" })
+                        .HeaderHtmlAttributes(new { style = "text-align:center" });
               columns.Bound(x => x.Id)
-                  .Width(20).Visible(false);
-              columns.Bound(c => c.Dci);
-              columns.Bound(c => c.NomCommerciale);
-              columns.Bound(c => c.Specialite);
-              columns.Bound(c => c.Forme);
-              columns.Bound(c => c.Dose);
-              columns.Bound(c => c.Conditionnement);
-              columns.Bound(c => c.NumEnregistrement);
-              columns.Bound(c => c.Remboursable);
-              columns.Bound(c => c.TarifReference);
+                 .Width(20).Visible(false);
+              columns.Bound(c => c.NumPiece).Width(160);
+              columns.Bound(c => c.Date).Width(120);
+              columns.Bound(c => c.Validation).Width(120);
+              columns.Bound(c => c.Delivrance).Width(120);
 
           })
           .HtmlAttributes(new { style = "height: 350px;" })
@@ -71,42 +45,15 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
               .Ajax()
-              .Read(read => read.Action("ListeMedicaments", "Medicament")
+                                      .Read(read => read.Action("GetList", "Commande")
                   .Data("additionalData"))
           ))
 
 
 </div>
-
 <script type="text/javascript">
     var selectedIds = [];
     $(document).ready(function () {
-        $("#import-fomr").submit(function (evt) {
-            evt.preventDefault();
-            var formData = new FormData($(this)[0]);
-            var currentEffect = 'stretch';
-            $.when(run_waitMe(currentEffect), 
-            $.ajax({
-                url: '@Url.Action("ImportXls", "Medicament")',
-                type: 'POST',
-                data: formData,
-                async: true,
-                cache: false,
-                contentType: false,
-                enctype: 'multipart/form-data',
-                processData: false,
-                success: function () {
-                    $('#import-modal').waitMe('hide');
-                }
-
-            }));
-
-            return false;
-        });
-
-
-        //$("#file").kendoUpload();
-
         $(".menu *").prop('disabled', true);
         $("#return-btn").click(function (e) {
             e.preventDefault();
@@ -183,18 +130,7 @@
             $('#specialites').data('kendoGrid').dataSource.fetch();
         });
 
-
     });
-    function run_waitMe(effect) {
-        $('#import-modal').waitMe({
-            effect: effect,
-            text: 'Veuillez vous patienter ...',
-            bg: 'rgba(255,255,255,0.7)',
-            color: '#000'
-        });
-    }
-    
-   
     function updateMasterCheckbox() {
         var numChkBoxes = $('#specialites input[type=checkbox]:not([id=mastercheckbox])').length;
         var numChkBoxesChecked = $('#specialites input[type=checkbox][checked]:not([id=mastercheckbox])').length;
@@ -203,14 +139,9 @@
     function additionalData() {
         return {
 
-            specialiteId: $('#SpecialiteId').val(),
-            dciId: $('#DciId').val(),
-            nom: $('#NomCommerciale').val(),
-            code: $('#Code').val(),
-            nEnregistrement: $('#NumEnregistrement').val(),
-           labId: $('#LboratoireId').val()
+            libelle: $('#Libelle').val(),
+            code: $('#Code').val()
         };
 
     }
-
 </script>

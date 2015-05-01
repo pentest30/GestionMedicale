@@ -77,13 +77,13 @@ namespace Gm.UI.Areas.Gestion.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "pharmacien")]
-        public ActionResult NouvellePharmacie(PharmacieModel model)
+        public ActionResult NouvellePharmacie(PharmacieModel model, HttpPostedFileBase image)
         {
-            HttpPostedFileBase file = Request.Files[0];
-            if (file != null && file.ContentLength > 0)
+            
+            if (image != null && image.ContentLength > 0)
             {
-                var fileName = Path.GetFileName(file.FileName) + model.PropreitaireId;
-                model.Logo = SaveFile(fileName , file);
+                var fileName = model.PropreitaireId + Path.GetFileName(image.FileName);
+                model.Logo = SaveFile(fileName , image);
             }
             //model.PropreitaireId = Guid.Parse(ViewData["propId"].ToString());
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);

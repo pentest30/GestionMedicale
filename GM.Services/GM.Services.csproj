@@ -117,6 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commandes\CommandeRepository.cs" />
+    <Compile Include="Commandes\IServiceCommandes.cs" />
+    <Compile Include="Commandes\ServiceCommande.cs" />
     <Compile Include="Conditionnelts\ConditionnemeRepository.cs" />
     <Compile Include="Conditionnelts\IServiceConditionnement.cs" />
     <Compile Include="Conditionnelts\ServiceConditionnement.cs" />
@@ -126,7 +129,13 @@
     <Compile Include="Formes\FormeRepository.cs" />
     <Compile Include="Formes\ISrviceForme.cs" />
     <Compile Include="Formes\ServiceForme.cs" />
+    <Compile Include="Fournisseurs\FournisseurRepository.cs" />
+    <Compile Include="Fournisseurs\IServiceFournisseur.cs" />
+    <Compile Include="Fournisseurs\ServiceFournisseur.cs" />
     <Compile Include="Helpers\Existe.cs" />
+    <Compile Include="Magasins\IServiceMagasin.cs" />
+    <Compile Include="Magasins\MagasinRepository.cs" />
+    <Compile Include="Magasins\ServiceMagasin.cs" />
     <Compile Include="Medicaments\IServiceMedicmaent.cs" />
     <Compile Include="Medicaments\MedicamentRepository.cs" />
     <Compile Include="Medicaments\PictureRepository.cs" />
