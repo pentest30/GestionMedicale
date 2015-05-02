@@ -20,7 +20,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             return View();
         }
-        public ActionResult AllFormes([DataSourceRequest] DataSourceRequest request)
+        public ActionResult AllFormes(DataSourceRequest request)
         {
             return Json(_service.ListeFormes().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commandes\CommandeRepository.cs" />
+    <Compile Include="Commandes\CommdeLigneRepo.cs" />
     <Compile Include="Commandes\IServiceCommandes.cs" />
     <Compile Include="Commandes\ServiceCommande.cs" />
     <Compile Include="Conditionnelts\ConditionnemeRepository.cs" />

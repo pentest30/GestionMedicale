@@ -22,9 +22,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult ListSpecialite([DataSourceRequest] DataSourceRequest request , string libelle , string code)
+        public ActionResult ListSpecialite( DataSourceRequest request , string libelle , string code)
         {
-            var filter = new Specialite()
+            var filter = new Specialite
             {
                 Libelle = libelle,
                 Code = code

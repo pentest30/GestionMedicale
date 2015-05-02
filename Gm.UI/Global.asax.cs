@@ -24,6 +24,9 @@ namespace Gm.UI
                 .ForMember(x => x.UtilisateurRoles, o => o.MapFrom(x => x.UtilisateurRoles));
             Mapper.CreateMap<Pharmacie, PharmacieModel>().ForMember(x => x.Logo, o => o.MapFrom(x => x.LogoUrl));
             Mapper.CreateMap<PharmacieModel, Pharmacie>().ForMember(x => x.LogoUrl, o => o.MapFrom(x => x.Logo));
+            Mapper.CreateMap<Fournisseur, PharmacieModel>().ForMember(x => x.Logo, o => o.MapFrom(x => x.LogoUrl));
+            Mapper.CreateMap<PharmacieModel, Fournisseur>().ForMember(x => x.LogoUrl, o => o.MapFrom(x => x.Logo));
+          
             Mapper.CreateMap<Utilisateur, RegisterModel>();
             Mapper.CreateMap<MedicamentModel, Medicament>();
             Mapper.CreateMap<Medicament, MedicamentModel>()

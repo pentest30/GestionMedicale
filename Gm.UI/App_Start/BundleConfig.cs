@@ -40,14 +40,15 @@ namespace Gm.UI
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Content/file-upload/js/jquery.ui.widget.js",
                 "~/Content/file-upload/js/jquery.iframe-transport.js",
-                "~/Content/file-upload/js/jquery.fileupload.js",
+                "~/Content/file-upload/js/jquery.iframe-transport.js",
+                "~/combogrid/jquery.easyui.min.js",
+                "~/combogird/jquery/jquery-ui-1.10.1.custom.min.js",
                 "~/Scripts/select2.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/select2-bootstrap.css",
                 "~/Content/bootstrap-datepicker.min.css",
-
                 "~/Content/select2.css",
                 "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/Gestion/css").Include(

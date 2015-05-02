@@ -196,9 +196,6 @@ namespace GM.Services.Medicaments
         }
 
      
-
-      
-
         public bool UpdateRemboussement(Remboursement remboursement)
         {
             try
@@ -244,6 +241,20 @@ namespace GM.Services.Medicaments
                     m.NumEnregistrement.Equals(medicament.NumEnregistrement) ||
                     string.IsNullOrEmpty(medicament.NumEnregistrement)
                 select m;
+            return filter.Filter(_repository.SelectAll().AsQueryable());
+        }
+
+        public IEnumerable<Medicament> AutoCOmpleteListe(Medicament medicament)
+        {
+            var filter = from m in EntityFilter<Medicament>.AsQueryable()
+                where
+                    m.NomCommerciale.StartsWith(medicament.NomCommerciale)||
+                    string.IsNullOrEmpty(medicament.NomCommerciale) 
+                    ||m.Dci.Nom.StartsWith(medicament.Dci.Nom) 
+                    ||string.IsNullOrEmpty(medicament.Dci.Nom)
+                    || m.Dose.StartsWith(medicament.Dose)
+                    || string.IsNullOrEmpty(medicament.Dose)
+               select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }

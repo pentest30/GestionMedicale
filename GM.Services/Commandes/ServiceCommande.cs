@@ -8,10 +8,12 @@ namespace GM.Services.Commandes
     public class ServiceCommande:IServiceCommandes
     {
         private readonly IRepository<Commande> _repository;
+        private readonly IRepository<LigneCommande> _repositoryLigne;
 
-        public ServiceCommande(IRepository<Commande> repository )
+        public ServiceCommande(IRepository<Commande> repository , IRepository<LigneCommande> repositoryLigne  )
         {
             _repository = repository;
+            _repositoryLigne = repositoryLigne;
         }
 
         public IEnumerable<Commande> Liste(long id)
@@ -29,6 +31,23 @@ namespace GM.Services.Commandes
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public bool Insert(Commande commande, out long id)
+        {
+            try
+            {
+                _repository.Insert(commande);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                id = commande.Id;
             }
         }
 
@@ -50,6 +69,10 @@ namespace GM.Services.Commandes
             return _repository.FindSingle(x => x.Id == id);
         }
 
+        public LigneCommande GetSingleLigne(long id)
+        {
+            return _repositoryLigne.SelectById(id);
+        }        
         public bool Delete(long id)
         {
             try

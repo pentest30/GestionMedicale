@@ -55,7 +55,7 @@ namespace GM.Services.Commandes
 
         public IEnumerable<Commande> Find(Func<Commande, bool> predicate)
         {
-            return _db.Commandes.Where(predicate);
+            return _db.Commandes.Include("Fournisseur").Where(predicate);
         }
 
         public Commande FindSingle(Func<Commande, bool> predicate)

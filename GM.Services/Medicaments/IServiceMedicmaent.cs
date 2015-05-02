@@ -21,5 +21,6 @@ namespace GM.Services.Medicaments
         bool Existe(string nom);
         bool ImporteListe(string fileName );
         ParamStock GetParamStock(Medicament medicament, int entrpriseId);
+        IEnumerable<Medicament> AutoCOmpleteListe(Medicament medicament);
     }
 }

@@ -37,7 +37,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult GetList([DataSourceRequest] DataSourceRequest request)
+        public ActionResult GetList( DataSourceRequest request)
         {
             int? id;
             if (Session["entreprise"] != null)

@@ -29,10 +29,16 @@
                         .HeaderHtmlAttributes(new { style = "text-align:center" });
               columns.Bound(x => x.Id)
                  .Width(20).Visible(false);
-              columns.Bound(c => c.NumPiece).Width(160);
-              columns.Bound(c => c.Date).Width(120);
-              columns.Bound(c => c.Validation).Width(120);
-              columns.Bound(c => c.Delivrance).Width(120);
+              columns.Bound(c => c.NumPiece);
+              columns.Bound(c => c.Date);
+              if (User.IsInRole("pharmacien"))
+              {
+                  columns.Bound(c => c.Fournisseur.Nom).Title("Fournisseur");
+              }
+              columns.Bound(c => c.Validation);
+              columns.Bound(c => c.Delivrance);
+              columns.Bound(c => c.Ttc);
+              columns.Bound(c => c.Tva);
 
           })
           .HtmlAttributes(new { style = "height: 350px;" })
@@ -44,7 +50,8 @@
               .PageSizes(true)
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
-              .Ajax()
+                      .Ajax()
+                      .Aggregates(aggregates => aggregates.Add(p => p.Ttc).Sum())
                                       .Read(read => read.Action("GetList", "Commande")
                   .Data("additionalData"))
           ))

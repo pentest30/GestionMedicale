@@ -68,6 +68,7 @@ namespace Gm.UI
             container.RegisterType<IRepository<Magasin>, MagasinRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Commande>, CommandeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Fournisseur>, FournisseurRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<LigneCommande>, CommdeLigneRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceAdministrateur,ServiceAdministrateur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceSpecialite, ServiceSpecialite>(new PerRequestLifetimeManager());

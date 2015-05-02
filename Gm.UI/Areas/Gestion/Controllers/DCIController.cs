@@ -28,7 +28,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult ListDci([DataSourceRequest] DataSourceRequest request)
+        public ActionResult ListDci( DataSourceRequest request)
         {
             return Json(_serviceDci.ListeDcis().ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
         }

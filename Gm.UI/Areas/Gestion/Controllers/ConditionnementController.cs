@@ -21,7 +21,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             return View();
         }
-        public ActionResult AllConditionnements([DataSourceRequest] DataSourceRequest request)
+        public ActionResult AllConditionnements( DataSourceRequest request)
         {
             return Json(_service.Liste().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

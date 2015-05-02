@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AutoMapper;
+using GM.Services.Fournisseurs;
 using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
 using GM.Core;
@@ -17,12 +18,14 @@ namespace Gm.UI.Controllers
     {
         private readonly IServiceUtilisateur _service;
         private readonly IServicePharmacie _servicePharmacie;
+        private readonly IServiceFournisseur _serviceFournisseur;
         private readonly IEnumerable<Role> _roles;
         // GET: Account
-        public AccountController(IServiceUtilisateur service, IServicePharmacie servicePharmacie)
+        public AccountController(IServiceUtilisateur service, IServicePharmacie servicePharmacie , IServiceFournisseur serviceFournisseur)
         {
             _service = service;
             _servicePharmacie = servicePharmacie;
+            _serviceFournisseur = serviceFournisseur;
             _roles = _service.SelectRoles();
         }
         [HttpGet]
@@ -94,6 +97,10 @@ namespace Gm.UI.Controllers
                             {
                                 return RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = user.Id});
                             }
+                            case "distributeur":
+                            {
+                                return RedirectToAction("NouvelleEntreprise", "Gestion/Fournissseur", new { id = user.Id });
+                            }
                         }
                     }
                 }
@@ -133,9 +140,16 @@ namespace Gm.UI.Controllers
                         }
                         if (User.IsInRole("distributeur") || User.IsInRole("distributeur-vendeur"))
                         {
-
+                            if (role != null && role.Equals("distributeur"))
+                            {
+                                var pharmacieId = _serviceFournisseur.GetFournisseur(item.Id);
+                                return RedirectToAction("Index", "Gestion/Fournisseur", new { id = pharmacieId });
+                            }
+                            return ((item.EnrepriseId != null))
+                                ? RedirectToAction("Index", "Gestion/Fournisseur", new { id = item.EnrepriseId })
+                                : RedirectToAction("Index", "Home", new { area = "" });
                         }
-                        else if (User.IsInRole("medecin"))
+                        if (User.IsInRole("medecin"))
                         {
 
                         }
@@ -152,6 +166,14 @@ namespace Gm.UI.Controllers
                             return (pharmacieId == 0)
                                 ? RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = item.Id})
                                 : RedirectToAction("Info", "Home", new {area = ""});
+
+                        }
+                        if (role == "distributeur")
+                        {
+                            var pharmacieId = _serviceFournisseur.GetFournisseur(item.Id);
+                            return (pharmacieId == 0)
+                                ? RedirectToAction("NouvelleEntreprise", "Gestion/Fournisseur", new { id = item.Id })
+                                : RedirectToAction("Info", "Home", new { area = "" });
 
                         }
 

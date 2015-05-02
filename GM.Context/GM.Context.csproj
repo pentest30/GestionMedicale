@@ -86,14 +86,6 @@
     <Compile Include="Migrations\201504301014035_mg11.Designer.cs">
       <DependentUpon>201504301014035_mg11.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504301018028_mg112.cs" />
-    <Compile Include="Migrations\201504301018028_mg112.Designer.cs">
-      <DependentUpon>201504301018028_mg112.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504301018414_mg12.cs" />
-    <Compile Include="Migrations\201504301018414_mg12.Designer.cs">
-      <DependentUpon>201504301018414_mg12.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201504301310530_mhg14.cs" />
     <Compile Include="Migrations\201504301310530_mhg14.Designer.cs">
       <DependentUpon>201504301310530_mhg14.cs</DependentUpon>
@@ -143,12 +135,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504301014035_mg11.resx">
       <DependentUpon>201504301014035_mg11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504301018028_mg112.resx">
-      <DependentUpon>201504301018028_mg112.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504301018414_mg12.resx">
-      <DependentUpon>201504301018414_mg12.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504301310530_mhg14.resx">
       <DependentUpon>201504301310530_mhg14.cs</DependentUpon>

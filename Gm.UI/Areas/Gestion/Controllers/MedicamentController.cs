@@ -155,7 +155,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         }
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateRembousement([DataSourceRequest] DataSourceRequest request, Remboursement product)
+        public ActionResult UpdateRembousement(DataSourceRequest request, Remboursement product)
         {
             if (product != null && ModelState.IsValid)
             {
@@ -197,12 +197,12 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
-        public ActionResult GetListeRemb([DataSourceRequest] DataSourceRequest request,int? id)
+        public ActionResult GetListeRemb(DataSourceRequest request,int? id)
         {
             return Json(_service.GetListRemboursements(id).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult ListeMedicaments([DataSourceRequest] DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int? labId)
+        public ActionResult ListeMedicaments(DataSourceRequest request, int?  specialiteId , int? dciId , string nom, string code , string nEnregistrement , int? labId)
         {
             var filter = new Medicament
             {
@@ -222,15 +222,12 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             
             HttpPostedFileBase file = Request.Files[0]; 
-            if (file != null && file.ContentLength <= 0) return null;
-            if (file != null)
+            if (file == null || file.ContentLength <= 0) return null;
+            var fileName = Path.GetFileName(file.FileName);
+            if (fileName != null)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                if (fileName != null)
-                {
-                    _service.ImporteListe(SaveFile(fileName, file));
-                    return Json(true, JsonRequestBehavior.AllowGet);
-                }
+                _service.ImporteListe(SaveFile(fileName, file));
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             return RedirectToAction("Index");
         }

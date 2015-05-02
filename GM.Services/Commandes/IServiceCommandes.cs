@@ -7,8 +7,10 @@ namespace GM.Services.Commandes
     {
         IEnumerable<Commande> Liste(long id);
         bool Insert(Commande commande);
+        bool Insert(Commande commande , out long id);
         bool Update(Commande commande);
         Commande FindSingle(long id);
         bool Delete(long id);
+        LigneCommande GetSingleLigne(long id);
     }
 }

@@ -23,7 +23,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             return View();
         }
-        public ActionResult GetList([DataSourceRequest] DataSourceRequest request)
+        public ActionResult GetList(DataSourceRequest request)
         {
            return Json(_service.Liste().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

@@ -128,7 +128,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return null;
         }
 
-        public ActionResult AllUsers([DataSourceRequest] DataSourceRequest request, string pseudo, string email)
+        public ActionResult AllUsers( DataSourceRequest request, string pseudo, string email)
         {
             var user = new Utilisateur
             {

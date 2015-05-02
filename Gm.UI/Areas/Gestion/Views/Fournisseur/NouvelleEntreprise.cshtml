@@ -1,0 +1,15 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+@{
+    ViewBag.Title = "Nouvelle Entreprise ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Etap 2:<small> Créer une nouvelle Entreprise</small></h2>
+
+<hr />
+@{
+    Html.RenderPartial("_CreateEntreprise", Model);
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
