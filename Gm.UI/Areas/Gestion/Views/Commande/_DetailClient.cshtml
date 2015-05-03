@@ -1,0 +1,46 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+<style type="text/css">
+    .table-user-information > tbody > tr {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+        .table-user-information > tbody > tr:first-child {
+            border-top: 0;
+        }
+
+        .table-user-information > tbody > tr > td {
+            border-top: 0;
+        }
+</style>
+
+<table class="table table-user-information">
+    <tbody>
+        <tr>
+            <td>Pharmacie:</td>
+            <td>@Model.Nom</td>
+        </tr>
+        <tr>
+            <td>Tel:</td>
+            <td>@Model.Tel</td>
+        </tr>
+        <tr>
+            <td>Wilaya</td>
+            <td>@Model.Wilaya</td>
+        </tr>
+
+        <tr>
+       
+        <tr>
+            <td> Addresse</td>
+            <td>@Model.Commune</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><a href="@Model.Email">@Model.Email</a></td>
+        </tr>
+   
+
+    </tbody>
+</table>
+
+

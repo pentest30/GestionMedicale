@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using Gm.UI.Areas.Gestion.Models;
 using GM.Core.Models;
+using GM.Services.Commandes;
+using GM.Services.Fournisseurs;
 using GM.Services.Medicaments;
 using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
-using GM.Services.Commandes;
-using GM.Services.Fournisseurs;
-using Gm.UI.Areas.Gestion.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
@@ -151,6 +151,16 @@ namespace Gm.UI.Areas.Gestion.Controllers
             var list = Mapper.Map<IList<MedicamentModel>>(_serviceMedicmaent.AutoCOmpleteListe(filter));
            
             return Json(list.ToArray(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DetailLigne(long? id)
+        {
+            var commandes = Mapper.Map<IList<LigneComamndeModel>>( _service.GetLigneCommandes(Convert.ToInt32(id)));
+            foreach (var cmd in commandes)
+            {
+                cmd.Medicament = Mapper.Map <MedicamentModel>(_serviceMedicmaent.ListeMedicaments().FirstOrDefault(x => x.Id == cmd.MedicamentId));
+            }
+            return PartialView("_DetailsLignes", commandes.ToList());
         }
 
         public ActionResult ListeLigneCommandes(DataSourceRequest request,int? commandeId)

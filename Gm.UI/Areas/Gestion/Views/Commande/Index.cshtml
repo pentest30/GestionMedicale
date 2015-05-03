@@ -10,8 +10,8 @@
     Html.RenderPartial("_ListToolBar");
 }
 <div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
-    <h2>Commandes  </h2>
-    <hr />
+    <h2>Commandes </h2>
+    <hr/>
     <div id="alert"></div>
     @{
         Html.RenderPartial("_Search", new Commande());
@@ -22,13 +22,13 @@
           .Columns(columns =>
           {
               columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
-                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
-                        .Title("<input id='mastercheckbox' type='checkbox'/>")
-                        .Width(50)
-                        .HtmlAttributes(new { style = "text-align:center" })
-                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+                  .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                  .Title("<input id='mastercheckbox' type='checkbox'/>")
+                  .Width(50)
+                  .HtmlAttributes(new {style = "text-align:center"})
+                  .HeaderHtmlAttributes(new {style = "text-align:center"});
               columns.Bound(x => x.Id)
-                 .Width(20).Visible(false);
+                  .Width(20).Visible(false);
               columns.Bound(c => c.NumPiece);
               columns.Bound(c => c.Date);
               if (User.IsInRole("pharmacien"))
@@ -37,28 +37,31 @@
               }
               columns.Bound(c => c.Validation);
               columns.Bound(c => c.Delivrance);
-             
+
 
           })
-          .HtmlAttributes(new { style = "height: 350px;" })
+          .HtmlAttributes(new {style = "height: 350px;"})
           .Scrollable()
           .Sortable()
-                
-            //.Events(events => events.Change("OnChange"))
+
+          //.Events(events => events.Change("OnChange"))
           .Pageable(pageable => pageable
               .Refresh(true)
               .PageSizes(true)
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
-                      .Ajax()
-                    
-                                      .Read(read => read.Action("GetList", "Commande")
+              .Ajax()
+
+              .Read(read => read.Action("GetList", "Commande")
                   .Data("additionalData"))
           ))
-    
+
 
 
 </div>
+@{
+    Html.RenderPartial("_ModalDetail");
+}
 <script type="text/javascript">
     var selectedIds = [];
     $(document).ready(function () {
@@ -109,7 +112,30 @@
             window.location.href = '@Url.Action("Create")';
         });
         $("#update-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
             window.location.href = '@Url.Action("Update")' + '/' + selectedIds[0].replace("<", "").replace(">", "");
+        });
+        $("#details-cmd-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
+            $.ajax({
+                url: '@Url.Action("DetailLigne")' + '/' + selectedIds[0].replace("<", "").replace(">", ""),
+
+                type: 'POST',
+                success: function (data) {
+                    $("#dony").html(data);
+                    $("#myModal").modal("show");
+                },
+                error: function () {
+                }
+
+            });
+
         });
         $(document).on('change', '#specialites input[type=checkbox][id!=mastercheckbox]', function () {
             var $check = $(this);
