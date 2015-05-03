@@ -1,6 +1,20 @@
-﻿@using Kendo.Mvc.UI
-@model IEnumerable<Gm.UI.Areas.Gestion.Models.LigneComamndeModel>
-<div class="container-fluid" style="padding: 15px;  height: auto">
+﻿@using Gm.UI.Areas.Gestion.Models
+@using Kendo.Mvc.UI
+@model IEnumerable<LigneComamndeModel>
+
+
+
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#home" data-toggle="tab">
+            Lignes commande
+        </a>
+    </li>
+    <li><a href="#ios" data-toggle="tab">Client</a></li>
+
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="home"><div class="container-fluid" style="padding: 15px;  height: auto">
 
     @(Html.Kendo().Grid(Model)
           .Name("lignes")
@@ -31,4 +45,13 @@
 
 
 </div>
+    </div>
+    <div class="tab-pane fade" id="ios">
 
+     @{
+         Html.RenderPartial("_DetailClient", ViewData["client"] as PharmacieModel);
+    }
+    </div>
+
+
+</div>

@@ -155,6 +155,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult DetailLigne(long? id)
         {
+            var com = _service.FindSingle(Convert.ToInt64(id));
+            ViewData["client"] = Mapper.Map<PharmacieModel>(_servicePharmacie.SinglePharmacie(com.ClientId));
             var commandes = Mapper.Map<IList<LigneComamndeModel>>( _service.GetLigneCommandes(Convert.ToInt32(id)));
             foreach (var cmd in commandes)
             {
