@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
@@ -28,27 +30,32 @@ namespace GM.Services.Commandes
 
         public void Insert(LigneCommande item)
         {
-            throw new NotImplementedException();
+            _db.LigneCommandes.Add(item);
+            Save();
         }
 
         public void Update(LigneCommande item)
         {
-            throw new NotImplementedException();
+            _db.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(object id)
         {
-            throw new NotImplementedException();
+            var item = SelectById(id);
+            if (item == null) return;
+            _db.Entry(item).State= EntityState.Deleted;
+            Save();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public IEnumerable<LigneCommande> Find(Func<LigneCommande, bool> predicate)
         {
-            throw new NotImplementedException();
+           return _db.LigneCommandes.Include(x=>x.Medicament).Where(predicate);
         }
 
         public LigneCommande FindSingle(Func<LigneCommande, bool> predicate)

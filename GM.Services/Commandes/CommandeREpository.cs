@@ -20,7 +20,7 @@ namespace GM.Services.Commandes
 
         public IEnumerable<Commande> SelectAll()
         {
-            return _db.Commandes;
+            return _db.Commandes.Include(x => x.LigneCommandes);
         }
 
         public Commande SelectById(object id)
@@ -55,12 +55,12 @@ namespace GM.Services.Commandes
 
         public IEnumerable<Commande> Find(Func<Commande, bool> predicate)
         {
-            return _db.Commandes.Include("Fournisseur").Where(predicate);
+            return _db.Commandes.Include(x => x.LigneCommandes.Select(y => y.Medicament)).Include("Fournisseur").Where(predicate);
         }
 
         public Commande FindSingle(Func<Commande, bool> predicate)
         {
-            return _db.Commandes.FirstOrDefault(predicate);
+            return _db.Commandes.Include(x =>x.LigneCommandes.Select(y=>y.Medicament)).FirstOrDefault(predicate);
         }
 
         public IEnumerable<Commande> GetAllLazyLoad(params Expression<Func<Commande, object>>[] children)

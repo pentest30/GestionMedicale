@@ -248,11 +248,11 @@ namespace GM.Services.Medicaments
         {
             var filter = from m in EntityFilter<Medicament>.AsQueryable()
                 where
-                    m.NomCommerciale.StartsWith(medicament.NomCommerciale)||
-                    string.IsNullOrEmpty(medicament.NomCommerciale) 
-                    ||m.Dci.Nom.StartsWith(medicament.Dci.Nom) 
+                    m.NomCommerciale.Contains(medicament.NomCommerciale)||
+                    string.IsNullOrEmpty(medicament.NomCommerciale)
+                    || m.Dci.Nom.Contains(medicament.Dci.Nom) 
                     ||string.IsNullOrEmpty(medicament.Dci.Nom)
-                    || m.Dose.StartsWith(medicament.Dose)
+                    || m.Dose.Contains(medicament.Dose)
                     || string.IsNullOrEmpty(medicament.Dose)
                select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());

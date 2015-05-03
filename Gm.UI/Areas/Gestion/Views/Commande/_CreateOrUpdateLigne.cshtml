@@ -1,18 +1,22 @@
 ﻿@model GM.Core.Models.LigneCommande
+@{
+    //Model.CommandeId = Convert.ToInt64(ViewData["id"]);
+}
 <link href="~/combogrid/themes/default/easyui.css" rel="stylesheet" />
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateUpdateLigne", "Commande", FormMethod.Post, new { id = "commande-form" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        @Html.HiddenFor(model => model.CommandeId)
 
         <div class="control-group">
             @Html.LabelFor(model => model.MedicamentId, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-                <input id="cc" name="MedocamentId" style="height: 30px">
-                @Html.ValidationMessageFor(model => model.MedicamentId, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.MedicamentId)
+                <input id="cc"  style="height: 30px">
+                @Html.ValidationMessageFor(model => model.MedicamentId, "", new {@class = "text-danger"})
             </div>
         </div>
 
@@ -29,10 +33,22 @@
 <script>
     $(document).ready(function () {
         $("#save-modal-btn").click(function () {
+            
+            $("#MedicamentId").val($('#cc').combogrid('getValue'));
            
+            $.ajax({
+                url: '@Url.Action("CreateUpdateLigne", "Commande", new { area = "Gestion" })',
+                data: $("#commande-form").serialize(),
+                type: 'POST',
+                success: function () {
+                    $('#specialites').data('kendoGrid').dataSource.read();
+                },
+                error: function () {
+                }
+            });
         });
         $('#cc').combogrid({
-            panelWidth: 500,
+            panelWidth: 650,
             url: '@Url.Action("SearchMedicament")',
             idField: 'Id',
             textField: 'NomCommerciale',
@@ -40,11 +56,12 @@
             fitColumns: true,
             columns: [
                 [
-                    { field: 'Id', title: 'Product ID', width: 80, visibility: false },
-                    { field: 'NomCommerciale', title: 'Nom commerciale', align: 'right', width: 160 },
-                    { field: 'Dose', title: 'Dose', align: 'right', width: 60 },
+                    { field: 'Id', title: 'ID', width: 80, visibility: false },
+                    { field: 'NomCommerciale', title: 'Nom commerciale', align: 'right' },
+                    { field: 'Dose', title: 'Dose', width: 90 },
                     { field: 'Forme', title: 'Forme', width: 150 },
-                    { field: 'Dci', title: 'Dci', width: 150 }
+                    { field: 'Dci', title: 'Dci', width: 150 },
+                     { field: 'Conditionnement', title: 'Conditionnement', width: 150 }
                 ]
             ]
         });

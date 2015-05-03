@@ -2,7 +2,7 @@
 @using GM.Core.Models
 @model IEnumerable<LigneCommande>
 
-<div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
+<div class="container-fluid" style="padding: 15px;  height: auto">
     
     <div id="alert"></div>
      @(Html.Kendo().Grid(Model)
@@ -18,11 +18,13 @@
                         .HeaderHtmlAttributes(new { style = "text-align:center" });
               columns.Bound(x => x.Id)
                  .Width(20).Visible(false);
-             // columns.Bound(c => c.Medicament.NomCommerciale).Width(160);
+              columns.Bound(c => c.Medicament.NomCommerciale);
+              columns.Bound(c => c.Medicament.Dose).Width(100);
               columns.Bound(c => c.Qnt).Width(120);
+              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
 
           })
-          .HtmlAttributes(new { style = "height: 350px;" })
+          
           .Scrollable()
           .Sortable()
             //.Events(events => events.Change("OnChange"))
@@ -32,8 +34,11 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
               .Ajax()
-                              .Read(read => read.Action("ListSpecialite", "Specialite")
+                       .Model(model => model.Id(p => p.Id))
+              .Read(read => read.Action("ListeLigneCommandes", "Commande")
                   .Data("additionalData"))
+                            .Update(update => update.Action("UpdateRembousement", "Medicament"))
+                        .Destroy(update => update.Action("EditingInline_Destroy", "Grid"))
           ))
 
 
@@ -126,8 +131,8 @@
     function additionalData() {
         return {
 
-            libelle: $('#Libelle').val(),
-            code: $('#Code').val()
+            commandeId: '@ViewData["id"]'
+            
         };
 
     }

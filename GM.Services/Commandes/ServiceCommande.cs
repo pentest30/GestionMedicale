@@ -72,7 +72,52 @@ namespace GM.Services.Commandes
         public LigneCommande GetSingleLigne(long id)
         {
             return _repositoryLigne.SelectById(id);
-        }        
+        }
+
+        public IEnumerable<LigneCommande> GetLigneCommandes( int commandeId )
+        {
+            return _repositoryLigne.Find(x => x.CommandeId == commandeId);
+        } 
+
+        public bool InsertLigne(LigneCommande ligne)
+        {
+            try
+            {
+                _repositoryLigne.Insert(ligne);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateLigne(LigneCommande ligne)
+        {
+            try
+            {
+                _repositoryLigne.Update(ligne);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteLigne(int id)
+        {
+            try
+            {
+                _repositoryLigne.Delete(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Delete(long id)
         {
             try

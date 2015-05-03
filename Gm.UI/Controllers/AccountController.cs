@@ -99,7 +99,7 @@ namespace Gm.UI.Controllers
                             }
                             case "distributeur":
                             {
-                                return RedirectToAction("NouvelleEntreprise", "Gestion/Fournissseur", new { id = user.Id });
+                                return RedirectToAction("NouvelleEntreprise", "Gestion/Fournisseur", new { id = user.Id });
                             }
                         }
                     }

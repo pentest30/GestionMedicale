@@ -78,6 +78,15 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
             return View(model);
         }
+
+        public ActionResult Update(long ? id)
+        {
+            if (id == null) return HttpNotFound();
+            var model = _service.FindSingle(Convert.ToInt64(id));
+            ViewData["id"] = model.Id;
+            ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom", model.FournisseurId);
+            return View(model);
+        }
         [HttpPost]
         public ActionResult Create(Commande model , bool continuer)
         {
@@ -95,16 +104,32 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
             }
             if (User.IsInRole("pharmacien")) model.ClientId = Convert.ToInt32(Session["entreprise"]);
-            
-            
             return (continuer) ? View(model) : View("Index");
         }
-        public ActionResult DetailCommade(long? id)
+        [HttpPost]
+        public ActionResult CreateUpdateLigne(LigneCommande model)
         {
-            if (id == null || id == 0) return PartialView("_CreateOrUpdateLigne" , new LigneCommande());
+            if (ModelState.IsValid)
+            {
+                var b = (model.Id == 0) ? _service.InsertLigne(model) : _service.UpdateLigne(model);
+                dynamic data = new
+                {
+                    message = b ? SuccessMessage() : ErrorMessage()
+                };
+                ViewData["id"] = model.CommandeId;
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            return View();
+        }
+
+        public ActionResult DetailCommade(long? id, long? commandeId)
+        {
+            if (id == null || id == 0)
+                return PartialView("_CreateOrUpdateLigne", new LigneCommande {CommandeId = Convert.ToInt64(commandeId)});
             var ligne = _service.GetSingleLigne(Convert.ToInt64(id));
             return PartialView("_CreateOrUpdateLigne", ligne);
         }
+
         [HttpPost]
         public ActionResult SearchMedicament()
         {
@@ -127,6 +152,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
            
             return Json(list.ToArray(), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ListeLigneCommandes(DataSourceRequest request,int? commandeId)
+        {
+            return Json(_service.GetLigneCommandes(Convert.ToInt32(commandeId)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        private string SuccessMessage()
+        {
+            return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
+        }
+        private string ErrorMessage()
+        {
+            return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
+        }
+        
 
     }
 }

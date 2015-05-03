@@ -12,5 +12,9 @@ namespace GM.Services.Commandes
         Commande FindSingle(long id);
         bool Delete(long id);
         LigneCommande GetSingleLigne(long id);
+        bool InsertLigne(LigneCommande ligne);
+        bool UpdateLigne(LigneCommande ligne);
+        bool DeleteLigne(int id);
+        IEnumerable<LigneCommande> GetLigneCommandes(int commandeId);
     }
 }

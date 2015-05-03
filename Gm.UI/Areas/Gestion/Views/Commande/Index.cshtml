@@ -37,13 +37,13 @@
               }
               columns.Bound(c => c.Validation);
               columns.Bound(c => c.Delivrance);
-              columns.Bound(c => c.Ttc);
-              columns.Bound(c => c.Tva);
+             
 
           })
           .HtmlAttributes(new { style = "height: 350px;" })
           .Scrollable()
           .Sortable()
+                
             //.Events(events => events.Change("OnChange"))
           .Pageable(pageable => pageable
               .Refresh(true)
@@ -51,10 +51,11 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
                       .Ajax()
-                      .Aggregates(aggregates => aggregates.Add(p => p.Ttc).Sum())
+                    
                                       .Read(read => read.Action("GetList", "Commande")
                   .Data("additionalData"))
           ))
+    
 
 
 </div>
