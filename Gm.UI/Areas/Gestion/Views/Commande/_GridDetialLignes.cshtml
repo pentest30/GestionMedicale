@@ -1,0 +1,28 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<Gm.UI.Areas.Gestion.Models.LigneComamndeModel>
+@(Html.Kendo().Grid(Model)
+          .Name("lignes")
+
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Medicament.Specialite);
+              columns.Bound(c => c.Medicament.Dci);
+              columns.Bound(c => c.Medicament.Forme);
+              columns.Bound(c => c.Medicament.NomCommerciale);
+              columns.Bound(c => c.Medicament.Dose).Width(100);
+              columns.Bound(c => c.Qnt).Width(120);
+
+          })
+
+          .Scrollable()
+          .Sortable()
+        //.Events(events => events.Change("OnChange"))
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .ServerOperation(false)
+                 )
+)

@@ -22,18 +22,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServicePharmacie _servicePharmacie;
         private readonly IServiceUtilisateur _serviceUtilisateur;
         private readonly IServiceMedicmaent _serviceMedicmaent;
+        private readonly IServiceFournisseur _serviceFournisseur;
         private readonly IEnumerable<Fournisseur> _liste; 
 
         public CommandeController(IServiceCommandes service, 
             IServicePharmacie servicePharmacie,
             IServiceUtilisateur serviceUtilisateur, 
             IServiceFournisseur serviceFournisseur , 
-            IServiceMedicmaent serviceMedicmaent)
+            IServiceMedicmaent serviceMedicmaent )
         {
             _service = service;
             _servicePharmacie = servicePharmacie;
             _serviceUtilisateur = serviceUtilisateur;
             _serviceMedicmaent = serviceMedicmaent;
+            _serviceFournisseur = serviceFournisseur;
             _liste = serviceFournisseur.GeltList();
         }
 
@@ -43,7 +45,15 @@ namespace Gm.UI.Areas.Gestion.Controllers
             if (Session["entreprise"] == null)
             {
                 var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-                Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+                if (User.IsInRole("pharmacien"))
+                {
+                    Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+                }
+                else if (User.IsInRole("distributeur"))
+                {
+                    Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
+                }
+                
             }
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom");
             return View();
@@ -62,6 +72,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return Json(_service.Liste(Convert.ToInt32(id)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+        [Authorize(Roles = "pharmacien")]
         public ActionResult Create()
         {
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom");
@@ -78,7 +89,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
             return View(model);
         }
-
+         [Authorize(Roles = "pharmacien")]
         public ActionResult Update(long ? id)
         {
             if (id == null) return HttpNotFound();
@@ -88,6 +99,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = "pharmacien")]
         public ActionResult Create(Commande model , bool continuer)
         {
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom" , model.FournisseurId);
@@ -107,6 +119,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return (continuer) ? View(model) : View("Index");
         }
         [HttpPost]
+        [Authorize(Roles = "pharmacien")]
         public ActionResult CreateUpdateLigne(LigneCommande model)
         {
             if (ModelState.IsValid)
@@ -131,6 +144,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "pharmacien")]
         public ActionResult SearchMedicament()
         {
             var name = Request["q"];

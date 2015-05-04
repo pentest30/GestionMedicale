@@ -8,7 +8,15 @@
 <div style="margin: 10px;">
     <div   class=" navbar navbar-inverses " style="padding: 0">
         @{
-            Html.RenderPartial("_PharmacieMenu");
+            if (User.IsInRole("pharmacien"))
+            {
+                Html.RenderPartial("_PharmacieMenu");
+            }
+            if (User.IsInRole("distributeur"))
+            {
+                Html.RenderPartial("_MenuDistributeur");
+            }
+           
         }
     </div>
     <div>

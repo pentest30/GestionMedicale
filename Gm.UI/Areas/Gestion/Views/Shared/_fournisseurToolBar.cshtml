@@ -1,0 +1,21 @@
+﻿<div class="navbar">
+    <nav class="navbar-inner navbar-fixed-top    " style="margin-top: 40px;">
+        <div>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><button id="add-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class="icon-white icon-ok"></i> Valider la commande</button></li>
+                     <li><button id="delete-cmd-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class=" icon-trash"></i> Supprimer</button></li>
+                    <li><button id="return-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class=" icon-lock"></i> Fermer</button></li>
+                   
+                    @if (Request.RawUrl.Contains("Commande"))
+                    {
+                        <li><button id="details-cmd-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class=" icon-list"></i> Détails commande</button></li>
+
+
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>

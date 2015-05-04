@@ -1,57 +1,43 @@
 ﻿@using Gm.UI.Areas.Gestion.Models
-@using Kendo.Mvc.UI
 @model IEnumerable<LigneComamndeModel>
 
+@if (User.IsInRole("distributeur"))
+{
 
 
-<ul id="myTab" class="nav nav-tabs">
-    <li class="active">
-        <a href="#home" data-toggle="tab">
-            Lignes commande
-        </a>
-    </li>
-    <li><a href="#ios" data-toggle="tab">Client</a></li>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#home" data-toggle="tab">
+                Lignes commande
+            </a>
+        </li>
+        <li><a href="#ios" data-toggle="tab">Client</a></li>
 
-</ul>
-<div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade in active" id="home"><div class="container-fluid" style="padding: 15px;  height: auto">
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+            <div class="container-fluid" style="padding: 15px;  height: auto">
 
-    @(Html.Kendo().Grid(Model)
-          .Name("lignes")
-
-          .Columns(columns =>
-          {
-              columns.Bound(c => c.Medicament.Specialite);
-              columns.Bound(c => c.Medicament.Dci);
-              columns.Bound(c => c.Medicament.Forme);
-              columns.Bound(c => c.Medicament.NomCommerciale);
-              columns.Bound(c => c.Medicament.Dose).Width(100);
-              columns.Bound(c => c.Qnt).Width(120);
-
-          })
-
-          .Scrollable()
-          .Sortable()
-            //.Events(events => events.Change("OnChange"))
-          .Pageable(pageable => pageable
-              .Refresh(true)
-              .PageSizes(true)
-              .ButtonCount(5))
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .ServerOperation(false)
-                 )
-    )
+                @{
+                    Html.RenderPartial("_GridDetialLignes", Model);
+                }
 
 
-</div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ios">
+
+            @{
+                 Html.RenderPartial("_DetailClient", ViewData["client"] as PharmacieModel);
+            }
+        </div>
+
+
     </div>
-    <div class="tab-pane fade" id="ios">
-
-     @{
-         Html.RenderPartial("_DetailClient", ViewData["client"] as PharmacieModel);
-    }
-    </div>
-
-
-</div>
+}
+else
+{
+   
+    Html.RenderPartial("_GridDetialLignes", Model);
+   
+}

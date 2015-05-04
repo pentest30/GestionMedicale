@@ -520,6 +520,7 @@
     <Content Include="Content\file-upload\js\jquery.ui.widget.js" />
     <Content Include="Content\file-upload\js\main.js" />
     <Content Include="Content\file-upload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\bootstrap-progressbar.js" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="data1\images\8508dbed85.jpg" />
@@ -970,6 +971,15 @@
     <Content Include="Areas\Gestion\Views\Commande\_ModalDetail.cshtml" />
     <Content Include="Areas\Gestion\Views\Commande\_DetailsLignes.cshtml" />
     <Content Include="Areas\Gestion\Views\Commande\_DetailClient.cshtml" />
+    <Content Include="Areas\Gestion\Views\Commande\_GridDetialLignes.cshtml" />
+    <Content Include="Areas\Gestion\Views\Shared\_MenuDistributeur.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\Index.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Gestion\Views\Shared\_fournisseurToolBar.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -1356,7 +1366,6 @@
     <Folder Include="App_Data\photos\poduits\" />
     <Folder Include="App_Data\photos\profils\" />
     <Folder Include="App_Data\uploads\" />
-    <Folder Include="Areas\Gestion\Views\Fournissseur\" />
     <Folder Include="Areas\Gestion\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>

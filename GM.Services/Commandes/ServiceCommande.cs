@@ -18,7 +18,7 @@ namespace GM.Services.Commandes
 
         public IEnumerable<Commande> Liste(long id)
         {
-            return _repository.Find(x => x.ClientId == id);
+            return _repository.Find(x => x.ClientId == id || x.FournisseurId== id);
         }
 
         public bool Insert(Commande commande)
