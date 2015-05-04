@@ -67,7 +67,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             GetEntrepriseId();
             ViewData["magasin"] = new SelectList(_serviceMagasin.Liste(Convert.ToInt32(Session["entreprise"])), "Id",
                 "Libelle");
-            var model = new BonEntree()
+            var model = new BonEntree
             {
                 ClientId = Convert.ToInt32(Session["entreprise"])
             };

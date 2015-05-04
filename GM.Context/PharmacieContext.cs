@@ -26,11 +26,13 @@ namespace GM.Context
         public DbSet<Medicament> Medicaments { get; set; }
         public DbSet<ParamStock> ParamStocks { get; set; }
         public DbSet<BonEntree> BonEntrees { get; set; }
-        public DbSet<LigneEntree> LigneEntrees { get; set; }
+        public DbSet<LigneEntreeMagasin> LigneEntreeMagasins { get; set; }
         public DbSet<MedicamentPicture> MedicamentPicture { get; set; }
         public DbSet<PointVente> PointVentes { get; set; }
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<LigneCommande> LigneCommandes { get; set; }
+        public DbSet<LigneEntree> LigneEntrees { get; set; }
+        public DbSet<Entree> Entrees { get; set; }
 
 
 

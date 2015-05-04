@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System; 
 
 namespace GM.Core.Models
 {
-    public class LigneEntree 
+    public class LigneEntree
     {
         public LigneEntree()
         {
-            BonEntree = new BonEntree();
+            Entree = new Entree();
         }
         public int Id { get; set; }
 
@@ -16,15 +16,13 @@ namespace GM.Core.Models
 
         public int Qnt { get; set; }
         public decimal Montant { get; set; }
-
-        //public decimal? Montant { get; set; }
         public decimal  PrixVente { get; set; }
         public decimal PrixAchat { get; set; }
-        public long BonEntreeId { get; set; }
+        public long EntreeId { get; set; }
         public DateTime? DateFabrication { get; set; }
         public DateTime? DatePeremption { get; set; }
         public decimal? TauxBenifice { get; set; }
-        public BonEntree BonEntree { get; set; }
+        public Entree Entree { get; set; }
         public Medicament Medicament { get; set; }
     }
 }

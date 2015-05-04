@@ -11,10 +11,10 @@ namespace GM.Services.Entrees
         bool Update(BonEntree commande);
         BonEntree FindSingle(long id);
         bool Delete(long id);
-        LigneEntree GetSingleLigne(long id);
-        bool InsertLigne(LigneEntree ligne);
-        bool UpdateLigne(LigneEntree ligne);
+        LigneEntreeMagasin GetSingleLigne(long id);
+        bool InsertLigne(LigneEntreeMagasin ligne);
+        bool UpdateLigne(LigneEntreeMagasin ligne);
         bool DeleteLigne(int id);
-        IEnumerable<LigneEntree> GetLigneCommandes(int entreeId);
+        IEnumerable<LigneEntreeMagasin> GetLigneCommandes(int entreeId);
     }
 }

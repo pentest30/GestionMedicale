@@ -53,6 +53,7 @@
     <Compile Include="Models\Commande.cs" />
     <Compile Include="Models\Conditionnement.cs" />
     <Compile Include="Models\Dci.cs" />
+    <Compile Include="Models\Entree.cs" />
     <Compile Include="Models\Entreprise.cs" />
     <Compile Include="Models\Forme.cs" />
     <Compile Include="Models\Fournisseur.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Models\Laboratoire.cs" />
     <Compile Include="Models\LigneCommande.cs" />
     <Compile Include="Models\LigneEntree.cs" />
+    <Compile Include="Models\LigneEntreeMagasin.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Medicament.cs" />
     <Compile Include="Models\MedicamentPicture.cs" />

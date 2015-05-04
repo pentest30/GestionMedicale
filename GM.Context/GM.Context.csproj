@@ -46,61 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201504101207299_m1.cs" />
-    <Compile Include="Migrations\201504101207299_m1.Designer.cs">
-      <DependentUpon>201504101207299_m1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504121054050_mg6.cs" />
-    <Compile Include="Migrations\201504121054050_mg6.Designer.cs">
-      <DependentUpon>201504121054050_mg6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504141254102_mg2.cs" />
-    <Compile Include="Migrations\201504141254102_mg2.Designer.cs">
-      <DependentUpon>201504141254102_mg2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504181141411_lj25.cs" />
-    <Compile Include="Migrations\201504181141411_lj25.Designer.cs">
-      <DependentUpon>201504181141411_lj25.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504181146324_lj2.cs" />
-    <Compile Include="Migrations\201504181146324_lj2.Designer.cs">
-      <DependentUpon>201504181146324_lj2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504181147423_lj21.cs" />
-    <Compile Include="Migrations\201504181147423_lj21.Designer.cs">
-      <DependentUpon>201504181147423_lj21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504241149013_mg54.cs" />
-    <Compile Include="Migrations\201504241149013_mg54.Designer.cs">
-      <DependentUpon>201504241149013_mg54.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504241653472_mg55.cs" />
-    <Compile Include="Migrations\201504241653472_mg55.Designer.cs">
-      <DependentUpon>201504241653472_mg55.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504251402285_mh154.cs" />
-    <Compile Include="Migrations\201504251402285_mh154.Designer.cs">
-      <DependentUpon>201504251402285_mh154.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504301014035_mg11.cs" />
-    <Compile Include="Migrations\201504301014035_mg11.Designer.cs">
-      <DependentUpon>201504301014035_mg11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504301310530_mhg14.cs" />
-    <Compile Include="Migrations\201504301310530_mhg14.Designer.cs">
-      <DependentUpon>201504301310530_mhg14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505041001474_gh14.cs" />
-    <Compile Include="Migrations\201505041001474_gh14.Designer.cs">
-      <DependentUpon>201505041001474_gh14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505041151341_gh145.cs" />
-    <Compile Include="Migrations\201505041151341_gh145.Designer.cs">
-      <DependentUpon>201505041151341_gh145.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505041300270_gh1447.cs" />
-    <Compile Include="Migrations\201505041300270_gh1447.Designer.cs">
-      <DependentUpon>201505041300270_gh1447.cs</DependentUpon>
+    <Compile Include="Migrations\201505041807523_fg144.cs" />
+    <Compile Include="Migrations\201505041807523_fg144.Designer.cs">
+      <DependentUpon>201505041807523_fg144.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
@@ -118,47 +66,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504101207299_m1.resx">
-      <DependentUpon>201504101207299_m1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504121054050_mg6.resx">
-      <DependentUpon>201504121054050_mg6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504141254102_mg2.resx">
-      <DependentUpon>201504141254102_mg2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504181141411_lj25.resx">
-      <DependentUpon>201504181141411_lj25.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504181146324_lj2.resx">
-      <DependentUpon>201504181146324_lj2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504181147423_lj21.resx">
-      <DependentUpon>201504181147423_lj21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504241149013_mg54.resx">
-      <DependentUpon>201504241149013_mg54.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504241653472_mg55.resx">
-      <DependentUpon>201504241653472_mg55.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504251402285_mh154.resx">
-      <DependentUpon>201504251402285_mh154.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504301014035_mg11.resx">
-      <DependentUpon>201504301014035_mg11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504301310530_mhg14.resx">
-      <DependentUpon>201504301310530_mhg14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505041001474_gh14.resx">
-      <DependentUpon>201505041001474_gh14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505041151341_gh145.resx">
-      <DependentUpon>201505041151341_gh145.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505041300270_gh1447.resx">
-      <DependentUpon>201505041300270_gh1447.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505041807523_fg144.resx">
+      <DependentUpon>201505041807523_fg144.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

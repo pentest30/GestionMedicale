@@ -9,7 +9,7 @@ using GM.Core.Models;
 
 namespace GM.Services.Entrees
 {
-    public class LigneEntreeRepo:IRepository<LigneEntree>
+    public class LigneEntreeRepo:IRepository<LigneEntreeMagasin>
     {
          private readonly PharmacieContext _db;
 
@@ -18,23 +18,23 @@ namespace GM.Services.Entrees
             _db = db;
         }
 
-        public IEnumerable<LigneEntree> SelectAll()
+        public IEnumerable<LigneEntreeMagasin> SelectAll()
         {
             throw new NotImplementedException();
         }
 
-        public LigneEntree SelectById(object id)
+        public LigneEntreeMagasin SelectById(object id)
         {
-            return _db.LigneEntrees.Find(id);
+            return _db.LigneEntreeMagasins.Find(id);
         }
 
-        public void Insert(LigneEntree item)
+        public void Insert(LigneEntreeMagasin item)
         {
-            _db.LigneEntrees.Add(item);
+            _db.LigneEntreeMagasins.Add(item);
             Save();
         }
 
-        public void Update(LigneEntree item)
+        public void Update(LigneEntreeMagasin item)
         {
             _db.Entry(item).State = EntityState.Modified;
             Save();
@@ -53,22 +53,22 @@ namespace GM.Services.Entrees
             _db.SaveChanges();
         }
 
-        public IEnumerable<LigneEntree> Find(Func<LigneEntree, bool> predicate)
+        public IEnumerable<LigneEntreeMagasin> Find(Func<LigneEntreeMagasin, bool> predicate)
         {
-           return _db.LigneEntrees.Include(x=>x.Medicament).Where(predicate);
+           return _db.LigneEntreeMagasins.Include(x=>x.Medicament).Where(predicate);
         }
 
-        public LigneEntree FindSingle(Func<LigneEntree, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<LigneEntree> GetAllLazyLoad(params Expression<Func<LigneEntree, object>>[] children)
+        public LigneEntreeMagasin FindSingle(Func<LigneEntreeMagasin, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exist(Func<LigneEntree, bool> predicate)
+        public IEnumerable<LigneEntreeMagasin> GetAllLazyLoad(params Expression<Func<LigneEntreeMagasin, object>>[] children)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exist(Func<LigneEntreeMagasin, bool> predicate)
         {
             throw new NotImplementedException();
         }

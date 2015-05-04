@@ -81,17 +81,17 @@ namespace GM.Services.Entrees
            }
        }
 
-       public LigneEntree GetSingleLigne(long id)
+       public LigneEntreeMagasin GetSingleLigne(long id)
        {
            throw new NotImplementedException();
        }
 
-       public bool InsertLigne(LigneEntree ligne)
+       public bool InsertLigne(LigneEntreeMagasin ligne)
        {
            throw new NotImplementedException();
        }
 
-       public bool UpdateLigne(LigneEntree ligne)
+       public bool UpdateLigne(LigneEntreeMagasin ligne)
        {
            throw new NotImplementedException();
        }
@@ -101,7 +101,7 @@ namespace GM.Services.Entrees
            throw new NotImplementedException();
        }
 
-       public IEnumerable<LigneEntree> GetLigneCommandes(int entreeId)
+       public IEnumerable<LigneEntreeMagasin> GetLigneCommandes(int entreeId)
        {
            throw new NotImplementedException();
        }
