@@ -13,13 +13,15 @@ namespace GM.Core.Models
 
         public long Id { get; set; }
          [Display(Name = "Fournisseur")]
+         [Required]
         public int FournisseurId { get; set; }
-
+         [Required]
         public int ClientId { get; set; }
         [Display(Name = "N Bon d'netrée")]
-
+        [Required]
         public string NumPiece { get; set; }
-
+         [Required]
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
         public decimal? Tva { get; set; }
@@ -28,6 +30,7 @@ namespace GM.Core.Models
 
         public decimal? Tht { get; set; }
         [Display(Name = "Magasin")]
+        [Required]
         public int MagasinId { get; set; }
         public Magasin Magasin { get; set; }
         public Fournisseur Fournisseur { get; set; }

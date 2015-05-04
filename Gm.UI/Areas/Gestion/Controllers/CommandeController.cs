@@ -44,24 +44,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
         // GET: Gestion/Commande
         public ActionResult Index()
         {
-            Session["entreprise"] = null;
-            var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-            if (User.IsInRole("pharmacien"))
-            {
-                Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
-              
-            }
-            else if (User.IsInRole("distributeur"))
-            {
-                Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
-               
-            }
+            GetEntrepriseId();
             ViewData["pharmacien"] = new SelectList(_listeClients, "Id", "Nom");
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom");
-            
-           
-            return View();
+           return View();
         }
+
+     
+
         public ActionResult GetList( DataSourceRequest request)
         {
             return Json(_service.Liste(Convert.ToInt32(Convert.ToInt32(Session["entreprise"]))).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -186,7 +176,19 @@ namespace Gm.UI.Areas.Gestion.Controllers
         {
             return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
         }
-        
+        private void GetEntrepriseId()
+        {
+            Session["entreprise"] = null;
+            var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
+            if (User.IsInRole("pharmacien"))
+            {
+                Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+            }
+            else if (User.IsInRole("distributeur"))
+            {
+                Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
+            }
+        }
 
     }
 }

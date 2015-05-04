@@ -16,7 +16,8 @@ namespace GM.Services.Entrees
 
        public IEnumerable<BonEntree> Liste(long id)
        {
-           return _repository.Find(x => x.ClientId == id );
+           var result = _repository.Find(x => x.ClientId == id);
+           return result;
        }
 
        public bool Insert(BonEntree commande)

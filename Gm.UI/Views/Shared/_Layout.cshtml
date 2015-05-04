@@ -19,6 +19,7 @@
     <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -47,7 +48,7 @@
                     @if (!Request.IsAuthenticated)
                     {
 
-                        <li><a href="@Url.Action("login", "account",new { area = "" })"><span class="glyphicon glyphicon-log-in"></span> Se connecte</a></li>
+                        <li><a href="@Url.Action("login", "account",new { area = "" })"><span class="fa fa-sign-in"></span> Se connecte</a></li>
                                 
                         <li><a href="@Url.Action("Inscription", "Account", new { area = "" })">Inscription</a></li>
                     }
@@ -55,13 +56,13 @@
                     {
                         if (User.IsInRole("pharmacien"))
                         {
-                            <li><a href="@Url.Action("Index","Gestion/Pharmacien")"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("Index","Gestion/Pharmacien")"><span class="fa fa-user"></span> @User.Identity.Name</a></li>
                         }
                         if (User.IsInRole("distributeur"))
                         {
-                            <li><a href="@Url.Action("Index","Gestion/Fournisseur")"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("Index","Gestion/Fournisseur")"><span class="fa fa-user"></span> @User.Identity.Name</a></li>
                         }
-                        <li><a href="@Url.Action("logout", "Account", new { area = "" })"><span class="glyphicon  glyphicon-log-out"></span> Sortie</a></li>
+                        <li><a href="@Url.Action("logout", "Account", new { area = "" })"><span class="fa fa-power-off"></span> Sortie</a></li>
 
                     }
                 </ul>

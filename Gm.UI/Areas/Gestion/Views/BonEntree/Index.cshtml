@@ -14,7 +14,7 @@
     
 }
 <div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
-    <h2>Commandes </h2>
+    <h2>Bons d'entrées </h2>
     <hr/>
     <div id="alert"></div>
     @{
@@ -35,10 +35,7 @@
                   .Width(20).Visible(false);
               columns.Bound(c => c.NumPiece);
               columns.Bound(c => c.Date);
-              if (User.IsInRole("pharmacien"))
-              {
-                  columns.Bound(c => c.Fournisseur.Nom).Title("Fournisseur");
-              }
+              columns.Bound(c => c.Fournisseur.Nom).Title("Fournisseur");
               columns.Bound(c => c.Magasin.Libelle).Title("Magasin");
 
 
@@ -56,7 +53,7 @@
           .DataSource(dataSource => dataSource
               .Ajax()
 
-              .Read(read => read.Action("GetList", "Commande")
+              .Read(read => read.Action("GetList", "BonEntree")
                   .Data("additionalData"))
           ))
 

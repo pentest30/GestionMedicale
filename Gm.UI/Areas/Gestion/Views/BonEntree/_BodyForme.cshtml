@@ -18,12 +18,12 @@
             @Html.ValidationMessageFor(model => model.NumPiece, "", new { @class = "text-danger" })
         </div>
     </div><div class="control-group">
-    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
-    <div class="controls">
-        <input type="text" style=" width: 270px" name="Date" id="Date" />
-        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
+        <div class="controls">
+            <input type="text" style=" width: 270px" name="Date" id="Date" />
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
     <div class="control-group">
         @Html.LabelFor(model => model.FournisseurId, htmlAttributes: new { @class = "control-label" })
         <div class="controls">
@@ -39,8 +39,9 @@
             @Html.ValidationMessageFor(model => model.MagasinId, "", new { @class = "text-danger" })
         </div>
     </div>
-   
+
     <hr />
 
 </div>
+
 

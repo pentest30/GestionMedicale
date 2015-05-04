@@ -126,6 +126,7 @@
     <Compile Include="Conditionnelts\ServiceConditionnement.cs" />
     <Compile Include="Entrees\BonEntreeRepository.cs" />
     <Compile Include="Entrees\IServiceEntrees.cs" />
+    <Compile Include="Entrees\LigneEntreeRepo.cs" />
     <Compile Include="Entrees\ServiceEntrees.cs" />
     <Compile Include="Fabriquant\FabriquantRepository.cs" />
     <Compile Include="Fabriquant\IServiceFabriquant.cs" />

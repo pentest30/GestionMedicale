@@ -55,7 +55,7 @@ namespace GM.Services.Entrees
 
         public IEnumerable<BonEntree> Find(Func<BonEntree, bool> predicate)
         {
-            return _db.BonEntrees.Include("Magasin").Include("Fournisseur").Where(predicate);
+            return _db.BonEntrees.Include(x=>x.Magasin).Include("Fournisseur").Where(predicate);
         }
 
         public BonEntree FindSingle(Func<BonEntree, bool> predicate)
