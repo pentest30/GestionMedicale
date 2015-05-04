@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201504301310530_mhg14.Designer.cs">
       <DependentUpon>201504301310530_mhg14.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505041001474_gh14.cs" />
+    <Compile Include="Migrations\201505041001474_gh14.Designer.cs">
+      <DependentUpon>201505041001474_gh14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505041151341_gh145.cs" />
+    <Compile Include="Migrations\201505041151341_gh145.Designer.cs">
+      <DependentUpon>201505041151341_gh145.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504301310530_mhg14.resx">
       <DependentUpon>201504301310530_mhg14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505041001474_gh14.resx">
+      <DependentUpon>201505041001474_gh14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505041151341_gh145.resx">
+      <DependentUpon>201505041151341_gh145.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

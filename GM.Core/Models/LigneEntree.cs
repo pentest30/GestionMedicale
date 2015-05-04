@@ -2,7 +2,7 @@
 
 namespace GM.Core.Models
 {
-    public class LigneEntree : ILigneCommande
+    public class LigneEntree 
     {
         public LigneEntree()
         {
@@ -15,10 +15,11 @@ namespace GM.Core.Models
         public string NumLot { get; set; }
 
         public int Qnt { get; set; }
+        public decimal Montant { get; set; }
 
         //public decimal? Montant { get; set; }
-
-        public decimal PrixUnitaire { get; set; }
+        public decimal  PrixVente { get; set; }
+        public decimal PrixAchat { get; set; }
         public long BonEntreeId { get; set; }
         public DateTime? DateFabrication { get; set; }
         public DateTime? DatePeremption { get; set; }

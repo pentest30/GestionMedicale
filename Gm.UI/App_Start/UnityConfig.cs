@@ -6,6 +6,7 @@ using GM.Core.Models;
 using GM.Services.Categorie;
 using GM.Services.Commandes;
 using GM.Services.Conditionnelts;
+using GM.Services.Entrees;
 using GM.Services.Fabriquant;
 using GM.Services.Formes;
 using GM.Services.Fournisseurs;
@@ -67,6 +68,7 @@ namespace Gm.UI
             container.RegisterType<IRepository<Laboratoire>, FabriquantRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Magasin>, MagasinRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Commande>, CommandeRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<BonEntree>, BonEntreeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Fournisseur>, FournisseurRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<LigneCommande>, CommdeLigneRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
@@ -81,6 +83,7 @@ namespace Gm.UI
             container.RegisterType<IServiceMagasin, ServiceMagasin>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceCommandes, ServiceCommande>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceFournisseur, ServiceFournisseur>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceEntrees, ServiceEntrees>(new PerRequestLifetimeManager());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GM.Core.Models;
 
 namespace GM.Services.Pharmacies
@@ -10,5 +11,6 @@ namespace GM.Services.Pharmacies
         bool Update(Pharmacie pharmacie);
         bool Existe(Guid id);
         Pharmacie SinglePharmacie(int id);
+        IEnumerable<Pharmacie> GetListe();
     }
 }

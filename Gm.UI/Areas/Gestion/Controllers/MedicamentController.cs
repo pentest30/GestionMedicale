@@ -12,6 +12,7 @@ using GM.Services.Categorie;
 using GM.Services.Conditionnelts;
 using GM.Services.Fabriquant;
 using GM.Services.Formes;
+using GM.Services.Fournisseurs;
 using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
 using Kendo.Mvc.Extensions;
@@ -29,6 +30,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceFabriquant _serviceFabriquant;
         private readonly IServicePharmacie _pharmacieService;
         private readonly IServiceUtilisateur _utilisateurService;
+        private readonly IServiceFournisseur _serviceFournisseur;
 
         // GET: Gestion/Medicament
         public MedicamentController(
@@ -39,7 +41,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
             IServiceConditionnement serviceConditionnement ,
             IServiceFabriquant serviceFabriquant, 
             IServicePharmacie pharmacieService,
-            IServiceUtilisateur utilisateurService)
+            IServiceUtilisateur utilisateurService , 
+            IServiceFournisseur serviceFournisseur)
         {
             _service = service;
             _serviceSpecialite = serviceSpecialite;
@@ -49,14 +52,14 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceFabriquant = serviceFabriquant;
             _pharmacieService = pharmacieService;
             _utilisateurService = utilisateurService;
+            _serviceFournisseur = serviceFournisseur;
         }
         [HttpGet]
         public ActionResult Create()
         {
             var user = _utilisateurService.SingleUser(User.Identity.Name);
-            var enId = _pharmacieService.GetPharmacie(user.Id);
+            var enId =(User.IsInRole("pharmacien"))? _pharmacieService.GetPharmacie(user.Id):_serviceFournisseur.GetFournisseur(user.Id);
             ViewData["entrpriseId"] = enId;
-            ViewData["entrpriseId"] = _pharmacieService.GetPharmacie(user.Id);
             ViewData["specialites"] = new SelectList(_serviceSpecialite.ListeSpecialites(), "Id", "Libelle");
             ViewData["dcis"] = new SelectList(_serviceDci.ListeDcis(), "Id", "Nom");
             ViewData["formes"] = new SelectList(_serviceForme.ListeFormes(), "Id", "Libelle");
@@ -68,7 +71,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public ActionResult Update(int ? id)
         {
             var user = _utilisateurService.SingleUser(User.Identity.Name);
-            var enId = _pharmacieService.GetPharmacie(user.Id);
+            var enId = (User.IsInRole("pharmacien")) ? _pharmacieService.GetPharmacie(user.Id) : _serviceFournisseur.GetFournisseur(user.Id);
             ViewData["entrpriseId"] = enId;
             var med = _service.FindSingle(Convert.ToInt32(id));
             var model = Mapper.Map<MedicamentModel>(med);
@@ -96,7 +99,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         public ActionResult Create(MedicamentModel model , bool continuer)
         {
             var user = _utilisateurService.SingleUser(User.Identity.Name);
-            var enId = _pharmacieService.GetPharmacie(user.Id);
+            var enId = (User.IsInRole("pharmacien")) ? _pharmacieService.GetPharmacie(user.Id) : _serviceFournisseur.GetFournisseur(user.Id);
             ViewData["entrpriseId"] = enId;
             if (ModelState.IsValid)
             {
@@ -117,7 +120,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             ViewData["id"] = model.Id ;
             ModelState.Remove("NomCommerciale");
             var user = _utilisateurService.SingleUser(User.Identity.Name);
-            var enId = _pharmacieService.GetPharmacie(user.Id);
+            var enId = (User.IsInRole("pharmacien")) ? _pharmacieService.GetPharmacie(user.Id) : _serviceFournisseur.GetFournisseur(user.Id);
             ViewData["entrpriseId"] = enId;
             if (ModelState.IsValid)
             {

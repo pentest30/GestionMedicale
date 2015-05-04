@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GM.Core;
 using GM.Core.Models;
 
@@ -54,6 +55,11 @@ namespace GM.Services.Pharmacies
         public Pharmacie SinglePharmacie(int id)
         {
             return _repository.SelectById(id);
+        }
+
+        public IEnumerable<Pharmacie> GetListe()
+        {
+           return _repository.SelectAll();
         }
     }
 }

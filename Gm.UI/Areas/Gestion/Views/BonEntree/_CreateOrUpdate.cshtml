@@ -1,0 +1,36 @@
+﻿@model GM.Core.Models.BonEntree
+@if (Request.RawUrl.Contains("Update"))
+{
+    using (Html.BeginForm("Update", "BonEntree", FormMethod.Post, new { id = "entree-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        Html.RenderPartial("_BodyForm", Model);
+    }
+}
+else
+{
+    using (Html.BeginForm("Create", "BonEntree", FormMethod.Post, new { id = "entree-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        Html.RenderPartial("_BodyForm", Model);
+    }
+}
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        $("#FournisseurId").select2();
+        $('#Date').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $("#save-btn").click(function () {
+            $("#continuer").val(true);
+            $('#entree-form').submit();
+        });
+    })
+
+</script>

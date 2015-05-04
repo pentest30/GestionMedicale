@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using GM.Core.Models;
+using GM.Services.Fournisseurs;
 using GM.Services.Magasins;
 using GM.Services.Pharmacies;
 using GM.Services.Utilisateurs;
@@ -10,45 +11,45 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
-    [Authorize(Roles = "pharmacien")]
+    [Authorize(Roles = "pharmacien, distributeur")]
     public class MagasinController : Controller
     {
         private readonly IServiceMagasin _service;
         private readonly IServicePharmacie _servicePharmacie;
         private readonly IServiceUtilisateur _serviceUtilisateur;
+        private readonly IServiceFournisseur _serviceFournisseur;
 
         public MagasinController(
             IServiceMagasin service, 
             IServicePharmacie servicePharmacie,
-            IServiceUtilisateur serviceUtilisateur)
+            IServiceUtilisateur serviceUtilisateur , IServiceFournisseur serviceFournisseur)
         {
             _service = service;
             _servicePharmacie = servicePharmacie;
             _serviceUtilisateur = serviceUtilisateur;
-            
+            _serviceFournisseur = serviceFournisseur;
         }
 
         // GET: Gestion/Magasin
         public ActionResult Index()
         {
+            Session["entreprise"] = null;
             var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-            int? id = _servicePharmacie.GetPharmacie(user.Id);
-            Session["entreprise"] = id; 
+            if (User.IsInRole("pharmacien"))
+            {
+                Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+            }
+            else if (User.IsInRole("distributeur"))
+            {
+                Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
+            }
+
             return View();
         }
 
         public ActionResult GetList( DataSourceRequest request)
         {
-            int? id;
-            if (Session["entreprise"] != null)
-               id = Convert.ToInt32(Session["entreprise"]);
-            else
-            {
-                var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-                id = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
-            }
-          
-            return Json(_service.Liste(Convert.ToInt32(id)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(_service.Liste(Convert.ToInt32(Convert.ToInt32(Session["entreprise"]))).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -95,7 +96,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
             else
             {
                 var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-                laboratoire.EntrepriseId = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+                laboratoire.EntrepriseId = (User.IsInRole("pharmacie"))?
+                    Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id)) : 
+                    Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
             }
           
             if (ModelState.IsValid)

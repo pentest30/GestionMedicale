@@ -23,7 +23,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServiceUtilisateur _serviceUtilisateur;
         private readonly IServiceMedicmaent _serviceMedicmaent;
         private readonly IServiceFournisseur _serviceFournisseur;
-        private readonly IEnumerable<Fournisseur> _liste; 
+        private readonly IEnumerable<Fournisseur> _liste;
+        private readonly IEnumerable<Pharmacie> _listeClients; 
 
         public CommandeController(IServiceCommandes service, 
             IServicePharmacie servicePharmacie,
@@ -36,40 +37,34 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceUtilisateur = serviceUtilisateur;
             _serviceMedicmaent = serviceMedicmaent;
             _serviceFournisseur = serviceFournisseur;
-            _liste = serviceFournisseur.GeltList();
+            _liste = _serviceFournisseur.GeltList();
+            _listeClients = _servicePharmacie.GetListe();
         }
 
         // GET: Gestion/Commande
         public ActionResult Index()
         {
-            if (Session["entreprise"] == null)
+            Session["entreprise"] = null;
+            var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
+            if (User.IsInRole("pharmacien"))
             {
-                var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-                if (User.IsInRole("pharmacien"))
-                {
-                    Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
-                }
-                else if (User.IsInRole("distributeur"))
-                {
-                    Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
-                }
-                
+                Session["entreprise"] = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
+              
             }
+            else if (User.IsInRole("distributeur"))
+            {
+                Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
+               
+            }
+            ViewData["pharmacien"] = new SelectList(_listeClients, "Id", "Nom");
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom");
+            
+           
             return View();
         }
         public ActionResult GetList( DataSourceRequest request)
         {
-            int? id;
-            if (Session["entreprise"] != null)
-                id = Convert.ToInt32(Session["entreprise"]);
-            else
-            {
-                var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
-                id = Convert.ToInt32(_servicePharmacie.GetPharmacie(user.Id));
-            }
-
-            return Json(_service.Liste(Convert.ToInt32(id)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(_service.Liste(Convert.ToInt32(Convert.ToInt32(Session["entreprise"]))).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         [Authorize(Roles = "pharmacien")]
