@@ -5,6 +5,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+    var url = User.IsInRole("pharmacien") ? Url.Action("Index", "Pharmacien", new {area = "Gestion"}) :
+        Url.Action("Index", "Fournisseur", new {area = "Gestion"});
 }
 @{
     Html.RenderPartial("_ListToolBar");
@@ -55,7 +57,7 @@
         $(".menu *").prop('disabled', true);
         $("#return-btn").click(function (e) {
             e.preventDefault();
-            window.location.href = '@Url.Action("Index","Pharmacien", new {area="Gestion"})';
+            window.location.href = '@url';
 
         });
         //$(".menu *").prop('disabled', true);
