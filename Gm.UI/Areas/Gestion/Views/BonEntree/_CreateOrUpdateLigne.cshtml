@@ -5,61 +5,63 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" >
+    <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.EntreeId)
         @Html.HiddenFor(model => model.Id)
         <div class="control-group">
-            @Html.LabelFor(model => model.MedicamentId, htmlAttributes: new {@class = "control-label "})
+            @Html.LabelFor(model => model.MedicamentId, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-               @if (Model.Id == 0)
-               {
-                 @Html.HiddenFor(model => model.MedicamentId)
+                @if (Model.Id == 0)
+                {
+                    @Html.HiddenFor(model => model.MedicamentId)
                     <input id="cc" style="height: 30px">
-               }
-               else
-               {
-                @Html.Custom_DropdownList("MedicamentId", ViewData["medicament"] as SelectList, htmlAttributes: new { @style = "width:230px; height: 35px" })
+                }
+                else
+                {
+                    @Html.Custom_DropdownList("MedicamentId", ViewData["medicament"] as SelectList, htmlAttributes: new { @style = "width:230px; height: 35px" })
 
-               }
-                @Html.ValidationMessageFor(model => model.MedicamentId, "", new {@class = "text-danger"})
+                }
+                @Html.ValidationMessageFor(model => model.MedicamentId, "", new { @class = "text-danger" })
             </div>
         </div>
-      
-            <div class="control-group">
-                @Html.LabelFor(model => model.NumLot, htmlAttributes: new { @class = "control-label " })
-                <div class="controls">
-                    @Html.TextBoxFor(model => model.NumLot, new { htmlAttributes = new { @class = "form-control", @style = "width:100px" } })
-                    @Html.ValidationMessageFor(model => model.NumLot, "", new { @class = "text-danger" })
-                </div>
-            </div>
-      
+
         <div class="control-group">
-            @Html.LabelFor(model => model.Qnt, htmlAttributes: new {@class = "control-label "})
+            @Html.LabelFor(model => model.NumLot, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-                @Html.EditorFor(model => model.Qnt, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Qnt, "", new {@class = "text-danger"})
+                @Html.TextBoxFor(model => model.NumLot, new { htmlAttributes = new { @class = "form-control", @style = "width:100px" } })
+                @Html.ValidationMessageFor(model => model.NumLot, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="control-group">
-            @Html.LabelFor(model => model.DateFabrication, htmlAttributes: new {@class = "control-label "})
+            @Html.LabelFor(model => model.Qnt, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-               @Html.EditorFor(model => model.DateFabrication, new { htmlAttributes = new { @class = "validate[required]" } })
-                @Html.ValidationMessageFor(model => model.DateFabrication, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Qnt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Qnt, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.DatePeremption, htmlAttributes: new {@class = "control-label "})
+            @Html.LabelFor(model => model.DateFabrication, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-                @Html.EditorFor(model => model.DatePeremption, new { htmlAttributes = new { @class = "validate[required]" } })
-                  @Html.ValidationMessageFor(model => model.DatePeremption, "", new {@class = "text-danger"})
+               
+                <input type="text" style=" width: 200px" name="DateFabrication" id="DateFabrication" value="@Convert.ToDateTime(Model.DateFabrication).ToShortDateString()" />
+                @Html.ValidationMessageFor(model => model.DateFabrication, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.PrixAchat, htmlAttributes: new {@class = "control-label "})
+            @Html.LabelFor(model => model.DatePeremption, htmlAttributes: new { @class = "control-label " })
             <div class="controls">
-                @Html.EditorFor(model => model.PrixAchat, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.PrixAchat, "", new {@class = "text-danger"})
+                <input type="text" style="width: 200px" name="DatePeremption" id="DatePeremption" value="@Convert.ToDateTime(Model.DatePeremption).ToShortDateString()" />
+                
+                @Html.ValidationMessageFor(model => model.DatePeremption, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.PrixAchat, htmlAttributes: new { @class = "control-label " })
+            <div class="controls">
+                @Html.EditorFor(model => model.PrixAchat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrixAchat, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="control-group">
@@ -81,36 +83,47 @@
 }
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#NumLot").addClass("validate[required]");
         $("#Qnt").addClass("validate[required]");
         $("#PrixAchat").addClass("validate[required]");
         $("#PrixVente").addClass("validate[required]");
         $("#TauxBenifice").addClass("validate[required]");
+        $('#DatePeremption').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#DateFabrication').datepicker({
+            format: 'dd/mm/yyyy'
+        });
         try {
             $("#MedicamentId").select2();
         } catch (e) {
 
-        } 
+        }
         $('#ligne-entree-form').validationEngine();
 
-     
-      
-        $("#save-modal-btn").click(function() {
+
+
+        $("#save-modal-btn").click(function () {
 
 
             if ($('#ligne-entree-form').validationEngine('validate')) {
-                $("#MedicamentId").val($('#cc').combogrid('getValue'));
+                try {
+                    $("#MedicamentId").val($('#cc').combogrid('getValue'));
+                } catch (e) {
+
+                } 
 
                 $.ajax({
                     url: '@Url.Action("CreateUpdateLigne", "BonEntree", new {area = "Gestion"})',
-                data: $("#ligne-entree-form").serialize(),
-                type: 'POST',
-                success: function () {
-                    $('#specialites').data('kendoGrid').dataSource.read();
-                },
-                error: function () {
-                }
+                    data: $("#ligne-entree-form").serialize(),
+                    type: 'POST',
+                    success: function () {
+                        $('#specialites').data('kendoGrid').dataSource.read();
+                        $.bootstrapGrowl("Opération est terminé avec succés", { type: 'success' });
+                    },
+                    error: function () {
+                    }
                 });
             }
         });

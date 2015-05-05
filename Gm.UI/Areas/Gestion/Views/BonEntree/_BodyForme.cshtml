@@ -20,7 +20,7 @@
     </div><div class="control-group">
         @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
         <div class="controls">
-            <input type="text" style=" width: 270px" name="Date" id="Date" />
+            <input type="text" style=" width: 270px" name="Date" id="Date" value="@Convert.ToDateTime(Model.Date).ToShortDateString()"/>
             @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -160,6 +160,17 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
 
         }
+        public ActionResult Delete(int? id)
+        {
+
+            var b = id != null && _serviceEntrees.Delete((int)id);
+            var data = new
+            {
+                message = (b) ? SuccessMessage() : ErrorMessage(),
+                //data = _serviceUtilisateur.NonActiveUsers().Count()
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ListeLigneEntrees(DataSourceRequest request, int? commandeId)
         {
             return Json(_serviceEntrees.GetLigneCommandes(Convert.ToInt32(commandeId)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
