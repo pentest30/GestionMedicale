@@ -67,18 +67,24 @@ namespace Gm.UI.Areas.Gestion.Controllers
             GetEntrepriseId();
             ViewData["magasin"] = new SelectList(_serviceMagasin.Liste(Convert.ToInt32(Session["entreprise"])), "Id",
                 "Libelle");
-            var model = new BonEntree
+            var model = new Entree
             {
                 ClientId = Convert.ToInt32(Session["entreprise"])
             };
             return View(model);
         }
-        public ActionResult Create(BonEntree model, bool continuer)
+        public ActionResult Update(long? id)
+        {
+            if (id == null) return HttpNotFound();
+            var model = _serviceEntrees.FindSingle(Convert.ToInt64(id));
+            ViewData["id"] = model.Id;
+            ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom", model.FournisseurId);
+            return View(model);
+        }
+        public ActionResult Create(Entree model, bool continuer)
         {
             ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom" , model.FournisseurId);
             GetEntrepriseId();
-            ViewData["magasin"] = new SelectList(_serviceMagasin.Liste(Convert.ToInt32(Session["entreprise"])), "Id",
-                "Libelle" , model.MagasinId);
             if (ModelState.IsValid)
             {
                 long identity;
@@ -111,6 +117,36 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
             return Json(list.ToArray(), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult DetailCommade(long? id )
+        {
+            long commandeId = Convert.ToInt64(Request["commandeId"]);
+            if (id == null || id == 0)
+            {
+                return PartialView("_CreateOrUpdateLigne", new LigneEntree()
+                {
+                    EntreeId = Convert.ToInt64(commandeId)
+                });
+                
+            }
+            
+            var ligne = _serviceEntrees.GetSingleLigne(Convert.ToInt64(id));
+            ViewData["medicament"] = new SelectList(_serviceMedicmaent.ListeMedicaments(), "Id", "NomCommerciale", ligne.MedicamentId);
+            return PartialView("_CreateOrUpdateLigne", ligne);
+        }
+        public ActionResult CreateUpdateLigne(LigneEntree model)
+        {
+            if (ModelState.IsValid)
+            {
+                var b = (model.Id == 0) ? _serviceEntrees.InsertLigne(model) : _serviceEntrees.UpdateLigne(model);
+                dynamic data = new
+                {
+                    message = b ? SuccessMessage() : ErrorMessage()
+                };
+                ViewData["id"] = model.EntreeId;
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            return View();
+        }
         private void GetEntrepriseId()
         {
             var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
@@ -123,6 +159,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 Session["entreprise"] = Convert.ToInt32(_serviceFournisseur.GetFournisseur(user.Id));
             }
 
+        }
+        public ActionResult ListeLigneEntrees(DataSourceRequest request, int? commandeId)
+        {
+            return Json(_serviceEntrees.GetLigneCommandes(Convert.ToInt32(commandeId)).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+       
+        private string SuccessMessage()
+        {
+            return "<div class='alert alert-info'><p>l'operation est terminée avec succés!</p><div/>";
+        }
+        private string ErrorMessage()
+        {
+            return "<div class='alert alert-danger'><p>erreurs pendant l'operation!</p><div/>";
         }
     }
 }

@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GM.Core.Models
 {
     public class Entree
     {
+        public Entree()
+        {
+            LigneEntrees = new List<LigneEntree>();
+        }
         public long Id { get; set; }
         [Display(Name = "Fournisseur")]
         [Required]
@@ -24,6 +29,7 @@ namespace GM.Core.Models
 
         public decimal? Tht { get; set; }
         public Fournisseur Fournisseur { get; set; }
+        public IList<LigneEntree> LigneEntrees { get; set; }
 
 
     }

@@ -33,6 +33,7 @@ namespace GM.Context
         public DbSet<LigneCommande> LigneCommandes { get; set; }
         public DbSet<LigneEntree> LigneEntrees { get; set; }
         public DbSet<Entree> Entrees { get; set; }
+       // public DbSet<LigneEntreeMagasin> LigneEntreeMagasins { get; set; }
 
 
 

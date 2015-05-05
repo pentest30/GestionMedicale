@@ -76,7 +76,8 @@ namespace GM.Services.Commandes
 
         public IEnumerable<LigneCommande> GetLigneCommandes( int commandeId )
         {
-            return _repositoryLigne.Find(x => x.CommandeId == commandeId);
+            return  _repositoryLigne.Find(x => x.CommandeId == commandeId);
+           
         } 
 
         public bool InsertLigne(LigneCommande ligne)

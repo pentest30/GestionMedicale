@@ -1,4 +1,4 @@
-﻿@model GM.Core.Models.BonEntree
+﻿@model GM.Core.Models.Entree
 @if (Request.RawUrl.Contains("Update"))
 {
     using (Html.BeginForm("Update", "BonEntree", FormMethod.Post, new { id = "entree-form" }))
@@ -34,3 +34,4 @@ else
     })
 
 </script>
+

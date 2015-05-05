@@ -1,43 +1,109 @@
-﻿@model GM.Core.Models.LigneEntree
-@{
-    //Model.CommandeId = Convert.ToInt64(ViewData["id"]);
-}
+﻿@using Gm.UI.HtmlExtenssions
+@model GM.Core.Models.LigneEntree
 <link href="~/combogrid/themes/default/easyui.css" rel="stylesheet" />
 @using (Html.BeginForm("CreateUpdateLigne", "BonEntree", FormMethod.Post, new { id = "ligne-entree-form" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal" >
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.BonEntreeId)
-
+        @Html.HiddenFor(model => model.EntreeId)
+        @Html.HiddenFor(model => model.Id)
         <div class="control-group">
-            @Html.LabelFor(model => model.MedicamentId, htmlAttributes: new { @class = "control-label " })
+            @Html.LabelFor(model => model.MedicamentId, htmlAttributes: new {@class = "control-label "})
             <div class="controls">
-                @Html.HiddenFor(model => model.MedicamentId)
-                <input id="cc"  style="height: 30px">
+               @if (Model.Id == 0)
+               {
+                 @Html.HiddenFor(model => model.MedicamentId)
+                    <input id="cc" style="height: 30px">
+               }
+               else
+               {
+                @Html.Custom_DropdownList("MedicamentId", ViewData["medicament"] as SelectList, htmlAttributes: new { @style = "width:230px; height: 35px" })
+
+               }
                 @Html.ValidationMessageFor(model => model.MedicamentId, "", new {@class = "text-danger"})
             </div>
         </div>
-
+      
+            <div class="control-group">
+                @Html.LabelFor(model => model.NumLot, htmlAttributes: new { @class = "control-label " })
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.NumLot, new { htmlAttributes = new { @class = "form-control", @style = "width:100px" } })
+                    @Html.ValidationMessageFor(model => model.NumLot, "", new { @class = "text-danger" })
+                </div>
+            </div>
+      
         <div class="control-group">
-            @Html.LabelFor(model => model.Qnt, htmlAttributes: new { @class = "control-label " })
+            @Html.LabelFor(model => model.Qnt, htmlAttributes: new {@class = "control-label "})
             <div class="controls">
-                @Html.EditorFor(model => model.Qnt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Qnt, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Qnt, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Qnt, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.DateFabrication, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+               @Html.EditorFor(model => model.DateFabrication, new { htmlAttributes = new { @class = "validate[required]" } })
+                @Html.ValidationMessageFor(model => model.DateFabrication, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.DatePeremption, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.DatePeremption, new { htmlAttributes = new { @class = "validate[required]" } })
+                  @Html.ValidationMessageFor(model => model.DatePeremption, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.PrixAchat, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.PrixAchat, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.PrixAchat, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.PrixVente, htmlAttributes: new { @class = "control-label " })
+            <div class="controls">
+                @Html.EditorFor(model => model.PrixVente, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrixVente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.TauxBenifice, htmlAttributes: new { @class = "control-label " })
+            <div class="controls">
+                @Html.EditorFor(model => model.TauxBenifice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TauxBenifice, "", new { @class = "text-danger" })
             </div>
         </div>
 
     </div>
 }
 <script>
-    $(document).ready(function () {
-        $("#save-modal-btn").click(function () {
-            
-            $("#MedicamentId").val($('#cc').combogrid('getValue'));
-           
-            $.ajax({
-                url: '@Url.Action("CreateUpdateLigne", "Commande", new { area = "Gestion" })',
+
+    $(document).ready(function() {
+        $("#NumLot").addClass("validate[required]");
+        $("#Qnt").addClass("validate[required]");
+        $("#PrixAchat").addClass("validate[required]");
+        $("#PrixVente").addClass("validate[required]");
+        $("#TauxBenifice").addClass("validate[required]");
+        try {
+            $("#MedicamentId").select2();
+        } catch (e) {
+
+        } 
+        $('#ligne-entree-form').validationEngine();
+
+     
+      
+        $("#save-modal-btn").click(function() {
+
+
+            if ($('#ligne-entree-form').validationEngine('validate')) {
+                $("#MedicamentId").val($('#cc').combogrid('getValue'));
+
+                $.ajax({
+                    url: '@Url.Action("CreateUpdateLigne", "BonEntree", new {area = "Gestion"})',
                 data: $("#ligne-entree-form").serialize(),
                 type: 'POST',
                 success: function () {
@@ -45,7 +111,8 @@
                 },
                 error: function () {
                 }
-            });
+                });
+            }
         });
         $('#cc').combogrid({
             panelWidth: 650,
@@ -61,11 +128,12 @@
                     { field: 'Dose', title: 'Dose', width: 90 },
                     { field: 'Forme', title: 'Forme', width: 150 },
                     { field: 'Dci', title: 'Dci', width: 150 },
-                     { field: 'Conditionnement', title: 'Conditionnement', width: 150 }
+                    { field: 'Conditionnement', title: 'Conditionnement', width: 150 }
                 ]
             ]
         });
 
 
     });
+
 </script>

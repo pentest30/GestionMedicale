@@ -9,32 +9,32 @@ using GM.Core.Models;
 
 namespace GM.Services.Entrees
 {
-    public class BonEntreeRepository:IRepository<BonEntree>
+    public class EntreeRepository:IRepository<Entree>
     {
          private readonly PharmacieContext _db;
 
-         public BonEntreeRepository(PharmacieContext db)
+         public EntreeRepository(PharmacieContext db)
         {
             _db = db;
         }
 
-        public IEnumerable<BonEntree> SelectAll()
+        public IEnumerable<Entree> SelectAll()
         {
-            return _db.BonEntrees;
+            return _db.Entrees;
         }
 
-        public BonEntree SelectById(object id)
+        public Entree SelectById(object id)
         {
-            return _db.BonEntrees.Find(id);
+            return _db.Entrees.Find(id);
         }
 
-        public void Insert(BonEntree item)
+        public void Insert(Entree item)
         {
-            _db.BonEntrees.Add(item);
+            _db.Entrees.Add(item);
             Save();
         }
 
-        public void Update(BonEntree item)
+        public void Update(Entree item)
         {
             _db.Entry(item).State = EntityState.Modified;
             Save();
@@ -53,22 +53,22 @@ namespace GM.Services.Entrees
             _db.SaveChanges();
         }
 
-        public IEnumerable<BonEntree> Find(Func<BonEntree, bool> predicate)
+        public IEnumerable<Entree> Find(Func<Entree, bool> predicate)
         {
-            return _db.BonEntrees.Include(x=>x.Magasin).Include("Fournisseur").Where(predicate);
+            return _db.Entrees.Include("Fournisseur").Where(predicate);
         }
 
-        public BonEntree FindSingle(Func<BonEntree, bool> predicate)
+        public Entree FindSingle(Func<Entree, bool> predicate)
         {
-            return _db.BonEntrees.FirstOrDefault(predicate);
+            return _db.Entrees.FirstOrDefault(predicate);
         }
 
-        public IEnumerable<BonEntree> GetAllLazyLoad(params Expression<Func<BonEntree, object>>[] children)
+        public IEnumerable<Entree> GetAllLazyLoad(params Expression<Func<Entree, object>>[] children)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exist(Func<BonEntree, bool> predicate)
+        public bool Exist(Func<Entree, bool> predicate)
         {
             throw new NotImplementedException();
         }

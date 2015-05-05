@@ -1,6 +1,5 @@
-﻿@using Gm.UI.HtmlExtenssions
-@model GM.Core.Models.BonEntree
-
+﻿@model GM.Core.Models.Entree
+@using Gm.UI.HtmlExtenssions
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,13 +14,7 @@
 
             </div>
         </div>
-        <div class="control-group">
-            @Html.LabelFor(model => model.MagasinId, htmlAttributes: new { @class = "control-label " })
-            <div class="controls">
-                @Html.Custom_DropdownList("MagasinId", ViewData["magasin"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
-                @Html.ValidationMessageFor(model => model.MagasinId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="control-group">
             @Html.LabelFor(model => model.NumPiece, htmlAttributes: new { @class = "control-label " })

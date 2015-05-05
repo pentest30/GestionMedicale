@@ -50,6 +50,10 @@
     <Compile Include="Migrations\201505041807523_fg144.Designer.cs">
       <DependentUpon>201505041807523_fg144.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505050824421_ght47.cs" />
+    <Compile Include="Migrations\201505050824421_ght47.Designer.cs">
+      <DependentUpon>201505050824421_ght47.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201505041807523_fg144.resx">
       <DependentUpon>201505041807523_fg144.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505050824421_ght47.resx">
+      <DependentUpon>201505050824421_ght47.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

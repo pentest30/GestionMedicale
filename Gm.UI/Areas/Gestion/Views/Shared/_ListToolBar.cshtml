@@ -13,11 +13,15 @@
 
 
                    }
-                    @if (Request.RawUrl.Contains("Commande"))
+                    @if (Request.RawUrl.Contains("Commande") || Request.RawUrl.Contains("BonEntree"))
                     {
-                        <li><button  id="details-cmd-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class=" icon-list"></i> Détails commande</button></li>
+                        <li><button  id="details-cmd-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class=" icon-list"></i> Détails </button></li>
 
 
+                    }
+                    @if (Request.RawUrl.Contains("BonEntree"))
+                    {
+                        <li><button id="generer-bn-btn" style="margin-right: 2px" class="btn   navbar-btn"><i class="icon-add"></i> Entrée magasin </button></li>
                     }
                 </ul>
 

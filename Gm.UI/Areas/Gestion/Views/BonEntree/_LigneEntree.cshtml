@@ -1,11 +1,9 @@
 ﻿@using Kendo.Mvc.UI
-@using GM.Core.Models
-@model IEnumerable<LigneEntree>
-
+@model IEnumerable<GM.Core.Models.LigneEntree>
 <div class="container-fluid" style="padding: 15px;  height: auto">
-    
+
     <div id="alert"></div>
-     @(Html.Kendo().Grid(Model)
+    @(Html.Kendo().Grid(Model)
           .Name("specialites")
 
           .Columns(columns =>
@@ -23,13 +21,14 @@
               columns.Bound(c => c.PrixAchat);
               columns.Bound(c => c.PrixVente);
               columns.Bound(c => c.TauxBenifice);
-              columns.Bound(c => c.DateFabrication).Width(100);
-              columns.Bound(c => c.DatePeremption).Width(100);
-              columns.Bound(c => c.Qnt).Width(120);
-              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+              columns.Bound(c => c.DateFabrication);
+              columns.Bound(c => c.DatePeremption);
+              columns.Bound(c => c.Qnt);
+              columns.Bound(c => c.Montant);
+              columns.Command(command => {  command.Destroy(); });
 
           })
-          
+
           .Scrollable()
           .Sortable()
             //.Events(events => events.Change("OnChange"))
@@ -42,7 +41,7 @@
                        .Model(model => model.Id(p => p.Id))
               .Read(read => read.Action("ListeLigneEntrees", "BonEntree")
                   .Data("additionalData"))
-                            .Update(update => update.Action("UpdateRembousement", "Medicament"))
+                           
                         .Destroy(update => update.Action("EditingInline_Destroy", "Grid"))
           ))
 
@@ -66,7 +65,7 @@
             title: "Confirmation",
             confirm: function () {
                 if ($.isEmptyObject(selectedIds) === true) {
-                    alert("Séléctionner un utilisateur!");
+                    alert("Séléctionner un champ!");
                     return;
                 }
 
@@ -122,9 +121,38 @@
             }
             updateMasterCheckbox();
         });
-        $("#search").on("click", function (e) {
-            e.preventDefault();
-            $('#specialites').data('kendoGrid').dataSource.fetch();
+
+        $("#add-ligne-btn").click(function () {
+            $.ajax({
+                url: '@Url.Action("DetailCommade", "BonEntree", new {id =0  , commandeId=ViewData["id"]})',
+
+                type: 'POST',
+                success: function (data) {
+                    $("#dony").html(data);
+                    $("#myModal").modal("show");
+                },
+                error: function () {
+                }
+
+            });
+        });
+        $("#update-ligne-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
+            $.ajax({
+                url: '/Gestion/BonEntree/DetailCommade/?id=' + selectedIds[0].replace("<", "").replace(">", "") ,
+                
+                type: 'POST',
+                success: function (data) {
+                    $("#dony").html(data);
+                    $("#myModal").modal("show");
+                },
+                error: function () {
+                }
+
+            });
         });
 
     });
@@ -137,7 +165,7 @@
         return {
 
             commandeId: '@ViewData["id"]'
-            
+
         };
 
     }

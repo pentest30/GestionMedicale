@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GM.Core;
 using GM.Core.Models;
 
@@ -7,20 +8,23 @@ namespace GM.Services.Entrees
 {
    public class ServiceEntrees:IServiceEntrees
     {
-       private readonly IRepository<BonEntree> _repository;
+       private readonly IRepository<Entree> _repository;
+       private readonly IRepository<LigneEntree> _repositoryLigne;
 
-       public ServiceEntrees(IRepository<BonEntree> repository)
+       public ServiceEntrees(IRepository<Entree> repository,
+           IRepository<LigneEntree> repositoryLigne)
        {
            _repository = repository;
+           _repositoryLigne = repositoryLigne;
        }
 
-       public IEnumerable<BonEntree> Liste(long id)
+       public IEnumerable<Entree> Liste(long id)
        {
            var result = _repository.Find(x => x.ClientId == id);
            return result;
        }
 
-       public bool Insert(BonEntree commande)
+       public bool Insert(Entree commande)
        {
            try
            {
@@ -33,7 +37,7 @@ namespace GM.Services.Entrees
            }
        }
 
-       public bool Insert(BonEntree commande, out long id)
+       public bool Insert(Entree commande, out long id)
        {
            try
            {
@@ -50,7 +54,7 @@ namespace GM.Services.Entrees
            }
        }
 
-       public bool Update(BonEntree commande)
+       public bool Update(Entree commande)
        {
            try
            {
@@ -63,9 +67,9 @@ namespace GM.Services.Entrees
            }
        }
 
-       public BonEntree FindSingle(long id)
+       public Entree FindSingle(long id)
        {
-           throw new NotImplementedException();
+           return _repository.FindSingle(x =>x.Id ==id);
        }
 
        public bool Delete(long id)
@@ -81,29 +85,64 @@ namespace GM.Services.Entrees
            }
        }
 
-       public LigneEntreeMagasin GetSingleLigne(long id)
+       public LigneEntree GetSingleLigne(long id)
        {
-           throw new NotImplementedException();
+           return _repositoryLigne.SelectById(id);
        }
 
-       public bool InsertLigne(LigneEntreeMagasin ligne)
+       public bool InsertLigne(LigneEntree ligne)
        {
-           throw new NotImplementedException();
+           try
+           {
+               _repositoryLigne.Insert(ligne);
+               return true;
+           }
+           catch (Exception)
+           {
+               return false;
+           }
        }
 
-       public bool UpdateLigne(LigneEntreeMagasin ligne)
+       public bool UpdateLigne(LigneEntree ligne)
        {
-           throw new NotImplementedException();
+           try
+           {
+               _repositoryLigne.Update(ligne);
+               return true;
+           }
+           catch (Exception)
+           {
+               return false;
+           }
        }
 
        public bool DeleteLigne(int id)
        {
-           throw new NotImplementedException();
+           try
+           {
+               _repositoryLigne.Delete(id);
+               return true;
+           }
+           catch (Exception)
+           {
+               return false;
+           }
        }
 
-       public IEnumerable<LigneEntreeMagasin> GetLigneCommandes(int entreeId)
+       public IEnumerable<LigneEntree> GetLigneCommandes(int entreeId)
        {
-           throw new NotImplementedException();
+           var result = _repositoryLigne.Find(x => x.EntreeId == entreeId);
+           var ligneCommandes = result as LigneEntree[] ?? result.ToArray();
+           foreach (var ligneEntree in ligneCommandes)
+           {
+               ligneEntree.Montant = ligneEntree.PrixAchat*ligneEntree.Qnt;
+           }
+           return ligneCommandes;
+       }
+
+       public IEnumerable<LigneEntree> GetLigneCommandes()
+       {
+           return _repositoryLigne.SelectAll();
        }
     }
 }

@@ -1,24 +1,25 @@
-﻿@using Kendo.Mvc.UI
-@using GM.Core.Models
-@model IEnumerable<BonEntree>
+﻿@using GM.Core.Models
+@using Kendo.Mvc.UI
+@model IEnumerable<Entree>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
 }
+
 @{
-   
-   
-        Html.RenderPartial("_ListToolBar");
-   
-    
+
+
+    Html.RenderPartial("_ListToolBar");
+
+
 }
 <div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
-    <h2>Bons d'entrées </h2>
-    <hr/>
+    <h2>Entrées </h2>
+    <hr />
     <div id="alert"></div>
     @{
-        Html.RenderPartial("_Search", new BonEntree());
+        Html.RenderPartial("_Search", new Entree());
     }
     @(Html.Kendo().Grid(Model)
           .Name("specialites")
@@ -29,19 +30,19 @@
                   .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
                   .Title("<input id='mastercheckbox' type='checkbox'/>")
                   .Width(50)
-                  .HtmlAttributes(new {style = "text-align:center"})
-                  .HeaderHtmlAttributes(new {style = "text-align:center"});
+                  .HtmlAttributes(new { style = "text-align:center" })
+                  .HeaderHtmlAttributes(new { style = "text-align:center" });
               columns.Bound(x => x.Id)
                   .Width(20).Visible(false);
               columns.Bound(c => c.NumPiece);
               columns.Bound(c => c.Date);
               columns.Bound(c => c.Fournisseur.Nom).Title("Fournisseur");
-              columns.Bound(c => c.Magasin.Libelle).Title("Magasin");
+            
 
 
 
           })
-          .HtmlAttributes(new {style = "height: 350px;"})
+          .HtmlAttributes(new { style = "height: 350px;" })
           .Scrollable()
           .Sortable()
 
