@@ -30,6 +30,10 @@ namespace Gm.UI
             Mapper.CreateMap<LigneComamndeModel, LigneCommande>();
             Mapper.CreateMap<Utilisateur, RegisterModel>();
             Mapper.CreateMap<MedicamentModel, Medicament>();
+            Mapper.CreateMap<Entree, BonEntree>(); 
+            Mapper.CreateMap<BonEntree, Entree>();
+            Mapper.CreateMap<LigneEntreeMagasin, LigneEntree>();
+            Mapper.CreateMap<LigneEntree, LigneEntreeMagasin>();
             Mapper.CreateMap<Medicament, MedicamentModel>()
                 .ForMember(x => x.Dci, o => o.MapFrom(x => x.Dci.Nom))
                 .ForMember(x => x.Specialite, o => o.MapFrom(x => x.Specialite.Libelle))

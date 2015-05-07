@@ -20,7 +20,7 @@ namespace GM.Services.Entrees
 
         public IEnumerable<Entree> SelectAll()
         {
-            return _db.Entrees;
+            return _db.Entrees.Include(c =>c.LigneEntrees);
         }
 
         public Entree SelectById(object id)
@@ -55,12 +55,12 @@ namespace GM.Services.Entrees
 
         public IEnumerable<Entree> Find(Func<Entree, bool> predicate)
         {
-            return _db.Entrees.Include("Fournisseur").Where(predicate);
+            return _db.Entrees.Include(c => c.LigneEntrees).Include("Fournisseur").Where(predicate);
         }
 
         public Entree FindSingle(Func<Entree, bool> predicate)
         {
-            return _db.Entrees.FirstOrDefault(predicate);
+            return _db.Entrees.Include(c => c.LigneEntrees).FirstOrDefault(predicate);
         }
 
         public IEnumerable<Entree> GetAllLazyLoad(params Expression<Func<Entree, object>>[] children)

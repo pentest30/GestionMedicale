@@ -39,7 +39,7 @@ namespace Gm.UI
                 "~/Scripts/bootstrap-progressbar.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Content/file-upload/js/jquery.ui.widget.js",
-                "~/Content/file-upload/js/jquery.iframe-transport.js",
+                 "~/Content/file-upload/js/jquery.fileupload.js",
                 "~/Content/file-upload/js/jquery.iframe-transport.js",
                 "~/combogrid/jquery.easyui.min.js",
                 "~/combogird/jquery/jquery-ui-1.10.1.custom.min.js",

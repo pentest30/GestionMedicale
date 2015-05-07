@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GM.Core;
 using GM.Core.Models;
+using GM.Services.Medicaments;
 
 namespace GM.Services.Entrees
 {
@@ -10,18 +11,36 @@ namespace GM.Services.Entrees
     {
        private readonly IRepository<Entree> _repository;
        private readonly IRepository<LigneEntree> _repositoryLigne;
+       private readonly IServiceMedicmaent _serviceMedicmaent;
+       private readonly IRepository<BonEntree> _repositoryBonnetree;
+       private readonly IRepository<LigneEntreeMagasin> _repositoryLigneMAgasin;
 
        public ServiceEntrees(IRepository<Entree> repository,
-           IRepository<LigneEntree> repositoryLigne)
+           IRepository<LigneEntree> repositoryLigne ,
+           IServiceMedicmaent serviceMedicmaent ,
+           IRepository<BonEntree> repositoryBonnetree  , 
+           IRepository<LigneEntreeMagasin> repositoryLigneMAgasin )
        {
            _repository = repository;
            _repositoryLigne = repositoryLigne;
+           _serviceMedicmaent = serviceMedicmaent;
+           _repositoryBonnetree = repositoryBonnetree;
+           _repositoryLigneMAgasin = repositoryLigneMAgasin;
        }
 
        public IEnumerable<Entree> Liste(long id)
        {
            var result = _repository.Find(x => x.ClientId == id);
-           return result;
+           var enumerable = result as Entree[] ?? result.ToArray();
+           foreach (var entree in enumerable)
+           {
+               entree.Tht = entree.LigneEntrees.Sum(x => x.PrixAchat*x.Qnt);
+               var tax = entree.LigneEntrees.Aggregate<LigneEntree, decimal>(0, (current, ligneEntree) => current + Convert.ToInt64(_serviceMedicmaent.FindSingle(ligneEntree.MedicamentId).Tva));
+               entree.Ttc = entree.LigneEntrees.Sum(x => x.PrixAchat * x.Qnt) +tax;
+               entree.Tva = tax;
+
+           }
+           return enumerable;
        }
 
        public bool Insert(Entree commande)
@@ -133,16 +152,48 @@ namespace GM.Services.Entrees
        {
            var result = _repositoryLigne.Find(x => x.EntreeId == entreeId);
            var ligneCommandes = result as LigneEntree[] ?? result.ToArray();
-           foreach (var ligneEntree in ligneCommandes)
-           {
-               ligneEntree.Montant = ligneEntree.PrixAchat*ligneEntree.Qnt;
-           }
+           foreach (var ligneEntree in ligneCommandes) ligneEntree.Montant = ligneEntree.PrixAchat * ligneEntree.Qnt;
            return ligneCommandes;
        }
 
        public IEnumerable<LigneEntree> GetLigneCommandes()
        {
            return _repositoryLigne.SelectAll();
+       }
+
+       public BonEntree FindByFactureId(long factureId)
+       {
+           return _repositoryBonnetree.FindSingle(x => x.FactureId == factureId);
+       }
+
+       public bool InsertLigneMagasin(LigneEntreeMagasin ligne)
+       {
+           try
+           {
+               _repositoryLigneMAgasin.Insert(ligne);
+               return true;
+           }
+           catch (Exception)
+           {
+               return false;
+           }
+       }
+
+       public bool InsertBonMagasin(BonEntree bon ,out long id)
+       {
+           try
+           {
+               _repositoryBonnetree.Insert(bon);
+               return true;
+           }
+           catch (Exception)
+           {
+               return false;
+           }
+           finally
+           {
+               id = bon.Id;
+           }
        }
     }
 }

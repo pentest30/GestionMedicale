@@ -164,7 +164,7 @@
             url: '@Url.Action("UpdateLogo")' + '/?id=@Model.Id',
             done: function (e, data) {
                 $('#Logo').attr('value', data.result);
-                console.log($('#Logo').val());
+                //console.log($('#Logo').val());
                 $('#image-frame > img').remove();
                 $('#image-frame').append('<img src="' + '@Url.Action("SomeImage", "Pharmacien")' + '/?imageName=' + $("#Logo").val() + '" ' + ' alt="" class="img img-polaroid">');
 

@@ -17,5 +17,9 @@ namespace GM.Services.Entrees
         bool DeleteLigne(int id);
         IEnumerable<LigneEntree> GetLigneCommandes(int entreeId);
         IEnumerable<LigneEntree> GetLigneCommandes();
+        BonEntree FindByFactureId(long factureId);
+        bool InsertLigneMagasin(LigneEntreeMagasin ligne);
+        bool InsertBonMagasin(BonEntree bon, out long id);
+
     }
 }

@@ -10,6 +10,7 @@ using GM.Services.Fournisseurs;
 using GM.Services.Magasins;
 using GM.Services.Medicaments;
 using GM.Services.Pharmacies;
+using GM.Services.Stocks;
 using GM.Services.Utilisateurs;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -24,6 +25,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
         private readonly IServicePharmacie _servicePharmacie;
         private readonly IServiceMedicmaent _serviceMedicmaent;
         private readonly IServiceEntrees _serviceEntrees;
+        private readonly IServiceStock _serviceStock;
         //private readonly IEnumerable<Magasin> _listMagasins;
         private readonly IEnumerable<Fournisseur> _liste;
         // GET: Gestion/BonEntree
@@ -32,7 +34,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             IServiceFournisseur serviceFournisseur,
             IServicePharmacie servicePharmacie,
             IServiceMedicmaent serviceMedicmaent,
-            IServiceEntrees serviceEntrees)
+            IServiceEntrees serviceEntrees , IServiceStock serviceStock)
         {
             _serviceMagasin = serviceMagasin;
             _serviceUtilisateur = serviceUtilisateur;
@@ -40,7 +42,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _servicePharmacie = servicePharmacie;
             _serviceMedicmaent = serviceMedicmaent;
             _serviceEntrees = serviceEntrees;
+            _serviceStock = serviceStock;
             _liste = _serviceFournisseur.GeltList();
+           // _listMagasins = _serviceMagasin.Liste()
             
         }
 
@@ -96,6 +100,22 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
             return (continuer) ? View(model) : View("Index");
         }
+        [HttpPost]
+        public ActionResult Update(Entree model, bool continuer)
+        {
+            ViewData["fournisseur"] = new SelectList(_liste, "Id", "Nom", model.FournisseurId);
+            GetEntrepriseId();
+            if (ModelState.IsValid)
+            {
+                //long identity;
+                _serviceEntrees.Update(model);
+                ViewData["info"] = "Opération est terminé avec succéss !";
+                ViewData["id"] = model.Id ;
+            }
+            model.ClientId = Convert.ToInt32(Session["entreprise"]);
+
+            return (continuer) ? View(model) : View("Index");
+        }
         public ActionResult SearchMedicament()
         {
             var name = Request["q"];
@@ -117,6 +137,117 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
             return Json(list.ToArray(), JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult GetBonMagasin(long? id)
+        {
+            if (id == null) return HttpNotFound();
+            var facture = _serviceEntrees.FindSingle(Convert.ToInt64(id));
+            if (facture != null)
+            {
+                ViewData["magasin"] = new SelectList(_serviceMagasin.Liste(facture.ClientId), "Id", "Libelle");
+                var model = Mapper.Map<BonEntree>(facture);
+                model.FactureId = Convert.ToInt64(id);
+                return PartialView("_BonMagasin", model);
+            }
+            return PartialView("_BonMagasin", new BonEntree());
+        }
+
+        [HttpPost]
+        public ActionResult CreateBonMagasin(BonEntree model)
+        {
+            var bon = _serviceEntrees.FindByFactureId(model.FactureId);
+            var b = false;
+            var facture = _serviceEntrees.FindSingle(Convert.ToInt64(model.FactureId));
+            if (bon != null && bon.LigneEntreesMagasin.Count() != facture.LigneEntrees.Count())
+            {
+
+                foreach (var ligne in facture.LigneEntrees)
+                {
+                    var findSingle = _serviceStock.FindSingle(ligne.MedicamentId, model.MagasinId);
+                    if (findSingle != null)
+                    {
+                        findSingle.Qnt += ligne.Qnt;
+                        _serviceStock.Update(findSingle);
+                    }
+                    else
+                    {
+                        var stoc = new Stock
+                        {
+                            MagasinId = model.MagasinId,
+                            EntrepriseId = model.ClientId,
+                            MedicamentId = ligne.MedicamentId , 
+                            Qnt = ligne.Qnt
+                        };
+                        _serviceStock.Insert(stoc);
+                    }
+                    var ligne1 = ligne;
+                    var entreeMagasin =
+                        bon.LigneEntreesMagasin.FirstOrDefault(
+                            x => x.NumLot == ligne1.NumLot && x.MedicamentId == ligne1.MedicamentId);
+                    if (entreeMagasin == null)
+                    {
+                        var newEntree = Mapper.Map<LigneEntreeMagasin>(ligne);
+                        newEntree.BonEntreeId = bon.Id;
+                        b = _serviceEntrees.InsertLigneMagasin(newEntree);
+                    }
+                }
+                dynamic data = new
+                {
+                    message = b ? SuccessMessage() : ErrorMessage()
+                };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            if (bon != null && bon.LigneEntreesMagasin.Count() == facture.LigneEntrees.Count())
+            {
+                dynamic data = new
+                {
+                    message = "Bon d'entrée existe dans la base de données"
+                };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+
+
+            long identity;
+             b = _serviceEntrees.InsertBonMagasin(model, out identity);
+             if (facture.LigneEntrees.Count > 0&& b)
+             {
+                 foreach (LigneEntree ligne in facture.LigneEntrees)
+                 {
+                     var findSingle = _serviceStock.FindSingle(ligne.MedicamentId, model.MagasinId);
+                     if (findSingle != null)
+                     {
+                         findSingle.Qnt += ligne.Qnt;
+                         _serviceStock.Update(findSingle);
+                     }
+                     else
+                     {
+                         var stoc = new Stock
+                         {
+                             MagasinId = model.MagasinId,
+                             EntrepriseId = model.ClientId,
+                             MedicamentId = ligne.MedicamentId,
+                             Qnt = ligne.Qnt
+                         };
+                         _serviceStock.Insert(stoc);
+                     }
+                     var newEntree = Mapper.Map<LigneEntreeMagasin>(ligne);
+                     newEntree.BonEntreeId = identity;
+                     b = _serviceEntrees.InsertLigneMagasin(newEntree);
+                 }
+                 dynamic data = new
+                 {
+                     message = b ? SuccessMessage() : ErrorMessage()
+                 };
+
+                 return Json(data, JsonRequestBehavior.AllowGet);
+             }
+             dynamic data1 = new
+             {
+                 message = b ? SuccessMessage() : ErrorMessage()
+             };
+             return Json(data1, JsonRequestBehavior.AllowGet);
+         }
         public ActionResult DetailCommade(long? id )
         {
             long commandeId = Convert.ToInt64(Request["commandeId"]);
@@ -126,7 +257,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 {
                     EntreeId = Convert.ToInt64(commandeId)
                 });
-                
             }
             
             var ligne = _serviceEntrees.GetSingleLigne(Convert.ToInt64(id));
@@ -147,6 +277,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
             return View();
         }
+
         private void GetEntrepriseId()
         {
             var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
@@ -160,9 +291,9 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
 
         }
+
         public ActionResult Delete(int? id)
         {
-
             var b = id != null && _serviceEntrees.Delete((int)id);
             var data = new
             {

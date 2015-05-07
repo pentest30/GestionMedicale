@@ -11,11 +11,12 @@
 
 
     Html.RenderPartial("_ListToolBar");
+    Html.RenderPartial("_ModalBonMagasin");
 
 
 }
 <div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
-    <h2>Entrées </h2>
+    <h2>Factures </h2>
     <hr />
     <div id="alert"></div>
     @{
@@ -37,7 +38,9 @@
               columns.Bound(c => c.NumPiece);
               columns.Bound(c => c.Date);
               columns.Bound(c => c.Fournisseur.Nom).Title("Fournisseur");
-            
+              columns.Bound(c => c.Tht).Title("Total hors tax");
+              columns.Bound(c => c.Tva).Title("Total tax");
+              columns.Bound(c => c.Ttc).Title("Total");
 
 
 
@@ -53,7 +56,7 @@
               .ButtonCount(5))
           .DataSource(dataSource => dataSource
               .Ajax()
-
+             
               .Read(read => read.Action("GetList", "BonEntree")
                   .Data("additionalData"))
           ))
@@ -62,119 +65,151 @@
 
 </div>
 <script type="text/javascript">
-            var selectedIds = [];
-            $(document).ready(function () {
-                $(".menu *").prop('disabled', true);
-                $("#return-btn").click(function (e) {
-                    e.preventDefault();
-                    window.location.href = '@Url.Action("Index","Pharmacien", new {area="Gestion"})';
+    var selectedIds = [];
+    $(document).ready(function () {
+        $(".menu *").prop('disabled', true);
+        $("#return-btn").click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("Index","Pharmacien", new {area="Gestion"})';
 
-                });
-                //$(".menu *").prop('disabled', true);
-                $('#mastercheckbox').click(function () {
-                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
-                });
-                $("#delete-btn").confirm({
-                    text: "Est vous sur(e)?",
-                    title: "Confirmation",
-                    confirm: function () {
-                        if ($.isEmptyObject(selectedIds) === true) {
-                            alert("Séléctionner un utilisateur!");
-                            return;
-                        }
+        });
+        //$(".menu *").prop('disabled', true);
+        $('#mastercheckbox').click(function () {
+            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+        });
+        $("#delete-btn").confirm({
+            text: "Est vous sur(e)?",
+            title: "Confirmation",
+            confirm: function () {
+                if ($.isEmptyObject(selectedIds) === true) {
+                    alert("Séléctionner un utilisateur!");
+                    return;
+                }
 
-                        for (var i = 0; i < selectedIds.length; i++) {
-                            $.ajax({
-                                url: '@Url.Action("Delete")' + '/' + selectedIds[i].replace("<", "").replace(">", ""),
-                                type: 'POST',
-                                success: function (data) {
-                                    $("#alert").html(data.message);
-
-                                    $('#specialites').data('kendoGrid').dataSource.read();
-                                },
-                                error: function () {
-                                }
-                            });
-                        }
-
-                    },
-                    cancel: function () {
-                        // nothing to do
-                    },
-                    confirmButton: "Oui",
-                    cancelButton: "Non",
-                    post: true,
-                    confirmButtonClass: "btn-success",
-                    cancelButtonClass: "btn-default"
-                });
-                $("#add-btn").click(function () {
-                    window.location.href = '@Url.Action("Create")';
-                });
-                $("#update-btn").click(function () {
-                    if ($.isEmptyObject(selectedIds) === true) {
-                        alert("Séléctionner un champ!");
-                        return;
-                    }
-                    window.location.href = '@Url.Action("Update")' + '/' + selectedIds[0].replace("<", "").replace(">", "");
-                });
-                $("#details-cmd-btn").click(function () {
-                    if ($.isEmptyObject(selectedIds) === true) {
-                        alert("Séléctionner un champ!");
-                        return;
-                    }
+                for (var i = 0; i < selectedIds.length; i++) {
                     $.ajax({
-                        url: '@Url.Action("DetailLigne")' + '/' + selectedIds[0].replace("<", "").replace(">", ""),
-
+                        url: '@Url.Action("Delete")' + '/' + selectedIds[i].replace("<", "").replace(">", ""),
                         type: 'POST',
                         success: function (data) {
-                            $("#dony").html(data);
-                            $("#myModal").modal("show");
+                            $("#alert").html(data.message);
+
+                            $('#specialites').data('kendoGrid').dataSource.read();
                         },
                         error: function () {
                         }
-
                     });
+                }
 
-                });
-                $(document).on('change', '#specialites input[type=checkbox][id!=mastercheckbox]', function () {
-                    var $check = $(this);
-                    var checked;
-                    if ($check.is(":checked") === true) {
-                        checked = jQuery.inArray($check.val(), selectedIds);
-                        if (checked === -1) {
-                            //add id to selectedIds.
-                            selectedIds.push($check.val());
+            },
+            cancel: function () {
+                // nothing to do
+            },
+            confirmButton: "Oui",
+            cancelButton: "Non",
+            post: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-default"
+        });
+        $("#add-btn").click(function () {
+            window.location.href = '@Url.Action("Create")';
+        });
+        $("#update-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
+            window.location.href = '@Url.Action("Update")' + '/' + selectedIds[0].replace("<", "").replace(">", "");
+        });
+        $("#details-cmd-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
+            $.ajax({
+                url: '@Url.Action("DetailLigne")' + '/' + selectedIds[0].replace("<", "").replace(">", ""),
 
-                        }
-                    }
-                    else {
-                        checked = jQuery.inArray($check.val(), selectedIds);
-                        if (checked > -1) {
-                            //remove id from selectedIds.
-                            selectedIds = $.grep(selectedIds, function (item) {
-                                return item !== $check.val();
-                            });
-                        }
-                    }
-                    updateMasterCheckbox();
-                });
-                $("#search").on("click", function (e) {
-                    e.preventDefault();
-                    $('#specialites').data('kendoGrid').dataSource.fetch();
-                });
+                type: 'POST',
+                success: function (data) {
+                    $("#dony").html(data);
+                    $("#myModal").modal("show");
+                },
+                error: function () {
+                }
 
             });
-            function updateMasterCheckbox() {
-                var numChkBoxes = $('#specialites input[type=checkbox]:not([id=mastercheckbox])').length;
-                var numChkBoxesChecked = $('#specialites input[type=checkbox][checked]:not([id=mastercheckbox])').length;
-                $('#mastercheckbox').attr('checked', numChkBoxes === numChkBoxesChecked && numChkBoxes > 0);
-            }
-            function additionalData() {
-                return {
 
-                    libelle: $('#Libelle').val(),
-                    code: $('#Code').val()
-                };
+        });
+        $(document).on('change', '#specialites input[type=checkbox][id!=mastercheckbox]', function () {
+            var $check = $(this);
+            var checked;
+            if ($check.is(":checked") === true) {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked === -1) {
+                    //add id to selectedIds.
+                    selectedIds.push($check.val());
 
+                }
             }
+            else {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked > -1) {
+                    //remove id from selectedIds.
+                    selectedIds = $.grep(selectedIds, function (item) {
+                        return item !== $check.val();
+                    });
+                }
+            }
+            updateMasterCheckbox();
+        });
+        $("#search").on("click", function (e) {
+            e.preventDefault();
+            $('#specialites').data('kendoGrid').dataSource.fetch();
+        });
+        $("#generer-bn-btn").click(function () {
+            if ($.isEmptyObject(selectedIds) === true) {
+                alert("Séléctionner un champ!");
+                return;
+            }
+            $.ajax({
+                url: '@Url.Action("GetBonMagasin", "BonEntree")' + '/' + selectedIds[0].replace("<", "").replace(">", ""),
+
+                type: 'POST',
+                success: function (data) {
+                    $("#dony").html(data);
+                    $("#myModal").modal("show");
+                },
+                error: function () {
+                }
+
+            });
+        });
+        $("#save-modal-btn").click(function () {
+           
+            $.ajax({
+                url: '@Url.Action("CreateBonMagasin", "BonEntree", new {area = "Gestion"})',
+                data: $("form").serialize(),
+                type: 'POST',
+                success: function (data) {
+                    //$('#specialites').data('kendoGrid').dataSource.read();
+                    $.bootstrapGrowl(data.message, { type: 'info' });
+                },
+                error: function () {
+                }
+            });
+        });
+
+    });
+    function updateMasterCheckbox() {
+        var numChkBoxes = $('#specialites input[type=checkbox]:not([id=mastercheckbox])').length;
+        var numChkBoxesChecked = $('#specialites input[type=checkbox][checked]:not([id=mastercheckbox])').length;
+        $('#mastercheckbox').attr('checked', numChkBoxes === numChkBoxesChecked && numChkBoxes > 0);
+    }
+    function additionalData() {
+        return {
+
+            libelle: $('#Libelle').val(),
+            code: $('#Code').val()
+        };
+
+    }
 </script>

@@ -6,9 +6,11 @@
         public int MedicamentId { get; set; }
         public int MagasinId { get; set; }
         public long? Qnt { get; set; }
+        public int EntrepriseId { get; set; }
        
         public Medicament Medicament { get; set; }
         public Magasin Magasin { get; set; }
+        public Entreprise Entreprise { get; set; }
 
     }
 }

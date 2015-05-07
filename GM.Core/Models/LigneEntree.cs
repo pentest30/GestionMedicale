@@ -38,8 +38,8 @@ namespace GM.Core.Models
         [Display(Name = "Taux de benifice")]
 
         public decimal? TauxBenifice { get; set; }
-
-        public Entree Entree { get; set; }
+        
+        //public Entree Entree { get; set; }
         public Medicament Medicament { get; set; }
     }
 }

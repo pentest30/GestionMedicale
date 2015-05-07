@@ -14,6 +14,7 @@ using GM.Services.Magasins;
 using GM.Services.Medicaments;
 using GM.Services.Nomenclature;
 using GM.Services.Pharmacies;
+using GM.Services.Stocks;
 using GM.Services.Utilisateurs;
 using Microsoft.Practices.Unity;
 
@@ -68,8 +69,11 @@ namespace Gm.UI
             container.RegisterType<IRepository<Laboratoire>, FabriquantRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Magasin>, MagasinRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Commande>, CommandeRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<Stock>, StockRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Entree>, EntreeRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<BonEntree>, BonEntreeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<LigneEntree>, LigneEntreeRepo>(new PerRequestLifetimeManager());
+            container.RegisterType<IRepository<LigneEntreeMagasin>, LigneBonEntreeRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<Fournisseur>, FournisseurRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IRepository<LigneCommande>, CommdeLigneRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceUtilisateur,ServiceUtilisateur>(new PerRequestLifetimeManager());
@@ -85,6 +89,7 @@ namespace Gm.UI
             container.RegisterType<IServiceCommandes, ServiceCommande>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceFournisseur, ServiceFournisseur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceEntrees, ServiceEntrees>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceStock, IServiceStock>(new PerRequestLifetimeManager());
         }
     }
 }

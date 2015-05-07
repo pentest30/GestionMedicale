@@ -996,6 +996,8 @@
     <Content Include="Areas\Gestion\Views\BonEntree\_CreateOrUpdateLigne.cshtml" />
     <Content Include="Areas\Gestion\Views\BonEntree\_toolBarCommande.cshtml" />
     <Content Include="Areas\Gestion\Views\BonEntree\Update.cshtml" />
+    <Content Include="Areas\Gestion\Views\BonEntree\_BonMagasin.cshtml" />
+    <Content Include="Areas\Gestion\Views\BonEntree\_ModalBonMagasin.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
