@@ -89,7 +89,7 @@ namespace Gm.UI
             container.RegisterType<IServiceCommandes, ServiceCommande>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceFournisseur, ServiceFournisseur>(new PerRequestLifetimeManager());
             container.RegisterType<IServiceEntrees, ServiceEntrees>(new PerRequestLifetimeManager());
-            container.RegisterType<IServiceStock, IServiceStock>(new PerRequestLifetimeManager());
+            container.RegisterType<IServiceStock, ServiceStock>(new PerRequestLifetimeManager());
         }
     }
 }

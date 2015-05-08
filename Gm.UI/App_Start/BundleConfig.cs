@@ -23,6 +23,7 @@ namespace Gm.UI
                 "~/Scripts/bootstrap-datepicker.js",
                 "~/Scripts/bootstrap-datepicker.fr.js",
                 "~/Scripts/respond.js",
+                 "~/Scripts/jquery.mixitup.js",
                 "~/Scripts/select2.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/gestion/bootstrap").Include(
                 "~/Scripts/gestion/bootstrap.min.js",
@@ -43,6 +44,7 @@ namespace Gm.UI
                 "~/Content/file-upload/js/jquery.iframe-transport.js",
                 "~/combogrid/jquery.easyui.min.js",
                 "~/combogird/jquery/jquery-ui-1.10.1.custom.min.js",
+             "~/Scripts/jquery.mixitup.js",
                 "~/Scripts/select2.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

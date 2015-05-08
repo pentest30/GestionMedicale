@@ -16,7 +16,7 @@ namespace GM.Core.Models
         public int FournisseurId { get; set; }
         [Required]
         public int ClientId { get; set; }
-        [Display(Name = "N de facture")]
+        [Display(Name = "N° de facture")]
         [Required]
         public string NumPiece { get; set; }
         [Required]

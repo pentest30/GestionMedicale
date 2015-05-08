@@ -44,8 +44,14 @@
                             <a href="@Url.Action("Index", "Magasin", new {area = "Gestion"})">Magasins</a>
                         </li>
 
-                        <li>
-                            <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Fournisseurs</a>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">Fournisseurs</a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">Recherche des fournisseurs</a></li>
+                               
+                                <li><a href="#">Nouveaux fournisseurs</a></li>
+                               
+                            </ul>
                         </li>
                         <li>
                             <a href="@Url.Action("Specialite", "Pharmacie", new {area = "Gestion"})">Clients</a>

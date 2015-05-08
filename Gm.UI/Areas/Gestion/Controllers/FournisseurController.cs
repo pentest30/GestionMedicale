@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GM.Core;
 using GM.Core.Models;
 using GM.Services.Fournisseurs;
 using Gm.UI.Areas.Gestion.Models;
+using MvcPaging;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
@@ -23,6 +26,20 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View();
         }
 
+        public ActionResult Recherche(int? page , string filter)
+        {
+            var currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            var search = new Fournisseur
+            {
+                Nom = filter,
+                Wilaya = filter,
+                Commune = filter,
+                Tel = filter,
+                Email = filter
+            };
+            var result = Mapper.Map<IList<PharmacieModel>>(_service.SearchResult(search));
+            return View(result.ToPagedList(currentPageIndex,  10));
+        }
         [HttpGet]
         public ActionResult NouvelleEntreprise(Guid id)
         {
@@ -46,7 +63,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             }
             //model.PropreitaireId = Guid.Parse(ViewData["propId"].ToString());
             ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
-            if (_service.Insert(AutoMapper.Mapper.Map<Fournisseur>(model)))
+            if (_service.Insert(Mapper.Map<Fournisseur>(model)))
                 return RedirectToAction("Info", "Home", new { area = "" });
             return View(model);
         }

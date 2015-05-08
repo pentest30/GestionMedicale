@@ -34,7 +34,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
             IServiceFournisseur serviceFournisseur,
             IServicePharmacie servicePharmacie,
             IServiceMedicmaent serviceMedicmaent,
-            IServiceEntrees serviceEntrees , IServiceStock serviceStock)
+            IServiceEntrees serviceEntrees , 
+            IServiceStock serviceStock)
         {
             _serviceMagasin = serviceMagasin;
             _serviceUtilisateur = serviceUtilisateur;
@@ -57,9 +58,6 @@ namespace Gm.UI.Areas.Gestion.Controllers
               "Libelle");
             return View();
         }
-
-      
-
         public ActionResult GetList(DataSourceRequest request)
         {
             return Json(_serviceEntrees.Liste(Convert.ToInt32(Convert.ToInt32(Session["entreprise"]))).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -253,7 +251,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             long commandeId = Convert.ToInt64(Request["commandeId"]);
             if (id == null || id == 0)
             {
-                return PartialView("_CreateOrUpdateLigne", new LigneEntree()
+                return PartialView("_CreateOrUpdateLigne", new LigneEntree
                 {
                     EntreeId = Convert.ToInt64(commandeId)
                 });

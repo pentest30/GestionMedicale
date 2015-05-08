@@ -98,6 +98,9 @@
     <Reference Include="MvcExtensions.AutoMapper">
       <HintPath>..\packages\MvcExtensions.AutoMapper.1.0.0\lib\net45\MvcExtensions.AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="MvcPaging">
+      <HintPath>..\packages\MvcPaging.2.1.2\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="NCrunch.Framework">
       <HintPath>..\packages\NCrunch.Framework.2.14.0.8\lib\portable-windows8+net45\NCrunch.Framework.dll</HintPath>
     </Reference>
@@ -877,6 +880,7 @@
     <Content Include="Content\select2.png" />
     <Content Include="Content\select2x2.png" />
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\jquery.mixitup.js" />
     <Content Include="Views\Home\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
