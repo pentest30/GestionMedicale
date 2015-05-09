@@ -68,11 +68,11 @@ namespace GM.Services.Fournisseurs
         {
 
             var filter = from m in EntityFilter<Fournisseur>.AsQueryable()
-                where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrWhiteSpace(fournisseur.Nom)
-                      || m.Wilaya.Contains(fournisseur.Wilaya) || string.IsNullOrWhiteSpace(fournisseur.Wilaya)
-                      || m.Wilaya.Contains(fournisseur.Commune) || string.IsNullOrWhiteSpace(fournisseur.Commune)
-                      || m.Wilaya.Contains(fournisseur.Tel) || string.IsNullOrWhiteSpace(fournisseur.Tel)
-                      || m.Wilaya.Contains(fournisseur.Email) || string.IsNullOrWhiteSpace(fournisseur.Email)
+                where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrEmpty(fournisseur.Nom)
+                      || m.Wilaya.Contains(fournisseur.Wilaya) || string.IsNullOrEmpty(fournisseur.Wilaya)
+                      || m.Wilaya.Contains(fournisseur.Commune) || string.IsNullOrEmpty(fournisseur.Commune)
+                      || m.Wilaya.Contains(fournisseur.Tel) || string.IsNullOrEmpty(fournisseur.Tel)
+                      || m.Wilaya.Contains(fournisseur.Email) || string.IsNullOrEmpty(fournisseur.Email)
                 select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
 

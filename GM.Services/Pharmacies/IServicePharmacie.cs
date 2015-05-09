@@ -12,5 +12,6 @@ namespace GM.Services.Pharmacies
         bool Existe(Guid id);
         Pharmacie SinglePharmacie(int id);
         IEnumerable<Pharmacie> GetListe();
+        IEnumerable<Pharmacie> SearchResult(Pharmacie fournisseur);
     }
 }

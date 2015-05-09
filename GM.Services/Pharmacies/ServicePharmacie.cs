@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using EntyTea.EntityQueries;
 using GM.Core;
 using GM.Core.Models;
 
@@ -60,6 +62,18 @@ namespace GM.Services.Pharmacies
         public IEnumerable<Pharmacie> GetListe()
         {
            return _repository.SelectAll();
+        }
+
+        public IEnumerable<Pharmacie> SearchResult(Pharmacie fournisseur)
+        {
+            var filter = from m in EntityFilter<Pharmacie>.AsQueryable()
+                         where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrEmpty(fournisseur.Nom)
+                               || m.Wilaya.Contains(fournisseur.Wilaya) || string.IsNullOrEmpty(fournisseur.Wilaya)
+                               || m.Wilaya.Contains(fournisseur.Commune) || string.IsNullOrEmpty(fournisseur.Commune)
+                               || m.Wilaya.Contains(fournisseur.Tel) || string.IsNullOrEmpty(fournisseur.Tel)
+                               || m.Wilaya.Contains(fournisseur.Email) || string.IsNullOrEmpty(fournisseur.Email)
+                         select m;
+            return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }
 }

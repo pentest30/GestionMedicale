@@ -1,0 +1,41 @@
+﻿@using MvcPaging
+@model IPagedList<Gm.UI.Areas.Gestion.Models.PharmacieModel>
+@{
+    ViewBag.Title = "Pharmaciens";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 60px">
+
+    <div id="products" class="row list-group">
+
+        @foreach (var item in Model)
+        {
+            Html.RenderPartial("_pharmacienTemplate", item);
+        }
+    </div>
+
+</div>
+<div class="pager">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Suivant", Previous = "Précédent" },
+                TooltipTitles = new TooltipTitles() { Next = "Suivant", Previous = "Précédent", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Fournisseur", action = "Recherche" }))
+</div>
+

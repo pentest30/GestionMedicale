@@ -28,7 +28,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
 
         public ActionResult Recherche(int? page , string filter)
         {
-            var currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            var currentPageIndex = page.HasValue ? page.Value - 1 : 1;
             var search = new Fournisseur
             {
                 Nom = filter,
