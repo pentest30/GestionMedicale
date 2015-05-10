@@ -46,20 +46,57 @@ namespace Gm.UI.Controllers
             return View();
         }
 
-        public ActionResult Pharmaciens(int ? page, string filter)
+        public ActionResult Pharmaciens()
+        {
+            return View();
+        }
+
+        public ActionResult GetListPharmacies(int? page, string filter, string param)
         {
             var currentPageIndex = page.HasValue ? page.Value - 1 : 1;
-            var search = new Pharmacie
+            var search = new Pharmacie();
+
+            switch (param)
             {
-                Nom = filter,
-                Wilaya = filter,
-                Commune = filter,
-                Tel = filter,
-                Email = filter
-            };
-            var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
-            return View(result.ToPagedList(currentPageIndex, 10));
-            
+                case "Nom de pharmacie":
+                    {
+                        search.Nom = filter;
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+                    }
+                case "Wilaya":
+                    {
+                        search.Wilaya = filter;
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+                    }
+                case "Commune":
+                    {
+                        search.Commune = filter;
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+                    }
+                case "Tel":
+                    {
+                        search.Tel = filter;
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+                    }
+                case "Email":
+                    {
+                        search.Email = filter;
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.SearchResult(search));
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+                    }
+                default:
+                    {
+                        var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.GetListe());
+                        return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
+
+                    }
+
+
+            }
         }
     }
 }

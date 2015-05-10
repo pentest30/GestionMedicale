@@ -1390,7 +1390,7 @@
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Pharmaciens.cshtml" />
-    <Content Include="Views\Home\_pharmacienTemplate.cshtml" />
+    <Content Include="Views\Home\_ListePharmacies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\poduits\" />

@@ -67,12 +67,17 @@ namespace GM.Services.Pharmacies
         public IEnumerable<Pharmacie> SearchResult(Pharmacie fournisseur)
         {
             var filter = from m in EntityFilter<Pharmacie>.AsQueryable()
-                         where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrEmpty(fournisseur.Nom)
-                               || m.Wilaya.Contains(fournisseur.Wilaya) || string.IsNullOrEmpty(fournisseur.Wilaya)
-                               || m.Wilaya.Contains(fournisseur.Commune) || string.IsNullOrEmpty(fournisseur.Commune)
-                               || m.Wilaya.Contains(fournisseur.Tel) || string.IsNullOrEmpty(fournisseur.Tel)
-                               || m.Wilaya.Contains(fournisseur.Email) || string.IsNullOrEmpty(fournisseur.Email)
-                         select m;
+                where m.Nom.Contains(fournisseur.Nom)
+                    
+                      || m.Wilaya.Contains(fournisseur.Wilaya)
+                     
+                      || m.Commune.Contains(fournisseur.Commune)
+                      
+                      || m.Tel.Contains(fournisseur.Tel)
+                    
+                      || m.Email.Contains(fournisseur.Email)
+                     
+                select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
         }
     }

@@ -1,0 +1,81 @@
+﻿@model IPagedList<Gm.UI.Areas.Gestion.Models.PharmacieModel>
+
+<table class="table table-bordered  table-hover">
+    <tr>
+        <th>
+            Nom
+        </th>
+      
+        <th>
+           Tel
+        </th>
+        
+        <th>
+            Email
+        </th>
+      
+        <th>
+            Wilaya
+        </th>
+        <th>
+          Commune
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+       
+      
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+       
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Wilaya)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commune)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+<div class="pager">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Suivant", Previous = "Précédent" },
+                TooltipTitles = new TooltipTitles() { Next = "Suivant", Previous = "Précédent", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "GetListPharmacies", action = "Home" }))
+</div>

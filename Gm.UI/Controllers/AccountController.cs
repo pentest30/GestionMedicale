@@ -36,7 +36,7 @@ namespace Gm.UI.Controllers
             if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value");
             ViewData["RoleId"] = new SelectList(_roles, "Id", "Nom");
-            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom");
+            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "Nom", "Nom");
             return View(new RegisterModel());
         }
 
@@ -201,7 +201,7 @@ namespace Gm.UI.Controllers
         {
             ViewData["RoleId"] = new SelectList(_roles, "Id", "Nom", model.RoleId);
             ViewData["Sexe"] = new SelectList(GetGenre(), "Key", "Value", model.Sexe);
-            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "NumWilaya", "Nom", model.Wilaya);
+            ViewData["Wilaya"] = new SelectList(Wilaya.ListWilayas(), "Nom", "Nom", model.Wilaya);
         }
 
         private bool IsNumeric(string input)
