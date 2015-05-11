@@ -50,6 +50,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Banne.cs" />
     <Compile Include="Models\BonEntree.cs" />
+    <Compile Include="Models\Cabinet.cs" />
     <Compile Include="Models\Commande.cs" />
     <Compile Include="Models\Conditionnement.cs" />
     <Compile Include="Models\Dci.cs" />

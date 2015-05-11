@@ -8,6 +8,8 @@ using GM.Core;
 using GM.Core.Models;
 using GM.Services.Fournisseurs;
 using Gm.UI.Areas.Gestion.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using MvcPaging;
 
 namespace Gm.UI.Areas.Gestion.Controllers
@@ -68,9 +70,17 @@ namespace Gm.UI.Areas.Gestion.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult Create()
+        [Authorize(Roles = "pharmacien")]
+        public ActionResult ListeFournisseur()
         {
             return View();
+        }
+       
+        [Authorize(Roles = "pharmacien")]
+        public ActionResult GetListFournisseur(DataSourceRequest request )
+        {
+            var result = Mapper.Map<IList<PharmacieModel>>(_service.GeltList());
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         private string SaveFile(string fileName, HttpPostedFileBase file)
         {

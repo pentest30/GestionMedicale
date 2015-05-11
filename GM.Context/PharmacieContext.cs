@@ -12,7 +12,7 @@ namespace GM.Context
         }
 
         public DbSet<Pays> Payses { get; set; }
-       
+        public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Pharmacie> Pharmacies { get; set; }
         public DbSet<Fournisseur> Fournisseurs { get; set; }
         public DbSet<Magasin> Magasins { get; set; }

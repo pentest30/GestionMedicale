@@ -117,6 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cabinets\CabinetRepository.cs" />
+    <Compile Include="Cabinets\IServiceCabinet.cs" />
+    <Compile Include="Cabinets\ServiceCabinet.cs" />
     <Compile Include="Commandes\CommandeRepository.cs" />
     <Compile Include="Commandes\CommdeLigneRepo.cs" />
     <Compile Include="Commandes\IServiceCommandes.cs" />
