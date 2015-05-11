@@ -67,6 +67,11 @@ namespace Gm.UI.Areas.Gestion.Controllers
                 return RedirectToAction("Info", "Home", new { area = "" });
             return View(model);
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
         private string SaveFile(string fileName, HttpPostedFileBase file)
         {
             var path = Path.Combine(Server.MapPath("~/App_Data/photos/logos"), fileName);
