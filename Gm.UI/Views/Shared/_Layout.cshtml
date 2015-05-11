@@ -62,6 +62,10 @@
                         {
                             <li><a href="@Url.Action("Index","Gestion/Fournisseur")"><span class="fa fa-user"></span> @User.Identity.Name</a></li>
                         }
+                        if (User.IsInRole("medecin"))
+                        {
+                            <li><a href="@Url.Action("Index","Gestion/Medecin")"><span class="fa fa-user"></span> @User.Identity.Name</a></li>
+                        }
                         <li><a href="@Url.Action("logout", "Account", new { area = "" })"><span class="fa fa-power-off"></span> Sortie</a></li>
 
                     }

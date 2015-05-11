@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201505110819031_ml2.Designer.cs">
       <DependentUpon>201505110819031_ml2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505111013103_mk25314.cs" />
+    <Compile Include="Migrations\201505111013103_mk25314.Designer.cs">
+      <DependentUpon>201505111013103_mk25314.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PharmacieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505110819031_ml2.resx">
       <DependentUpon>201505110819031_ml2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505111013103_mk25314.resx">
+      <DependentUpon>201505111013103_mk25314.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
