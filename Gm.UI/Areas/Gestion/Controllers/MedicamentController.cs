@@ -20,6 +20,7 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     [Authorize(Roles = "pharmacien,distributeur")]
     public class MedicamentController : Controller
     {
         private readonly IServiceMedicmaent _service;

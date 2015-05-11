@@ -17,6 +17,7 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     [Authorize(Roles = "pharmacien,distributeur")]
     public class BonEntreeController : Controller
     {
         private readonly IServiceMagasin _serviceMagasin;

@@ -11,6 +11,7 @@ namespace GM.Services.Cabinets
         bool Update(Cabinet cabinet);
         bool Existe(Guid id);
         Cabinet SingleCabinet(int id);
+        Cabinet SingleCabinet(Guid id);
         IEnumerable<Cabinet> GetListe();
     }
 }

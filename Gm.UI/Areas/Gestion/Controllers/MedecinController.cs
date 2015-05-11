@@ -7,6 +7,7 @@ using GM.Services.Utilisateurs;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     //[Authorize(Roles = "medecin")]
     public class MedecinController : Controller
     {
         private readonly IServiceCabinet _serviceCabinet;

@@ -14,6 +14,7 @@ using MvcPaging;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     [Authorize(Roles = "distributeur")]
     public class FournisseurController : Controller
     {
         private readonly IServiceFournisseur _service;

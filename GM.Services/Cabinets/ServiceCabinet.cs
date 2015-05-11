@@ -58,6 +58,11 @@ namespace GM.Services.Cabinets
             return _repository.SelectById(id);
         }
 
+        public Cabinet SingleCabinet(Guid id)
+        {
+            return _repository.FindSingle(x => x.MedecinId == id);
+        }
+
         public IEnumerable<Cabinet> GetListe()
         {
            return _repository.SelectAll();

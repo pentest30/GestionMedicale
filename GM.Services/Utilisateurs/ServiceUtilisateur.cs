@@ -7,6 +7,7 @@ using System.Web.Helpers;
 using EntyTea.EntityQueries;
 using GM.Core;
 using GM.Core.Models;
+using GM.Services.Cabinets;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -17,6 +18,8 @@ namespace GM.Services.Utilisateurs
         private readonly IRepository<Utilisateur> _repository;
         private readonly IRepository<UtilisateurRole> _roleUserRepository;
         private readonly IRepository<Role> _roleRepository;
+        private readonly IServiceCabinet _serviceCabinet;
+
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -25,17 +28,21 @@ namespace GM.Services.Utilisateurs
             }
         }
 
-        public ServiceUtilisateur(IRepository<Utilisateur> repository, IRepository<UtilisateurRole> roleUserRepository, IRepository<Role> roleRepository)
+        public ServiceUtilisateur(IRepository<Utilisateur> repository,
+            IRepository<UtilisateurRole> roleUserRepository, 
+            IRepository<Role> roleRepository , IServiceCabinet serviceCabinet)
         {
             _repository = repository;
             _roleUserRepository = roleUserRepository;
             _roleRepository = roleRepository;
+            _serviceCabinet = serviceCabinet;
         }
 
         public IEnumerable<Role> SelectRoles()
         {
            return _roleRepository.Find(x=>x.Public);
         }
+
 
         public Role GetSingleRole(string id)
         {
@@ -169,6 +176,13 @@ namespace GM.Services.Utilisateurs
                 where m.Validation == predicate
                 select m;
             return filter.Filter(_repository.SelectAll().AsQueryable());
+        }
+
+        public IEnumerable<Utilisateur> SelectMedecins(string role)
+        {
+            var roles = _roleUserRepository.Find(x => x.Roles.Nom == role);
+            return roles.Select(role2 => _repository.FindSingle(x => x.Id == role2.UtilisateurId)).ToList();
+           
         }
     }
 }

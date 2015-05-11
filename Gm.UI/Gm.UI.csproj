@@ -217,6 +217,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlExtenssions\HtmlExtensions.cs" />
+    <Compile Include="Models\Docteurs\DocteurModel.cs" />
     <Compile Include="Models\Utilisateurs\LoginModel.cs" />
     <Compile Include="Models\Utilisateurs\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1394,6 +1395,8 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Pharmaciens.cshtml" />
     <Content Include="Views\Home\_ListePharmacies.cshtml" />
+    <Content Include="Views\Home\Medecins.cshtml" />
+    <Content Include="Views\Home\_ListeMedecins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\poduits\" />

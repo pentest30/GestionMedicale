@@ -14,7 +14,7 @@ using GM.Services.Cabinets;
 
 namespace Gm.UI.Controllers
 {
-    //[Authorize(Roles = "admin")]
+   // [Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IServiceUtilisateur _service;

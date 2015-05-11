@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Gm.UI.Areas.Gestion.Models;
+using Gm.UI.Models.Docteurs;
 using GM.Core.Models;
 using Gm.UI.Models.Utilisateurs;
 
@@ -30,6 +31,8 @@ namespace Gm.UI
             Mapper.CreateMap<LigneComamndeModel, LigneCommande>();
             Mapper.CreateMap<Utilisateur, RegisterModel>();
             Mapper.CreateMap<MedicamentModel, Medicament>();
+            Mapper.CreateMap<Utilisateur, DocteurModel>();
+            Mapper.CreateMap<DocteurModel, Utilisateur>();
             Mapper.CreateMap<Entree, BonEntree>(); 
             Mapper.CreateMap<BonEntree, Entree>();
             Mapper.CreateMap<LigneEntreeMagasin, LigneEntree>();
