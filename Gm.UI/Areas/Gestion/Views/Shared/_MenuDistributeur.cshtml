@@ -55,25 +55,41 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-shopping-cart"></i> Ventes <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-sale"></i> Ventes <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="@Url.Action("Index", "Commande", new {area = "Gestion"})">Commandes</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "BonEntree", new { area = "Gestion" })">Entrées</a>
+                            <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Factures de vente </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "BonEntree", new { area = "Gestion" })">Bon de sortie magasin </a>
                         </li>
 
                     </ul>
                 </li>
-                <li>
-                    <a href="@Url.Action("Specialite", "Fournisseur", new {area = "Gestion"})">Ventes</a>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-shopping-cart"></i> Achat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                       
+                        <li>
+                            <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Facture d'achat</a>
+                        </li>
+                    <li>
+                        
+                        <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Bon d'entrée magasin </a>
+                    </li>
+                       
+
+                    </ul>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Fournisseur", new {area = "Gestion"})">Stocks</a>
+                    <a href="@Url.Action("Specialite", "Fournisseur", new {area = "Gestion"})"><i class="icon-white icon-user"></i>Utilisateurs</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Fournisseur", new { area = "Gestion" })"><i class="icon-white icon-user"></i>Utilisateurs</a>
+                    <a href="@Url.Action("Specialite", "Fournisseur", new { area = "Gestion" })"><i class="icon-white  icon-bell"></i>Notifications</a>
                 </li>
             </ul>
 
