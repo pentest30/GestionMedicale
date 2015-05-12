@@ -55,7 +55,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-sale"></i> Ventes <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-usd"></i> Ventes <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="@Url.Action("Index", "Commande", new {area = "Gestion"})">Commandes</a>
@@ -69,21 +69,24 @@
 
                     </ul>
                 </li>
-                
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-white icon-shopping-cart"></i> Achat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                       
+
                         <li>
                             <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Facture d'achat</a>
                         </li>
-                    <li>
-                        
-                        <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Bon d'entrée magasin </a>
-                    </li>
-                       
+                        <li>
+
+                            <a href="@Url.Action("Index", "BonEntree", new {area = "Gestion"})">Bon d'entrée magasin </a>
+                        </li>
+
 
                     </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Stock", new {area = "Gestion"})">Stocks</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Specialite", "Fournisseur", new {area = "Gestion"})"><i class="icon-white icon-user"></i>Utilisateurs</a>

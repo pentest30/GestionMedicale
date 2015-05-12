@@ -160,6 +160,9 @@
     <Compile Include="Pharmacies\IServicePharmacie.cs" />
     <Compile Include="Pharmacies\PharmacieRepository.cs" />
     <Compile Include="Pharmacies\ServicePharmacie.cs" />
+    <Compile Include="Sorties\IServiceSortie.cs" />
+    <Compile Include="Sorties\ServiceSortie.cs" />
+    <Compile Include="Sorties\SortieRepository.cs" />
     <Compile Include="Stocks\IServiceStock.cs" />
     <Compile Include="Stocks\ServiceStock.cs" />
     <Compile Include="Stocks\StockRepository.cs" />

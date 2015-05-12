@@ -1,0 +1,53 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<Gm.UI.Areas.Gestion.Models.StockModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+}
+
+
+<div class="container-fluid" style="padding: 15px; margin-top: 50px; height: auto">
+    <h2>Stock </h2>
+    <hr />
+    <div id="alert"></div>
+
+    @(Html.Kendo().Grid(Model)
+          .Name("specialites")
+
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
+                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                        .Title("<input id='mastercheckbox' type='checkbox'/>")
+                        .Width(50)
+                        .HtmlAttributes(new { style = "text-align:center" })
+                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+              columns.Bound(x => x.Id).Filterable(false)
+                 .Width(20).Visible(false);
+
+              columns.Bound(c => c.NomCommerciale).Width(200);
+              columns.Bound(c => c.Dose).Width(160).Filterable(true);
+              columns.Bound(c => c.Forme).Width(130).Title("Forme").Filterable(true);
+              columns.Bound(c => c.Qnt).Width(100);
+              columns.Bound(c => c.QntCritique).Width(100);
+              columns.Bound(c => c.Magasin).Width(150).Filterable(true);
+
+          })
+          .HtmlAttributes(new { style = "height: 350px;" })
+          .Scrollable()
+                  .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+          .Sortable()
+            //.Events(events => events.Change("OnChange"))
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+                              .Read(read => read.Action("ListStock", "Stock")
+                 )
+          ))
+
+
+</div>
