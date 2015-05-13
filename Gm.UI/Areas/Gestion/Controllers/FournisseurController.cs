@@ -8,6 +8,7 @@ using GM.Core;
 using GM.Core.Models;
 using GM.Services.Fournisseurs;
 using Gm.UI.Areas.Gestion.Models;
+using GM.Services.Utilisateurs;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MvcPaging;
@@ -18,18 +19,24 @@ namespace Gm.UI.Areas.Gestion.Controllers
     public class FournisseurController : Controller
     {
         private readonly IServiceFournisseur _service;
-        // GET: Gestion/Fournissseur
-        public FournisseurController(IServiceFournisseur service)
+         private readonly IServiceUtilisateur _serviceUtilisateur;
+         // GET: Gestion/Fournissseur
+        public FournisseurController(IServiceFournisseur service,IServiceUtilisateur serviceUtilisateur)
         {
             _service = service;
+            _serviceUtilisateur = serviceUtilisateur;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+         public ActionResult Index()
+         {
+             var user = _serviceUtilisateur.SingleUser(User.Identity.Name);
+             var id = _service.GetFournisseur(user.Id);
+             if (id == 0)  return RedirectToAction("NouvelleEntreprise", "Gestion/Fournisseur", new { id = user.Id });
+             if (id !=0 &&! user.Validation)return  RedirectToAction("Info", "Home", new {area = ""});
+             return View();
+         }
 
-        public ActionResult Recherche(int? page , string filter)
+         public ActionResult Recherche(int? page , string filter)
         {
             var currentPageIndex = page.HasValue ? page.Value - 1 : 1;
             var search = new Fournisseur

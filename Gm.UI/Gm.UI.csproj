@@ -1400,6 +1400,7 @@
     <Content Include="Views\Home\_ListePharmacies.cshtml" />
     <Content Include="Views\Home\Medecins.cshtml" />
     <Content Include="Views\Home\_ListeMedecins.cshtml" />
+    <Content Include="Views\Home\Medicaments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\poduits\" />

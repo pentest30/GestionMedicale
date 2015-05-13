@@ -18,7 +18,8 @@ namespace Gm.UI.Controllers
         private readonly IServiceCabinet _serviceCabinet;
         private readonly IServicePharmacie _servicePharmacie;
 
-        public HomeController(IServiceUtilisateur service ,IServiceCabinet serviceCabinet,
+        public HomeController(IServiceUtilisateur service ,
+            IServiceCabinet serviceCabinet,
             IServicePharmacie servicePharmacie )
         {
             _service = service;
@@ -61,6 +62,11 @@ namespace Gm.UI.Controllers
             return View();
         }
 
+        public ActionResult Medicaments()
+        {
+            return View();
+        }
+
         public ActionResult GetMedecins(int? page, string filter, string param)
         {
             var currentPageIndex = page.HasValue ? page.Value - 1 : 1;
@@ -71,22 +77,24 @@ namespace Gm.UI.Controllers
             switch (param)
             {
                 case "Nom de medecin":
-                    {
-                        search.Nom = filter;
-                        return PartialView("_ListeMedecins", finalresult.Where(x => x.Nom.Contains(filter)).ToPagedList(currentPageIndex, 10));
-                    }
+                {
+                    search.Nom = filter;
+                    return PartialView("_ListeMedecins",
+                        finalresult.Where(x => x.Nom.Contains(filter)).ToPagedList(currentPageIndex, 10));
+                }
                 case "Nom de cabinet":
-                    {
-                        search.Nom = filter;
-                        return PartialView("_ListeMedecins", finalresult.Where(x => x.Cabinet.Nom.Contains(filter)).ToPagedList(currentPageIndex, 10));
-                    }
+                {
+                    search.Nom = filter;
+                    return PartialView("_ListeMedecins",
+                        finalresult.Where(x => x.Cabinet.Nom.Contains(filter)).ToPagedList(currentPageIndex, 10));
+                }
                 default:
                 {
                     return PartialView("_ListeMedecins", finalresult.ToPagedList(currentPageIndex, 10));
                 }
-               
+
             }
-           
+
         }
 
 
@@ -131,10 +139,8 @@ namespace Gm.UI.Controllers
                 {
                     var result = Mapper.Map<IList<PharmacieModel>>(_servicePharmacie.GetListe());
                     return PartialView("_ListePharmacies", result.ToPagedList(currentPageIndex, 10));
-                    
+
                 }
-
-
             }
         }
     }

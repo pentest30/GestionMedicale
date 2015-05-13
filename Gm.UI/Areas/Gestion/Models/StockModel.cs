@@ -7,7 +7,6 @@
         public int MagasinId { get; set; }
         public long? Qnt { get; set; }
         public int EntrepriseId { get; set; }
-
         public string NomCommerciale { get; set; }
         public string Dose { get; set; }
         public string Forme { get; set; }

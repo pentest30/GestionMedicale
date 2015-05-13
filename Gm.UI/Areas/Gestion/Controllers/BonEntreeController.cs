@@ -217,6 +217,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
                      if (findSingle != null)
                      {
                          findSingle.Qnt += ligne.Qnt;
+                         findSingle.PrixUnitaire = ligne.PrixVente;
+                         findSingle.TauxBenefice =Convert.ToDecimal( ligne.TauxBenifice);
                          _serviceStock.Update(findSingle);
                      }
                      else
@@ -226,7 +228,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
                              MagasinId = model.MagasinId,
                              EntrepriseId = model.ClientId,
                              MedicamentId = ligne.MedicamentId,
-                             Qnt = ligne.Qnt
+                             Qnt = ligne.Qnt,
+                             PrixUnitaire = ligne.PrixVente,
+                             TauxBenefice = Convert.ToDecimal(ligne.TauxBenifice)
+
                          };
                          _serviceStock.Insert(stoc);
                      }
