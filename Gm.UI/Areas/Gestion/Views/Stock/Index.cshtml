@@ -17,12 +17,7 @@
 
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
-                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
-                        .Title("<input id='mastercheckbox' type='checkbox'/>")
-                        .Width(50)
-                        .HtmlAttributes(new { style = "text-align:center" })
-                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+             
               columns.Bound(x => x.Id).Filterable(false)
                  .Width(20).Visible(false);
 

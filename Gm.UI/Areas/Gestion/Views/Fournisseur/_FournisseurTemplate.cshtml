@@ -2,13 +2,15 @@
 
 <div class=" col-md-3 col-sm-6 ">
     <div class="thumbnail">
-        <img class=" img-responsive list-group-image" style="max-height: 250px" src="@Url.Action("SomeImage", "Pharmacien", new { imageName = Model.Logo })" alt="">
+        <img class=" img-responsive list-group-image" style="max-height: 180px; height: 180px; max-width: 250px;width: 250px" src="@Url.Action("SomeImage", "Pharmacien", new { imageName = Model.Logo })" alt="">
         <div class="caption">
             <h3>@Model.Nom</h3>
-            <p>@Model.Tel.</p>
+            <p>Tél: @Model.Tel.</p>
+            <p>Wilaya: @Model.Wilaya.</p>
             <p>
-                <a href="#" class="btn btn-primary">Buy Now!</a>
-                <a href="#" class="btn btn-default">More Info</a>
+                <a href="#" class="btn btn-default">Médicaments</a>
+                <a href="#" class="btn btn-primary">Détail</a>
+                
             </p>
         </div>
     </div>

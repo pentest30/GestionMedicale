@@ -37,7 +37,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceUtilisateur = serviceUtilisateur;
             _serviceMedicmaent = serviceMedicmaent;
             _serviceFournisseur = serviceFournisseur;
-            _liste = _serviceFournisseur.GeltList();
+            _liste = _serviceFournisseur.FounisseurNonInscript();
             _listeClients = _servicePharmacie.GetListe();
         }
 

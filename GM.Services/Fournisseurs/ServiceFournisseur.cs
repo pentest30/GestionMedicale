@@ -59,23 +59,45 @@ namespace GM.Services.Fournisseurs
             return _repository.SelectById(id);
         }
 
-        public IEnumerable<Fournisseur> GeltList()
+        public IEnumerable<Fournisseur> FounisseurNonInscript()
+        {
+            return _repository.Find(x =>x.PropreitaireId == null);
+        }
+
+        public IEnumerable<Fournisseur> AllFournisseurs()
         {
             return _repository.SelectAll();
         }
 
+        public IEnumerable<Fournisseur> FounisseurInscript()
+        {
+            return _repository.Find(fournisseur => fournisseur.PropreitaireId.HasValue).ToList();
+        }
+
         public IEnumerable<Fournisseur> SearchResult(Fournisseur fournisseur)
         {
-
             var filter = from m in EntityFilter<Fournisseur>.AsQueryable()
-                where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrEmpty(fournisseur.Nom)
+                         where m.Nom.Contains(fournisseur.Nom) || string.IsNullOrEmpty(fournisseur.Nom)
                       || m.Wilaya.Contains(fournisseur.Wilaya) || string.IsNullOrEmpty(fournisseur.Wilaya)
                       || m.Wilaya.Contains(fournisseur.Commune) || string.IsNullOrEmpty(fournisseur.Commune)
                       || m.Wilaya.Contains(fournisseur.Tel) || string.IsNullOrEmpty(fournisseur.Tel)
                       || m.Wilaya.Contains(fournisseur.Email) || string.IsNullOrEmpty(fournisseur.Email)
                 select m;
-            return filter.Filter(_repository.SelectAll().AsQueryable());
+            return filter.Filter(FounisseurInscript().AsQueryable());
 
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                _repository.Delete(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Gm.UI.Areas.Gestion.Models
         [Display(Name = "Site web")]
         public string SiteWeb { get; set; }
 
-        [Required]
+       // [Required]
         public Guid? PropreitaireId { get; set; }
 
         [Required]

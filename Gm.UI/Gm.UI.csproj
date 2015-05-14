@@ -1015,6 +1015,9 @@
     <Content Include="Areas\Gestion\Views\Medecin\NouveauCabinet.cshtml" />
     <Content Include="Areas\Gestion\Views\Medecin\_CreateCabinet.cshtml" />
     <Content Include="Areas\Gestion\Views\Stock\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\Update.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />

@@ -68,8 +68,8 @@ namespace GM.Services.Categorie
         public IEnumerable<Specialite> FilterListe(Specialite specialite)
         {
             var filter = from m in EntityFilter<Specialite>.AsQueryable()
-                where m.Libelle.Contains(specialite.Libelle ) ||
-                    string.IsNullOrEmpty(specialite.Libelle)
+                where m.Libelle.Contains(specialite.Libelle) ||
+                      string.IsNullOrEmpty(specialite.Libelle)
                 where m.Code.Equals(specialite.Code) || string.IsNullOrEmpty(specialite.Code)
                 select m;
 

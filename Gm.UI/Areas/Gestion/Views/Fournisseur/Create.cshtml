@@ -1,0 +1,66 @@
+﻿@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+    var url = Url.Action("Create", "Fournisseur", new { area = "Gestion" });
+}
+<div style="margin-top: 95px; padding: 15px; height: auto" class="container-fluid">
+    <h2>Nouveaux <small>fournisseur</small>
+    </h2>
+    <hr/>
+
+
+    <div id="alert">
+
+    </div>
+
+    @{
+        Html.RenderPartial("_CreateOrUpdate", Model);
+    }
+
+
+</div>
+<script type="text/javascript">
+   $(function() {
+       $('#Wilaya').select2();
+       $("#Nom").addClass("validate[required]");
+       $("#Tel").addClass("validate[required]");
+       $("#Wilaya").addClass("validate[required]");
+       $("#Commune").addClass("validate[required]");
+       $('form').validationEngine();
+
+       $(".menu *").prop('disabled', true);
+       $("#delete-btn").click(function (e) {
+           e.preventDefault();
+           window.location.href = '@Url.Action("ListeFournisseur", "Fournisseur", new { area = "Gestion" })';
+
+       });
+       $("#save-btn").click(function (e) {
+           if ($('form').validationEngine('validate')) {
+               e.preventDefault();
+               $.ajax({
+                   url: '@url',
+                   data: $("form").serialize(),
+                   type: 'POST',
+                   success: function (data) {
+                       $('#alert').html(data.message);
+                       $("#alert").fadeIn('slow').delay(1500).hide(0);
+                       $('#Nom').val("");
+                       $('#Wilaya').val("");
+                       $('#Commune').val("");
+                       $('#Tel').val("");
+                       $('#CompteBancaire').val("");
+                       $('#SiteWeb').val("");
+                       $('#Email').val("");
+                   },
+                   error: function () {
+                   }
+               });
+           } else {
+               e.preventDefault();
+           }
+
+       });
+
+   })
+</script>
