@@ -54,10 +54,10 @@ namespace GM.Core
             wilayas.Add(new Wilaya { NumWilaya = 41, Nom = "Souk Ahras" });
             wilayas.Add(new Wilaya { NumWilaya = 42, Nom = "Tipaza" });
             wilayas.Add(new Wilaya { NumWilaya = 43, Nom = "Mila" });
-            wilayas.Add(new Wilaya { NumWilaya = 44, Nom = "Aïn Defla" });
+            wilayas.Add(new Wilaya { NumWilaya = 44, Nom = "Ain Defla" });
             wilayas.Add(new Wilaya { NumWilaya = 55, Nom = "Naâma" });
-            wilayas.Add(new Wilaya { NumWilaya = 46, Nom = "Aïn Témouchent" });
-            wilayas.Add(new Wilaya { NumWilaya = 47, Nom = "Ghardaïa" });
+            wilayas.Add(new Wilaya { NumWilaya = 46, Nom = "Ain Témouchent" });
+            wilayas.Add(new Wilaya { NumWilaya = 47, Nom = "Ghardaia" });
             wilayas.Add(new Wilaya { NumWilaya = 48, Nom = "Relizane" });
             return wilayas;
         }

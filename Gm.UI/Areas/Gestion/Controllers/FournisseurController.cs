@@ -52,7 +52,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             };
             var filtredList = _service.FounisseurInscript();
             var result = Mapper.Map<IList<PharmacieModel>>(filtredList);
-            return View(result.ToPagedList(currentPageIndex, 10));
+            return View(result.ToPagedList(currentPageIndex, 8));
         }
 
         [Authorize(Roles = "distributeur")]
