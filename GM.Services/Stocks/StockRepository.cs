@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using GM.Context;
 using GM.Core;
 using GM.Core.Models;
+using GM.Services.Medicaments;
 using EntityState = System.Data.Entity.EntityState;
 
 namespace GM.Services.Stocks
@@ -12,15 +13,17 @@ namespace GM.Services.Stocks
     public class StockRepository:IRepository<Stock>
     {
          private readonly PharmacieContext _db;
+        private readonly IServiceMedicmaent _serviceMedicmaent;
 
-       public StockRepository(PharmacieContext db)
+        public StockRepository(PharmacieContext db ,IServiceMedicmaent serviceMedicmaent)
         {
             _db = db;
+            _serviceMedicmaent = serviceMedicmaent;
         }
 
         public IEnumerable<Stock> SelectAll()
         {
-            return _db.Stocks.Include("LigneEntreesMagasin");
+            return _db.Stocks.Include("Medicament").Include("Magasin");
         }
 
         public Stock SelectById(object id)
@@ -55,7 +58,13 @@ namespace GM.Services.Stocks
 
         public IEnumerable<Stock> Find(Func<Stock, bool> predicate)
         {
-            return _db.Stocks.Where(predicate);
+            var result = _db.Stocks.Include("Magasin").Where(predicate);
+            var enumerable = result as Stock[] ?? result.ToArray();
+            foreach (var stock in enumerable)
+            {
+                stock.Medicament = _serviceMedicmaent.FindSingle(stock.MedicamentId);
+            }
+            return enumerable;
         }
 
         public Stock FindSingle(Func<Stock, bool> predicate)

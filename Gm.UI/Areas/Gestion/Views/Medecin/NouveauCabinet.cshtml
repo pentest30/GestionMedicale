@@ -1,0 +1,12 @@
+﻿@model GM.Core.Models.Cabinet
+@{
+    ViewBag.Title = "NouveauCabinet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nouveau Cabinet</h2>
+<hr />
+@{
+    Html.RenderPartial("_CreateCabinet" ,Model);
+}
+

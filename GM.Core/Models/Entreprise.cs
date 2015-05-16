@@ -15,7 +15,7 @@ namespace GM.Core.Models
         public string Fax { get; set; }
         public string Email { get; set; }
         public string SiteWeb { get; set; }
-        public Guid PropreitaireId { get; set; }
+        public Guid? PropreitaireId { get; set; }
         public string CompteBancaire { get; set; }
         public Utilisateur Propreitaire{ get; set; }
         public string LogoUrl { get; set; }

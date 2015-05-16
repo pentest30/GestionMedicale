@@ -1,0 +1,140 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<Gm.UI.Areas.Gestion.Models.PharmacieModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Gestion/Views/Shared/_PharmacieMainPage.cshtml";
+    var url = User.IsInRole("pharmacien") ? Url.Action("Index", "Pharmacien", new { area = "Gestion" }) :
+        Url.Action("Index", "Fournisseur", new { area = "Gestion" });
+}
+@{
+    Html.RenderPartial("_ListToolBar");
+}
+<div class="container-fluid" style="padding: 15px; margin-top: 90px; height: auto">
+    <h2>Liste  <small>des fournisseurs</small></h2>
+    <hr />
+    <div id="alert"></div>
+   
+    @(Html.Kendo().Grid(Model)
+          .Name("specialites")
+
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Sortable(false).Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
+                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                        .Title("<input id='mastercheckbox' type='checkbox'/>")
+                        .Width(50)
+                        .HtmlAttributes(new { style = "text-align:center" })
+                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+              columns.Bound(x => x.Id)
+                 .Width(20).Visible(false);
+              columns.Bound(c => c.Nom).Width(160);
+              columns.Bound(c => c.Wilaya).Width(160);
+              columns.Bound(c => c.Commune).Width(160);
+              columns.Bound(c => c.Tel).Width(160);
+              columns.Bound(c => c.Email).Width(120);
+
+          })
+          .HtmlAttributes(new { style = "height: 350px;" })
+          .Scrollable()
+          .Sortable()
+            //.Events(events => events.Change("OnChange"))
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+                  .Read(read => read.Action("GetListFournisseur", "Fournisseur")
+                  )
+          ))
+
+
+</div>
+<script type="text/javascript">
+    var selectedIds = [];
+    $(document).ready(function () {
+        $(".menu *").prop('disabled', true);
+        $("#return-btn").click(function (e) {
+            e.preventDefault();
+            window.location.href = '@url';
+
+        });
+        //$(".menu *").prop('disabled', true);
+        $('#mastercheckbox').click(function () {
+            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+        });
+        $("#delete-btn").confirm({
+            text: "Est vous sur(e)?",
+            title: "Confirmation",
+            confirm: function () {
+                if ($.isEmptyObject(selectedIds) === true) {
+                    alert("Séléctionner un utilisateur!");
+                    return;
+                }
+
+                for (var i = 0; i < selectedIds.length; i++) {
+                    $.ajax({
+                        url: '@Url.Action("Delete")' + '/' + selectedIds[i].replace("<", "").replace(">", ""),
+                        type: 'POST',
+                        success: function (data) {
+                            $("#alert").html(data.message);
+
+                            $('#specialites').data('kendoGrid').dataSource.read();
+                        },
+                        error: function () {
+                        }
+                    });
+                }
+
+            },
+            cancel: function () {
+                // nothing to do
+            },
+            confirmButton: "Oui",
+            cancelButton: "Non",
+            post: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-default"
+        });
+        $("#add-btn").click(function () {
+            window.location.href = '@Url.Action("Create")';
+        });
+        $("#update-btn").click(function () {
+            window.location.href = '@Url.Action("Update")' + '/' + selectedIds[0].replace("<", "").replace(">", "");
+        });
+        $(document).on('change', '#specialites input[type=checkbox][id!=mastercheckbox]', function () {
+            var $check = $(this);
+            var checked;
+            if ($check.is(":checked") === true) {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked === -1) {
+                    //add id to selectedIds.
+                    selectedIds.push($check.val());
+
+                }
+            }
+            else {
+                checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked > -1) {
+                    //remove id from selectedIds.
+                    selectedIds = $.grep(selectedIds, function (item) {
+                        return item !== $check.val();
+                    });
+                }
+            }
+            updateMasterCheckbox();
+        });
+        $("#search").on("click", function (e) {
+            e.preventDefault();
+            $('#specialites').data('kendoGrid').dataSource.fetch();
+        });
+
+    });
+    function updateMasterCheckbox() {
+        var numChkBoxes = $('#specialites input[type=checkbox]:not([id=mastercheckbox])').length;
+        var numChkBoxesChecked = $('#specialites input[type=checkbox][checked]:not([id=mastercheckbox])').length;
+        $('#mastercheckbox').attr('checked', numChkBoxes === numChkBoxesChecked && numChkBoxes > 0);
+    }
+   
+</script>

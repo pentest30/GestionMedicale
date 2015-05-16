@@ -1,0 +1,79 @@
+﻿@model IPagedList<Gm.UI.Models.Docteurs.DocteurModel>
+@{
+    ViewBag.Title = "Medecins";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="margin-top: 20px; min-height: 400px">
+    <h3>Recherche <small>des médecins</small></h3>
+    <hr />
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span id="search_btn">All</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#Nom">Nom de medecin</a></li>
+                        <li><a href="#Nom">Nom de cabinet</a></li>
+                        <li><a href="#Wilaya">Wilaya</a></li>
+                        <li><a href="#Commune">Commune</a></li>
+                        <li><a href="#Tel">Tel </a></li>
+                        <li><a href="#Email">Email</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#Email">All</a></li>
+
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" id="search-box" class="form-control" name="x" placeholder="Recherche...">
+                <span class="input-group-btn">
+                    <button id="recherche-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+
+    <hr />
+    <div id="body-search">
+
+    </div>
+
+    </div>
+<script>
+
+  $(function() {
+      $.ajax({
+          url: '/home/GetMedecins/',
+          type: 'POST',
+          success: function (data) {
+              $("#body-search").html(data);
+          },
+          error: function () {
+          }
+      });
+      $('.search-panel .dropdown-menu').find('a').click(function (e) {
+          e.preventDefault();
+          var param = $(this).attr("href").replace("#", "");
+          var concept = $(this).text();
+          $('#search_btn').text(concept);
+          $('.input-group #search_param').val(param);
+
+      });
+      $("#recherche-btn").click(function() {
+          $.ajax({
+              url: '/home/GetMedecins/?filter=' + $("#search-box").val() + '&param=' + $('#search_btn').text(),
+              type: 'POST',
+              success: function(data) {
+                  $("#body-search").html(data);
+              },
+              error: function() {
+              }
+          });
+      });
+  })
+</script>

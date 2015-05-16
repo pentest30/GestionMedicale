@@ -1,0 +1,85 @@
+﻿@model IPagedList<Gm.UI.Models.Docteurs.DocteurModel>
+
+
+<table class="table table-bordered  table-hover">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Prenom
+        </th>
+        <th>
+            Cabinet
+        </th>
+        <th>
+            Wilaya
+        </th>
+        <th>
+            Addresse
+        </th>
+        <th>
+            Tel
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Cabinet.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cabinet.Wilaya)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cabinet.Addresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cabinet.Tel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+              
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+              
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pager">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Suivant", Previous = "Précédent" },
+                TooltipTitles = new TooltipTitles() { Next = "Suivant", Previous = "Précédent", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "GetListPharmacies", action = "Home" }))
+</div>

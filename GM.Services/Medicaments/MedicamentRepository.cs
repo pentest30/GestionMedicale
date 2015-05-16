@@ -70,7 +70,13 @@ namespace GM.Services.Medicaments
 
         public Medicament FindSingle(Func<Medicament, bool> predicate)
         {
-            return _db.Medicaments.  Include("ParamStocks").FirstOrDefault(predicate);
+            return _db.Medicaments.
+                Include("Dci").
+                Include("Specialite").
+                Include("Forme").
+                Include("Conditionnement").
+                Include("ParamStocks").
+                FirstOrDefault(predicate);
         }
 
        

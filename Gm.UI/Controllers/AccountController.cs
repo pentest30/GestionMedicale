@@ -10,22 +10,28 @@ using GM.Services.Utilisateurs;
 using GM.Core;
 using GM.Core.Models;
 using Gm.UI.Models.Utilisateurs;
+using GM.Services.Cabinets;
 
 namespace Gm.UI.Controllers
 {
-    //[Authorize(Roles = "admin")]
+   // [Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IServiceUtilisateur _service;
         private readonly IServicePharmacie _servicePharmacie;
         private readonly IServiceFournisseur _serviceFournisseur;
+        private readonly IServiceCabinet _serviceCabinet;
         private readonly IEnumerable<Role> _roles;
         // GET: Account
-        public AccountController(IServiceUtilisateur service, IServicePharmacie servicePharmacie , IServiceFournisseur serviceFournisseur)
+        public AccountController(IServiceUtilisateur service,
+            IServicePharmacie servicePharmacie , 
+            IServiceFournisseur serviceFournisseur ,
+            IServiceCabinet serviceCabinet)
         {
             _service = service;
             _servicePharmacie = servicePharmacie;
             _serviceFournisseur = serviceFournisseur;
+            _serviceCabinet = serviceCabinet;
             _roles = _service.SelectRoles();
         }
         [HttpGet]
@@ -91,8 +97,12 @@ namespace Gm.UI.Controllers
                         {
                             case "patient":
                                 break;
+                          
                             case "medecin":
-                                break;
+                                {
+                                    return RedirectToAction("NouveauCabinet", "Gestion/Medecin", new { id = user.Id });
+                                }
+                              
                             case "pharmacien":
                             {
                                 return RedirectToAction("NouvellePharmacie", "Gestion/Pharmacien", new {id = user.Id});
@@ -151,7 +161,14 @@ namespace Gm.UI.Controllers
                         }
                         if (User.IsInRole("medecin"))
                         {
-
+                            if (role != null && role.Equals("medecin"))
+                            {
+                                var pharmacieId = _serviceCabinet.GetCabinet(item.Id);
+                                return RedirectToAction("Index", "Gestion/Medecin", new { id = pharmacieId });
+                            }
+                            return ((item.EnrepriseId != null))
+                                ? RedirectToAction("Index", "Gestion/Medecin", new { id = item.EnrepriseId })
+                                : RedirectToAction("Index", "Home", new { area = "" });
                         }
                         else if (User.IsInRole("patient"))
                         {
@@ -176,6 +193,14 @@ namespace Gm.UI.Controllers
                                 : RedirectToAction("Info", "Home", new { area = "" });
 
                         }
+                        if (role == "medecin")
+                        {
+                            var pharmacieId = _serviceCabinet.GetCabinet(item.Id);
+                            return (pharmacieId == 0)
+                                ? RedirectToAction("NouveauCabinet", "Gestion/Medecin", new { id = item.Id })
+                                : RedirectToAction("Info", "Home", new { area = "" });
+
+                        }
 
                     }
                     else 
@@ -191,6 +216,8 @@ namespace Gm.UI.Controllers
             }
             return View(model);
         }
+
+       
 
         public ActionResult Logout()
         {

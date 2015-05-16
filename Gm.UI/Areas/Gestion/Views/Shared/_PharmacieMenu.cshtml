@@ -49,7 +49,7 @@
                             <ul class="dropdown-menu">
                                 <li><a tabindex="-1" href="@Url.Action("Recherche", "Fournisseur", new {area = "Gestion"})">Recherche des fournisseurs</a></li>
                                
-                                <li><a href="#">Nouveaux fournisseurs</a></li>
+                                <li><a href="@Url.Action("ListeFournisseur", "Fournisseur", new { area = "Gestion" })">Nouveaux fournisseurs</a></li>
                                
                             </ul>
                         </li>
@@ -72,10 +72,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Ventes</a>
+                    <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})"><i class="fa fa-usd"></i>Ventes</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Specialite", "Pharmacien", new {area = "Gestion"})">Stocks</a>
+                    <a href="@Url.Action("Index", "Stock", new {area = "Gestion"})">Stocks</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Specialite", "Pharmacien", new { area = "Gestion" })"><i class="icon-white icon-user"></i>Utilisateurs</a>

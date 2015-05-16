@@ -1,0 +1,133 @@
+﻿@using Gm.UI.HtmlExtenssions
+@model Gm.UI.Areas.Gestion.Models.PharmacieModel
+
+@{
+    var url = (Request.RawUrl.Contains("Update")) ? Url.Action("Update", "Fournisseur", new {area = "Gestion"}) :
+        Url.Action("Create", "Fournisseur", new {area = "Gestion"});
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="navbar">
+            <nav class="navbar-inner   navbar-fixed-top  " style="top: 40px; margin-bottom: 90px">
+                <div>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li><button id="save-btn" style="margin-right: 2px" class="btn btn-success navbar-btn"><i class=" icon-ok"></i> Enregister et Continuer</button></li>
+                            <li><button id="update-btn" style="margin-right: 2px" class="btn btn-default navbar-btn"><i class=" icon-lock"></i> Enregistrer et fermer</button></li>
+                            <li><button id="delete-btn" style="margin-right: 2px" class="btn btn-default  navbar-btn"><i class=" icon-arrow-left"></i> Femer</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @if (Request.RawUrl.Contains("Update"))
+        {
+            @Html.HiddenFor(model => model.Id)
+        }
+       
+        <div class="control-group">
+            @Html.LabelFor(model => model.Nom, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Nom, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Nom, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Nrc, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Nrc, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Nrc, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Nif, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Nif, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Nif, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Nis, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Nis, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Nis, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        
+      
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Tel, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Tel, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Tel, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Fax, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Fax, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Fax, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.SiteWeb, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.SiteWeb, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SiteWeb, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+       
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Wilaya, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.Custom_DropdownList("Wilaya", ViewData["Wilaya"] as SelectList, htmlAttributes: new { @style = "width: 280px;height: 35px" })
+                @Html.ValidationMessageFor(model => model.Wilaya, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Commune, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.Commune, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Commune, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.CompteBancaire, htmlAttributes: new {@class = "control-label "})
+            <div class="controls">
+                @Html.EditorFor(model => model.CompteBancaire, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.CompteBancaire, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+       
+
+    </div>
+}
+
+
+

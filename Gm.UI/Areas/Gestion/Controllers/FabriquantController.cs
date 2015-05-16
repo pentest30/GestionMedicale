@@ -8,6 +8,7 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+    [Authorize(Roles = "pharmacien,distributeur")]
     public class FabriquantController : Controller
     {
         private readonly IServiceFabriquant _service;

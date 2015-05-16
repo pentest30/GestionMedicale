@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Gm.UI.Areas.Gestion.Models;
+using Gm.UI.Models.Docteurs;
 using GM.Core.Models;
 using Gm.UI.Models.Utilisateurs;
 
@@ -30,6 +31,16 @@ namespace Gm.UI
             Mapper.CreateMap<LigneComamndeModel, LigneCommande>();
             Mapper.CreateMap<Utilisateur, RegisterModel>();
             Mapper.CreateMap<MedicamentModel, Medicament>();
+            Mapper.CreateMap<Utilisateur, DocteurModel>();
+            Mapper.CreateMap<DocteurModel, Utilisateur>();
+            Mapper.CreateMap<Stock, StockModel>().ForMember(x => x.NomCommerciale, o => o.MapFrom(x => x.Medicament.NomCommerciale))
+                .ForMember(x => x.Dose, o => o.MapFrom(x => x.Medicament.Dose))
+                 .ForMember(x => x.Magasin, o => o.MapFrom(x => x.Magasin.Libelle))
+                .ForMember(x => x.Forme, o => o.MapFrom(x => x.Medicament.Forme.Libelle))
+                .ForMember(x => x.QntCritique, o => o.MapFrom(x => x.Medicament.ParamStocks.FirstOrDefault(m => m.EntrepriseId == x.EntrepriseId).QntCritique))
+                .ForMember(x => x.NomCommerciale, o => o.MapFrom(x => x.Medicament.NomCommerciale));
+            Mapper.CreateMap<StockModel, Stock>();
+             
             Mapper.CreateMap<Entree, BonEntree>(); 
             Mapper.CreateMap<BonEntree, Entree>();
             Mapper.CreateMap<LigneEntreeMagasin, LigneEntree>();

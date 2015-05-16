@@ -17,6 +17,7 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     [Authorize(Roles = "pharmacien,distributeur")]
     public class BonEntreeController : Controller
     {
         private readonly IServiceMagasin _serviceMagasin;
@@ -44,7 +45,7 @@ namespace Gm.UI.Areas.Gestion.Controllers
             _serviceMedicmaent = serviceMedicmaent;
             _serviceEntrees = serviceEntrees;
             _serviceStock = serviceStock;
-            _liste = _serviceFournisseur.GeltList();
+            _liste = _serviceFournisseur.AllFournisseurs();
            // _listMagasins = _serviceMagasin.Liste()
             
         }
@@ -165,6 +166,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
                     if (findSingle != null)
                     {
                         findSingle.Qnt += ligne.Qnt;
+                        findSingle.PrixUnitaire = ligne.PrixVente;
+                        findSingle.TauxBenefice = Convert.ToDecimal(ligne.TauxBenifice);
                         _serviceStock.Update(findSingle);
                     }
                     else
@@ -173,8 +176,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
                         {
                             MagasinId = model.MagasinId,
                             EntrepriseId = model.ClientId,
-                            MedicamentId = ligne.MedicamentId , 
-                            Qnt = ligne.Qnt
+                            MedicamentId = ligne.MedicamentId ,
+                            Qnt = ligne.Qnt,
+                            PrixUnitaire = ligne.PrixVente,
+                            TauxBenefice = Convert.ToDecimal(ligne.TauxBenifice)
                         };
                         _serviceStock.Insert(stoc);
                     }
@@ -216,6 +221,8 @@ namespace Gm.UI.Areas.Gestion.Controllers
                      if (findSingle != null)
                      {
                          findSingle.Qnt += ligne.Qnt;
+                         findSingle.PrixUnitaire = ligne.PrixVente;
+                         findSingle.TauxBenefice =Convert.ToDecimal( ligne.TauxBenifice);
                          _serviceStock.Update(findSingle);
                      }
                      else
@@ -225,7 +232,10 @@ namespace Gm.UI.Areas.Gestion.Controllers
                              MagasinId = model.MagasinId,
                              EntrepriseId = model.ClientId,
                              MedicamentId = ligne.MedicamentId,
-                             Qnt = ligne.Qnt
+                             Qnt = ligne.Qnt,
+                             PrixUnitaire = ligne.PrixVente,
+                             TauxBenefice = Convert.ToDecimal(ligne.TauxBenifice)
+
                          };
                          _serviceStock.Insert(stoc);
                      }

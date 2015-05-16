@@ -34,7 +34,7 @@
                 {
                     if (Model.Id > 0)
                     {
-                        if (User.IsInRole("pharmacien"))
+                        if (User.IsInRole("pharmacien") || User.IsInRole("distributeur"))
                         {
                             ParamStock item1 = Model.ParamStock ?? new ParamStock();
                             item1.MedicamentId = Model.Id;

@@ -5,8 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="margin-top: 60px">
+<div class="container" style="margin-top: 50px">
+
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-list" id="search_btn"></span>  <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#Nom">Nom </a></li>
+                        <li><a href="#Wilaya">Wilaya</a></li>
+                        <li><a href="#Commune">Commune</a></li>
+                        <li><a href="#Tel">Tel </a></li>
+                        <li><a href="#Email">Email</a></li>
+                       
+
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" id="search-box" class="form-control" name="x" placeholder="Recherche...">
+                <span class="input-group-btn">
+                    <button id="recherche-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr/>
     
+  
+
+   
+    <br />
     <div id="products" class="row list-group">
 
         @foreach (var item in Model)

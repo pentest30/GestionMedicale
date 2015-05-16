@@ -202,11 +202,13 @@
     <Compile Include="Areas\Gestion\Controllers\PatientController.cs" />
     <Compile Include="Areas\Gestion\Controllers\PharmacienController.cs" />
     <Compile Include="Areas\Gestion\Controllers\SpecialiteController.cs" />
+    <Compile Include="Areas\Gestion\Controllers\StockController.cs" />
     <Compile Include="Areas\Gestion\GestionAreaRegistration.cs" />
     <Compile Include="Areas\Gestion\Models\LigneComamndeModel.cs" />
     <Compile Include="Areas\Gestion\Models\MedicamentModel.cs" />
     <Compile Include="Areas\Gestion\Models\PharmacieModel.cs" />
     <Compile Include="Areas\Gestion\Models\SearchMedicamentModel.cs" />
+    <Compile Include="Areas\Gestion\Models\StockModel.cs" />
     <Compile Include="Areas\Gestion\Models\UtilisateurModel.cs" />
     <Compile Include="HtmlExtenssions\ControlGroupExtensions.cs" />
     <Compile Include="HtmlExtenssions\ViewHelperExtensions.cs" />
@@ -217,6 +219,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlExtenssions\HtmlExtensions.cs" />
+    <Compile Include="Models\Docteurs\DocteurModel.cs" />
     <Compile Include="Models\Utilisateurs\LoginModel.cs" />
     <Compile Include="Models\Utilisateurs\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1008,6 +1011,13 @@
     <Content Include="Areas\Gestion\Views\BonEntree\_ModalBonMagasin.cshtml" />
     <Content Include="Areas\Gestion\Views\Fournisseur\Recherche.cshtml" />
     <Content Include="Areas\Gestion\Views\Fournisseur\_FournisseurTemplate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\ListeFournisseur.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medecin\NouveauCabinet.cshtml" />
+    <Content Include="Areas\Gestion\Views\Medecin\_CreateCabinet.cshtml" />
+    <Content Include="Areas\Gestion\Views\Stock\Index.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\Create.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Gestion\Views\Fournisseur\Update.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\gestion\bootstrap.js" />
     <Content Include="Scripts\gestion\bootstrap.min.js" />
@@ -1391,6 +1401,9 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Pharmaciens.cshtml" />
     <Content Include="Views\Home\_ListePharmacies.cshtml" />
+    <Content Include="Views\Home\Medecins.cshtml" />
+    <Content Include="Views\Home\_ListeMedecins.cshtml" />
+    <Content Include="Views\Home\Medicaments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\photos\poduits\" />

@@ -7,6 +7,7 @@ using Kendo.Mvc.UI;
 
 namespace Gm.UI.Areas.Gestion.Controllers
 {
+     [Authorize(Roles = "pharmacien,distributeur")]
     public class ConditionnementController : Controller
     {
         // GET: Gestion/Conditionnemet

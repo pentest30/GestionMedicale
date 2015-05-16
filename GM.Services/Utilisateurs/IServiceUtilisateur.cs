@@ -22,5 +22,6 @@ namespace GM.Services.Utilisateurs
         void Logout();
         IEnumerable<Utilisateur> FilterListe(Utilisateur utilisateur);
         IEnumerable<Utilisateur> FilterByActivation(IEnumerable<Utilisateur> utilisateurs, bool predicate);
+        IEnumerable<Utilisateur> SelectMedecins(string role);
     }
 }

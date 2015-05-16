@@ -12,7 +12,7 @@ namespace GM.Context
         }
 
         public DbSet<Pays> Payses { get; set; }
-       
+        public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Pharmacie> Pharmacies { get; set; }
         public DbSet<Fournisseur> Fournisseurs { get; set; }
         public DbSet<Magasin> Magasins { get; set; }
@@ -33,6 +33,10 @@ namespace GM.Context
         public DbSet<LigneCommande> LigneCommandes { get; set; }
         public DbSet<LigneEntree> LigneEntrees { get; set; }
         public DbSet<Entree> Entrees { get; set; }
+        public DbSet<Sortie> Sorties { get; set; }
+        public DbSet<BonSortieMagasin> BonSortieMagasins { get; set; }
+        public DbSet<LigneSortieMagasin> LigneSortieMagasins { get; set; }
+        public DbSet<LigneSortie> LigneSorties { get; set; }
        // public DbSet<LigneEntreeMagasin> LigneEntreeMagasins { get; set; }
 
 

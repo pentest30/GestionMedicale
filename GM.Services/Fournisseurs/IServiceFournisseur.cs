@@ -11,9 +11,12 @@ namespace GM.Services.Fournisseurs
         bool Update(Fournisseur fournisseur);
         bool Existe(Guid id);
         Fournisseur SingleFournisseur(int id);
-        IEnumerable<Fournisseur> GeltList();
+        IEnumerable<Fournisseur> FounisseurNonInscript();
+        IEnumerable<Fournisseur> AllFournisseurs();
+        IEnumerable<Fournisseur> FounisseurInscript();
 
         IEnumerable<Fournisseur> SearchResult(Fournisseur fournisseur);
 
+        bool Delete(int id);
     }
 }
